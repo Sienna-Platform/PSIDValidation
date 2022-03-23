@@ -250,6 +250,9 @@ psspy.change_plmod_con(8034,r"""G""",r"""GENROU""",14,0.0)
 psspy.change_plmod_con(8034,r"""H""",r"""GENROU""",13,0.0)
 psspy.change_plmod_con(8034,r"""H""",r"""GENROU""",14,0.0)
 
+# Export data 
+psspy.dyda(0,1,[2,1,0],0,"PSCAD_VALIDATION_DYR.dyr")
+psspy.writerawversion(r"""32""",0,"PSCAD_VALIDATION_RAW.raw")
 
 
 psspy.fnsl([0,0,0,1,1,0,0,0])
