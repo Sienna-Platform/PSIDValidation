@@ -34,7 +34,7 @@ result_psid = read_results(sim_ida)
 ## Plot Comparison
 
 result = CSV.read("test/benchmarks/psse/240WECC/psse_results_line_trip/results_psse.csv", DataFrame, header = 2) 
-hdr = names(volts_psse)
+hdr = names(result)
 ix = findall(x -> occursin("ANGL 8034 ", x), hdr)[1];
 #ix = findall(x -> occursin("VOLT 8034 ", x), hdr)[1];
 v1032_psse = result[!, ix][4:end-1] * (π/180);
