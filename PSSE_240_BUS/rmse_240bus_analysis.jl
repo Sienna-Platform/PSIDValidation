@@ -24,7 +24,7 @@ sim_ida = Simulation(
         system,
         pwd(),
         (0.0, 20.0), #time span
-        BranchTrip(1.0, Line, "WILLAMET-4203-MERIDIAN-4204-i_274");
+        BranchTrip(1.0, Line, "WILLAMET-4203-MERIDIAN-4204-i_1");
         file_level = Logging.Error,
         )
 
@@ -33,7 +33,12 @@ result_psid = read_results(sim_ida)
 
 ## Plot Comparison
 
-result = CSV.read("test/benchmarks/psse/240WECC/psse_results_line_trip/results_psse.csv", DataFrame, header = 2) 
+vals = split("WILLAMET-4203-MERIDIAN-4204-i_1", "-")
+id = split(vals[end], "_")[end]
+psse_name = "line_$(vals[2])_$(vals[4])-$(id)"
+psse_results_file = joinpath("line_results", psse_name, "results.csv")
+
+result = CSV.read(psse_results_file, DataFrame, header = 2)
 hdr = names(result)
 ix = findall(x -> occursin("ANGL 8034 ", x), hdr)[1];
 #ix = findall(x -> occursin("VOLT 8034 ", x), hdr)[1];
@@ -125,34 +130,6 @@ for (ix, n) in enumerate(names(result))
             dict_speed[gen_name] = norm(p_series - res, 2)/length(res)
         end
     end
-end
-
-function find_max_key(d::Dict)
-
-    maxval = first(values(d))
-    maxkey = first(keys(d))
-    for key in keys(d)
-        if d[key] >= maxval
-            maxkey = key
-            maxval = d[key]
-        end
-    end
-
-    return maxkey, maxval
-end
-
-function find_min_key(d::Dict)
-
-    minval = first(values(d))
-    minkey = first(keys(d))
-    for key in keys(d)
-        if d[key] <= minval
-            minkey = key
-            minval = d[key]
-        end
-    end
-
-    return minkey, minval
 end
 
 
