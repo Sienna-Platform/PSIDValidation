@@ -3,275 +3,109 @@ using PowerSystems
 using PowerSimulationsDynamics
 using Logging
 using OrdinaryDiffEq
-using Sundials
 using PlotlyJS
+templates.default = "plotly_white"
+using CSV
+using DataFrames
+include("../utils.jl")
 
-sys = System("/Users/jdlara/.julia/dev/PowerSimulationsDynamics/test/benchmarks/psse/MultiGen/FourBusMulti.raw",
-"/Users/jdlara/.julia/dev/PowerSimulationsDynamics/test/benchmarks/psse/MultiGen/ThreeBus_multigen.dyr"; runchecks = false)
+# Load system data
+sys = System("PSSE_3_BUS/FourBusMulti.raw", "PSSE_3_BUS/FourBus_multigen.dyr"; runchecks = false)
 
+# Convert Loads to constant impedance
 for l in get_components(PowerLoad, sys)
     set_model!(l, LoadModels.ConstantImpedance)
 end
-
-sim = Simulation(
-    ResidualModel,
-    sys, #system
-    pwd(),
-    (0.0, 20.0), #time span
-    BranchTrip(1.0, Line, "BUS 1-BUS 2 HV-i_1"),
-)
-
-execute!(sim, IDA(), abstol = 1e-10)
-results = read_results(sim)
-
-v104_current = get_voltage_magnitude_series(results, 104)
-plot(scatter(x = v104_current[1], y =  v104_current[2]))
-
-a104_current = get_voltage_angle_series(results, 104)
-plot(scatter(x = a104_current[1], y =  a104_current[2]))
-
-using CSV
-using DataFrames
-psse_results = CSV.read("/Users/jdlara/.julia/dev/PowerSimulationsDynamics/test/benchmarks/psse/MultiGen/line_trip_results.csv", DataFrame, header = 2)
-hdr = names(psse_results)
-ix = findall(x -> occursin("SPD 102", x), hdr)
-w_psse_ = psse_results[4:end-1, [1, ix...]]
-w_psse = deleteat!(w_psse_, 202)
-
-speeds = Vector{GenericTrace{Dict{Symbol, Any}}}()
-for n in ["generator-102-ND",
-          "generator-102-SG",
-          "generator-102-RG",
-          "generator-102-SH",
-          "generator-102-EG",
-          "generator-102-WG"]
-
-    x, y = get_state_series(results, (n, :ω))
-    push!(speeds, scatter(x = x, y =y, name = n))
-end
-plot(speeds)
-
-speeds = Vector{GenericTrace{Dict{Symbol, Any}}}()
-for n in ["ND",
-          "SG",
-          "RG",
-          "SH",
-          "EG",
-          "WG"]
-
-    x, y = get_state_series(results, ("generator-102-$(n)", :ω), dt = 0.005)
-    w_psse_gen = w_psse[!, " SPD 102[BUS 2 LV 20.000]$n"]
-    error_v = w_psse_gen .- y .+ 1.0
-    push!(speeds, scatter(x = x, y =error_v, name = "generator-102-$(n)"))
-end
-
-plot(speeds)
-
-ix = findall(x -> occursin("VOLT", x), hdr)
-volt_psse_ = psse_results[4:end-1, [1, ix...]]
-volt_psse = deleteat!(volt_psse_, 202)
-
-speeds = Vector{GenericTrace{Dict{Symbol, Any}}}()
-for (ix, n) in enumerate(101:104)
-    x, y = get_voltage_magnitude_series(results, n, dt = 0.005)
-    volt_psse_gen = volt_psse[!, ix+1]
-    error_v = volt_psse_gen .- y
-    push!(speeds, scatter(x = x, y =error_v, name = n))
-end
-plot(speeds)
-
-x, y = get_voltage_magnitude_series(results, 101, dt = 0.005)
-plot([scatter(x =x , y =y, name = "PSID"), scatter(x = volt_psse[!, 1], y =  volt_psse[!, 2], name = "PSSe")])
-
-x, y = get_voltage_magnitude_series(results, 102, dt = 0.005)
-plot([scatter(x =x , y =y, name = "PSID"), scatter(x = volt_psse[!, 1], y =  volt_psse[!, 3], name = "PSSe")])
-
-x, y = get_voltage_magnitude_series(results, 103, dt = 0.005)
-plot([scatter(x =x , y =y, name = "PSID"), scatter(x = volt_psse[!, 1], y =  volt_psse[!, 4], name = "PSSe")])
-
-x, y = get_voltage_magnitude_series(results, 104, dt = 0.005)
-plot([scatter(x =x , y =y, name = "PSID"), scatter(x = volt_psse[!, 1], y =  volt_psse[!, 5], name = "PSSe")])
-
 
 dc = get_dynamic_injector(get_component(ThermalStandard, sys, "generator-102-SW"))
-sim = Simulation(
+sim_alg = Simulation(
     MassMatrixModel,
     sys, #system
-    pwd(),
+    "PSSE_3_BUS",
     (0.0, 20.0), #time span
-    GeneratorTrip(1.0, dc),
+    GeneratorTrip(1.0, dc);
+    console_level = Logging.Info
 )
 
-execute!(sim, Rodas5P(), abstol = 1e-6)
-results = read_results(sim)
+execute!(sim_alg, Rodas5P(), abstol = 1e-10)
+results_alg = read_results(sim_alg)
 
-using CSV
-using DataFrames
-
-psse_results = CSV.read("/Users/jdlara/.julia/dev/PowerSimulationsDynamics/test/benchmarks/psse/MultiGen/gen_trip_results_with_names.csv", DataFrame, header = 2)
+psse_results = CSV.read("PSSE_3_BUS/generator-102-SW__BUS 2 LV/results.csv", DataFrame, header = 2)
+# Clean up PSSe results
 hdr = names(psse_results)
+
+# Speed comparison
 ix = findall(x -> occursin("SPD", x), hdr)
-w_psse_ = psse_results[4:end-1, [1, ix...]]
-w_psse = deleteat!(w_psse_, 201)
+ω_psse = psse_results[!, [1, ix...]]
 
-speeds = Vector{GenericTrace{Dict{Symbol, Any}}}()
-for n in ["generator-102-ND",
-          "generator-102-SG",
-          "generator-102-RG",
-          "generator-102-SH",
-          "generator-102-EG",
-          "generator-102-WG",]
-
-    x, y = get_state_series(results, (n, :ω))
-    push!(speeds, )
-end
-plot(speeds)
-
-plots = []
-for n in ["ND",
-          "SG",
-          "RG",
-          "SH",
-          "EG",
-          "WG",]
-
-    x, y = get_state_series(results, ("generator-102-$(n)", :ω), dt = 0.005)
-    w_psse_gen = w_psse[!, " SPD 102[BUS 2 LV 20.000]$n"]
-    error_v = w_psse_gen .+ 1.0
-    push!(plots, plot([scatter(x = x, y =error_v, name = " SPD 102[BUS 2 LV 20.000]$n"),
-                    scatter(x = x, y =y, name = "generator-102-$(n)")]))
+speed_plots = []
+for (ix, n) in enumerate(["ND", "SG", "RG", "SH", "EG", "WG",])
+    color = D3Colors[ix]
+    x_alg, y_alg = get_state_series(results_alg, ("generator-102-$(n)", :ω))
+    # x_dyn, y_dyn = get_state_series(results_dyn, ("generator-102-$(n)", :ω))
+    ω_psse_gen = ω_psse[!, " SPD 102[BUS 2 LV 20.000]$n"] .+ 1.0
+    psse_line = scatter(x = ω_psse[!, 1], y =ω_psse_gen, name = "PSSE", line_color = "black", line_dash = "dot")
+    psid_line_alg = scatter(x = x_alg, y =y_alg, name = "PSID-QSP", line_color = color, line_dash = "dot")
+    # psid_line_dyn = scatter(x = x_dyn, y =y_dyn, name = "PSID-EMT", line_color = color)
+    push!(speed_plots, plot([psid_line_alg,
+                            # psid_line_dyn,
+                            psse_line], Layout(;title="GEN-$n",
+                                                            xaxis_title = "Time [s]",
+                                                            yaxis_title = "Speed [p.u.]",
+                                                            )))
 end
 
-[plots[1] plots[2]
-plots[3] plots[4]
-plots[5] plots[6]]
+speeds = [speed_plots[1] speed_plots[2]
+speed_plots[3] speed_plots[4]
+speed_plots[5] speed_plots[6]]
 
-plot(speeds)
-
+# Terminal Voltage Comparison
 ix = findall(x -> occursin("VOLT", x), hdr)
-volt_psse_ = psse_results[4:end-1, [1, ix...]]
-volt_psse = deleteat!(volt_psse_, 201)
+volt_psse = psse_results[!, [1, ix...]]
 
-speeds = Vector{GenericTrace{Dict{Symbol, Any}}}()
+
+voltage_plots = []
 for (ix, n) in enumerate(101:104)
-    x, y = get_voltage_magnitude_series(results, n, dt = 0.005)
+    color = D3Colors[ix]
+    x_alg, y_alg = get_voltage_magnitude_series(results_alg, n)
+    # x_dyn, y_dyn = get_voltage_magnitude_series(results_dyn, n; dt = 0.005)
     volt_psse_gen = volt_psse[!, ix+1]
-    error_v = volt_psse_gen .- y
-    push!(speeds, scatter(x = x, y =error_v, name = n))
+    psse_line = scatter(x = volt_psse[!, 1], y =volt_psse_gen, name = "PSSE", line_color = "black", line_dash = "dot")
+    psid_line_alg = scatter(x = x_alg, y =y_alg, name = "PSID-QSP", line_color = color, line_dash = "dot")
+    # psid_line_dyn = scatter(x = x_dyn, y =y_dyn, name = "PSID-EMT", line_color = color)
+    push!(voltage_plots, plot([psid_line_alg,
+                               # psid_line_dyn,
+                               psse_line], Layout(;title="BUS-$n",
+                                                            xaxis_title = "Time [s]",
+                                                            yaxis_title = "Voltage [p.u.]",
+                                                            )))
 end
-plot(speeds)
 
-x, y = get_voltage_magnitude_series(results, 101, dt = 0.005)
-plot([scatter(x =x , y =y, name = "PSID"), scatter(x = volt_psse[!, 1], y =  volt_psse[!, 2], name = "PSSe")])
+voltages = [voltage_plots[1] voltage_plots[2]
+voltage_plots[3] voltage_plots[4]]
 
-x, y = get_voltage_magnitude_series(results, 102, dt = 0.005)
-plot([scatter(x =x , y =y, name = "PSID"), scatter(x = volt_psse[!, 1], y =  volt_psse[!, 3], name = "PSSe")])
-
-x, y = get_voltage_magnitude_series(results, 103, dt = 0.005)
-plot([scatter(x =x , y =y, name = "PSID"), scatter(x = volt_psse[!, 1], y =  volt_psse[!, 4], name = "PSSe")])
-
-x, y = get_voltage_magnitude_series(results, 104, dt = 0.005)
-plot([scatter(x =x , y =y, name = "PSID"), scatter(x = volt_psse[!, 1], y =  volt_psse[!, 5], name = "PSSe")])
-
-ix = findall(x -> occursin("VOLT", x), hdr)
-volt_psse_ = psse_results[4:end-1, [1, ix...]]
-volt_psse = deleteat!(volt_psse_, 201)
-
+# Active Power Comparison
 ix = findall(x -> occursin("POWR", x), hdr)
-power_psse_ = psse_results[4:end-1, [1, ix...]]
-power_psse = deleteat!(power_psse_, 201)
-
-x, y = get_activepower_series(results, "generator-101-1"; dt = 0.005)
-plot([scatter(x =x , y =y, name = "PSID"), scatter(x = power_psse[!, 1], y =  power_psse[!, 2], name = "PSSe")])
-
-x, y = get_activepower_series(results, "generator-101-1"; dt = 0.005)
-plot([scatter(x =x , y =y, name = "PSID"), scatter(x = power_psse[!, 1], y =  power_psse[!, 2], name = "PSSe")])
-
-speeds = Vector{GenericTrace{Dict{Symbol, Any}}}()
-total_power = 0.0
-for n in ["ND",
-          "SG",
-          "RG",
-          "SH",
-          "S",
-          "EG",
-          "WG",
-          "SW"]
-
-    x, y = get_activepower_series(results, "generator-102-$(n)"; dt = 0.005)
-    w_psse_gen = power_psse[!, " POWR 102[BUS 2 LV 20.000]$n"]
-    error_v = w_psse_gen .- y
-    total_power += sum(error_v)
-    push!(speeds, scatter(x = x, y =y, name = "generator-102-$(n)"))
-    push!(speeds, scatter(x = power_psse[!, 1], y =w_psse_gen, name = "POWR 102[BUS 2 LV 20.000]$n"))
-end
-plot(speeds)
+power_psse = psse_results[!, [1, ix...]]
 
 
-sys = System("/Users/jdlara/cache/andes/andes/cases/psid_files/FourBusMulti.raw",
-"/Users/jdlara/cache/andes/andes/cases/psid_files/ThreeBus_multigen.dyr"; runchecks = false)
-
-for l in get_components(PowerLoad, sys)
-    set_model!(l, LoadModels.ConstantImpedance)
+power_plots = []
+for (ix, n) in enumerate(["ND", "SG", "RG", "SH", "EG", "WG",])
+    color = D3Colors[ix]
+    x_alg, y_alg = get_activepower_series(results_alg, "generator-102-$(n)")
+#    x_dyn, y_dyn = get_activepower_series(results_dyn, "generator-102-$(n)")
+    power_psse_gen = power_psse[!, " POWR 102[BUS 2 LV 20.000]$n"]
+    psse_line = scatter(x = power_psse[!, 1], y =power_psse_gen, name = "PSSE", line_color = "black", line_dash = "dot")
+    psid_line_alg = scatter(x = x_alg, y =y_alg, name = "PSID-QSP", line_color = color, line_dash = "dot")
+#    psid_line_dyn = scatter(x = x_dyn, y =y_dyn, name = "PSID-EMT", line_color = color)
+    push!(power_plots, plot([psid_line_alg,
+                            # psid_line_dyn,
+                            psse_line], Layout(;title="GEN-$n",
+                                                            xaxis_title = "Time [s]",
+                                                            yaxis_title = "Power [p.u.]",
+                                                            )))
 end
 
-
-dc = get_dynamic_injector(get_component(ThermalStandard, sys, "generator-102-5"))
-sim = Simulation(
-    MassMatrixModel,
-    sys, #system
-    pwd(),
-    (0.0, 20.0), #time span
-    GeneratorTrip(1.0, dc),
-)
-
-execute!(sim, Rodas5P(), abstol = 1e-10, dtmax = 0.0333333)
-results = read_results(sim)
-
-using CSV, DataFrames
-andes_res = CSV.read("/Users/jdlara/cache/andes/FourBusMulti_out.csv", DataFrame)
-
-psse_results = CSV.read("speed.csv", DataFrame, header = 2)
-hdr = names(psse_results)
-ix = findall(x -> occursin("SPD 102", x), hdr)
-w_psse_ = psse_results[4:end-1, [1, ix...]]
-w_psse = deleteat!(w_psse_, 201)
-
-hdr = names(andes_res)
-ix = findall(x -> occursin("omega", x), hdr)
-andes_speed = andes_res[!, [1, ix...]]
-
-speeds = Vector{GenericTrace{Dict{Symbol, Any}}}()
-plots = Vector{PlotlyJS.SyncPlot}(undef, 1)
-
-x, y =  get_state_series(results, ("generator-101-1", :ω), dt = 0.0333333)
-plots[1] = plot([scatter(x = x, y =y, name = "PSID generator-101-1"),
-                 scatter(x = andes_speed[!, 1], y =andes_speed[!, 2], name = "ANDES delta GENROU 1"),
-                 scatter(x =psse_results[!, 1], y = psse_results[!, 5] .+ 1.0, name = "PSSE SPD 102-1")
-                ])
-
-for (n, lab) in enumerate(["EG",
-          "ND",
-          "RG",
-          "SG",
-          "SH",
-          "WG"])
-    x, y =  get_state_series(results, ("generator-102-$(n)", :ω), dt = 0.0333333)
-    w_psse_gen = w_psse[!, " SPD 102[BUS 2 LV 20.000]$lab"] .+ 1.0
-    push!(plots, plot([scatter(x = x, y =y, name = "PSID-generator-102-$(n)"),
-                       scatter(x = andes_speed[!, 1], y =andes_speed[!, n+2], name = "ANDES delta GENROU $(n)"),
-                       scatter(x =  w_psse[!, 1], y = w_psse_gen, name = "PSSE SPD 102 $lab")
-                       ])
-    )
-end
-
-EG = 1
-ND = 2
-RG = 3
-SG = 4
-SH = 5
-WG = 6
-
-[plots[1] plots[2]
-plots[3] plots[4]
-plots[5] plots[7]]
+powers = [power_plots[1] power_plots[2]
+power_plots[3] power_plots[4]
+power_plots[5] power_plots[6]]
