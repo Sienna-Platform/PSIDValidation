@@ -11,8 +11,7 @@ using LinearAlgebra
 
 const PSY = PowerSystems
 
-system = System("test/benchmarks/psse/240WECC/PSCAD_VALIDATION_RAW.raw",
-"test/benchmarks/psse/240WECC/PSCAD_VALIDATION_DYR.dyr";
+system = System("PSCAD_VALIDATION_RAW.raw", "PSCAD_VALIDATION_DYR.dyr";
 bus_name_formatter = x -> strip(string(x["name"])) * "-" * string(x["index"]), runchecks = false)
 
 for l in get_components(PSY.PowerLoad, system)
@@ -20,17 +19,22 @@ for l in get_components(PSY.PowerLoad, system)
 end
 
 sim_ida = Simulation(
-        ResidualModel,
+        MassMatrixModel,
         system,
         pwd(),
         (0.0, 20.0), #time span
-        BranchTrip(1.0, Line, "WILLAMET-4203-MERIDIAN-4204-i_274");
+        BranchTrip(1.0, Line, "BORAH-6104-NAUGHTON-6305-i_1");
+        file_level = Logging.Error,
+        console_level = Logging.Info
         )
 
-execute!(sim_ida, IDA(), dtmax = 0.02)
+execute!(sim_ida, Rodas5P())
 result_psid = read_results(sim_ida)
 
-volts_psse = CSV.read("test/benchmarks/psse/240WECC/psse_results_line_trip/VOLT_csv.csv", DataFrame) 
+v1032_psid = get_voltage_magnitude_series(result_psid, 6104, dt = 0.005);
+
+
+volts_psse = CSV.read("test/benchmarks/psse/240WECC/psse_results_line_trip/VOLT_csv.csv", DataFrame)
 
 
 ## Gen Trip
@@ -60,27 +64,42 @@ for (ix, solver) in enumerate([Rodas4(), Rodas5(), Rodas5P(), QNDF(), FBDF()])
         gen_trip;
         )
 
-    #execute!(sim_ida, IDA(), dtmax = 0.02)
-    execute!(sim_ida, solver, abstol = 1e-8)
-    result_psid = read_results(sim_ida)
-    v1032_psid = get_voltage_magnitude_series(result_psid, 1032, dt = 0.005);
-    dict_voltages[solver_string[ix]] = v1032_psid
-    dict_time[solver_string[ix]] = result_psid.time_log[:timed_solve_time]
+    try
+        #execute!(sim_ida, IDA(), dtmax = 0.02)
+        execute!(sim_ida, solver, abstol = 1e-8)
+        result_psid = read_results(sim_ida)
+        v1032_psid = get_voltage_magnitude_series(result_psid, 1032, dt = 0.005);
+        dict_voltages[solver_string[ix]] = v1032_psid
+        dict_time[solver_string[ix]] = result_psid.time_log[:timed_solve_time]
+    catch e
+        dict_time[solver_string[ix]] = NaN
+        dict_voltages[solver_string[ix]] = ([NaN], [NaN])
+        continue
+    end
 end
 
-result = CSV.read("test/benchmarks/psse/240WECC/psse_results_gen_trip/results_psse.csv", DataFrame; header = 2)
+result = CSV.read("/Users/jdlara/cache/PSIDValidation/line_6104_6305-1/results.csv", DataFrame; header = 2)
 hdr = names(result)
-ix = findall(x -> occursin("VOLT 1032 ", x), hdr)[1];
+ix = findall(x -> occursin("VOLT 6104 ", x), hdr)[1];
 v1032_psse = result[!, ix][4:end-1];
 time_psse = result[!, 1][4:end-1];
 time_psse = vcat(time_psse[1:200], time_psse[202:end])
 v1032_psse = vcat(v1032_psse[1:200], v1032_psse[202:end])
-using Plots
-plot(time_psse, v1032_psse)
+
+plot([scatter(x = v1032_psid[1], y = v1032_psid[2], name = "PSID"), scatter(x = time_psse, y = v1032_psse, name = "PSSe")])
+
 for (k, v) in dict_voltages
     plot!(v)
 end
 
+traces1 = GenericTrace{Dict{Symbol, Any}}[]
+for (k, v) in dict_voltages
+    isnan(v[1][1]) && continue
+    push!(traces1, scatter(x = v[1], y = v[2], name = "$k - $(dict_time[k]) Seconds"))
+end
+plot(traces1, Layout(title = "Results Comparison Mass Matrix Model - abstol 1e-8",
+                     yaxis_title="Voltage Bus 1032",
+                     xaxis_title="Time"))
 
 # Compare 1032 psse run with psid
 ix = findall(x -> occursin("VOLT 1032 ", x), hdr)[1];
