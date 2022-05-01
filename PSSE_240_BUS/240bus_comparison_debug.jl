@@ -9,84 +9,39 @@ using PowerFlows
 using DataFrames
 using LinearAlgebra
 
-const PSY = PowerSystems
+using PlotlyJS
 
-system = System("PSCAD_VALIDATION_RAW.raw", "PSCAD_VALIDATION_DYR.dyr";
+system = System("PSSE_240_BUS/PSCAD_VALIDATION_RAW.raw", "PSSE_240_BUS/PSCAD_VALIDATION_DYR.dyr";
 bus_name_formatter = x -> strip(string(x["name"])) * "-" * string(x["index"]), runchecks = false)
 
-for l in get_components(PSY.PowerLoad, system)
-    PSY.set_model!(l, PSY.LoadModels.ConstantImpedance)
+for l in get_components(PowerLoad, system)
+    set_model!(l, LoadModels.ConstantImpedance)
 end
 
-sim_ida = Simulation(
+th = get_dynamic_injector(get_component(ThermalStandard, system, "generator-1431-N"))
+
+sim_ref = Simulation(
         MassMatrixModel,
         system,
-        pwd(),
-        (0.0, 20.0), #time span
-        BranchTrip(1.0, Line, "BORAH-6104-NAUGHTON-6305-i_1");
+        "PSSE_240_BUS",
+        (0.0, 20.0),
+        GeneratorTrip(1.0, th);
         file_level = Logging.Error,
         console_level = Logging.Info
         )
+execute!(sim_ref, Rodas5P(), abstol = 1e-9)
+res_ref = read_results(sim_ref)
+v1032_psid = get_voltage_angle_series(res_ref, 5032)
 
-execute!(sim_ida, Rodas5P())
-result_psid = read_results(sim_ida)
-
-v1032_psid = get_voltage_magnitude_series(result_psid, 6104, dt = 0.005);
-
-
-volts_psse = CSV.read("test/benchmarks/psse/240WECC/psse_results_line_trip/VOLT_csv.csv", DataFrame)
-
-
-## Gen Trip
-
-dyn_gen = get_component(DynamicInverter, system, "generator-1431-S")
-#dyn_gen = get_dynamic_injector(gen)
-gen_trip = GeneratorTrip(1.0, dyn_gen)
-
-
-sim_ida = Simulation(
-        ResidualModel,
-        system,
-        pwd(),
-        (0.0, 20.0), #time span
-        gen_trip;
-        )
-
-solver_string = ["Rodas4", "Rodas5", "Rodas5P", "QNDF", "FBDF"]
-dict_voltages = Dict()
-dict_time = Dict()
-for (ix, solver) in enumerate([Rodas4(), Rodas5(), Rodas5P(), QNDF(), FBDF()])
-    sim_ida = Simulation(
-        MassMatrixModel,
-        system,
-        pwd(),
-        (0.0, 20.0), #time span
-        gen_trip;
-        )
-
-    try
-        #execute!(sim_ida, IDA(), dtmax = 0.02)
-        execute!(sim_ida, solver, abstol = 1e-8)
-        result_psid = read_results(sim_ida)
-        v1032_psid = get_voltage_magnitude_series(result_psid, 1032, dt = 0.005);
-        dict_voltages[solver_string[ix]] = v1032_psid
-        dict_time[solver_string[ix]] = result_psid.time_log[:timed_solve_time]
-    catch e
-        dict_time[solver_string[ix]] = NaN
-        dict_voltages[solver_string[ix]] = ([NaN], [NaN])
-        continue
-    end
-end
-
-result = CSV.read("/Users/jdlara/cache/PSIDValidation/line_6104_6305-1/results.csv", DataFrame; header = 2)
+result = CSV.read("results-7.csv", DataFrame; header = 2)
 hdr = names(result)
-ix = findall(x -> occursin("VOLT 6104 ", x), hdr)[1];
-v1032_psse = result[!, ix][4:end-1];
-time_psse = result[!, 1][4:end-1];
-time_psse = vcat(time_psse[1:200], time_psse[202:end])
-v1032_psse = vcat(v1032_psse[1:200], v1032_psse[202:end])
+angle_slack = result[!, [506]]
+ix = findall(x -> occursin("ANGL 5032 ", x), hdr)[1];
+v1032_psse = (result[!, ix] .- angle_slack).* (π / 180)
+time_psse = result[!, 1]
 
-plot([scatter(x = v1032_psid[1], y = v1032_psid[2], name = "PSID"), scatter(x = time_psse, y = v1032_psse, name = "PSSe")])
+
+plot([scatter(x = v1032_psid[1], y = v1032_psid[2], name = "PSID"), scatter(x = result[!, ix], y = v1032_psse, name = "PSSe")])
 
 for (k, v) in dict_voltages
     plot!(v)
