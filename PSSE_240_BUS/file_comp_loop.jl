@@ -1,5 +1,5 @@
 using Distributed
-addprocs(20, exeflags=`--project=$@__DIR__`)
+addprocs(36, exeflags=`--project=$@__DIR__`)
 @everywhere begin
 using Pkg
 Pkg.instantiate()
@@ -38,14 +38,14 @@ function run_line(l, system)
         sim_ida = Simulation(
             MassMatrixModel,
             system,
-            pwd(),
+            mktempdir(),
             (0.0, 20.0), #time span
             BranchTrip(1.0, Line, name);
             file_level = Logging.Error,
             console_level = Logging.Error,
         )
 
-        res = execute!(sim_ida, Rodas5P(), enable_progress_bar = false, abstol = 1e-6, dt = 0.01)
+        res = execute!(sim_ida, Rodas5P(), enable_progress_bar = false, abstol = 1e-6, dt = 0.01, initializealg = NoInit())
 
         if res !=  PowerSimulationsDynamics.SIMULATION_FINALIZED
             return error()
@@ -176,14 +176,14 @@ function run_gen(l, system)
         sim_ida = Simulation(
             MassMatrixModel,
             system,
-            pwd(),
+            mktempdir(),
             (0.0, 20.0), #time span
             GeneratorTrip(1.0, get_dynamic_injector(l));
             file_level = Logging.Error,
             console_level = Logging.Error,
         )
 
-        res = execute!(sim_ida, Rodas5P(), enable_progress_bar = false, abstol = 1e-6, dt = 0.01)
+        res = execute!(sim_ida, Rodas5P(), enable_progress_bar = false, abstol = 1e-6, dt = 0.01, initializealg = NoInit())
 
         if res !=  PowerSimulationsDynamics.SIMULATION_FINALIZED
             result["all failed"] = res
@@ -311,6 +311,7 @@ end
 
 
 res = pmap(x -> run_gen(x, system), collect(get_components(ThermalStandard, system, x -> get_status(x))); on_error = x -> Dict(get_name(x) => "failed"))
+
 res = pmap(x -> run_line(x, system), collect(get_components(Line, system)); on_error = x -> Dict(get_name(x) => "failed"))
 
 # run_line(get_component(Line, system, "WILLAMET-4203-MERIDIAN-4204-i_1"), system)
