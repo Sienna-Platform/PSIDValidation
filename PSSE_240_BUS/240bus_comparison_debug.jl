@@ -31,13 +31,14 @@ sim_ref = Simulation(
         )
 execute!(sim_ref, Rodas5P(), abstol = 1e-9)
 res_ref = read_results(sim_ref)
+
 v1032_psid = get_voltage_angle_series(res_ref, 5032)
 
 result = CSV.read("results-7.csv", DataFrame; header = 2)
 hdr = names(result)
 angle_slack = result[!, [506]]
-ix = findall(x -> occursin("ANGL 5032 ", x), hdr)[1];
-v1032_psse = (result[!, ix] .- angle_slack).* (π / 180)
+ix = findall(x -> occursin("SPD 1431", x), hdr)
+v1032_psse = result[!, ix] .+ 1
 time_psse = result[!, 1]
 
 

@@ -3,8 +3,6 @@ using DataFrames
 
 include("../utils.jl")
 
-dir = "/Users/jdlara/cache/PSIDValidation/line_validation_output"
-
 function get_error_metrics(dir::String)
     volt = []
     volt_names = []
@@ -25,16 +23,22 @@ function get_error_metrics(dir::String)
             push!(failed_names, join(split(split(f, ".")[1], "_")[2:end], "_"))
             continue
         end
+        gen_name = join(split(split(f, ".j")[1], "_")[2:end], "_")
+        push!(line_names, gen_name)
         volt_val, volt_name = find_max_key(res_dict["volt"], "error")
         push!(volt, volt_val)
         push!(volt_names, volt_name)
         speed_val, speed_name = find_max_key(res_dict["speed"], "error")
+        if occursin(speed_name, gen_name)
+            @warn "Trying again"
+            pop!(res_dict["speed"], speed_name)
+            speed_val, speed_name = find_max_key(res_dict["speed"], "error")
+        end
         push!(speed, speed_val)
         push!(speed_names, speed_name)
         ang_val, ang_name = find_max_key(res_dict["angles"], "error")
         push!(ang, ang_val)
         push!(ang_names, ang_name)
-        push!(line_names, join(split(split(f, ".j")[1], "_")[2:end], "_"))
     end
 
     return DataFrame("fault" => line_names,
@@ -46,6 +50,7 @@ function get_error_metrics(dir::String)
                         "voltage" => volt), failed_names
 end
 
+dir = "/Users/jdlara/cache/PSIDValidation/PSSE_240_BUS/line_validation_output"
 line_df, failed_lines = get_error_metrics(dir)
 
 using PlotlyJS
@@ -60,6 +65,7 @@ gen_df, failed_gens = get_error_metrics(dir)
 plot(scatter(x = gen_df[!, "fault"], y = gen_df[!, "speed"], name="Max speed error"))
 plot(scatter(x = gen_df[!, "fault"], y = gen_df[!, "angle"], name="Max angle error"))
 plot(scatter(x = gen_df[!, "fault"], y = gen_df[!, "voltage"], name="Max voltage error"))
+
 
 
  "generator-1333-G__H ALLEN-1333" # Singular Exception

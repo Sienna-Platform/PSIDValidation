@@ -9,26 +9,31 @@ using PowerFlows
 using DataFrames
 using LinearAlgebra
 using DiffEqDevTools
+using JSON
 
-system = System("PSCAD_VALIDATION_RAW.raw", "PSCAD_VALIDATION_DYR.dyr";
+include("utils.jl")
+
+system = System("PSSE_240_BUS/PSCAD_VALIDATION_RAW.raw", "PSSE_240_BUS/PSCAD_VALIDATION_DYR.dyr";
 bus_name_formatter = x -> strip(string(x["name"])) * "-" * string(x["index"]), runchecks = false)
 
 for l in get_components(PowerLoad, system)
     set_model!(l, LoadModels.ConstantImpedance)
 end
 
-th = get_dynamic_injector(get_component(ThermalStandard, system, "generator-1431-N"))
-
+#th = get_dynamic_injector(get_component(ThermalStandard, system, "generator-1431-N"))
+th = get_component(ThermalStandard, system, "generator-2637-H")
+set_available!(th, false)
 sim_ref = Simulation(
-        MassMatrixModel,
+        ResidualModel,
         system,
         "WORK_PRECISION_DIAGRAMS",
         (0.0, 10.0),
-        GeneratorTrip(0.1, th);
+        #GeneratorTrip(0.1, th)     
+        ;
         file_level = Logging.Error,
         console_level = Logging.Info
         )
-execute!(sim_ref, Rodas5P(), abstol = 1e-12)
+execute!(sim_ref, IDA(), abstol = 1e-10, reltol = 1e-10)
 res_ref = read_results(sim_ref)
 ref_sol = res_ref.solution
 
@@ -37,7 +42,8 @@ sim_mm = Simulation(
         system,
         "WORK_PRECISION_DIAGRAMS",
         (0.0, 10.0),
-        GeneratorTrip(0.1, th);
+        #GeneratorTrip(0.1, th)
+        ;
         file_level = Logging.Error,
         console_level = Logging.Info
         )
@@ -45,43 +51,62 @@ sim_mm = Simulation(
 
 probs = [sim_mm.problem]
 refs = [ref_sol]
-abstols = 1.0 ./ 10.0 .^ (6:9)
-reltols = 1.0 ./ 10.0 .^ (2:5)
+abstols = 1.0 ./ 10.0 .^ (2:7)
+reltols = 1.0 ./ 10.0 .^ (2:7)
 
 setups = [Dict(:prob_choice => 1, :alg=>Rodas5P(), :callback => SciMLBase.CallbackSet((), tuple(sim_mm.callbacks...)), :tstops => sim_mm.tstops, :initializealg => SciMLBase.NoInit()),
           Dict(:prob_choice => 1, :alg=>Rodas4(), :callback => SciMLBase.CallbackSet((), tuple(sim_mm.callbacks...)), :tstops => sim_mm.tstops, :initializealg => SciMLBase.NoInit()),
           Dict(:prob_choice => 1, :alg=>Rodas4P2(), :callback => SciMLBase.CallbackSet((), tuple(sim_mm.callbacks...)), :tstops => sim_mm.tstops, :initializealg => SciMLBase.NoInit()),
           Dict(:prob_choice => 1, :alg=>Rodas42(), :callback => SciMLBase.CallbackSet((), tuple(sim_mm.callbacks...)), :tstops => sim_mm.tstops, :initializealg => SciMLBase.NoInit()),
           Dict(:prob_choice => 1, :alg=>Rodas5(), :callback => SciMLBase.CallbackSet((), tuple(sim_mm.callbacks...)), :tstops => sim_mm.tstops, :initializealg => SciMLBase.NoInit()),
-          Dict(:prob_choice => 1, :alg=>Ros4LStab(), :callback => SciMLBase.CallbackSet((), tuple(sim_mm.callbacks...)), :tstops => sim_mm.tstops, :initializealg => SciMLBase.NoInit()),
+]
 
-          Dict(:prob_choice => 1, :alg=>ABDF2(), :callback => SciMLBase.CallbackSet((), tuple(sim_mm.callbacks...)), :tstops => sim_mm.tstops, :initializealg => SciMLBase.NoInit()),
+wp_mm1 = WorkPrecisionSet(probs, abstols, reltols, setups; print_names=true, parallel_type = :threads,
+                      save_everystep=false,appxsol=refs,maxiters=Int(1e5),numruns=10,
+                      )
+
+res_mm1 = wp_to_dict(wp_mm1)
+open("mm_wp_results1.json", "w") do io
+      JSON.print(io, res_mm1)
+end
+
+setups = [
           Dict(:prob_choice => 1, :alg=>FBDF(), :callback => SciMLBase.CallbackSet((), tuple(sim_mm.callbacks...)), :tstops => sim_mm.tstops, :initializealg => SciMLBase.NoInit()),
           Dict(:prob_choice => 1, :alg=>QNDF(), :callback => SciMLBase.CallbackSet((), tuple(sim_mm.callbacks...)), :tstops => sim_mm.tstops, :initializealg => SciMLBase.NoInit()),
-          Dict(:prob_choice => 1, :alg=>QNDF1(), :callback => SciMLBase.CallbackSet((), tuple(sim_mm.callbacks...)), :tstops => sim_mm.tstops, :initializealg => SciMLBase.NoInit()),
-          Dict(:prob_choice => 1, :alg=>QNDF2(), :callback => SciMLBase.CallbackSet((), tuple(sim_mm.callbacks...)), :tstops => sim_mm.tstops, :initializealg => SciMLBase.NoInit()),
-          Dict(:prob_choice => 1, :alg=>QBDF1(), :callback => SciMLBase.CallbackSet((), tuple(sim_mm.callbacks...)), :tstops => sim_mm.tstops, :initializealg => SciMLBase.NoInit()),
-          Dict(:prob_choice => 1, :alg=>QBDF2(), :callback => SciMLBase.CallbackSet((), tuple(sim_mm.callbacks...)), :tstops => sim_mm.tstops, :initializealg => SciMLBase.NoInit()),
+          # Dict(:prob_choice => 1, :alg=>QNDF2(), :callback => SciMLBase.CallbackSet((), tuple(sim_mm.callbacks...)), :tstops => sim_mm.tstops, :initializealg => SciMLBase.NoInit()),
+          Dict(:prob_choice => 1, :alg=>QBDF(), :callback => SciMLBase.CallbackSet((), tuple(sim_mm.callbacks...)), :tstops => sim_mm.tstops, :initializealg => SciMLBase.NoInit()),
+          #Dict(:prob_choice => 1, :alg=>QBDF2(), :callback => SciMLBase.CallbackSet((), tuple(sim_mm.callbacks...)), :tstops => sim_mm.tstops, :initializealg => SciMLBase.NoInit()),
+]
 
+wp_mm2 = WorkPrecisionSet(probs, abstols, reltols, setups; print_names=true, parallel_type = :threads,
+                      save_everystep=false,appxsol=refs,maxiters=Int(1e5),numruns=10, kwargshandle=KeywordArgSilent
+                      )
+
+res_mm2 = wp_to_dict(wp_mm2)
+open("mm_wp_results2.json", "w") do io
+      JSON.print(io, res_mm2)
+end
+
+setups = [
           Dict(:prob_choice => 1, :alg=>Rosenbrock23(), :callback => SciMLBase.CallbackSet((), tuple(sim_mm.callbacks...)), :tstops => sim_mm.tstops, :initializealg => SciMLBase.NoInit()),
-          Dict(:prob_choice => 1, :alg=>Rosenbrock32(), :callback => SciMLBase.CallbackSet((), tuple(sim_mm.callbacks...)), :tstops => sim_mm.tstops, :initializealg => SciMLBase.NoInit()),
+          # Dict(:prob_choice => 1, :alg=>Rosenbrock32(), :callback => SciMLBase.CallbackSet((), tuple(sim_mm.callbacks...)), :tstops => sim_mm.tstops, :initializealg => SciMLBase.NoInit()),
           Dict(:prob_choice => 1, :alg=>RosenbrockW6S4OS(), :callback => SciMLBase.CallbackSet((), tuple(sim_mm.callbacks...)), :tstops => sim_mm.tstops, :initializealg => SciMLBase.NoInit()),
           Dict(:prob_choice => 1, :alg=>ROS34PW1a(), :callback => SciMLBase.CallbackSet((), tuple(sim_mm.callbacks...)), :tstops => sim_mm.tstops, :initializealg => SciMLBase.NoInit()),
           Dict(:prob_choice => 1, :alg=>ROS34PW1b(), :callback => SciMLBase.CallbackSet((), tuple(sim_mm.callbacks...)), :tstops => sim_mm.tstops, :initializealg => SciMLBase.NoInit()),
           Dict(:prob_choice => 1, :alg=>ROS34PW2(), :callback => SciMLBase.CallbackSet((), tuple(sim_mm.callbacks...)), :tstops => sim_mm.tstops, :initializealg => SciMLBase.NoInit()),
           Dict(:prob_choice => 1, :alg=>ROS34PW3(), :callback => SciMLBase.CallbackSet((), tuple(sim_mm.callbacks...)), :tstops => sim_mm.tstops, :initializealg => SciMLBase.NoInit()),
-
           Dict(:prob_choice => 1, :alg=>RadauIIA5(), :callback => SciMLBase.CallbackSet((), tuple(sim_mm.callbacks...)), :tstops => sim_mm.tstops, :initializealg => SciMLBase.NoInit())
 ]
 
-wp = WorkPrecisionSet(probs, abstols, reltols, setups; print_names=true, parallel_type = :threads,
+wp_mm3 = WorkPrecisionSet(probs, abstols, reltols, setups; print_names=true, parallel_type = :threads,
                       save_everystep=false,appxsol=refs,maxiters=Int(1e5),numruns=10,
                       )
 
-res = wp_to_dict(wp)
-open("mm_wp_results.json") do io
-      JSON.print(io, res)
+res_mm3 = wp_to_dict(wp_mm3)
+open("mm_wp_results3.json", "w") do io
+      JSON.print(io, res_mm3)
 end
+
 
 sim_res = Simulation(
         ResidualModel,
@@ -96,8 +121,6 @@ sim_res = Simulation(
 
 probs = [sim_res.problem]
 refs = [ref_sol]
-abstols = 1.0 ./ 10.0 .^ (6:9)
-reltols = 1.0 ./ 10.0 .^ (2:5)
 
 setups = [Dict(:prob_choice => 1, :alg=>IDA(), :callback => SciMLBase.CallbackSet((), tuple(sim_res.callbacks...)), :tstops => sim_res.tstops, :initializealg => SciMLBase.NoInit()),
           Dict(:prob_choice => 1, :alg=>IDA(linear_solver = :LapackDense), :callback => SciMLBase.CallbackSet((), tuple(sim_res.callbacks...)), :tstops => sim_res.tstops, :initializealg => SciMLBase.NoInit()),
@@ -105,15 +128,15 @@ setups = [Dict(:prob_choice => 1, :alg=>IDA(), :callback => SciMLBase.CallbackSe
           #Dict(:prob_choice => 1, :alg=>IDA(linear_solver = :BCG), :callback => SciMLBase.CallbackSet((), tuple(sim_res.callbacks...)), :tstops => sim_res.tstops, :initializealg => SciMLBase.NoInit()),
           Dict(:prob_choice => 1, :alg=>IDA(linear_solver = :KLU), :callback => SciMLBase.CallbackSet((), tuple(sim_res.callbacks...)), :tstops => sim_res.tstops, :initializealg => SciMLBase.NoInit())
 ]
-wp = WorkPrecisionSet(probs, abstols, reltols, setups; print_names=true,
+wp_res = WorkPrecisionSet(probs, abstols, reltols, setups; print_names=true,
                        names = ["Dense" "LapackDense" "KLU"],
                       save_everystep=false,appxsol=refs,maxiters=Int(1e5),numruns=10,
                       )
 
-res = wp_to_dict(wp)
+res_dict = wp_to_dict(wp_res)
 
-open("sundials_wp_results.json") do io
-      JSON.print(io, res)
+open("sundials_wp_results.json", "w") do io
+      JSON.print(io, res_dict)
 end
 
 

@@ -8,10 +8,10 @@ using CSV
 using PowerFlows
 using DataFrames
 using LinearAlgebra
-using PlotlyJS
+using PlotlyJS_ 
 const PSY = PowerSystems
 
-system = System("ThreeBusVSM_Droop.json")
+system = System("PSCAD_3BUS/ThreeBusVSM_Droop.json")
 
 load2 = get_component(PowerLoad, system, "load1032")
 load_trip = LoadTrip(0.1, load2)

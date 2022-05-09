@@ -19,6 +19,7 @@ Revise = "295af30f-e4ad-537b-8983-00126c2a3abe"
 SciMLBase = "0bca4576-84f4-4d90-8ffe-ffa030f20462"
 SparseDiffTools = "47a9eef4-7e08-11e9-0b38-333d64bd3804"
 Sundials = "c3572dad-4567-51f8-b174-8c6c989267f4"
+TexTables = "ebf5ac4f-3ec1-555f-9ac9-3d72ed88c471"
 
 [extras]
 CPUSummary = "2a0fbf3d-bb9c-48f3-b0a9-814d99fd7ab9"
