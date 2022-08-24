@@ -23,7 +23,7 @@
     <param name="Warn" value="0" />
     <param name="Check" value="0" />
     <param name="description" value="" />
-    <param name="revisor" value="Matt Bossart, 1661184993" />
+    <param name="revisor" value="Matt Bossart, 1661185432" />
   </paramlist>
   <Layers>
     <Layer id="563951131" classid="Layer" name="dev" state="Disabled">
@@ -1268,7 +1268,7 @@
         </Wire>
       </schematic>
     </Definition>
-    <Definition classid="UserCmpDefn" name="Main" id="1334321687" group="" url="" version="" build="" crc="105881001" view="false" date="1661184942">
+    <Definition classid="UserCmpDefn" name="Main" id="1334321687" group="" url="" version="" build="" crc="9706524" view="false" date="1661184942">
       <paramlist name="">
         <param name="Description" value="" />
       </paramlist>
@@ -2821,7 +2821,7 @@
               <param name="ymin" value="-1" />
               <param name="ymax" value="1" />
             </paramlist>
-            <Curve classid="Curve" id="695811110" name="P_101" link="1111477538" color="0" bold="1" show="-1" mode="0" gradient="false" transparency="255" thresh="0.5" above="High" below="Low" style="0">
+            <Curve classid="Curve" id="695811110" name="P_101" link="1111477538" color="0" bold="0" show="-1" mode="0" gradient="false" transparency="255" thresh="0.5" above="High" below="Low" style="0">
               <path />
             </Curve>
             <Curve classid="Curve" id="936807771" name="P_102" link="286218688" color="0" bold="0" show="-1" mode="0" gradient="false" transparency="255" thresh="0.5" above="High" below="Low" style="0">
@@ -3117,7 +3117,7 @@
         </Frame>
         <User classid="UserCmp" defn="master:source_3" id="1377811945" x="972" y="198" w="41" h="105" z="1" orient="3" link="-1" layer="" q="4" disable="false">
           <paramlist link="-1" name="" crc="111699524">
-            <param name="Name" value="InfBussss" />
+            <param name="Name" value="InfBus" />
             <param name="Type" value="6" />
             <param name="Grnd" value="1" />
             <param name="View" value="1" />
@@ -3163,7 +3163,7 @@
   </definitions>
   <List classid="Resource" />
   <hierarchy>
-    <call link="1810436242" name="sauerpai_3bus_infinitebus:DS" z="-1" view="false" instance="0">
+    <call link="1385964027" name="sauerpai_3bus_infinitebus:DS" z="-1" view="false" instance="0">
       <call link="1255703834" name="sauerpai_3bus_infinitebus:Main" z="-1" view="true" instance="0">
         <call link="1851570176" name="PSID_Library_Inverters:SIMPLE_MACHINE" z="330" view="false" instance="0" />
         <call link="996706454" name="PSID_Library_Inverters:DROOP_GFM" z="340" view="false" instance="0">
