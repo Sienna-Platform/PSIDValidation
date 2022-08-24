@@ -28,7 +28,13 @@ docs/site/
 
 #Figures
 *.pdf
+*.png
 *.ipynb
+
+#outputs
+pscad_outputs*
+psid_outputs*
+*.gf46
 
 Manifest.toml
 .vscode

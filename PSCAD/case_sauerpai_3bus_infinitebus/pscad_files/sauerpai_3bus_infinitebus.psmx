@@ -1,0 +1,52 @@
+<Meta name="sauerpai_3bus_infinitebus">
+  <messagelist>
+    <message status="normal" label="build" groupid="400002" scope="sauerpai_3bus_infinitebus" id="461317406" classid="MessageObj"><![CDATA[Begin compiling with PSCAD Version 5.0.1]]></message>
+    <message status="normal" label="build" groupid="100006" id="1181765408" classid="CmpNavigator">
+      <User scope="sauerpai_3bus_infinitebus" name="PSID_Library_Inverters:SIMPLE_MACHINE" status="normal" link="1851570176" /><![CDATA[Compiling 'SIMPLE_MACHINE'. Generating network and data files.]]></message>
+    <message status="normal" label="build" groupid="100006" link="1391047295" id="1391047295" classid="FileNavigator"><![CDATA[Generating 'c:\Users\Matt Bossart\OneDrive - UCB-O365\Desktop\Transient Stability\Repositories\PSIDValidation\PSCAD\case_sauerpai_3bus_infinitebus\pscad_files\sauerpai_3bus_infinitebus.gf46\sauerpai_3bus_infinitebus.map'.]]><file scope="sauerpai_3bus_infinitebus">c:\Users\Matt Bossart\OneDrive - UCB-O365\Desktop\Transient Stability\Repositories\PSIDValidation\PSCAD\case_sauerpai_3bus_infinitebus\pscad_files\sauerpai_3bus_infinitebus.gf46\sauerpai_3bus_infinitebus.map</file></message>
+    <message status="normal" label="build" groupid="100015" scope="sauerpai_3bus_infinitebus" id="590347914" classid="MessageObj"><![CDATA[The total number of live nodes: 37]]></message>
+    <message status="normal" label="build" groupid="0" link="966823005" id="966823005" classid="FileNavigator"><![CDATA[Coding .mak file: 'c:\Users\Matt Bossart\OneDrive - UCB-O365\Desktop\Transient Stability\Repositories\PSIDValidation\PSCAD\case_sauerpai_3bus_infinitebus\pscad_files\sauerpai_3bus_infinitebus.gf46\\sauerpai_3bus_infinitebus.mak']]><file scope="sauerpai_3bus_infinitebus">c:\Users\Matt Bossart\OneDrive - UCB-O365\Desktop\Transient Stability\Repositories\PSIDValidation\PSCAD\case_sauerpai_3bus_infinitebus\pscad_files\sauerpai_3bus_infinitebus.gf46\\sauerpai_3bus_infinitebus.mak</file></message>
+    <message status="normal" label="build" groupid="400000" scope="sauerpai_3bus_infinitebus" id="1202680428" classid="MessageObj"><![CDATA[Time for Compile: 187ms  Make: 15ms]]></message>
+    <message status="normal" label="build" groupid="400000" scope="sauerpai_3bus_infinitebus" id="696432742" classid="MessageObj"><![CDATA[Solve Time = 31ms]]></message>
+    <message status="normal" label="build" groupid="100016" scope="sauerpai_3bus_infinitebus" id="620712657" classid="MessageObj"><![CDATA[Will execute (1): call C:\Program Files (x86)\GFortran\4.6\bin\gf46vars.bat]]></message>
+    <message status="normal" label="build" groupid="100016" scope="sauerpai_3bus_infinitebus" id="1801754740" classid="MessageObj"><![CDATA[Will execute (1): call "C:\Program Files (x86)\GFortran\4.6\bin\gf46vars.bat"]]></message>
+    <message status="normal" label="build" groupid="100016" scope="sauerpai_3bus_infinitebus" id="1935142322" classid="MessageObj"><![CDATA[Will execute (2): make -j -f sauerpai_3bus_infinitebus.mak]]></message>
+    <message status="normal" label="build" groupid="100016" scope="sauerpai_3bus_infinitebus" id="463048621" classid="MessageObj"><![CDATA[Will execute (2): "c:\Users\Matt Bossart\OneDrive - UCB-O365\Desktop\Transient Stability\Repositories\PSIDValidation\PSCAD\case_sauerpai_3bus_infinitebus\pscad_files\sauerpai_3bus_infinitebus.gf46\sauerpai_3bus_infinitebus_mak.bat"]]></message>
+    <message status="normal" label="build" groupid="100005" scope="sauerpai_3bus_infinitebus" id="1353055198" classid="MessageObj"><![CDATA[Creating EMTDC executable...]]></message>
+    <message status="normal" label="build" groupid="0" scope="sauerpai_3bus_infinitebus" id="465122810" classid="MessageObj"><![CDATA[c:\Users\Matt Bossart\OneDrive - UCB-O365\Desktop\Transient Stability\Repositories\PSIDValidation\PSCAD\case_sauerpai_3bus_infinitebus\pscad_files\sauerpai_3bus_infinitebus.gf46>call "C:\Program Files (x86)\GFortran\4.6\bin\gf46vars.bat" ]]></message>
+    <message status="normal" label="build" groupid="100004" scope="sauerpai_3bus_infinitebus" id="392512994" classid="MessageObj"><![CDATA[Compiling 'DS.f' into object code.]]></message>
+    <message status="normal" label="build" groupid="100004" scope="sauerpai_3bus_infinitebus" id="1802985895" classid="MessageObj"><![CDATA[Compiling 'Main.f' into object code.]]></message>
+    <message status="normal" label="build" groupid="100004" scope="sauerpai_3bus_infinitebus" id="1933667102" classid="MessageObj"><![CDATA[Compiling 'SIMPLE_MACHINE.f' into object code.]]></message>
+    <message status="normal" label="build" groupid="0" scope="sauerpai_3bus_infinitebus" id="1338288653" classid="MessageObj"><![CDATA[gfortran.exe -c -ffree-form -fdefault-real-8 -fdefault-double-8 -I"C:\Program Files (x86)\PSCAD501 x64\emtdc\gf46\inc" -I"C:\Program Files (x86)\PSCAD501 x64\emtdc\gf46\windows" -O2 -Wconversion  SIMPLE_MACHINE.f]]></message>
+    <message status="normal" label="build" groupid="100013" scope="sauerpai_3bus_infinitebus" id="656726365" classid="MessageObj"><![CDATA[Linking objects and libraries into binary 'sauerpai_3bus_infinitebus.exe']]></message>
+    <message status="normal" label="build" groupid="400003" scope="sauerpai_3bus_infinitebus" id="548550026" classid="MessageObj"><![CDATA[Finished compiling with PSCAD Version 5.0.1]]></message>
+  </messagelist>
+  <ViewContext>
+    <Window defn="sauerpai_3bus_infinitebus:Main" call="0" />
+  </ViewContext>
+  <List classid="View">
+    <View name="Main" zoomscale="0.96" scrollx="0" scrolly="0" />
+  </List>
+  <Output device="EMTDC" version="2010" date="2022/08/22" time="12:15:45.000000">
+    <Domain name="Time" unit="s" mult="0.0" skew="0.0">
+      <Sample rate="4000.0" end="100000" />
+    </Domain>
+    <List classid="Analog">
+      <Analog name="Main(0):V_101" index="1" gindex="100663297" id="349715791:0" label="" dim="1" unit="" min="-2.0" max="2.0" />
+      <Analog name="Main(0):P_101" index="2" gindex="100663298" id="1111477538:0" label="" dim="1" unit="" min="-2.0" max="2.0" />
+      <Analog name="Main(0):Q_101" index="3" gindex="100663299" id="311085016:0" label="" dim="1" unit="" min="-2.0" max="2.0" />
+      <Analog name="Main(0):V_102" index="4" gindex="100663300" id="331552535:0" label="" dim="1" unit="" min="-2.0" max="2.0" />
+      <Analog name="Main(0):P_102" index="5" gindex="100663301" id="286218688:0" label="" dim="1" unit="" min="-2.0" max="2.0" />
+      <Analog name="Main(0):Q_102" index="6" gindex="100663302" id="1472105460:0" label="" dim="1" unit="" min="-2.0" max="2.0" />
+      <Analog name="Main(0):V_103" index="7" gindex="100663303" id="1770736775:0" label="" dim="1" unit="" min="-2.0" max="2.0" />
+      <Analog name="Main(0):P_103_1" index="8" gindex="100663304" id="36824159:0" label="" dim="1" unit="" min="-2.0" max="2.0" />
+      <Analog name="Main(0):Q_103_1" index="9" gindex="100663305" id="504636806:0" label="" dim="1" unit="" min="-2.0" max="2.0" />
+      <Analog name="Main(0):P_103_2" index="10" gindex="100663306" id="1246112086:0" label="" dim="1" unit="" min="-2.0" max="2.0" />
+      <Analog name="Main(0):Q_103_2" index="11" gindex="100663307" id="2067795501:0" label="" dim="1" unit="" min="-2.0" max="2.0" />
+      <Analog name="Main(0):P_103_3" index="12" gindex="100663308" id="1746426579:0" label="" dim="1" unit="" min="-2.0" max="2.0" />
+      <Analog name="Main(0):Q_103_3" index="13" gindex="100663309" id="186533709:0" label="" dim="1" unit="" min="-2.0" max="2.0" />
+      <Analog name="Main(0):Freq_out" index="14" gindex="100663310" id="1880506312:0" label="" dim="1" unit="" min="-2.0" max="2.0" />
+    </List>
+    <List classid="Digital" />
+  </Output>
+</Meta>

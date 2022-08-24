@@ -1,5 +1,7 @@
 [deps]
+Arrow = "69666777-d1a9-59fb-9406-91d4454c9d45"
 CSV = "336ed68f-0bac-5ca0-87d4-7b16caf5d00b"
+Conda = "8f4d0f93-b110-5947-807f-2305c1781a2d"
 DataFrames = "a93c6f00-e57d-5684-b7b6-d8193f3e46c0"
 DiffEqDevTools = "f3b72e0c-5b89-59e1-b016-84e28bfd966d"
 JSON = "682c06a0-de6a-54ab-a142-c8b1cf79cde6"
@@ -15,11 +17,13 @@ PowerSimulationsDynamics = "398b2ede-47ed-4edc-b52e-69e4a48b4336"
 PowerSystems = "bcd98974-b02a-5e2f-9ee0-a103f5c450dd"
 Profile = "9abbd945-dff8-562f-b5e8-e1ebf5ef1b79"
 ProfileView = "c46f51b8-102a-5cf2-8d2c-8597cb0e0da7"
+PyCall = "438e738f-606a-5dbb-bf0a-cddfbfd45ab0"
 Revise = "295af30f-e4ad-537b-8983-00126c2a3abe"
 SciMLBase = "0bca4576-84f4-4d90-8ffe-ffa030f20462"
 SparseDiffTools = "47a9eef4-7e08-11e9-0b38-333d64bd3804"
 Sundials = "c3572dad-4567-51f8-b174-8c6c989267f4"
 TexTables = "ebf5ac4f-3ec1-555f-9ac9-3d72ed88c471"
+UnPack = "3a884ed6-31ef-47d7-9d2a-63182c4928ed"
 
 [extras]
 CPUSummary = "2a0fbf3d-bb9c-48f3-b0a9-814d99fd7ab9"

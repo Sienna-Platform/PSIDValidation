@@ -1,0 +1,62 @@
+<Meta name="PSID_Library">
+  <messagelist>
+    <message status="warning" label="build" groupid="206502" id="198326413" classid="CmpNavigator">
+      <User scope="PSID_Library" name="master:realpole" status="warning" link="472444405" /><![CDATA[Signal 'INV' type conversion may lose accuracy at connection 'R']]></message>
+    <message status="warning" label="build" groupid="206502" id="2108984198" classid="CmpNavigator">
+      <User scope="PSID_Library" name="master:realpole" status="warning" link="440507626" /><![CDATA[Signal 'INV' type conversion may lose accuracy at connection 'R']]></message>
+    <message status="warning" label="build" groupid="206502" id="1733559350" classid="CmpNavigator">
+      <User scope="PSID_Library" name="master:integral" status="warning" link="550938491" /><![CDATA[Signal 'INV' type conversion may lose accuracy at connection 'R']]></message>
+    <message status="warning" label="build" groupid="206502" id="1075640926" classid="CmpNavigator">
+      <User scope="PSID_Library" name="master:integral" status="warning" link="1891684365" /><![CDATA[Signal 'INV' type conversion may lose accuracy at connection 'R']]></message>
+    <message status="warning" label="build" groupid="206502" id="1753417226" classid="CmpNavigator">
+      <User scope="PSID_Library" name="master:realpole" status="warning" link="231561493" /><![CDATA[Signal 'INV' type conversion may lose accuracy at connection 'R']]></message>
+    <message status="warning" label="build" groupid="206502" id="1661760781" classid="CmpNavigator">
+      <User scope="PSID_Library" name="master:integral" status="warning" link="1673256143" /><![CDATA[Signal 'INV' type conversion may lose accuracy at connection 'R']]></message>
+    <message status="warning" label="build" groupid="206502" id="1905356234" classid="CmpNavigator">
+      <User scope="PSID_Library" name="master:realpole" status="warning" link="393200150" /><![CDATA[Signal 'INV' type conversion may lose accuracy at connection 'R']]></message>
+    <message status="warning" label="build" groupid="206502" id="763177427" classid="CmpNavigator">
+      <User scope="PSID_Library" name="master:integral" status="warning" link="496252468" /><![CDATA[Signal 'INV' type conversion may lose accuracy at connection 'R']]></message>
+    <message status="warning" label="build" groupid="206502" id="1393640709" classid="CmpNavigator">
+      <User scope="PSID_Library" name="master:integral" status="warning" link="1332369744" /><![CDATA[Signal 'INV' type conversion may lose accuracy at connection 'R']]></message>
+  </messagelist>
+  <List classid="Settings" />
+  <ViewContext>
+    <Window defn="PSID_Library:Main" call="0" />
+  </ViewContext>
+  <List classid="View">
+    <View name="Main" zoomlevel="4" scrollx="0" scrolly="576" zoomscale="1.2" />
+    <View name="TGTypeII" zoomlevel="4" scrollx="0" scrolly="252" zoomscale="0.96" />
+    <View name="TGOV1" zoomlevel="4" scrollx="184" scrolly="185" zoomscale="1.5" />
+    <View name="SEXS" zoomlevel="1" scrollx="0" scrolly="300" zoomscale="0.96" />
+    <View name="LCLFilter" zoomlevel="4" scrollx="403" scrolly="525" zoomscale="0.96" />
+    <View name="CurrentControl" zoomlevel="3" scrollx="0" scrolly="0" />
+    <View name="KauraPLL" zoomlevel="5" scrollx="0" scrolly="180" zoomscale="0.96" />
+    <View name="AverageConverter" zoomlevel="6" scrollx="0" scrolly="0" zoomscale="0.768" />
+    <View name="FixedDCSource" zoomlevel="4" scrollx="0" scrolly="0" zoomscale="0.768" />
+    <View name="OuterControl_1" zoomlevel="4" scrollx="0" scrolly="11" />
+    <View name="OuterControl" zoomlevel="3" scrollx="0" scrolly="0" />
+    <View name="PSID_Inverter" zoomlevel="4" scrollx="0" scrolly="0" />
+    <View name="dq_ri" zoomlevel="6" scrollx="0" scrolly="0" zoomscale="0.96" />
+    <View name="ri_dq" zoomlevel="5" scrollx="0" scrolly="30" zoomscale="0.96" />
+    <View name="ri_abc" zoomlevel="6" scrollx="0" scrolly="0" zoomscale="0.96" />
+    <View name="magangle_ri" zoomlevel="5" scrollx="65" scrolly="0" />
+    <View name="AVRSimple" zoomlevel="5" scrollx="0" scrolly="0" />
+    <View name="IEEET1" zoomlevel="5" scrollx="9" scrolly="225" zoomscale="0.768" />
+    <View name="exciter_saturation" zoomlevel="5" scrollx="0" scrolly="0" zoomscale="0.768" />
+    <View name="BPA_GG" zoomlevel="4" scrollx="0" scrolly="50" zoomscale="1.2" />
+    <View name="GGOV1" zoomlevel="3" scrollx="0" scrolly="0" zoomscale="0.768" />
+    <View name="DeadBand" zoomlevel="7" scrollx="97" scrolly="405" />
+    <View name="RateLimiter" zoomlevel="7" scrollx="236" scrolly="0" />
+    <View name="VoltageModeControl" zoomlevel="4" scrollx="0" scrolly="273" zoomscale="0.96" />
+    <View name="FixedFrequency" zoomlevel="4" scrollx="0" scrolly="0" zoomscale="0.96" />
+    <View name="VirtualInertia_ReactiveDroop" zoomlevel="4" scrollx="0" scrolly="0" zoomscale="0.96" />
+    <View name="ActiveDroop_ReactiveDroop" zoomlevel="3" scrollx="359" scrolly="72" zoomscale="0.96" />
+    <View name="ReducedOrderPLL" zoomlevel="4" scrollx="0" scrolly="0" zoomscale="0.96" />
+    <View name="CurrentModeControl" zoomlevel="5" scrollx="0" scrolly="291" zoomscale="0.96" />
+    <View name="ActivePI_ReactivePI" zoomlevel="6" scrollx="0" scrolly="377" zoomscale="0.96" />
+    <View name="GAST" zoomscale="0.768" scrollx="0" scrolly="400" />
+    <View name="Untitled" zoomscale="0.6144" scrollx="0" scrolly="0" />
+    <View name="volley_circuit_breaker_logic" zoomscale="1.2" scrollx="0" scrolly="0" />
+  </List>
+  <Catalog count="0" />
+</Meta>

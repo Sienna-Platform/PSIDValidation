@@ -1,0 +1,16 @@
+<workspace name="sauerpai_3bus_inverter" version="5.0.1" crc="51354931">
+  <projects>
+    <project type="library" name="PSID_Library" filepath="..\..\_pscad_libraries\PSID_Library.pslx" />
+    <project type="library" name="PSID_Library_Inverters" filepath="..\..\_pscad_libraries\PSID_Library_Inverters.pslx" />
+    <project type="project" name="sauerpai_3bus_inverter" filepath=".\sauerpai_3bus_inverter.pscx" />
+  </projects>
+  <simulations />
+  <pmr />
+  <messagegrid expanded="">
+    <column name="Icon" />
+    <column name="Id" />
+    <column name="Component" />
+    <column name="Namespace" />
+    <column name="Description" />
+  </messagegrid>
+</workspace>

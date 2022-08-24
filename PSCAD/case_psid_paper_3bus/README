@@ -1,0 +1,34 @@
+All PSCAD Faults occur at t = 5s 
+All PSID Faults occur at t = 1s 
+
+Run a load step down (50MW), load step up (50MW?) and line trip (between two generators)
+
+PSCAD parameters
+    50us solution step
+    50us plot step 
+
+PSID parameters
+    IDA(), dtmax = 1e-4, saveat=5e-5, abstol = 1e-14 #algebraic lines different??? 
+    IDA(), dtmax = 1e-5, saveat=5e-5, abstol = 1e-14
+
+Save data
+    V101
+    V102 
+    V103 
+    a bunch of states from droop...
+    a bunch of states from vsm...
+
+Include a summary plot that shows the voltages and the states for each fault.
+    states_LoadStepDown.png
+    voltages_LoadStepDown.png
+    states_LoadStepUp.png
+    voltages_LoadStepUp.png
+    states_LineTrip.png
+    voltages_LineTrip.png
+
+    data_LoadStepDown.csv
+    data_LoadStepUp.csv
+    data_LineTrip.csv 
+
+
+CLEAN UP SCRIPTS FOR EASE OF UNDERSTANDING/ CHANGING PARAMETERS. 

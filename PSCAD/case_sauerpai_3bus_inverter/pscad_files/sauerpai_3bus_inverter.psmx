@@ -1,0 +1,107 @@
+<Meta name="sauerpai_3bus_inverter">
+  <messagelist>
+    <message status="normal" label="build" groupid="400002" scope="sauerpai_3bus_inverter" id="918745111" classid="MessageObj"><![CDATA[Begin compiling with PSCAD Version 5.0.1]]></message>
+    <message status="normal" label="build" groupid="100006" id="822233923" classid="CmpNavigator">
+      <User scope="sauerpai_3bus_inverter" name="PSID_Library_Inverters:SIMPLE_MACHINE" status="normal" link="1851570176" /><![CDATA[Compiling 'SIMPLE_MACHINE'. Generating network and data files.]]></message>
+    <message status="normal" label="build" groupid="100006" id="765851482" classid="CmpNavigator">
+      <User scope="sauerpai_3bus_inverter" name="PSID_Library_Inverters:DROOP_GFM" status="normal" link="996706454" /><![CDATA[Compiling 'DROOP_GFM'. Generating network and data files.]]></message>
+    <message status="normal" label="build" groupid="100006" id="903831990" classid="CmpNavigator">
+      <User scope="PSID_Library_Inverters" name="PSID_Library:FixedFrequency" status="normal" link="822903436" /><![CDATA[Compiling 'FixedFrequency'. Generating network and data files.]]></message>
+    <message status="normal" label="build" groupid="100006" id="1778026503" classid="CmpNavigator">
+      <User scope="PSID_Library_Inverters" name="PSID_Library:ActiveDroop_ReactiveDroop" status="normal" link="966491600" /><![CDATA[Compiling 'ActiveDroop_ReactiveDroop'. Generating network and data files.]]></message>
+    <message status="warning" label="build" groupid="206502" id="374809389" classid="CmpNavigator">
+      <User scope="PSID_Library" name="master:realpole" status="warning" link="472444405" /><![CDATA[Signal 'INV' type conversion may lose accuracy at connection 'R']]></message>
+    <message status="warning" label="build" groupid="206502" id="1520525043" classid="CmpNavigator">
+      <User scope="PSID_Library" name="master:realpole" status="warning" link="440507626" /><![CDATA[Signal 'INV' type conversion may lose accuracy at connection 'R']]></message>
+    <message status="warning" label="build" groupid="206502" id="1166150663" classid="CmpNavigator">
+      <User scope="PSID_Library" name="master:integral" status="warning" link="550938491" /><![CDATA[Signal 'INV' type conversion may lose accuracy at connection 'R']]></message>
+    <message status="normal" label="build" groupid="100006" id="1648069045" classid="CmpNavigator">
+      <User scope="PSID_Library_Inverters" name="PSID_Library:VoltageModeControl" status="normal" link="2079101627" /><![CDATA[Compiling 'VoltageModeControl'. Generating network and data files.]]></message>
+    <message status="warning" label="build" groupid="206502" id="1098117875" classid="CmpNavigator">
+      <User scope="PSID_Library" name="master:integral" status="warning" link="1891684365" /><![CDATA[Signal 'INV' type conversion may lose accuracy at connection 'R']]></message>
+    <message status="warning" label="build" groupid="206502" id="724652473" classid="CmpNavigator">
+      <User scope="PSID_Library" name="master:realpole" status="warning" link="231561493" /><![CDATA[Signal 'INV' type conversion may lose accuracy at connection 'R']]></message>
+    <message status="warning" label="build" groupid="206502" id="202451645" classid="CmpNavigator">
+      <User scope="PSID_Library" name="master:integral" status="warning" link="1673256143" /><![CDATA[Signal 'INV' type conversion may lose accuracy at connection 'R']]></message>
+    <message status="warning" label="build" groupid="206502" id="1330344008" classid="CmpNavigator">
+      <User scope="PSID_Library" name="master:realpole" status="warning" link="393200150" /><![CDATA[Signal 'INV' type conversion may lose accuracy at connection 'R']]></message>
+    <message status="warning" label="build" groupid="206502" id="982029673" classid="CmpNavigator">
+      <User scope="PSID_Library" name="master:integral" status="warning" link="496252468" /><![CDATA[Signal 'INV' type conversion may lose accuracy at connection 'R']]></message>
+    <message status="warning" label="build" groupid="206502" id="910137129" classid="CmpNavigator">
+      <User scope="PSID_Library" name="master:integral" status="warning" link="1332369744" /><![CDATA[Signal 'INV' type conversion may lose accuracy at connection 'R']]></message>
+    <message status="normal" label="build" groupid="100006" id="2096947366" classid="CmpNavigator">
+      <User scope="PSID_Library_Inverters" name="PSID_Library:AverageConverter" status="normal" link="2040622412" /><![CDATA[Compiling 'AverageConverter'. Generating network and data files.]]></message>
+    <message status="normal" label="build" groupid="100006" id="2020562596" classid="CmpNavigator">
+      <User scope="PSID_Library_Inverters" name="PSID_Library:LCLFilter" status="normal" link="1958227927" /><![CDATA[Compiling 'LCLFilter'. Generating network and data files.]]></message>
+    <message status="normal" label="build" groupid="100006" id="2068958991" classid="CmpNavigator">
+      <User scope="PSID_Library" name="dq_ri" status="normal" link="777028743" /><![CDATA[Compiling 'dq_ri'. Generating network and data files.]]></message>
+    <message status="normal" label="build" groupid="100006" id="197369912" classid="CmpNavigator">
+      <User scope="PSID_Library" name="ri_abc" status="normal" link="1215232083" /><![CDATA[Compiling 'ri_abc'. Generating network and data files.]]></message>
+    <message status="normal" label="build" groupid="100006" id="550373415" classid="CmpNavigator">
+      <User scope="PSID_Library_Inverters" name="PSID_Library:FixedDCSource" status="normal" link="219331248" /><![CDATA[Compiling 'FixedDCSource'. Generating network and data files.]]></message>
+    <message status="normal" label="build" groupid="100006" link="2035087281" id="2035087281" classid="FileNavigator"><![CDATA[Generating 'C:\Users\Matt Bossart\OneDrive - UCB-O365\Desktop\Transient Stability\Repositories\PSIDValidation\PSCAD\case_sauerpai_3bus_inverter\pscad_files\sauerpai_3bus_inverter.gf46\sauerpai_3bus_inverter.map'.]]><file scope="sauerpai_3bus_inverter">C:\Users\Matt Bossart\OneDrive - UCB-O365\Desktop\Transient Stability\Repositories\PSIDValidation\PSCAD\case_sauerpai_3bus_inverter\pscad_files\sauerpai_3bus_inverter.gf46\sauerpai_3bus_inverter.map</file></message>
+    <message status="normal" label="build" groupid="100015" scope="sauerpai_3bus_inverter" id="1993608931" classid="MessageObj"><![CDATA[The total number of live nodes: 58]]></message>
+    <message status="normal" label="build" groupid="0" link="1800292468" id="1800292468" classid="FileNavigator"><![CDATA[Coding .mak file: 'C:\Users\Matt Bossart\OneDrive - UCB-O365\Desktop\Transient Stability\Repositories\PSIDValidation\PSCAD\case_sauerpai_3bus_inverter\pscad_files\sauerpai_3bus_inverter.gf46\\sauerpai_3bus_inverter.mak']]><file scope="sauerpai_3bus_inverter">C:\Users\Matt Bossart\OneDrive - UCB-O365\Desktop\Transient Stability\Repositories\PSIDValidation\PSCAD\case_sauerpai_3bus_inverter\pscad_files\sauerpai_3bus_inverter.gf46\\sauerpai_3bus_inverter.mak</file></message>
+    <message status="normal" label="build" groupid="400000" scope="sauerpai_3bus_inverter" id="20668858" classid="MessageObj"><![CDATA[Time for Compile: 608ms  Make: 0ms]]></message>
+    <message status="normal" label="build" groupid="400000" scope="sauerpai_3bus_inverter" id="2085608052" classid="MessageObj"><![CDATA[Solve Time = 15ms]]></message>
+    <message status="normal" label="build" groupid="100016" scope="sauerpai_3bus_inverter" id="712335031" classid="MessageObj"><![CDATA[Will execute (1): call C:\Program Files (x86)\GFortran\4.6\bin\gf46vars.bat]]></message>
+    <message status="normal" label="build" groupid="100016" scope="sauerpai_3bus_inverter" id="2138045127" classid="MessageObj"><![CDATA[Will execute (1): call "C:\Program Files (x86)\GFortran\4.6\bin\gf46vars.bat"]]></message>
+    <message status="normal" label="build" groupid="100016" scope="sauerpai_3bus_inverter" id="1542531152" classid="MessageObj"><![CDATA[Will execute (2): make -j -f sauerpai_3bus_inverter.mak]]></message>
+    <message status="normal" label="build" groupid="100016" scope="sauerpai_3bus_inverter" id="652351661" classid="MessageObj"><![CDATA[Will execute (2): "C:\Users\Matt Bossart\OneDrive - UCB-O365\Desktop\Transient Stability\Repositories\PSIDValidation\PSCAD\case_sauerpai_3bus_inverter\pscad_files\sauerpai_3bus_inverter.gf46\sauerpai_3bus_inverter_mak.bat"]]></message>
+    <message status="normal" label="build" groupid="100005" scope="sauerpai_3bus_inverter" id="352374140" classid="MessageObj"><![CDATA[Creating EMTDC executable...]]></message>
+    <message status="normal" label="build" groupid="0" scope="sauerpai_3bus_inverter" id="255051200" classid="MessageObj"><![CDATA[C:\Users\Matt Bossart\OneDrive - UCB-O365\Desktop\Transient Stability\Repositories\PSIDValidation\PSCAD\case_sauerpai_3bus_inverter\pscad_files\sauerpai_3bus_inverter.gf46>call "C:\Program Files (x86)\GFortran\4.6\bin\gf46vars.bat" ]]></message>
+    <message status="normal" label="build" groupid="100004" scope="sauerpai_3bus_inverter" id="18721376" classid="MessageObj"><![CDATA[Compiling 'DS.f' into object code.]]></message>
+    <message status="normal" label="build" groupid="100004" scope="sauerpai_3bus_inverter" id="1008570301" classid="MessageObj"><![CDATA[Compiling 'Main.f' into object code.]]></message>
+    <message status="normal" label="build" groupid="100004" scope="sauerpai_3bus_inverter" id="189210639" classid="MessageObj"><![CDATA[Compiling 'SIMPLE_MACHINE.f' into object code.]]></message>
+    <message status="normal" label="build" groupid="100004" scope="sauerpai_3bus_inverter" id="1604521008" classid="MessageObj"><![CDATA[Compiling 'DROOP_GFM.f' into object code.]]></message>
+    <message status="normal" label="build" groupid="100004" scope="sauerpai_3bus_inverter" id="758983718" classid="MessageObj"><![CDATA[Compiling 'FixedFrequency.f' into object code.]]></message>
+    <message status="normal" label="build" groupid="100004" scope="sauerpai_3bus_inverter" id="639404118" classid="MessageObj"><![CDATA[Compiling 'ActiveDroop_ReactiveDroop.f' into object code.]]></message>
+    <message status="normal" label="build" groupid="100004" scope="sauerpai_3bus_inverter" id="1074224054" classid="MessageObj"><![CDATA[Compiling 'VoltageModeControl.f' into object code.]]></message>
+    <message status="normal" label="build" groupid="100004" scope="sauerpai_3bus_inverter" id="378678993" classid="MessageObj"><![CDATA[Compiling 'AverageConverter.f' into object code.]]></message>
+    <message status="normal" label="build" groupid="100004" scope="sauerpai_3bus_inverter" id="1716761040" classid="MessageObj"><![CDATA[Compiling 'LCLFilter.f' into object code.]]></message>
+    <message status="normal" label="build" groupid="100004" scope="sauerpai_3bus_inverter" id="885689381" classid="MessageObj"><![CDATA[Compiling 'dq_ri.f' into object code.]]></message>
+    <message status="normal" label="build" groupid="100004" scope="sauerpai_3bus_inverter" id="602277881" classid="MessageObj"><![CDATA[Compiling 'ri_abc.f' into object code.]]></message>
+    <message status="normal" label="build" groupid="100004" scope="sauerpai_3bus_inverter" id="770046285" classid="MessageObj"><![CDATA[Compiling 'FixedDCSource.f' into object code.]]></message>
+    <message status="normal" label="build" groupid="0" scope="sauerpai_3bus_inverter" id="398392626" classid="MessageObj"><![CDATA[gfortran.exe -c -ffree-form -fdefault-real-8 -fdefault-double-8 -I"C:\Program Files (x86)\PSCAD501 x64\emtdc\gf46\inc" -I"C:\Program Files (x86)\PSCAD501 x64\emtdc\gf46\windows" -O2 -Wconversion  SIMPLE_MACHINE.f]]></message>
+    <message status="normal" label="build" groupid="0" scope="sauerpai_3bus_inverter" id="997632464" classid="MessageObj"><![CDATA[gfortran.exe -c -ffree-form -fdefault-real-8 -fdefault-double-8 -I"C:\Program Files (x86)\PSCAD501 x64\emtdc\gf46\inc" -I"C:\Program Files (x86)\PSCAD501 x64\emtdc\gf46\windows" -O2 -Wconversion  DROOP_GFM.f]]></message>
+    <message status="normal" label="build" groupid="0" scope="sauerpai_3bus_inverter" id="1312837726" classid="MessageObj"><![CDATA[gfortran.exe -c -ffree-form -fdefault-real-8 -fdefault-double-8 -I"C:\Program Files (x86)\PSCAD501 x64\emtdc\gf46\inc" -I"C:\Program Files (x86)\PSCAD501 x64\emtdc\gf46\windows" -O2 -Wconversion  FixedFrequency.f]]></message>
+    <message status="normal" label="build" groupid="0" scope="sauerpai_3bus_inverter" id="1654759087" classid="MessageObj"><![CDATA[gfortran.exe -c -ffree-form -fdefault-real-8 -fdefault-double-8 -I"C:\Program Files (x86)\PSCAD501 x64\emtdc\gf46\inc" -I"C:\Program Files (x86)\PSCAD501 x64\emtdc\gf46\windows" -O2 -Wconversion  ActiveDroop_ReactiveDroop.f]]></message>
+    <message status="normal" label="build" groupid="0" scope="sauerpai_3bus_inverter" id="1257345018" classid="MessageObj"><![CDATA[gfortran.exe -c -ffree-form -fdefault-real-8 -fdefault-double-8 -I"C:\Program Files (x86)\PSCAD501 x64\emtdc\gf46\inc" -I"C:\Program Files (x86)\PSCAD501 x64\emtdc\gf46\windows" -O2 -Wconversion  VoltageModeControl.f]]></message>
+    <message status="normal" label="build" groupid="0" scope="sauerpai_3bus_inverter" id="1683359645" classid="MessageObj"><![CDATA[gfortran.exe -c -ffree-form -fdefault-real-8 -fdefault-double-8 -I"C:\Program Files (x86)\PSCAD501 x64\emtdc\gf46\inc" -I"C:\Program Files (x86)\PSCAD501 x64\emtdc\gf46\windows" -O2 -Wconversion  AverageConverter.f]]></message>
+    <message status="normal" label="build" groupid="0" scope="sauerpai_3bus_inverter" id="100282677" classid="MessageObj"><![CDATA[gfortran.exe -c -ffree-form -fdefault-real-8 -fdefault-double-8 -I"C:\Program Files (x86)\PSCAD501 x64\emtdc\gf46\inc" -I"C:\Program Files (x86)\PSCAD501 x64\emtdc\gf46\windows" -O2 -Wconversion  LCLFilter.f]]></message>
+    <message status="normal" label="build" groupid="0" scope="sauerpai_3bus_inverter" id="699172955" classid="MessageObj"><![CDATA[gfortran.exe -c -ffree-form -fdefault-real-8 -fdefault-double-8 -I"C:\Program Files (x86)\PSCAD501 x64\emtdc\gf46\inc" -I"C:\Program Files (x86)\PSCAD501 x64\emtdc\gf46\windows" -O2 -Wconversion  dq_ri.f]]></message>
+    <message status="normal" label="build" groupid="0" scope="sauerpai_3bus_inverter" id="1331741058" classid="MessageObj"><![CDATA[gfortran.exe -c -ffree-form -fdefault-real-8 -fdefault-double-8 -I"C:\Program Files (x86)\PSCAD501 x64\emtdc\gf46\inc" -I"C:\Program Files (x86)\PSCAD501 x64\emtdc\gf46\windows" -O2 -Wconversion  ri_abc.f]]></message>
+    <message status="normal" label="build" groupid="0" scope="sauerpai_3bus_inverter" id="224622202" classid="MessageObj"><![CDATA[gfortran.exe -c -ffree-form -fdefault-real-8 -fdefault-double-8 -I"C:\Program Files (x86)\PSCAD501 x64\emtdc\gf46\inc" -I"C:\Program Files (x86)\PSCAD501 x64\emtdc\gf46\windows" -O2 -Wconversion  FixedDCSource.f]]></message>
+    <message status="normal" label="build" groupid="100013" scope="sauerpai_3bus_inverter" id="1555476876" classid="MessageObj"><![CDATA[Linking objects and libraries into binary 'sauerpai_3bus_inverter.exe']]></message>
+    <message status="normal" label="build" groupid="400003" scope="sauerpai_3bus_inverter" id="1625515324" classid="MessageObj"><![CDATA[Finished compiling with PSCAD Version 5.0.1]]></message>
+  </messagelist>
+  <ViewContext>
+    <Window defn="sauerpai_3bus_inverter:Main" call="0" />
+  </ViewContext>
+  <List classid="View">
+    <View name="Main" zoomscale="1.2" scrollx="76" scrolly="0" />
+  </List>
+  <Output device="EMTDC" version="2010" date="2022/08/22" time="10:20:46.000000">
+    <Domain name="Time" unit="s" mult="0.0" skew="0.0">
+      <Sample rate="4000.0" end="100000" />
+    </Domain>
+    <List classid="Analog">
+      <Analog name="Main(0):V_101" index="1" gindex="100663297" id="349715791:0" label="" dim="1" unit="" min="-2.0" max="2.0" />
+      <Analog name="Main(0):P_101" index="2" gindex="100663298" id="1111477538:0" label="" dim="1" unit="" min="-2.0" max="2.0" />
+      <Analog name="Main(0):Q_101" index="3" gindex="100663299" id="311085016:0" label="" dim="1" unit="" min="-2.0" max="2.0" />
+      <Analog name="Main(0):V_102" index="4" gindex="100663300" id="331552535:0" label="" dim="1" unit="" min="-2.0" max="2.0" />
+      <Analog name="Main(0):P_102" index="5" gindex="100663301" id="286218688:0" label="" dim="1" unit="" min="-2.0" max="2.0" />
+      <Analog name="Main(0):Q_102" index="6" gindex="100663302" id="1472105460:0" label="" dim="1" unit="" min="-2.0" max="2.0" />
+      <Analog name="Main(0):V_103" index="7" gindex="100663303" id="1770736775:0" label="" dim="1" unit="" min="-2.0" max="2.0" />
+      <Analog name="Main(0):P_103_1" index="8" gindex="100663304" id="36824159:0" label="" dim="1" unit="" min="-2.0" max="2.0" />
+      <Analog name="Main(0):Q_103_1" index="9" gindex="100663305" id="504636806:0" label="" dim="1" unit="" min="-2.0" max="2.0" />
+      <Analog name="Main(0):P_103_2" index="10" gindex="100663306" id="1246112086:0" label="" dim="1" unit="" min="-2.0" max="2.0" />
+      <Analog name="Main(0):Q_103_2" index="11" gindex="100663307" id="2067795501:0" label="" dim="1" unit="" min="-2.0" max="2.0" />
+      <Analog name="Main(0):P_103_3" index="12" gindex="100663308" id="1746426579:0" label="" dim="1" unit="" min="-2.0" max="2.0" />
+      <Analog name="Main(0):Q_103_3" index="13" gindex="100663309" id="186533709:0" label="" dim="1" unit="" min="-2.0" max="2.0" />
+      <Analog name="Main(0):Freq_out_102" index="14" gindex="100663310" id="550254599:0" label="" dim="1" unit="" min="-2.0" max="2.0" />
+      <Analog name="Main(0):Freq_out" index="15" gindex="100663311" id="1880506312:0" label="" dim="1" unit="" min="-2.0" max="2.0" />
+    </List>
+    <List classid="Digital" />
+  </Output>
+</Meta>
