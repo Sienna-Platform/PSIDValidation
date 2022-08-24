@@ -1,3 +1,12 @@
+function set_project_parameters!(project; kwargs... )
+    project_params = project.parameters()
+    for k in kwargs 
+        @warn k
+        project_params[string(k[1])] = k[2]
+    end 
+    PP.update_parameter_by_dictionary(project, project_params)
+end 
+
 function parameterize_system(sys::System, project)
     sim = Simulation!(MassMatrixModel, sys, pwd(), (0.0, 0.0))
     ss = small_signal_analysis(sim)
@@ -332,16 +341,13 @@ function write_parameters(
     pscad_component = pscad_project.find(pscad_component_name)
     pscad_params = pscad_component.parameters()
 
-    @warn "Vbase", get_base_voltage(get_bus(psid_component))
-    @warn "Qinit", get_reactive_power(psid_component)
-    @warn "Pinit", get_active_power(psid_component)
-    
     pscad_params["Vbase"] = get_base_voltage(get_bus(psid_component))
     pscad_params["Sbase"] = get_base_power(psid_component)
     pscad_params["Vpu"] = get_magnitude(get_bus(psid_component))
     pscad_params["PhT"] = get_angle(get_bus(psid_component)) * (180 / pi)
     pscad_params["Pinit"] = get_active_power(psid_component)
     pscad_params["Qinit"] = get_reactive_power(psid_component)
+    pscad_params["Spec"]  = 1   #Sets Spec to be "AT_THE_TERMINAL" 
 
     PP.update_parameter_by_dictionary(pscad_component, pscad_params)
 end
