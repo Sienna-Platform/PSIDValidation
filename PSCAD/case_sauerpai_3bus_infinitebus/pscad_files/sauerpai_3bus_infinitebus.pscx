@@ -23,7 +23,7 @@
     <param name="Warn" value="0" />
     <param name="Check" value="0" />
     <param name="description" value="" />
-    <param name="revisor" value="Matt Bossart, 1661185432" />
+    <param name="revisor" value="Matt Bossart, 1661380250" />
   </paramlist>
   <Layers>
     <Layer id="563951131" classid="Layer" name="dev" state="Disabled">
@@ -848,7 +848,7 @@
       </path>
       <paramlist>
         <param name="xmin" value="0.0" />
-        <param name="xmax" value="25.0" />
+        <param name="xmax" value="0.225" />
       </paramlist>
     </Settings>
     <Settings classid="OverlayGraphSettings" id="77428667" link="2072463498">
@@ -856,8 +856,8 @@
         <ref link="1255703834" />
       </path>
       <paramlist>
-        <param name="ymin" value="-100.0" />
-        <param name="ymax" value="500.0" />
+        <param name="ymin" value="-0.5" />
+        <param name="ymax" value="2.5" />
       </paramlist>
     </Settings>
     <Settings classid="TraceSettings" id="1458632321" link="9032877">
@@ -866,6 +866,11 @@
       </path>
       <paramlist>
         <param name="active_1" value="true" />
+        <param name="visible_1" value="true" />
+        <param name="bold_1" value="false" />
+        <param name="style_1" value="false" />
+        <param name="count" value="1" />
+        <param name="name" value="V_103" />
       </paramlist>
     </Settings>
     <Settings classid="GraphFrameSettings" id="1846560815" link="1254710280">
@@ -874,7 +879,7 @@
       </path>
       <paramlist>
         <param name="xmin" value="0.0" />
-        <param name="xmax" value="20.0" />
+        <param name="xmax" value="14.0" />
       </paramlist>
     </Settings>
     <Settings classid="OverlayGraphSettings" id="717000787" link="292029018">
@@ -882,7 +887,7 @@
         <ref link="1255703834" />
       </path>
       <paramlist>
-        <param name="ymin" value="-6.0" />
+        <param name="ymin" value="-4.0" />
         <param name="ymax" value="10.0" />
       </paramlist>
     </Settings>
@@ -891,8 +896,8 @@
         <ref link="1255703834" />
       </path>
       <paramlist>
-        <param name="ymin" value="-2.0e+12" />
-        <param name="ymax" value="1.4e+13" />
+        <param name="ymin" value="-15.0" />
+        <param name="ymax" value="30.0" />
       </paramlist>
     </Settings>
     <Settings classid="TraceSettings" id="1408712854" link="1063725120">
@@ -1227,6 +1232,22 @@
         <param name="active_1" value="true" />
       </paramlist>
     </Settings>
+    <Settings classid="TraceSettings" id="1068760710" link="392195697">
+      <path>
+        <ref link="1255703834" />
+      </path>
+      <paramlist>
+        <param name="active_1" value="true" />
+      </paramlist>
+    </Settings>
+    <Settings classid="TraceSettings" id="235105323" link="867434884">
+      <path>
+        <ref link="1255703834" />
+      </path>
+      <paramlist>
+        <param name="active_1" value="true" />
+      </paramlist>
+    </Settings>
   </List>
   <bookmarks />
   <GlobalSubstitutions name="Default">
@@ -1268,7 +1289,7 @@
         </Wire>
       </schematic>
     </Definition>
-    <Definition classid="UserCmpDefn" name="Main" id="1334321687" group="" url="" version="" build="" crc="9706524" view="false" date="1661184942">
+    <Definition classid="UserCmpDefn" name="Main" id="1334321687" group="" url="" version="" build="" crc="67331436" view="false" date="1661372297">
       <paramlist name="">
         <param name="Description" value="" />
       </paramlist>
@@ -1539,7 +1560,7 @@
             <param name="BaseKV" value="138.0" />
             <param name="VRMS" value="0" />
             <param name="Vrms" value="0" />
-            <param name="VA" value="0.018879147705981106" />
+            <param name="VA" value="-0.0007820689462438458" />
             <param name="VM" value="1.02" />
             <param name="type" value="0" />
           </paramlist>
@@ -1565,8 +1586,8 @@
             <param name="BaseKV" value="138.0" />
             <param name="VRMS" value="0" />
             <param name="Vrms" value="0" />
-            <param name="VA" value="-0.019627246530217274" />
-            <param name="VM" value="1.0142442516455474" />
+            <param name="VA" value="-0.05873860796405717" />
+            <param name="VM" value="1.0074731665756802" />
             <param name="type" value="0" />
           </paramlist>
           <vertex x="0" y="0" />
@@ -1680,7 +1701,7 @@
             <param name="L1" value="" />
             <param name="C1" value="" />
             <param name="Name" value="load1031" />
-            <param name="VPU" value="1.0142442516455474" />
+            <param name="VPU" value="1.0074731665756802" />
             <param name="PQdef" value="1" />
             <param name="Parts" value="1" />
             <param name="NPB" value="2.0" />
@@ -1710,7 +1731,7 @@
             <param name="L1" value="" />
             <param name="C1" value="" />
             <param name="Name" value="load1032" />
-            <param name="VPU" value="1.0142442516455474" />
+            <param name="VPU" value="1.0074731665756802" />
             <param name="PQdef" value="1" />
             <param name="Parts" value="1" />
             <param name="NPB" value="2.0" />
@@ -2617,7 +2638,7 @@
             <param name="Name" value="" />
           </paramlist>
         </User>
-        <Frame classid="GraphFrame" id="1727717747" name="frame" link="-1" x="810" y="738" w="576" h="306">
+        <Frame classid="GraphFrame" id="1727717747" name="frame" link="-1" x="522" y="846" w="576" h="306">
           <paramlist link="-1" name="">
             <param name="Icon" value="-1,0" />
             <param name="state" value="1" />
@@ -2676,6 +2697,9 @@
               <param name="ymax" value="1" />
             </paramlist>
             <Curve classid="Curve" id="9032877" name="V_103" link="1770736775" color="0" bold="0" show="-1" mode="0" gradient="false" transparency="255" thresh="0.5" above="High" below="Low" style="0">
+              <path />
+            </Curve>
+            <Curve classid="Curve" id="392195697" name="V_102" link="331552535" color="0" bold="0" show="-1" mode="0" gradient="false" transparency="255" thresh="0.5" above="High" below="Low" style="0">
               <path />
             </Curve>
             <Curve classid="Curve" id="946896908" name="V_101" link="349715791" color="0" bold="0" show="-1" mode="0" gradient="false" transparency="255" thresh="0.5" above="High" below="Low" style="0">
@@ -2763,7 +2787,7 @@
           <vertex x="0" y="0" />
           <vertex x="36" y="0" />
         </Wire>
-        <Frame classid="GraphFrame" id="1254710280" name="frame" link="-1" x="1008" y="612" w="576" h="486">
+        <Frame classid="GraphFrame" id="1254710280" name="frame" link="-1" x="1008" y="468" w="576" h="486">
           <paramlist link="-1" name="">
             <param name="Icon" value="-1,0" />
             <param name="state" value="1" />
@@ -2825,6 +2849,9 @@
               <path />
             </Curve>
             <Curve classid="Curve" id="936807771" name="P_102" link="286218688" color="0" bold="0" show="-1" mode="0" gradient="false" transparency="255" thresh="0.5" above="High" below="Low" style="0">
+              <path />
+            </Curve>
+            <Curve classid="Curve" id="867434884" name="V_102" link="331552535" color="0" bold="0" show="-1" mode="0" gradient="false" transparency="255" thresh="0.5" above="High" below="Low" style="0">
               <path />
             </Curve>
           </Graph>
@@ -2946,11 +2973,11 @@
             <param name="I_phase" value="0.4183697602823375" />
             <param name="V_ln" value="79.67433714816836" />
             <param name="V_pf" value="1.02" />
-            <param name="theta_pf" value="0.018879147705981106" />
-            <param name="V_ref" value="1.149338882459752" />
+            <param name="theta_pf" value="-0.0007820689462438458" />
+            <param name="V_ref" value="1.2590158729223317" />
             <param name="omega_ref" value="1.0" />
-            <param name="P_ref" value="0.5004808830321359" />
-            <param name="Q_ref" value="0.07647229400982081" />
+            <param name="P_ref" value="0.5004918262432987" />
+            <param name="Q_ref" value="0.1" />
             <param name="t_S2M" value="t_S2M" />
             <param name="t_L2N" value="t_L2N" />
             <param name="t_RAMP" value="t_RAMP" />
@@ -3052,7 +3079,7 @@
           <vertex x="0" y="0" />
           <vertex x="36" y="0" />
         </Wire>
-        <Frame classid="GraphFrame" id="1031513104" name="frame" link="-1" x="306" y="900" w="576" h="288">
+        <Frame classid="GraphFrame" id="1031513104" name="frame" link="-1" x="0" y="828" w="576" h="288">
           <paramlist link="-1" name="">
             <param name="Icon" value="-1,0" />
             <param name="state" value="1" />
@@ -3132,8 +3159,8 @@
             <param name="Sbase" value="100.0" />
             <param name="Vpu" value="1.0142" />
             <param name="PhT" value="0.0" />
-            <param name="Pinit" value="0.0016313620431942263" />
-            <param name="Qinit" value="-0.09777238865823357" />
+            <param name="Pinit" value="0.5049735008164512" />
+            <param name="Qinit" value="-0.07099047528029791" />
             <param name="R" value="1.0" />
             <param name="Rs" value="1.0" />
             <param name="Rp" value="1.0" />
@@ -3163,7 +3190,7 @@
   </definitions>
   <List classid="Resource" />
   <hierarchy>
-    <call link="1385964027" name="sauerpai_3bus_infinitebus:DS" z="-1" view="false" instance="0">
+    <call link="1201991185" name="sauerpai_3bus_infinitebus:DS" z="-1" view="false" instance="0">
       <call link="1255703834" name="sauerpai_3bus_infinitebus:Main" z="-1" view="true" instance="0">
         <call link="1851570176" name="PSID_Library_Inverters:SIMPLE_MACHINE" z="330" view="false" instance="0" />
         <call link="996706454" name="PSID_Library_Inverters:DROOP_GFM" z="340" view="false" instance="0">
