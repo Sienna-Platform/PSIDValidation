@@ -16,6 +16,9 @@ perturbation_type =  "LoadStepDown"     #Options: ["LoadStepDown" "LoadStepUp" "
 pscad_workspace = "sauerpai_3bus_infinitebus.pswx"
 pscad_case = "sauerpai_3bus_infinitebus" #the pscad case corresponding to the psid test
 t_offset = 10.0                          #only collect data starting at t_offset
+saveat = 5e-5
+time_step = 5e-6 
+t_span = (0.0, 3.0)
 ######################################################################
 ######################################################################
 ######################################################################
@@ -76,6 +79,8 @@ elseif perturbation_type == "LineTrip"
 else
     @error "Provided perturbation not found!"
 end 
+#See https://www.pscad.com/webhelp-v5-al/reference/project.html#properties for additional keywords
+set_project_parameters!(project; time_duration = tspan[2] + t_offset, sample_step = saveat*1e6, time_step = time_step*1e6,)   
 
 #Run PSCAD, quit when finished, and shutdown logging 
 project.run()

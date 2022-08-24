@@ -17,12 +17,12 @@ end
 
 perturbation_type = "LoadStepDown"    #Options: ["LoadStepDown" "LoadStepUp" "LineTrip"]  
 pscad_offset = 10.0
-voltage_plot_zoom = (0.09, 0.13)
+voltage_plot_zoom = (0.09, 0.12)
 
 #(pscad_name, psid_name)
 voltage_names = [("V_101","V_101") , ("V_102","V_102") ,("V_103","V_103") ]      
-state_names = []#[ ("delta_theta_olc", "generator-102-1θ_oc") ]    
-state_plot_zoom = (0.0,1.0)
+state_names = [("Freq_out", "generator-101-1ω") ]  #[ ("delta_theta_olc", "generator-102-1θ_oc") ]    
+state_plot_zoom = (0.0,3.0)
 
 
 df_pscad = read_csv_file_to_dataframe(joinpath(@__DIR__, "..",  "pscad_files", string("pscad_outputs_", perturbation_type)))
