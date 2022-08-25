@@ -26,12 +26,13 @@ t_span = (0.0, 3.0)
 #Include Julia source code for conversion
 include(joinpath(@__DIR__, "..", "..", "_pscad_psid_conversion", "PSCAD_PSID.jl"))
 include(joinpath(@__DIR__, "..", "..", "_pscad_psid_conversion", "collect_data.jl"))
+include(joinpath(@__DIR__, "..", "..", "constants.jl"))
 
 # Issue with path in windows per: https://github.com/JuliaPy/PyCall.jl/issues/730
 ENV["PATH"] = Conda.bin_dir(Conda.ROOTENV) * ";" * ENV["PATH"] 
 
 #Set build PyCall to use the pscadV5 python environment (name of environment could change)
-ENV["PYTHON"] =   "C:\\Users\\Matt Bossart\\.conda\\envs\\pscad_v5\\python.exe"
+ENV["PYTHON"] = PYTHON_PATH 
 Pkg.build("PyCall") 
 
 #import python packages
@@ -80,7 +81,7 @@ else
     @error "Provided perturbation not found!"
 end 
 #See https://www.pscad.com/webhelp-v5-al/reference/project.html#properties for additional keywords
-set_project_parameters!(project; time_duration = tspan[2] + t_offset, sample_step = saveat*1e6, time_step = time_step*1e6,)   
+set_project_parameters!(project; time_duration = t_span[2] + t_offset, sample_step = saveat*1e6, time_step = time_step*1e6,)   
 
 #Run PSCAD, quit when finished, and shutdown logging 
 project.run()

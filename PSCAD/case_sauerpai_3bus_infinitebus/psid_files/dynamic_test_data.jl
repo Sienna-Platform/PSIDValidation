@@ -37,18 +37,18 @@ machine_simple_marconato() = SimpleMarconatoMachine(
     0.0,
 ) #MVABase
 
-machine_marconato() = MarconatoMachine(
-    0.0,
-    1.3125, #Xd
-    1.2578, #Xq
-    0.1813, #Xd_p
-    0.25, #Xq_p
-    0.14, #Xd_pp
-    0.18, #Xq_pp
-    5.89, #Td0_p
-    0.6, #Tq0_p
-    0.5, #Td0_pp
-    0.023, #Tq0_pp
+machine_marconato_pscad_params() = MarconatoMachine(
+    0.002, #R (check)
+    1.79, #Xd
+    1.71, #Xq
+    0.169, #Xd_p
+    0.228, #Xq_p
+    0.135, #Xd_pp
+    0.2, #Xq_pp
+    4.3, #Td0_p
+    0.85, #Tq0_p
+    0.032, #Td0_pp
+    0.05, #Tq0_pp
     0.0,
 ) #MVABase
 
@@ -637,6 +637,18 @@ function inv_darco_droop(static_device)
         filt(),
     ) #pss
 end
+
+function dyn_gen_marconato(generator)
+    return PSY.DynamicGenerator(
+    name = get_name(generator), #static generator
+    ω_ref = 1.0, # ω_ref
+    machine = machine_marconato_pscad_params(), #machine
+    shaft = shaft_no_damping(), #shaft
+    avr = avr_none(), #avr
+    prime_mover = tg_none(), #tg
+    pss = pss_none(),
+    )
+end 
 
 function dyn_gen_sauerpai(generator)
     return PSY.DynamicGenerator(
