@@ -34,8 +34,7 @@ docs/site/
 *.pyc 
 
 #outputs
-pscad_outputs*
-psid_outputs*
+*.csv
 *.gf46
 
 Manifest.toml

@@ -19,6 +19,7 @@ t_offset = 10.0                          #only collect data starting at t_offset
 saveat = 5e-5
 time_step = 5e-6 
 t_span = (0.0, 3.0)
+output_csv_name = "pscad"
 ######################################################################
 ######################################################################
 ######################################################################
@@ -91,6 +92,6 @@ logging.shutdown()
 #Collect pscad outputs and write as dataframe to csv
 df1 = collect_pscad_outputs(pscad_output_folder_path)[1]
 df_filt = df1[df1[!,:time].>=t_offset, : ]   
-open(joinpath(@__DIR__, "..", "pscad_files", string("pscad_outputs_", perturbation_type)), "w") do io
+open(joinpath(@__DIR__, "..", "pscad_files", string(output_csv_name, ".csv")), "w") do io
     CSV.write(io, df_filt)
 end

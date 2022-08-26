@@ -480,18 +480,14 @@ function write_initial_conditions(
     pscad_project,
     x0_dict,
 )
-    @warn psid_component 
     pscad_component = pscad_project.find(pscad_component_name)
     pscad_params = pscad_component.parameters()
-    print(pscad_params)
     for (i, state) in enumerate(get_states(psid_component.filter))
-        @info "FilterState", i 
         name = "filter_x0_" * string(i)
         pscad_params[name] = x0_dict[get_name(psid_component)][state]
     end
     for (i, state) in enumerate(get_states(psid_component.outer_control))
         name = "outercontrol_x0_" * string(i)
-        @warn i,state
         pscad_params[name] = x0_dict[get_name(psid_component)][state]
     end
     for (i, state) in enumerate(get_states(psid_component.converter))
@@ -510,7 +506,6 @@ function write_initial_conditions(
         name = "freqestimator_x0_" * string(i)
         pscad_params[name] = x0_dict[get_name(psid_component)][state]
     end
-    print(pscad_params)
     PP.update_parameter_by_dictionary(pscad_component, pscad_params)
 end
 

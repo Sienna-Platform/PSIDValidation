@@ -624,3 +624,28 @@ function inv_case78(static_device)
         filter = filt(), #filter
     )
 end
+
+function inv_darco_droop(static_device)
+    return PSY.DynamicInverter(
+        get_name(static_device),
+        1.0, #ω_ref
+        converter_low_power(), #converter
+        outer_control_droop(), #outercontrol
+        inner_control(), #inner_control
+        dc_source_lv(),
+        no_pll(),
+        filt(),
+    ) #pss
+end
+
+function dyn_gen_sauerpai(generator)
+    return PSY.DynamicGenerator(
+        name = get_name(generator), #static generator
+        ω_ref = 1.0, # ω_ref
+        machine = machine_sauerpai(), #machine
+        shaft = shaft_no_damping(), #shaft
+        avr = avr_none(), #avr
+        prime_mover = tg_none(), #tg
+        pss = pss_none(),
+    ) #pss
+end

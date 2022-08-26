@@ -1,5 +1,6 @@
 using Revise
 using Logging
+using OrdinaryDiffEq
 using PowerSystems
 using PowerSimulationsDynamics
 using Plots
@@ -17,12 +18,14 @@ perturbation_type = "LoadStepDown"    #Options: ["LoadStepDown" "LoadStepUp" "Li
 line_to_trip = "BUS 1-BUS 2-i_1"  
 line_type = "Dynamic"                 #Options: ["Dynamic" "Algebraic"]   
 recorded_voltages = [101, 102, 103]   # Bus numbers to record voltage  
-recorded_states = [("generator-101-1",:ω) ] #("generator-102-1",:θ_oc)
+recorded_states = [("generator-101-1",:ω)] 
 saveat = 5e-5
 tspan = (0.0, 3.0)
 ref_bus_number = 102
 frequency_reference = "ReferenceBus" #["ReferenceBus, "ConstantFrequency"]
-
+solver = "Rodas5"
+abstol = 1e-14
+output_csv_name = "psid_Rodas_dtmax" #
 ######################################################################
 ######################################################################
 ######################################################################
@@ -36,7 +39,7 @@ end
 
 for g in get_components(Generator, sys)
     if get_number(get_bus(g)) == 101
-        case_gen = dyn_gen_sauerpai(g) #dyn_gen_marconato(g)
+        case_gen = dyn_gen_sauerpai(g)
         add_component!(sys, case_gen, g)
     end
 end
@@ -103,38 +106,70 @@ elseif line_type == "Dynamic"
 end 
 
 if frequency_reference == "ReferenceBus"
-    sim_ida = Simulation!(
-        ResidualModel,
-        sys,
-        pwd(),
-        tspan, 
-        perturbation;
-        file_level = Logging.Error,
-        frequency_reference = ReferenceBus
-        )
+    if solver == "IDA"
+        sim = Simulation!(
+            ResidualModel,
+            sys,
+            pwd(),
+            tspan, 
+            perturbation;
+            file_level = Logging.Error,
+            frequency_reference = ReferenceBus
+            )
+    elseif solver == "Rodas5"
+        sim = Simulation!(
+            MassMatrixModel,
+            sys,
+            pwd(),
+            tspan, 
+            perturbation;
+            file_level = Logging.Error,
+            frequency_reference = ReferenceBus
+            )
+    else 
+        @error "invalid solver choice"
+    end 
 elseif frequency_reference == "ConstantFrequency"
-    sim_ida = Simulation!(
-        ResidualModel,
-        sys,
-        pwd(),
-        tspan, 
-        perturbation;
-        file_level = Logging.Error,
-        frequency_reference = ConstantFrequency
-        )
+    if solver == "IDA"
+        sim = Simulation!(
+            ResidualModel,
+            sys,
+            pwd(),
+            tspan, 
+            perturbation;
+            file_level = Logging.Error,
+            frequency_reference = ConstantFrequency
+            )
+    elseif solver == "Rodas5"
+        sim = Simulation!(
+            MassMatrixModel,
+            sys,
+            pwd(),
+            tspan, 
+            perturbation;
+            file_level = Logging.Error,
+            frequency_reference = ConstantFrequency
+            )
+    else 
+        @error "invalid solver choice"
+    end 
 else 
     @error "invalid input for frequency_reference"
 end 
 
-ss = small_signal_analysis(sim_ida)
+ss = small_signal_analysis(sim) #fieldnames(ss)
 if ss.stable == false 
     @error "System is not small-signal stable"
     display(ss.eigenvalues)
 end 
-display(solve_powerflow(sim_ida.sys)["bus_results"])
-execute!(sim_ida, IDA(), saveat=saveat, abstol = 1e-14) #dtmax = 1e-5,
+display(solve_powerflow(sim.sys)["bus_results"])
+if solver == "IDA"
+    execute!(sim, IDA(), saveat=saveat, abstol = abstol, dtmax = 5e-6) #dtmax = 1e-5,
+elseif solver == "Rodas5"
+    execute!(sim, Rodas5(), saveat=saveat, abstol = abstol, dtmax = 5e-6) #dtmax = 1e-5,
+end 
 display(solve_powerflow(sys)["bus_results"])    #Is this the powerflow after the simulation ran? 
-result_psid = read_results(sim_ida)
+result_psid = read_results(sim)
 
 df = DataFrame()
 df[!, "time"] =  get_voltage_magnitude_series(result_psid, 101)[1]
@@ -146,7 +181,7 @@ for s in recorded_states
         df[!, string(s[1], s[2])] = get_state_series(result_psid, s)[2]
 end 
 
-open(joinpath(@__DIR__, "..", "psid_files",  string("psid_outputs_", perturbation_type, "_", line_type)), "w") do io
+open(joinpath(@__DIR__, "..", "psid_files",  string(output_csv_name,".csv")), "w") do io
         CSV.write(io, df)       
 end  
 

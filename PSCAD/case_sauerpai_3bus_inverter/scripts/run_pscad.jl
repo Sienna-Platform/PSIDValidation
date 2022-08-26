@@ -1,9 +1,3 @@
-#TODO
-#1. Write a function to apply project settings dictionary to a case
-#2. Write a function to enable/disable layers.
-#3. Document installation process (conda, pscad automation library, etc.)
-
-#Julia Packages
 using Pkg
 Pkg.activate(".")
 using Revise
@@ -14,76 +8,64 @@ using Conda
 using UnPack
 using DataFrames
 using CSV
-using Arrow
 
-perturbation_type =  "LineTrip"     #Options: ["LoadStepDown" "LoadStepUp" "LineTrip"]  
+######################################################################
+####################### USER INPUT ###################################
+######################################################################
+perturbation_type =  "LoadStepDown"     #Options: ["LoadStepDown" "LoadStepUp" "LineTrip"]  
+pscad_workspace = "sauerpai_3bus_inverter.pswx"
+pscad_case = "sauerpai_3bus_inverter" #the pscad case corresponding to the psid test
+t_offset = 10.0                          #only collect data starting at t_offset
+saveat = 5e-5
+time_step = 5e-6 
+t_span = (0.0, 3.0)
+output_csv_name = "pscad"
+######################################################################
+######################################################################
+######################################################################
 
+#Include Julia source code for conversion
 include(joinpath(@__DIR__, "..", "..", "_pscad_psid_conversion", "PSCAD_PSID.jl"))
 include(joinpath(@__DIR__, "..", "..", "_pscad_psid_conversion", "collect_data.jl"))
+include(joinpath(@__DIR__, "..", "..", "constants.jl"))
 
 # Issue with path in windows per: https://github.com/JuliaPy/PyCall.jl/issues/730
-ENV["PATH"] = Conda.bin_dir(Conda.ROOTENV) * ";" * ENV["PATH"]
+ENV["PATH"] = Conda.bin_dir(Conda.ROOTENV) * ";" * ENV["PATH"] 
 
-#Set build PyCall to use the pscadV5 python environment
-ENV["PYTHON"] =   "C:\\Users\\Matt Bossart\\.conda\\envs\\pscad_v5\\python.exe"# "C:\\ProgramData\\Anaconda3\\python.exe"# "C:\\Program Files\\Python37\\python.exe" #"C:\\anaconda\\envs\\pscadV5\\python.exe"  
+#Set build PyCall to use the pscadV5 python environment (name of environment could change)
+ENV["PYTHON"] = PYTHON_PATH 
 Pkg.build("PyCall") 
 
+#import python packages
 mhi = pyimport("mhi.pscad")
 sys = pyimport("sys")
 logging = pyimport("logging")
 os = pyimport("os")
 time = pyimport("time")
 win32 = pyimport("win32com.shell")
+
+#add PSCAD_Python library directory to path
 pyimport("sys")."path"
-pushfirst!(PyVector(pyimport("sys")."path"), joinpath("PSCAD", "_pscad_psid_conversion")) #add automation_code directory to path
+pushfirst!(PyVector(pyimport("sys")."path"), joinpath("PSCAD", "_pscad_psid_conversion"))
 PP = pyimport("PSCAD_Python")
 
-################################################################################
-#USER INPUT
-psid_system_path = joinpath(@__DIR__, "..", "psid_files", "ThreeBus_SauerPai_Droop.json") #serialized file from a PSID test
-pscad_workspace = joinpath(@__DIR__, "..", "pscad_files", "sauerpai_3bus_inverter.pswx")
-pscad_case = "sauerpai_3bus_inverter" #the pscad case corresponding to the psid test
+#Delete pscad output folder from a previous run
 pscad_output_folder_path =
     joinpath(@__DIR__, "..", "pscad_files", string(pscad_case, ".gf46"))
 rm(pscad_output_folder_path, recursive=true, force=true)
-rm(joinpath(@__DIR__, "..", "pscad_files", "pscad_outputs"), force=true)
 
+#Start up PSCAD and read the PSID system
 pscad = PP.basic_pscad_startup()
-sleep(2)
-pscad.load(PyObject(pscad_workspace))
+sleep(2)    #Need to wait for the last closed workspace to load and then load the one below
+pscad.load(PyObject(joinpath(@__DIR__, "..", "pscad_files", pscad_workspace)))
 project = pscad.project(pscad_case)
-sys = System(psid_system_path)
-solve_powerflow(sys)["bus_results"]
-sim = Simulation!(MassMatrixModel, sys, pwd(), (0.0, 0.0))
-#ss = small_signal_analysis(sim)
-x0_dict = read_initial_conditions(sim)
-setpoints_dict = get_setpoints(sim)
+sys = System(joinpath(@__DIR__, "..", "psid_files", "system.json"))
 
-thermal = collect(get_components(ThermalStandard, sys))
-for t in thermal
-    @show get_name(t)
-    write_initial_conditions(t, get_name(t), project, x0_dict)
-end
+#Generic Parameterization (should run this function for every case)
+parameterize_system(sys, project)       
 
-injectors = collect(get_components(DynamicInjection, sys))
-for i in injectors
-    write_setpoints(i, get_name(i), project, setpoints_dict)
-    write_initial_conditions(i, get_name(i), project, x0_dict)
-end
-
-buses = collect(get_components(Bus, sys))
-for b in buses
-    write_initial_conditions(b, get_name(b), project, x0_dict)
-end
-
-components = collect(get_components(Component, sys))
-for c in components
-    @show get_name(c)
-    write_parameters(c, get_name(c), project)
-end
-
+#Special Parameterizations for this particular system/study
 PP.update_parameter_by_name(project.find("generator-102-1"), "omega_ref", "Freq_out")
-
 if perturbation_type == "LoadStepDown"
     PP.update_parameter_by_name(project.find("t_LoadStepDownConstant"), "Value", 10.1 )
     PP.update_parameter_by_name(project.find("t_LoadStepUpConstant"), "Value", 100.0 )
@@ -99,20 +81,17 @@ elseif perturbation_type == "LineTrip"
 else
     @error "Provided perturbation not found!"
 end 
-##
-pscad_output_name = "pscad_outputs_linetrip"
-sleep(1)
+#See https://www.pscad.com/webhelp-v5-al/reference/project.html#properties for additional keywords
+set_project_parameters!(project; time_duration = t_span[2] + t_offset, sample_step = saveat*1e6, time_step = time_step*1e6,)   
+
+#Run PSCAD, quit when finished, and shutdown logging 
 project.run()
-sleep(1)
 pscad.quit()
 logging.shutdown()
 
-sleep(1)
-#Collect pscad outputs and write as dataframe to arrow file for easy comparison with PSID. 
+#Collect pscad outputs and write as dataframe to csv
 df1 = collect_pscad_outputs(pscad_output_folder_path)[1]
-
-df_filt = df1[df1[!,:time].>=10.0, : ]       #CHANGE BACK 
-
-open(joinpath(@__DIR__, "..", "pscad_files", string("pscad_outputs_", perturbation_type)), "w") do io
+df_filt = df1[df1[!,:time].>=t_offset, : ]   
+open(joinpath(@__DIR__, "..", "pscad_files", string(output_csv_name, ".csv")), "w") do io
     CSV.write(io, df_filt)
 end

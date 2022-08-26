@@ -1,11 +1,11 @@
 <project name="sauerpai_3bus_infinitebus" version="5.0.1" schema="" Target="EMTDC">
   <paramlist name="Settings">
     <param name="creator" value="Matt Bossart,1649802738" />
-    <param name="time_duration" value="25" />
-    <param name="time_step" value="50" />
-    <param name="sample_step" value="250" />
-    <param name="chatter_threshold" value=".001" />
-    <param name="branch_threshold" value=".0005" />
+    <param name="time_duration" value="13" />
+    <param name="time_step" value="5" />
+    <param name="sample_step" value="50" />
+    <param name="chatter_threshold" value="0.001" />
+    <param name="branch_threshold" value="0.0005" />
     <param name="StartType" value="0" />
     <param name="startup_filename" value="$(Namespace).snp" />
     <param name="PlotType" value="1" />
@@ -23,7 +23,7 @@
     <param name="Warn" value="0" />
     <param name="Check" value="0" />
     <param name="description" value="" />
-    <param name="revisor" value="Matt Bossart, 1661372956" />
+    <param name="revisor" value="Matt Bossart, 1661464167" />
   </paramlist>
   <Layers>
     <Layer id="563951131" classid="Layer" name="dev" state="Disabled">
@@ -1289,7 +1289,7 @@
         </Wire>
       </schematic>
     </Definition>
-    <Definition classid="UserCmpDefn" name="Main" id="1334321687" group="" url="" version="" build="" crc="130536494" view="false" date="1661372297">
+    <Definition classid="UserCmpDefn" name="Main" id="1334321687" group="" url="" version="" build="" crc="120794448" view="false" date="1661372297">
       <paramlist name="">
         <param name="Description" value="" />
       </paramlist>
@@ -1392,7 +1392,7 @@
             <param name="Config" value="1" />
             <param name="F" value="60.0" />
             <param name="len" value="100000.0" />
-            <param name="Estim" value="1" />
+            <param name="Estim" value="0" />
             <param name="View" value="2" />
             <param name="REst" value="1.5" />
             <param name="ZEst" value="1.5" />
@@ -1422,7 +1422,7 @@
             <param name="RPUP2" value="1.0000000000000001e-07" />
             <param name="XLPUP2" value="1.2000000000000002e-06" />
             <param name="BPUP2" value="5.000000000000001e-07" />
-            <param name="RPUZ2" value="5.58072e-07" />
+            <param name="RPUZ2" value="5.58072e-04" />
             <param name="XLPUZ2" value="1.96578e-06" />
             <param name="BPUZ2" value="1.277271e-06" />
             <param name="Rp2" value="1.781598e-05" />
@@ -2845,7 +2845,7 @@
               <param name="ymin" value="-1" />
               <param name="ymax" value="1" />
             </paramlist>
-            <Curve classid="Curve" id="695811110" name="P_101" link="1111477538" color="0" bold="1" show="-1" mode="0" gradient="false" transparency="255" thresh="0.5" above="High" below="Low" style="0">
+            <Curve classid="Curve" id="695811110" name="P_101" link="1111477538" color="0" bold="0" show="-1" mode="0" gradient="false" transparency="255" thresh="0.5" above="High" below="Low" style="0">
               <path />
             </Curve>
             <Curve classid="Curve" id="936807771" name="P_102" link="286218688" color="0" bold="0" show="-1" mode="0" gradient="false" transparency="255" thresh="0.5" above="High" below="Low" style="0">
@@ -3148,7 +3148,7 @@
             <param name="Type" value="6" />
             <param name="Grnd" value="1" />
             <param name="View" value="1" />
-            <param name="Spec" value="0" />
+            <param name="Spec" value="1" />
             <param name="VCtrl" value="0" />
             <param name="FCtrl" value="0" />
             <param name="Vm" value="230.0" />
@@ -3190,7 +3190,7 @@
   </definitions>
   <List classid="Resource" />
   <hierarchy>
-    <call link="1522033916" name="sauerpai_3bus_infinitebus:DS" z="-1" view="false" instance="0">
+    <call link="326283669" name="sauerpai_3bus_infinitebus:DS" z="-1" view="false" instance="0">
       <call link="1255703834" name="sauerpai_3bus_infinitebus:Main" z="-1" view="true" instance="0">
         <call link="1851570176" name="PSID_Library_Inverters:SIMPLE_MACHINE" z="330" view="false" instance="0" />
         <call link="996706454" name="PSID_Library_Inverters:DROOP_GFM" z="340" view="false" instance="0">

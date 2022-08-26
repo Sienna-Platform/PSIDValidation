@@ -19,7 +19,7 @@
     <Window defn="sauerpai_3bus_infinitebus:Main" call="0" />
   </ViewContext>
   <List classid="View">
-    <View name="Main" zoomscale="0.96" scrollx="0" scrolly="42" />
+    <View name="Main" zoomscale="0.96" scrollx="0" scrolly="0" />
   </List>
   <Output device="EMTDC" version="2010" date="2022/08/24" time="16:26:33.000000">
     <Domain name="Time" unit="s" mult="0.0" skew="0.0">
