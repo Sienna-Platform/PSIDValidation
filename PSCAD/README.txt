@@ -23,3 +23,11 @@ Usefull conda commands
 'conda activate <env_name>' : activate your environment 
 'conda list' : list all linked packages in the active environment 
 `conda env remove -n <env_name>' : remove (delete) a conda environment
+
+Making a new case in PSCAD 
+- Copy the file directory structure from existing case ("pscad_files", "psid_files", "scripts")
+- Make a new workspace file is PSCAD.
+- Open libraries in the new workspace from _pscad_libraries folder.
+- To copy and modify an existing case, save case with new name in the new directory. 
+- Unload the case in the old workspace and re-load the original case.
+- Load the new case in the new workspace. 
