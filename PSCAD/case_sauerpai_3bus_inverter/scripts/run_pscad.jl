@@ -65,21 +65,7 @@ project = pscad.project(pscad_case)
 sys = System(joinpath(@__DIR__, "..", "psid_files", "system.json"))
 
 #Generic Parameterization (should run this function for every case)
-function enable_gens_by_type(sys, project)
-    for g in get_components(DynamicInjection, sys)
-        psid_name = get_name(g)
-        for f in project.find_all(psid_name)
-            f.add_to_layer("disabled_gens")
-        end 
-        if typeof(g) <: DynamicInverter
-            project.find("PSID_Library_Inverters:DARCO_VSM", psid_name).add_to_layer("enabled_gens") #TODO - distinguish between the types of inverters! 
-        end 
-        if typeof(g) <: DynamicGenerator
-            project.find("PSID_Library_Inverters:SIMPLE_MACHINE", psid_name).add_to_layer("enabled_gens")
-        end  
-    end 
-end 
-enable_gens_by_type(sys, project)
+enable_dynamic_injection_by_type(sys, project)
 parameterize_system(sys, project)       
 
 #Special Parameterizations for this particular system/study
@@ -110,7 +96,6 @@ end
 #See https://www.pscad.com/webhelp-v5-al/reference/project.html#properties for additional keywords
 set_project_parameters!(project; time_duration = t_span[2] + t_offset, sample_step = saveat*1e6, time_step = time_step*1e6,)   
 #Run PSCAD, quit when finished, and shutdown logging 
-
 project.run()
 pscad.quit()
 logging.shutdown()
