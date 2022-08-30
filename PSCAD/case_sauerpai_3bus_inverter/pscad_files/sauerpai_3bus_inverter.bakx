@@ -23,7 +23,7 @@
     <param name="Warn" value="0" />
     <param name="Check" value="0" />
     <param name="description" value="" />
-    <param name="revisor" value="Matt Bossart, 1661873722" />
+    <param name="revisor" value="Matt Bossart, 1661874184" />
   </paramlist>
   <Layers>
     <Layer id="563951131" classid="Layer" name="dev" state="Disabled">
@@ -42,7 +42,7 @@
         <param name="highlight_opacity" value="100" />
       </paramlist>
       <ref link="1851570176" />
-      <ref link="996706454" />
+      <ref link="329269441" />
     </Layer>
     <Layer id="723705383" classid="Layer" name="disabled_gens" state="Disabled">
       <paramlist>
@@ -55,8 +55,8 @@
       <ref link="342322305" />
       <ref link="1621780067" />
       <ref link="519867759" />
-      <ref link="329269441" />
       <ref link="63989763" />
+      <ref link="996706454" />
     </Layer>
   </Layers>
   <List classid="Settings">
@@ -1291,7 +1291,7 @@
         </Wire>
       </schematic>
     </Definition>
-    <Definition classid="UserCmpDefn" name="Main" id="1334321687" group="" url="" version="" build="" crc="27431170" view="false" date="1661873139">
+    <Definition classid="UserCmpDefn" name="Main" id="1334321687" group="" url="" version="" build="" crc="28916482" view="false" date="1661873139">
       <paramlist name="">
         <param name="Description" value="" />
       </paramlist>
@@ -3396,17 +3396,17 @@
         <User classid="UserCmp" name="PSID_Library_Inverters:DARCO_VSM" id="329269441" x="1044" y="234" w="115" h="78" z="-1" orient="4" defn="PSID_Library_Inverters:DARCO_VSM" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="34922684">
             <param name="Name" value="generator-102-1" />
-            <param name="f_base" value="60 [Hz]" />
-            <param name="S_base" value="1 [MVA]" />
-            <param name="V_base" value="1 [kV]" />
-            <param name="V_pf" value="1.0" />
-            <param name="theta_pf" value="0.0 [rad]" />
-            <param name="V_ref" value="1.0" />
+            <param name="f_base" value="60.0" />
+            <param name="S_base" value="100.0" />
+            <param name="V_base" value="138.0" />
+            <param name="V_pf" value="1.0142" />
+            <param name="theta_pf" value="0.0003939802433026839" />
+            <param name="V_ref" value="1.0108168393655297" />
             <param name="omega_ref" value="1.0" />
-            <param name="P_ref" value="0.0" />
-            <param name="Q_ref" value="0.0" />
-            <param name="lf" value="0.08 [p.u.]" />
-            <param name="rg" value="0.01 [p.u.]" />
+            <param name="P_ref" value="0.5024790456301202" />
+            <param name="Q_ref" value="-0.0210946848719656" />
+            <param name="lf" value="0.08" />
+            <param name="rg" value="0.01" />
             <param name="inner_x0_1" value="0" />
             <param name="pll_x0_1" value="0" />
             <param name="pll_x0_2" value="0" />
@@ -3416,58 +3416,58 @@
             <param name="outer_x0_3" value="0" />
             <param name="inner_x0_2" value="0" />
             <param name="inner_x0_3" value="0" />
-            <param name="filter_x0_1" value="0" />
+            <param name="filter_x0_1" value="0.48559465088190684" />
             <param name="inner_x0_4" value="0" />
             <param name="inner_x0_5" value="0" />
             <param name="inner_x0_6" value="0" />
-            <param name="filter_x0_2" value="0" />
-            <param name="filter_x0_3" value="0" />
-            <param name="filter_x0_4" value="0" />
-            <param name="filter_x0_5" value="0" />
-            <param name="filter_x0_6" value="0" />
+            <param name="filter_x0_2" value="0.1442616471382271" />
+            <param name="filter_x0_3" value="1.0051535840376378" />
+            <param name="filter_x0_4" value="0.09969276063445186" />
+            <param name="filter_x0_5" value="0.49297191516885713" />
+            <param name="filter_x0_6" value="0.06988028191943307" />
             <param name="pll_x0_4" value="0" />
             <param name="Q_out" value="Q_out" />
             <param name="P_out" value="P_out" />
-            <param name="f_out" value="Freq_out" />
-            <param name="rf" value="0.003 [p.u.]" />
-            <param name="cf" value="0.074 [p.u.]" />
-            <param name="lg" value="0.002 [p.u.]" />
-            <param name="voltage" value="1500 [V]" />
+            <param name="f_out" value="ref_freq_out" />
+            <param name="rf" value="0.003" />
+            <param name="cf" value="0.074" />
+            <param name="lg" value="0.2" />
+            <param name="voltage" value="600.0" />
             <param name="kpv" value="0.59" />
             <param name="kiv" value="736.0" />
-            <param name="kffv" value="0" />
+            <param name="kffv" value="0.0" />
             <param name="rv" value="0.0" />
             <param name="lv" value="0.2" />
             <param name="kpc" value="1.27" />
             <param name="kic" value="14.3" />
-            <param name="kffi" value="0" />
-            <param name="omega_ad" value="50.0 [rad/s]" />
+            <param name="kffi" value="0.0" />
+            <param name="omega_ad" value="50.0" />
             <param name="kad" value="0.2" />
             <param name="lf_1" value="lf" />
             <param name="cf_1" value="cf" />
-            <param name="Ta" value="2.0 [s]" />
+            <param name="Ta" value="2.0" />
             <param name="kd" value="400.0" />
             <param name="k_omega" value="20.0" />
             <param name="kq" value="0.2" />
             <param name="omega_f" value="1000.0" />
-            <param name="omega_lp" value="500.0 [rad/s]" />
+            <param name="omega_lp" value="500.0" />
             <param name="kp_pll" value="0.084" />
             <param name="ki_pll" value="4.69" />
-            <param name="innercontrol_x0_1" value="0" />
-            <param name="freqestimator_x0_1" value="0" />
-            <param name="freqestimator_x0_2" value="0" />
-            <param name="freqestimator_x0_3" value="0" />
-            <param name="outercontrol_x0_3" value="0" />
-            <param name="innercontrol_x0_2" value="0" />
-            <param name="innercontrol_x0_3" value="0" />
-            <param name="innercontrol_x0_4" value="0" />
-            <param name="innercontrol_x0_5" value="0" />
-            <param name="innercontrol_x0_6" value="0" />
-            <param name="freqestimator_x0_4" value="0" />
-            <param name="outercontrol_x0_1" value="0" />
-            <param name="outercontrol_x0_2" value="0" />
-            <param name="t_INV" value="0.0" />
-            <param name="t_RAMP" value="0" />
+            <param name="innercontrol_x0_1" value="0.0006754102899513331" />
+            <param name="freqestimator_x0_1" value="1.010085330071983" />
+            <param name="freqestimator_x0_2" value="4.202620993039042e-25" />
+            <param name="freqestimator_x0_3" value="-4.77658839325151e-27" />
+            <param name="outercontrol_x0_3" value="-0.02109468468644252" />
+            <param name="innercontrol_x0_2" value="-3.8289937892348954e-05" />
+            <param name="innercontrol_x0_3" value="0.07039817746283233" />
+            <param name="innercontrol_x0_4" value="-0.006942782432118173" />
+            <param name="innercontrol_x0_5" value="1.0051805604706705" />
+            <param name="innercontrol_x0_6" value="-0.09942039468084803" />
+            <param name="freqestimator_x0_4" value="0.09885830960402071" />
+            <param name="outercontrol_x0_1" value="0.19744565335623884" />
+            <param name="outercontrol_x0_2" value="1.0000000000001186" />
+            <param name="t_INV" value="t_INV" />
+            <param name="t_RAMP" value="t_RAMP" />
           </paramlist>
         </User>
         <User classid="UserCmp" name="PSID_Library_Inverters:GFL" id="519867759" x="252" y="324" w="115" h="78" z="-1" orient="0" defn="PSID_Library_Inverters:GFL" link="-1" q="4" disable="false">
@@ -3605,9 +3605,9 @@
   </definitions>
   <List classid="Resource" />
   <hierarchy>
-    <call link="1053049735" name="sauerpai_3bus_inverter:DS" z="-1" view="false" instance="0">
+    <call link="606127518" name="sauerpai_3bus_inverter:DS" z="-1" view="false" instance="0">
       <call link="1255703834" name="sauerpai_3bus_inverter:Main" z="-1" view="true" instance="0">
-        <call link="1621780067" name="PSID_Library_Inverters:DARCO_VSM" z="-1" view="false" instance="0">
+        <call link="329269441" name="PSID_Library_Inverters:DARCO_VSM" z="-1" view="false" instance="0">
           <call link="356470831" name="PSID_Library:KauraPLL" z="570" view="false" instance="0">
             <call link="894185864" name="PSID_Library:ri_dq" z="220" view="false" instance="0" />
           </call>
@@ -3624,14 +3624,14 @@
           </call>
           <call link="1730679757" name="PSID_Library:FixedDCSource" z="620" view="false" instance="0" />
         </call>
-        <call link="519867759" name="PSID_Library_Inverters:GFL" z="-1" view="false" instance="0">
-          <call link="1494865977" name="PSID_Library:ReducedOrderPLL" z="470" view="false" instance="0">
-            <call link="2057070710" name="PSID_Library:ri_dq" z="200" view="false" instance="1" />
+        <call link="1621780067" name="PSID_Library_Inverters:DARCO_VSM" z="-1" view="false" instance="1">
+          <call link="356470831" name="PSID_Library:KauraPLL" z="570" view="false" instance="1">
+            <call link="894185864" name="PSID_Library:ri_dq" z="220" view="false" instance="1" />
           </call>
-          <call link="815459201" name="PSID_Library:ActivePI_ReactivePI" z="480" view="false" instance="0" />
-          <call link="2051780060" name="PSID_Library:CurrentModeControl" z="490" view="false" instance="0" />
-          <call link="784303139" name="PSID_Library:AverageConverter" z="500" view="false" instance="1" />
-          <call link="38528684" name="PSID_Library:LCLFilter" z="510" view="false" instance="1">
+          <call link="157850209" name="PSID_Library:VirtualInertia_ReactiveDroop" z="580" view="false" instance="1" />
+          <call link="645732161" name="PSID_Library:VoltageModeControl" z="590" view="false" instance="1" />
+          <call link="764540826" name="PSID_Library:AverageConverter" z="600" view="false" instance="1" />
+          <call link="895432214" name="PSID_Library:LCLFilter" z="610" view="false" instance="1">
             <call link="777028743" name="PSID_Library:dq_ri" z="490" view="false" instance="4" />
             <call link="514904379" name="PSID_Library:dq_ri" z="850" view="false" instance="5" />
             <call link="2092800291" name="PSID_Library:dq_ri" z="860" view="false" instance="6" />
@@ -3639,16 +3639,16 @@
             <call link="1215232083" name="PSID_Library:ri_abc" z="1000" view="false" instance="2" />
             <call link="909248648" name="PSID_Library:ri_abc" z="1070" view="false" instance="3" />
           </call>
-          <call link="1760640988" name="PSID_Library:FixedDCSource" z="520" view="false" instance="1" />
+          <call link="1730679757" name="PSID_Library:FixedDCSource" z="620" view="false" instance="1" />
         </call>
-        <call link="329269441" name="PSID_Library_Inverters:DARCO_VSM" z="-1" view="false" instance="1">
-          <call link="356470831" name="PSID_Library:KauraPLL" z="570" view="false" instance="1">
-            <call link="894185864" name="PSID_Library:ri_dq" z="220" view="false" instance="2" />
+        <call link="63989763" name="PSID_Library_Inverters:GFL" z="-1" view="false" instance="0">
+          <call link="1494865977" name="PSID_Library:ReducedOrderPLL" z="470" view="false" instance="0">
+            <call link="2057070710" name="PSID_Library:ri_dq" z="200" view="false" instance="2" />
           </call>
-          <call link="157850209" name="PSID_Library:VirtualInertia_ReactiveDroop" z="580" view="false" instance="1" />
-          <call link="645732161" name="PSID_Library:VoltageModeControl" z="590" view="false" instance="1" />
-          <call link="764540826" name="PSID_Library:AverageConverter" z="600" view="false" instance="2" />
-          <call link="895432214" name="PSID_Library:LCLFilter" z="610" view="false" instance="2">
+          <call link="815459201" name="PSID_Library:ActivePI_ReactivePI" z="480" view="false" instance="0" />
+          <call link="2051780060" name="PSID_Library:CurrentModeControl" z="490" view="false" instance="0" />
+          <call link="784303139" name="PSID_Library:AverageConverter" z="500" view="false" instance="2" />
+          <call link="38528684" name="PSID_Library:LCLFilter" z="510" view="false" instance="2">
             <call link="777028743" name="PSID_Library:dq_ri" z="490" view="false" instance="8" />
             <call link="514904379" name="PSID_Library:dq_ri" z="850" view="false" instance="9" />
             <call link="2092800291" name="PSID_Library:dq_ri" z="860" view="false" instance="10" />
@@ -3656,9 +3656,9 @@
             <call link="1215232083" name="PSID_Library:ri_abc" z="1000" view="false" instance="4" />
             <call link="909248648" name="PSID_Library:ri_abc" z="1070" view="false" instance="5" />
           </call>
-          <call link="1730679757" name="PSID_Library:FixedDCSource" z="620" view="false" instance="2" />
+          <call link="1760640988" name="PSID_Library:FixedDCSource" z="520" view="false" instance="2" />
         </call>
-        <call link="63989763" name="PSID_Library_Inverters:GFL" z="-1" view="false" instance="1">
+        <call link="519867759" name="PSID_Library_Inverters:GFL" z="-1" view="false" instance="1">
           <call link="1494865977" name="PSID_Library:ReducedOrderPLL" z="470" view="false" instance="1">
             <call link="2057070710" name="PSID_Library:ri_dq" z="200" view="false" instance="3" />
           </call>

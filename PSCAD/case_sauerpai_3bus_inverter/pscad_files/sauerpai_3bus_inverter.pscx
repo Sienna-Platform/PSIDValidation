@@ -23,7 +23,7 @@
     <param name="Warn" value="0" />
     <param name="Check" value="0" />
     <param name="description" value="" />
-    <param name="revisor" value="Matt Bossart, 1661874184" />
+    <param name="revisor" value="Matt Bossart, 1661897460" />
   </paramlist>
   <Layers>
     <Layer id="563951131" classid="Layer" name="dev" state="Disabled">
@@ -41,8 +41,8 @@
         <param name="highlight_color" value="#FF7AFF76" />
         <param name="highlight_opacity" value="100" />
       </paramlist>
+      <ref link="342322305" />
       <ref link="1851570176" />
-      <ref link="329269441" />
     </Layer>
     <Layer id="723705383" classid="Layer" name="disabled_gens" state="Disabled">
       <paramlist>
@@ -52,11 +52,11 @@
         <param name="highlight_opacity" value="100" />
       </paramlist>
       <ref link="1831120059" />
-      <ref link="342322305" />
       <ref link="1621780067" />
       <ref link="519867759" />
       <ref link="63989763" />
       <ref link="996706454" />
+      <ref link="329269441" />
     </Layer>
   </Layers>
   <List classid="Settings">
@@ -1291,7 +1291,7 @@
         </Wire>
       </schematic>
     </Definition>
-    <Definition classid="UserCmpDefn" name="Main" id="1334321687" group="" url="" version="" build="" crc="28916482" view="false" date="1661873139">
+    <Definition classid="UserCmpDefn" name="Main" id="1334321687" group="" url="" version="" build="" crc="45959434" view="false" date="1661873139">
       <paramlist name="">
         <param name="Description" value="" />
       </paramlist>
@@ -2998,9 +2998,9 @@
             <param name="primemover_x0_1" value="0" />
             <param name="primemover_x0_2" value="0" />
             <param name="primemover_x0_3" value="0" />
-            <param name="Q_out" value="Q_out" />
-            <param name="P_out" value="P_out" />
-            <param name="f_out" value="f_out" />
+            <param name="Q_out" value="Q_out_101" />
+            <param name="P_out" value="P_out_101" />
+            <param name="f_out" value="f_out_101" />
           </paramlist>
         </User>
         <User classid="UserCmp" name="master:const" id="1102796066" x="54" y="108" w="76" h="22" z="30" orient="0" defn="master:const" link="-1" q="4" disable="false">
@@ -3248,17 +3248,17 @@
             <param name="w_sys" value="w_sys" />
           </paramlist>
         </User>
-        <User classid="UserCmp" id="342322305" name="PSID_Library_Inverters:SIMPLE_MACHINE" x="1044" y="54" w="115" h="78" z="350" orient="4" defn="PSID_Library_Inverters:SIMPLE_MACHINE" link="-1" q="4" disable="true">
+        <User classid="UserCmp" id="342322305" name="PSID_Library_Inverters:SIMPLE_MACHINE" x="1044" y="54" w="115" h="78" z="350" orient="4" defn="PSID_Library_Inverters:SIMPLE_MACHINE" link="-1" q="4" disable="false">
           <paramlist name="" link="-1" crc="110423495">
             <param name="Name" value="generator-102-1" />
             <param name="w_base" value="376.99111843077515" />
             <param name="I_phase" value="0.4183697602823375" />
             <param name="V_ln" value="79.67433714816836" />
-            <param name="V_pf" value="1.02" />
-            <param name="theta_pf" value="0.0" />
-            <param name="V_ref" value="1.2605350807386537" />
+            <param name="V_pf" value="1.0142" />
+            <param name="theta_pf" value="0.0003939802433026839" />
+            <param name="V_ref" value="1.0024701372108202" />
             <param name="omega_ref" value="1.0" />
-            <param name="P_ref" value="0.5054743512873053" />
+            <param name="P_ref" value="0.5004958091260955" />
             <param name="Q_ref" value="0.1" />
             <param name="t_S2M" value="t_S2M" />
             <param name="t_L2N" value="t_L2N" />
@@ -3297,9 +3297,9 @@
             <param name="primemover_x0_1" value="0" />
             <param name="primemover_x0_2" value="0" />
             <param name="primemover_x0_3" value="0" />
-            <param name="Q_out" value="Q_out" />
-            <param name="P_out" value="P_out" />
-            <param name="f_out" value="f_out" />
+            <param name="Q_out" value="Q_out_102" />
+            <param name="P_out" value="P_out_102" />
+            <param name="f_out" value="ref_freq_out" />
           </paramlist>
         </User>
         <Sticky classid="Sticky" id="1173540160" x="450" y="18" w="252" h="36" colors="0, 15792890">
@@ -3605,9 +3605,9 @@
   </definitions>
   <List classid="Resource" />
   <hierarchy>
-    <call link="606127518" name="sauerpai_3bus_inverter:DS" z="-1" view="false" instance="0">
+    <call link="1798155057" name="sauerpai_3bus_inverter:DS" z="-1" view="false" instance="0">
       <call link="1255703834" name="sauerpai_3bus_inverter:Main" z="-1" view="true" instance="0">
-        <call link="329269441" name="PSID_Library_Inverters:DARCO_VSM" z="-1" view="false" instance="0">
+        <call link="1621780067" name="PSID_Library_Inverters:DARCO_VSM" z="-1" view="false" instance="0">
           <call link="356470831" name="PSID_Library:KauraPLL" z="570" view="false" instance="0">
             <call link="894185864" name="PSID_Library:ri_dq" z="220" view="false" instance="0" />
           </call>
@@ -3624,7 +3624,7 @@
           </call>
           <call link="1730679757" name="PSID_Library:FixedDCSource" z="620" view="false" instance="0" />
         </call>
-        <call link="1621780067" name="PSID_Library_Inverters:DARCO_VSM" z="-1" view="false" instance="1">
+        <call link="329269441" name="PSID_Library_Inverters:DARCO_VSM" z="-1" view="false" instance="1">
           <call link="356470831" name="PSID_Library:KauraPLL" z="570" view="false" instance="1">
             <call link="894185864" name="PSID_Library:ri_dq" z="220" view="false" instance="1" />
           </call>
@@ -3691,6 +3691,7 @@
           <call link="219331248" name="PSID_Library:FixedDCSource" z="550" view="false" instance="4" />
         </call>
         <call link="342322305" name="PSID_Library_Inverters:SIMPLE_MACHINE" z="350" view="false" instance="0" />
+        <call link="1851570176" name="PSID_Library_Inverters:SIMPLE_MACHINE" z="360" view="false" instance="1" />
         <call link="1831120059" name="PSID_Library_Inverters:DROOP_GFM" z="360" view="false" instance="1">
           <call link="822903436" name="PSID_Library:FixedFrequency" z="500" view="false" instance="1" />
           <call link="966491600" name="PSID_Library:ActiveDroop_ReactiveDroop" z="510" view="false" instance="1" />
@@ -3706,7 +3707,6 @@
           </call>
           <call link="219331248" name="PSID_Library:FixedDCSource" z="550" view="false" instance="5" />
         </call>
-        <call link="1851570176" name="PSID_Library_Inverters:SIMPLE_MACHINE" z="360" view="false" instance="1" />
       </call>
     </call>
   </hierarchy>
