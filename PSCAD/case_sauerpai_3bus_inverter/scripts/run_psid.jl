@@ -18,14 +18,14 @@ perturbation_type = "LoadStepDown"    #Options: ["LoadStepDown" "LoadStepUp" "Li
 line_to_trip = "BUS 1-BUS 2-i_1"  
 line_type = "Dynamic"                 #Options: ["Dynamic" "Algebraic"]   
 recorded_voltages = [101, 102, 103]   # Bus numbers to record voltage  
-recorded_states = [("generator-101-1",:ω), ("generator-102-1",:θ_oc)] 
+recorded_states = [("generator-101-1",:ω)]#, ("generator-102-1",:θ_oc)] 
 saveat = 5e-5
 tspan = (0.0, 3.0)
 ref_bus_number = 101
 frequency_reference = "ReferenceBus" #["ReferenceBus, "ConstantFrequency"]
-solver = "IDA"
+solver = "Rodas5"
 abstol = 1e-14
-output_csv_name = "psid_IDA" #
+output_csv_name = "psid_Rodas5" #
 ######################################################################
 ######################################################################
 ######################################################################
@@ -42,7 +42,7 @@ for g in get_components(Generator, sys)
         case_gen = dyn_gen_sauerpai(g)
         add_component!(sys, case_gen, g)
     elseif get_number(get_bus(g)) == 102
-        case_gen = inv_case78(g)  #  inv_darco_droop(g)       
+        case_gen = dyn_gen_sauerpai(g)   #inv_case78(g)  inv_gfoll(g) inv_darco_droop(g) #dyn_gen_sauerpai(g)
         add_component!(sys, case_gen, g)
     end
 end
@@ -150,6 +150,7 @@ ss = small_signal_analysis(sim) #fieldnames(ss)
 if ss.stable == false 
     @error "System is not small-signal stable"
     display(ss.eigenvalues)
+    @assert false 
 end 
 display(solve_powerflow(sim.sys)["bus_results"])
 if solver == "IDA"
