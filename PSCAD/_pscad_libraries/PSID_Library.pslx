@@ -21,7 +21,7 @@
     <param name="Warn" value="0" />
     <param name="Check" value="0" />
     <param name="description" value="" />
-    <param name="revisor" value="Matt Bossart, 1660510240" />
+    <param name="revisor" value="Matt Bossart, 1661788737" />
     <param name="sparsity_threshold" value="200" />
   </paramlist>
   <Layers>
@@ -5925,9 +5925,228 @@
         <param name="ymax" value="1" />
       </paramlist>
     </Settings>
+    <Settings classid="GraphFrameSettings" id="1333537193" link="1193758711">
+      <path>
+        <ref link="1121605733" />
+        <ref link="1340636822" />
+      </path>
+      <paramlist>
+        <param name="xmin" value="-1" />
+        <param name="xmax" value="1" />
+      </paramlist>
+    </Settings>
+    <Settings classid="OverlayGraphSettings" id="1252307142" link="1975763288">
+      <path>
+        <ref link="1121605733" />
+        <ref link="1340636822" />
+      </path>
+      <paramlist>
+        <param name="ymin" value="-1" />
+        <param name="ymax" value="1" />
+      </paramlist>
+    </Settings>
+    <Settings classid="TraceSettings" id="1472061069" link="2084755436">
+      <path>
+        <ref link="1121605733" />
+        <ref link="1340636822" />
+      </path>
+      <paramlist>
+        <param name="active_1" value="true" />
+      </paramlist>
+    </Settings>
+    <Settings classid="OverlayGraphSettings" id="301818770" link="958018015">
+      <path>
+        <ref link="1121605733" />
+        <ref link="1340636822" />
+      </path>
+      <paramlist>
+        <param name="ymin" value="-1" />
+        <param name="ymax" value="1" />
+      </paramlist>
+    </Settings>
+    <Settings classid="GraphFrameSettings" id="302509908" link="707714452">
+      <path>
+        <ref link="1121605733" />
+        <ref link="1340636822" />
+      </path>
+      <paramlist>
+        <param name="xmin" value="-1" />
+        <param name="xmax" value="1" />
+      </paramlist>
+    </Settings>
+    <Settings classid="OverlayGraphSettings" id="1865190112" link="580080222">
+      <path>
+        <ref link="1121605733" />
+        <ref link="1340636822" />
+      </path>
+      <paramlist>
+        <param name="ymin" value="-1" />
+        <param name="ymax" value="1" />
+      </paramlist>
+    </Settings>
+    <Settings classid="GraphFrameSettings" id="352303896" link="1791746228">
+      <path>
+        <ref link="1121605733" />
+        <ref link="1340636822" />
+      </path>
+      <paramlist>
+        <param name="xmin" value="-1" />
+        <param name="xmax" value="1" />
+      </paramlist>
+    </Settings>
+    <Settings classid="OverlayGraphSettings" id="2127825763" link="676534044">
+      <path>
+        <ref link="1121605733" />
+        <ref link="1340636822" />
+      </path>
+      <paramlist>
+        <param name="ymin" value="-1" />
+        <param name="ymax" value="1" />
+      </paramlist>
+    </Settings>
+    <Settings classid="OverlayGraphSettings" id="2070821915" link="1854044170">
+      <path>
+        <ref link="1121605733" />
+        <ref link="1340636822" />
+      </path>
+      <paramlist>
+        <param name="ymin" value="-1" />
+        <param name="ymax" value="1" />
+      </paramlist>
+    </Settings>
+    <Settings classid="GraphFrameSettings" id="1319504517" link="1631671657">
+      <path>
+        <ref link="1121605733" />
+        <ref link="1340636822" />
+      </path>
+      <paramlist>
+        <param name="xmin" value="-1" />
+        <param name="xmax" value="1" />
+      </paramlist>
+    </Settings>
+    <Settings classid="OverlayGraphSettings" id="521153534" link="836402048">
+      <path>
+        <ref link="1121605733" />
+        <ref link="1340636822" />
+      </path>
+      <paramlist>
+        <param name="ymin" value="-1" />
+        <param name="ymax" value="1" />
+      </paramlist>
+    </Settings>
+    <Settings classid="OverlayGraphSettings" id="907858230" link="1493692158">
+      <path>
+        <ref link="1121605733" />
+        <ref link="1340636822" />
+      </path>
+      <paramlist>
+        <param name="ymin" value="-1" />
+        <param name="ymax" value="1" />
+      </paramlist>
+    </Settings>
+    <Settings classid="OverlayGraphSettings" id="1888646747" link="1512811439">
+      <path>
+        <ref link="1121605733" />
+        <ref link="1340636822" />
+      </path>
+      <paramlist>
+        <param name="ymin" value="-1" />
+        <param name="ymax" value="1" />
+      </paramlist>
+    </Settings>
+    <Settings classid="GraphFrameSettings" id="1173632314" link="1971849011">
+      <path>
+        <ref link="1121605733" />
+        <ref link="1340636822" />
+      </path>
+      <paramlist>
+        <param name="xmin" value="-1" />
+        <param name="xmax" value="1" />
+      </paramlist>
+    </Settings>
+    <Settings classid="OverlayGraphSettings" id="2077474294" link="755815073">
+      <path>
+        <ref link="1121605733" />
+        <ref link="1340636822" />
+      </path>
+      <paramlist>
+        <param name="ymin" value="-1" />
+        <param name="ymax" value="1" />
+      </paramlist>
+    </Settings>
+    <Settings classid="OverlayGraphSettings" id="176193565" link="855845606">
+      <path>
+        <ref link="1121605733" />
+        <ref link="1340636822" />
+      </path>
+      <paramlist>
+        <param name="ymin" value="-1" />
+        <param name="ymax" value="1" />
+      </paramlist>
+    </Settings>
+    <Settings classid="OverlayGraphSettings" id="1494095681" link="1858901540">
+      <path>
+        <ref link="1121605733" />
+        <ref link="1340636822" />
+      </path>
+      <paramlist>
+        <param name="ymin" value="-1" />
+        <param name="ymax" value="1" />
+      </paramlist>
+    </Settings>
+    <Settings classid="GraphFrameSettings" id="50278197" link="851640439">
+      <path>
+        <ref link="1121605733" />
+        <ref link="1340636822" />
+      </path>
+      <paramlist>
+        <param name="xmin" value="-1" />
+        <param name="xmax" value="1" />
+      </paramlist>
+    </Settings>
+    <Settings classid="OverlayGraphSettings" id="633250106" link="1833049930">
+      <path>
+        <ref link="1121605733" />
+        <ref link="1340636822" />
+      </path>
+      <paramlist>
+        <param name="ymin" value="-1" />
+        <param name="ymax" value="1" />
+      </paramlist>
+    </Settings>
+    <Settings classid="OverlayGraphSettings" id="1892478626" link="1895114917">
+      <path>
+        <ref link="1121605733" />
+        <ref link="1340636822" />
+      </path>
+      <paramlist>
+        <param name="ymin" value="-1" />
+        <param name="ymax" value="1" />
+      </paramlist>
+    </Settings>
+    <Settings classid="OverlayGraphSettings" id="135891502" link="1387850366">
+      <path>
+        <ref link="1121605733" />
+        <ref link="1340636822" />
+      </path>
+      <paramlist>
+        <param name="ymin" value="-1" />
+        <param name="ymax" value="1" />
+      </paramlist>
+    </Settings>
+    <Settings classid="OverlayGraphSettings" id="865949461" link="1998000805">
+      <path>
+        <ref link="1121605733" />
+        <ref link="1340636822" />
+      </path>
+      <paramlist>
+        <param name="ymin" value="-1" />
+        <param name="ymax" value="1" />
+      </paramlist>
+    </Settings>
   </List>
   <definitions>
-    <Definition classid="UserCmpDefn" name="volley_circuit_breaker_logic" build="" crc="9105665" view="false" instances="0" date="1637273572" id="511940441" w="320" h="400" url="" group="">
+    <Definition classid="UserCmpDefn" name="volley_circuit_breaker_logic" build="" crc="55748006" view="false" instances="0" date="1637273572" id="511940441" w="320" h="400" url="" group="">
       <paramlist>
         <param name="Description" value="" />
       </paramlist>
@@ -6171,7 +6390,7 @@
             <param name="Name" value="" />
           </paramlist>
         </User>
-        <User classid="UserCmp" name="master:rank_number" id="1264738279" x="180" y="234" w="75" h="21" z="30" orient="0" defn="master:rank_number" link="-1" layer="" q="4" disable="false">
+        <User classid="UserCmp" name="master:rank_number" id="1264738279" x="180" y="234" w="75" h="22" z="30" orient="0" defn="master:rank_number" link="-1" layer="" q="4" disable="false">
           <paramlist link="-1" name="" crc="119362076" />
         </User>
         <User classid="UserCmp" defn="master:inv" id="756446297" x="288" y="270" w="44" h="25" z="70" orient="0" link="-1" q="4" disable="false">
@@ -6180,7 +6399,7 @@
             <param name="Name" value="" />
           </paramlist>
         </User>
-        <User classid="UserCmp" defn="master:sumjct" id="2120589013" x="252" y="270" w="80" h="83" z="60" orient="0" link="-1" q="4" disable="false">
+        <User classid="UserCmp" defn="master:sumjct" id="2120589013" x="252" y="270" w="80" h="82" z="60" orient="0" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="16672553">
             <param name="DPath" value="1" />
             <param name="A" value="0" />
@@ -6194,7 +6413,7 @@
             <param name="Dim" value="1" />
           </paramlist>
         </User>
-        <User classid="UserCmp" defn="master:select" id="330266478" x="324" y="162" w="82" h="90" z="80" orient="0" link="-1" q="4" disable="false">
+        <User classid="UserCmp" defn="master:select" id="330266478" x="324" y="162" w="82" h="91" z="80" orient="0" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="108938206">
             <param name="A" value="1" />
             <param name="DPath" value="1" />
@@ -6265,7 +6484,7 @@
         </User>
       </schematic>
     </Definition>
-    <Definition classid="UserCmpDefn" name="ActivePI_ReactivePI" group="" url="" version="" build="" crc="71543052" instances="0" key="" view="false" date="1637273568" id="1023623776">
+    <Definition classid="UserCmpDefn" name="ActivePI_ReactivePI" group="" url="" version="" build="" crc="29869338" instances="0" key="" view="false" date="1637273568" id="1023623776">
       <paramlist name="">
         <param name="Description" value="" />
       </paramlist>
@@ -6545,7 +6764,7 @@
             <param name="Dim" value="1" />
           </paramlist>
         </User>
-        <User classid="UserCmp" defn="master:sumjct" id="1890171610" x="936" y="306" w="80" h="64" z="490" orient="0" link="-1" q="4" disable="false">
+        <User classid="UserCmp" defn="master:sumjct" id="1890171610" x="936" y="306" w="80" h="63" z="490" orient="0" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="16672553">
             <param name="DPath" value="1" />
             <param name="A" value="0" />
@@ -6621,14 +6840,14 @@
             <param name="Dim" value="1" />
           </paramlist>
         </User>
-        <User classid="UserCmp" defn="master:div" id="842501591" x="234" y="378" w="80" h="60" z="610" orient="0" link="-1" q="4" disable="false">
+        <User classid="UserCmp" defn="master:div" id="842501591" x="234" y="378" w="80" h="59" z="610" orient="0" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="74852640">
             <param name="Dim" value="1" />
             <param name="Name" value="" />
             <param name="DPath" value="1" />
           </paramlist>
         </User>
-        <User classid="UserCmp" defn="master:emtconst" id="718481145" x="198" y="486" w="21" h="76" z="170" orient="3" link="-1" layer="" q="4" disable="false">
+        <User classid="UserCmp" defn="master:emtconst" id="718481145" x="198" y="486" w="22" h="76" z="170" orient="3" link="-1" layer="" q="4" disable="false">
           <paramlist link="-1" name="" crc="116269466">
             <param name="Name" value="" />
             <param name="Value" value="1" />
@@ -6732,7 +6951,7 @@
             <param name="Name" value="I_dq" />
           </paramlist>
         </User>
-        <User classid="UserCmp" defn="master:sumjct" id="1770214424" x="702" y="576" w="80" h="83" z="430" orient="0" link="-1" q="4" disable="false">
+        <User classid="UserCmp" defn="master:sumjct" id="1770214424" x="702" y="576" w="80" h="82" z="430" orient="0" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="16672553">
             <param name="DPath" value="1" />
             <param name="A" value="0" />
@@ -6774,7 +6993,7 @@
             <param name="Dim" value="1" />
           </paramlist>
         </User>
-        <User classid="UserCmp" defn="master:sumjct" id="1465520143" x="684" y="324" w="80" h="83" z="460" orient="0" link="-1" q="4" disable="false">
+        <User classid="UserCmp" defn="master:sumjct" id="1465520143" x="684" y="324" w="80" h="82" z="460" orient="0" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="16672553">
             <param name="DPath" value="1" />
             <param name="A" value="0" />
@@ -7434,14 +7653,14 @@
             <param name="Dim" value="1" />
           </paramlist>
         </User>
-        <User classid="UserCmp" defn="master:div" id="1523585354" x="288" y="594" w="80" h="60" z="420" orient="0" link="-1" q="4" disable="false">
+        <User classid="UserCmp" defn="master:div" id="1523585354" x="288" y="594" w="80" h="59" z="420" orient="0" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="74852640">
             <param name="Dim" value="1" />
             <param name="Name" value="" />
             <param name="DPath" value="1" />
           </paramlist>
         </User>
-        <User classid="UserCmp" defn="master:div" id="921558749" x="288" y="702" w="80" h="60" z="450" orient="0" link="-1" q="4" disable="false">
+        <User classid="UserCmp" defn="master:div" id="921558749" x="288" y="702" w="80" h="59" z="450" orient="0" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="74852640">
             <param name="Dim" value="1" />
             <param name="Name" value="" />
@@ -7477,7 +7696,7 @@
           <vertex x="0" y="0" />
           <vertex x="126" y="0" />
         </Wire>
-        <User classid="UserCmp" defn="master:sumjct" id="761203812" x="936" y="540" w="80" h="64" z="480" orient="0" link="-1" q="4" disable="false">
+        <User classid="UserCmp" defn="master:sumjct" id="761203812" x="936" y="540" w="80" h="63" z="480" orient="0" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="16672553">
             <param name="DPath" value="1" />
             <param name="A" value="0" />
@@ -7556,7 +7775,7 @@
             <param name="AL2" value="" />
           </paramlist>
         </User>
-        <User classid="UserCmp" name="master:integral" id="2071166572" x="1116" y="342" w="80" h="74" z="500" orient="0" defn="master:integral" link="-1" q="4" disable="false">
+        <User classid="UserCmp" name="master:integral" id="2071166572" x="1116" y="342" w="80" h="73" z="500" orient="0" defn="master:integral" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="126573893">
             <param name="Extrn" value="0" />
             <param name="Reset" value="1" />
@@ -7589,7 +7808,7 @@
             <param name="DPath" value="1" />
           </paramlist>
         </User>
-        <User classid="UserCmp" name="master:sumjct" id="143608593" x="1260" y="306" w="80" h="83" z="550" orient="0" defn="master:sumjct" link="-1" q="4" disable="false">
+        <User classid="UserCmp" name="master:sumjct" id="143608593" x="1260" y="306" w="80" h="82" z="550" orient="0" defn="master:sumjct" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="16672553">
             <param name="DPath" value="1" />
             <param name="A" value="0" />
@@ -7647,7 +7866,7 @@
           <vertex x="0" y="0" />
           <vertex x="36" y="0" />
         </Wire>
-        <User classid="UserCmp" name="master:sumjct" id="1361906622" x="1278" y="540" w="80" h="83" z="570" orient="0" defn="master:sumjct" link="-1" q="4" disable="false">
+        <User classid="UserCmp" name="master:sumjct" id="1361906622" x="1278" y="540" w="80" h="82" z="570" orient="0" defn="master:sumjct" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="16672553">
             <param name="DPath" value="1" />
             <param name="A" value="0" />
@@ -7679,7 +7898,7 @@
             <param name="DPath" value="1" />
           </paramlist>
         </User>
-        <User classid="UserCmp" name="master:integral" id="1544546380" x="1134" y="576" w="80" h="74" z="520" orient="0" defn="master:integral" link="-1" q="4" disable="false">
+        <User classid="UserCmp" name="master:integral" id="1544546380" x="1134" y="576" w="80" h="73" z="520" orient="0" defn="master:integral" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="126573893">
             <param name="Extrn" value="0" />
             <param name="Reset" value="1" />
@@ -8394,7 +8613,7 @@
         </Gfx>
       </graphics>
     </Definition>
-    <Definition classid="UserCmpDefn" name="CurrentModeControl" group="" url="" version="" build="" crc="85665037" instances="0" key="" view="false" date="1637273568" id="700101540">
+    <Definition classid="UserCmpDefn" name="CurrentModeControl" group="" url="" version="" build="" crc="49201427" instances="0" key="" view="false" date="1637273568" id="700101540">
       <paramlist name="">
         <param name="Description" value="" />
       </paramlist>
@@ -8979,7 +9198,7 @@
           <vertex x="18" y="0" />
           <vertex x="18" y="54" />
         </Wire>
-        <User classid="UserCmp" name="master:sumjct" id="677087516" x="774" y="324" w="80" h="64" z="150" orient="0" defn="master:sumjct" link="-1" q="4" disable="false">
+        <User classid="UserCmp" name="master:sumjct" id="677087516" x="774" y="324" w="80" h="63" z="150" orient="0" defn="master:sumjct" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="16672553">
             <param name="DPath" value="1" />
             <param name="A" value="0" />
@@ -9005,7 +9224,7 @@
           <vertex x="0" y="0" />
           <vertex x="36" y="0" />
         </Wire>
-        <User classid="UserCmp" name="master:sumjct" id="985014476" x="990" y="324" w="80" h="83" z="380" orient="0" defn="master:sumjct" link="-1" q="4" disable="false">
+        <User classid="UserCmp" name="master:sumjct" id="985014476" x="990" y="324" w="80" h="82" z="380" orient="0" defn="master:sumjct" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="16672553">
             <param name="DPath" value="1" />
             <param name="A" value="0" />
@@ -9042,7 +9261,7 @@
             <param name="DPath" value="1" />
           </paramlist>
         </User>
-        <User classid="UserCmp" name="master:sumjct" id="991822557" x="1062" y="324" w="80" h="83" z="390" orient="0" defn="master:sumjct" link="-1" q="4" disable="false">
+        <User classid="UserCmp" name="master:sumjct" id="991822557" x="1062" y="324" w="80" h="82" z="390" orient="0" defn="master:sumjct" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="16672553">
             <param name="G" value="0" />
             <param name="F" value="-1" />
@@ -9081,7 +9300,7 @@
             <param name="DPath" value="1" />
           </paramlist>
         </User>
-        <User classid="UserCmp" name="master:integral" id="138022980" x="846" y="360" w="80" h="74" z="320" orient="0" defn="master:integral" link="-1" q="4" disable="false">
+        <User classid="UserCmp" name="master:integral" id="138022980" x="846" y="360" w="80" h="73" z="320" orient="0" defn="master:integral" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="126573893">
             <param name="Extrn" value="0" />
             <param name="Reset" value="1" />
@@ -9155,7 +9374,7 @@
           <vertex x="18" y="0" />
           <vertex x="18" y="54" />
         </Wire>
-        <User classid="UserCmp" name="master:sumjct" id="261206855" x="792" y="738" w="80" h="64" z="240" orient="0" defn="master:sumjct" link="-1" q="4" disable="false">
+        <User classid="UserCmp" name="master:sumjct" id="261206855" x="792" y="738" w="80" h="63" z="240" orient="0" defn="master:sumjct" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="16672553">
             <param name="DPath" value="1" />
             <param name="A" value="0" />
@@ -9181,7 +9400,7 @@
           <vertex x="0" y="0" />
           <vertex x="36" y="0" />
         </Wire>
-        <User classid="UserCmp" name="master:sumjct" id="616077110" x="1008" y="738" w="80" h="83" z="360" orient="0" defn="master:sumjct" link="-1" q="4" disable="false">
+        <User classid="UserCmp" name="master:sumjct" id="616077110" x="1008" y="738" w="80" h="82" z="360" orient="0" defn="master:sumjct" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="16672553">
             <param name="DPath" value="1" />
             <param name="A" value="0" />
@@ -9218,7 +9437,7 @@
             <param name="DPath" value="1" />
           </paramlist>
         </User>
-        <User classid="UserCmp" name="master:sumjct" id="1056037809" x="1080" y="738" w="80" h="83" z="370" orient="0" defn="master:sumjct" link="-1" q="4" disable="false">
+        <User classid="UserCmp" name="master:sumjct" id="1056037809" x="1080" y="738" w="80" h="82" z="370" orient="0" defn="master:sumjct" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="16672553">
             <param name="G" value="0" />
             <param name="F" value="1" />
@@ -9257,7 +9476,7 @@
             <param name="DPath" value="1" />
           </paramlist>
         </User>
-        <User classid="UserCmp" name="master:integral" id="1271894104" x="864" y="774" w="80" h="74" z="260" orient="0" defn="master:integral" link="-1" q="4" disable="false">
+        <User classid="UserCmp" name="master:integral" id="1271894104" x="864" y="774" w="80" h="73" z="260" orient="0" defn="master:integral" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="126573893">
             <param name="Extrn" value="0" />
             <param name="Reset" value="1" />
@@ -9696,7 +9915,7 @@
         </Gfx>
       </graphics>
     </Definition>
-    <Definition classid="UserCmpDefn" name="ReducedOrderPLL" group="" url="" version="" build="" crc="57833996" instances="0" key="" view="false" date="1637273566" id="1515094901">
+    <Definition classid="UserCmpDefn" name="ReducedOrderPLL" group="" url="" version="" build="" crc="35517605" instances="0" key="" view="false" date="1637273566" id="1515094901">
       <paramlist name="">
         <param name="Description" value="" />
       </paramlist>
@@ -9930,7 +10149,7 @@
             <param name="Dim" value="1" />
           </paramlist>
         </User>
-        <User classid="UserCmp" defn="master:div" id="1824530856" x="252" y="324" w="80" h="60" z="170" orient="0" link="-1" q="4" disable="false">
+        <User classid="UserCmp" defn="master:div" id="1824530856" x="252" y="324" w="80" h="59" z="170" orient="0" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="74852640">
             <param name="Dim" value="1" />
             <param name="Name" value="" />
@@ -9959,7 +10178,7 @@
             <param name="DPath" value="1" />
           </paramlist>
         </User>
-        <User classid="UserCmp" name="master:integral" id="492855705" x="900" y="216" w="80" h="74" z="230" orient="0" defn="master:integral" link="-1" q="4" disable="false">
+        <User classid="UserCmp" name="master:integral" id="492855705" x="900" y="216" w="80" h="73" z="230" orient="0" defn="master:integral" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="126573893">
             <param name="Extrn" value="0" />
             <param name="Reset" value="1" />
@@ -9974,7 +10193,7 @@
             <param name="Name" value="" />
           </paramlist>
         </User>
-        <User classid="UserCmp" name="master:sumjct" id="1809046789" x="1044" y="180" w="80" h="83" z="250" orient="0" defn="master:sumjct" link="-1" q="4" disable="false">
+        <User classid="UserCmp" name="master:sumjct" id="1809046789" x="1044" y="180" w="80" h="82" z="250" orient="0" defn="master:sumjct" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="16672553">
             <param name="DPath" value="1" />
             <param name="A" value="0" />
@@ -10038,14 +10257,14 @@
             <param name="Dim" value="1" />
           </paramlist>
         </User>
-        <User classid="UserCmp" defn="master:emtconst" id="1489816219" x="216" y="252" w="21" h="76" z="60" orient="3" link="-1" layer="" q="4" disable="false">
+        <User classid="UserCmp" defn="master:emtconst" id="1489816219" x="216" y="252" w="22" h="76" z="60" orient="3" link="-1" layer="" q="4" disable="false">
           <paramlist link="-1" name="" crc="116269466">
             <param name="Name" value="" />
             <param name="Value" value="1" />
             <param name="Dim" value="1" />
           </paramlist>
         </User>
-        <User classid="UserCmp" defn="master:div" id="502953064" x="252" y="144" w="80" h="60" z="180" orient="0" link="-1" q="4" disable="false">
+        <User classid="UserCmp" defn="master:div" id="502953064" x="252" y="144" w="80" h="59" z="180" orient="0" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="74852640">
             <param name="Dim" value="1" />
             <param name="Name" value="" />
@@ -10324,7 +10543,7 @@
             <param name="Name" value="delta_theta_pll_internall" />
           </paramlist>
         </User>
-        <User classid="UserCmp" defn="master:select" id="1153255795" x="612" y="342" w="82" h="90" z="250" orient="0" link="-1" q="4" disable="false">
+        <User classid="UserCmp" defn="master:select" id="1153255795" x="612" y="342" w="82" h="91" z="250" orient="0" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="108938206">
             <param name="A" value="0" />
             <param name="DPath" value="1" />
@@ -10346,10 +10565,10 @@
             <param name="Name" value="" />
           </paramlist>
         </User>
-        <User classid="UserCmp" defn="master:time-sig" id="134584747" x="486" y="468" w="76" h="21" z="150" orient="0" link="-1" q="4" disable="false">
+        <User classid="UserCmp" defn="master:time-sig" id="134584747" x="486" y="468" w="76" h="22" z="150" orient="0" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="20913136" />
         </User>
-        <User classid="UserCmp" defn="master:delta-t" id="1451337911" x="396" y="468" w="76" h="21" z="140" orient="0" link="-1" q="4" disable="false">
+        <User classid="UserCmp" defn="master:delta-t" id="1451337911" x="396" y="468" w="76" h="22" z="140" orient="0" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="58660321" />
         </User>
         <Wire classid="WireOrthogonal" id="2051276492" name="" x="504" y="342" w="82" h="10" orient="0" disable="false">
@@ -10379,7 +10598,7 @@
             <param name="Name" value="delta_w_pll_internal" />
           </paramlist>
         </User>
-        <User classid="UserCmp" name="master:sumjct" id="657275781" x="1332" y="108" w="80" h="83" z="280" orient="0" defn="master:sumjct" link="-1" q="4" disable="false">
+        <User classid="UserCmp" name="master:sumjct" id="657275781" x="1332" y="108" w="80" h="82" z="280" orient="0" defn="master:sumjct" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="16672553">
             <param name="DPath" value="1" />
             <param name="A" value="0" />
@@ -10410,12 +10629,12 @@
             <param name="Name" value="" />
           </paramlist>
         </User>
-        <User classid="UserCmp" name="PSID_Library:ri_dq" id="2057070710" x="468" y="126" w="108" h="61" z="200" orient="0" defn="PSID_Library:ri_dq" link="-1" q="4" disable="false">
+        <User classid="UserCmp" name="PSID_Library:ri_dq" id="2057070710" x="468" y="126" w="108" h="62" z="200" orient="0" defn="PSID_Library:ri_dq" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="63023770">
             <param name="Name" value="" />
           </paramlist>
         </User>
-        <User classid="UserCmp" defn="master:emtconst" id="1204404911" x="486" y="216" w="21" h="76" z="50" orient="3" link="-1" q="4" disable="false">
+        <User classid="UserCmp" defn="master:emtconst" id="1204404911" x="486" y="216" w="22" h="76" z="50" orient="3" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="116269466">
             <param name="Name" value="" />
             <param name="Value" value="4" />
@@ -10496,7 +10715,7 @@
             <param name="Name" value="t_INV" />
           </paramlist>
         </User>
-        <User classid="UserCmp" name="master:sumjct" id="1080597379" x="468" y="504" w="80" h="83" z="160" orient="0" defn="master:sumjct" link="-1" q="4" disable="false">
+        <User classid="UserCmp" name="master:sumjct" id="1080597379" x="468" y="504" w="80" h="82" z="160" orient="0" defn="master:sumjct" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="16672553">
             <param name="DPath" value="1" />
             <param name="A" value="0" />
@@ -10707,12 +10926,18 @@
         </Gfx>
       </graphics>
     </Definition>
-    <Definition classid="UserCmpDefn" name="ActiveDroop_ReactiveDroop" group="" url="" version="" build="" crc="61813109" instances="0" key="" view="false" date="1660509197" id="1143056703">
+    <Definition classid="UserCmpDefn" name="ActiveDroop_ReactiveDroop" group="" url="" version="" build="" crc="61701072" instances="0" key="" view="false" date="1660509197" id="1143056703">
       <paramlist name="">
         <param name="Description" value="" />
       </paramlist>
       <form name="" w="500" h="400" splitter="60" category-width="180" commentlines="4" help-width="490">
         <category name="Configuration" visible="true">
+          <parameter name="w_sys" desc="System frequency" type="Real" group="Frequency" helpmode="Append" content_type="Variable" intent="Input" dim="1" animate="false" unit="" min="-1E+308" max="1E+308">
+            <value><![CDATA[1.0]]></value>
+            <cond><![CDATA[true]]></cond>
+            <vis><![CDATA[true]]></vis>
+            <help><![CDATA[]]></help>
+          </parameter>
           <cond />
           <parameter desc="Name" name="Name" group="" type="Text" helpmode="Append" allowemptystr="true" min="0" max="0">
             <value />
@@ -10908,7 +11133,7 @@
             <param name="Name" value="I_dq" />
           </paramlist>
         </User>
-        <Sticky classid="Sticky" id="1341659875" x="36" y="36" w="108" h="36" colors="0, 15792890">
+        <Sticky classid="Sticky" id="1341659875" x="18" y="0" w="108" h="36" colors="0, 15792890">
           <paramlist>
             <param name="full_font" value="Tahoma, 9pt" />
             <param name="align" value="0" />
@@ -10982,7 +11207,7 @@
           <vertex x="0" y="0" />
           <vertex x="36" y="0" />
         </Wire>
-        <User classid="UserCmp" defn="master:sumjct" id="212302453" x="900" y="540" w="80" h="64" z="500" orient="0" link="-1" q="4" disable="false">
+        <User classid="UserCmp" defn="master:sumjct" id="212302453" x="900" y="540" w="80" h="63" z="500" orient="0" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="16672553">
             <param name="DPath" value="1" />
             <param name="A" value="0" />
@@ -11070,7 +11295,7 @@
         </Wire>
         <User classid="UserCmp" name="master:datalabel" id="207024219" x="1260" y="144" w="38" h="23" z="1" orient="2" defn="master:datalabel" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="127230955">
-            <param name="Name" value="w_ref" />
+            <param name="Name" value="w_sys" />
           </paramlist>
         </User>
         <User classid="UserCmp" name="master:datalabel" id="515725816" x="756" y="252" w="12" h="23" z="1" orient="0" defn="master:datalabel" link="-1" q="4" disable="false">
@@ -11099,14 +11324,14 @@
             <param name="Dim" value="1" />
           </paramlist>
         </User>
-        <User classid="UserCmp" defn="master:div" id="1276331578" x="234" y="378" w="80" h="60" z="430" orient="0" link="-1" q="4" disable="false">
+        <User classid="UserCmp" defn="master:div" id="1276331578" x="234" y="378" w="80" h="59" z="430" orient="0" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="74852640">
             <param name="Dim" value="1" />
             <param name="Name" value="" />
             <param name="DPath" value="1" />
           </paramlist>
         </User>
-        <User classid="UserCmp" defn="master:emtconst" id="1057009833" x="198" y="486" w="21" h="76" z="130" orient="3" link="-1" layer="" q="4" disable="false">
+        <User classid="UserCmp" defn="master:emtconst" id="1057009833" x="198" y="486" w="22" h="76" z="130" orient="3" link="-1" layer="" q="4" disable="false">
           <paramlist link="-1" name="" crc="116269466">
             <param name="Name" value="" />
             <param name="Value" value="1" />
@@ -11220,7 +11445,7 @@
             <param name="Name" value="I_dq" />
           </paramlist>
         </User>
-        <User classid="UserCmp" defn="master:sumjct" id="2088175240" x="576" y="180" w="80" h="83" z="410" orient="0" link="-1" q="4" disable="false">
+        <User classid="UserCmp" defn="master:sumjct" id="2088175240" x="576" y="180" w="80" h="82" z="410" orient="0" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="16672553">
             <param name="DPath" value="1" />
             <param name="A" value="0" />
@@ -11262,7 +11487,7 @@
             <param name="Dim" value="1" />
           </paramlist>
         </User>
-        <User classid="UserCmp" defn="master:sumjct" id="2012624657" x="594" y="540" w="80" h="83" z="440" orient="0" link="-1" q="4" disable="false">
+        <User classid="UserCmp" defn="master:sumjct" id="2012624657" x="594" y="540" w="80" h="82" z="440" orient="0" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="16672553">
             <param name="DPath" value="1" />
             <param name="A" value="0" />
@@ -12008,14 +12233,14 @@
             <param name="Dim" value="1" />
           </paramlist>
         </User>
-        <User classid="UserCmp" defn="master:div" id="667600336" x="288" y="576" w="80" h="60" z="370" orient="0" link="-1" q="4" disable="false">
+        <User classid="UserCmp" defn="master:div" id="667600336" x="288" y="576" w="80" h="59" z="370" orient="0" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="74852640">
             <param name="Dim" value="1" />
             <param name="Name" value="" />
             <param name="DPath" value="1" />
           </paramlist>
         </User>
-        <User classid="UserCmp" defn="master:div" id="1042371798" x="288" y="648" w="80" h="60" z="390" orient="0" link="-1" q="4" disable="false">
+        <User classid="UserCmp" defn="master:div" id="1042371798" x="288" y="648" w="80" h="59" z="390" orient="0" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="74852640">
             <param name="Dim" value="1" />
             <param name="Name" value="" />
@@ -12060,7 +12285,7 @@
             <param name="Name" value="" />
           </paramlist>
         </User>
-        <User classid="UserCmp" defn="master:integral" id="550938491" x="1332" y="180" w="80" h="74" z="520" orient="0" link="-1" q="4" disable="false">
+        <User classid="UserCmp" defn="master:integral" id="550938491" x="1332" y="180" w="80" h="73" z="520" orient="0" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="126573893">
             <param name="Extrn" value="0" />
             <param name="Reset" value="1" />
@@ -12076,14 +12301,7 @@
             <param name="Name" value="" />
           </paramlist>
         </User>
-        <User classid="UserCmp" name="master:const" id="711809602" x="1134" y="144" w="76" h="22" z="50" orient="2" defn="master:const" link="-1" q="4" disable="false">
-          <paramlist link="-1" name="" crc="10628662">
-            <param name="Name" value="" />
-            <param name="Value" value="1.0" />
-            <param name="Dim" value="1" />
-          </paramlist>
-        </User>
-        <User classid="UserCmp" defn="master:sumjct" id="1111560355" x="1260" y="180" w="80" h="64" z="490" orient="6" link="-1" q="4" disable="false">
+        <User classid="UserCmp" defn="master:sumjct" id="1111560355" x="1260" y="180" w="80" h="63" z="490" orient="6" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="16672553">
             <param name="DPath" value="1" />
             <param name="A" value="0" />
@@ -12097,7 +12315,7 @@
             <param name="Dim" value="1" />
           </paramlist>
         </User>
-        <User classid="UserCmp" defn="master:sumjct" id="1349214540" x="882" y="180" w="80" h="64" z="460" orient="0" link="-1" q="4" disable="false">
+        <User classid="UserCmp" defn="master:sumjct" id="1349214540" x="882" y="180" w="80" h="63" z="460" orient="0" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="16672553">
             <param name="DPath" value="1" />
             <param name="A" value="0" />
@@ -12497,6 +12715,16 @@ Add a new ]]></Sticky>
             </Curve>
           </Graph>
         </Frame>
+        <User classid="UserCmp" name="master:datalabel" id="282584520" x="1098" y="144" w="38" h="23" z="1" orient="2" defn="master:datalabel" link="-1" q="4" disable="false">
+          <paramlist link="-1" name="" crc="127230955">
+            <param name="Name" value="w_ref" />
+          </paramlist>
+        </User>
+        <User classid="UserCmp" name="master:import" id="1815502115" x="126" y="54" w="80" h="25" z="30" orient="0" defn="master:import" link="-1" q="4" disable="false">
+          <paramlist link="-1" name="" crc="117509081">
+            <param name="Name" value="w_sys" />
+          </paramlist>
+        </User>
       </schematic>
       <references>
         <using namespace="master" />
@@ -13083,7 +13311,7 @@ Add a new ]]></Sticky>
         </Gfx>
       </graphics>
     </Definition>
-    <Definition classid="UserCmpDefn" name="FixedFrequency" group="" url="" version="" build="" crc="114218013" instances="0" key="" view="false" date="1660509196" id="1637480071">
+    <Definition classid="UserCmpDefn" name="FixedFrequency" group="" url="" version="" build="" crc="114218013" instances="0" key="" view="false" date="1661788660" id="1637480071">
       <paramlist name="">
         <param name="Description" value="" />
       </paramlist>
@@ -13376,7 +13604,7 @@ Add a new ]]></Sticky>
         </Gfx>
       </graphics>
     </Definition>
-    <Definition classid="UserCmpDefn" name="RateLimiter" group="" url="" version="" build="" crc="2324950" instances="0" key="" view="false" date="1624994702" id="1900318861">
+    <Definition classid="UserCmpDefn" name="RateLimiter" group="" url="" version="" build="" crc="92647985" instances="0" key="" view="false" date="1624994702" id="1900318861">
       <paramlist name="">
         <param name="Description" value="" />
       </paramlist>
@@ -13462,7 +13690,7 @@ Add a new ]]></Sticky>
             <param name="Name" value="" />
           </paramlist>
         </User>
-        <User classid="UserCmp" defn="master:select" id="1144038685" x="378" y="252" w="82" h="90" z="70" orient="0" link="-1" q="4" disable="false">
+        <User classid="UserCmp" defn="master:select" id="1144038685" x="378" y="252" w="82" h="91" z="70" orient="0" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="108938206">
             <param name="A" value="1" />
             <param name="DPath" value="1" />
@@ -13481,7 +13709,7 @@ Add a new ]]></Sticky>
             <param name="Name" value="DR" />
           </paramlist>
         </User>
-        <User classid="UserCmp" defn="master:select" id="868432491" x="540" y="288" w="82" h="90" z="90" orient="0" link="-1" q="4" disable="false">
+        <User classid="UserCmp" defn="master:select" id="868432491" x="540" y="288" w="82" h="91" z="90" orient="0" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="108938206">
             <param name="A" value="1" />
             <param name="DPath" value="1" />
@@ -13685,7 +13913,7 @@ Add a new ]]></Sticky>
         </Gfx>
       </graphics>
     </Definition>
-    <Definition classid="UserCmpDefn" name="DeadBand" group="" url="" version="" build="" crc="31699124" instances="0" key="" view="false" date="1626192224" id="1945937744">
+    <Definition classid="UserCmpDefn" name="DeadBand" group="" url="" version="" build="" crc="65052130" instances="0" key="" view="false" date="1626192224" id="1945937744">
       <paramlist name="">
         <param name="Description" value="" />
       </paramlist>
@@ -13744,7 +13972,7 @@ Add a new ]]></Sticky>
             <param name="Dim" value="1" />
           </paramlist>
         </User>
-        <User classid="UserCmp" defn="master:select" id="1193666164" x="468" y="540" w="82" h="90" z="60" orient="0" link="-1" q="4" disable="false">
+        <User classid="UserCmp" defn="master:select" id="1193666164" x="468" y="540" w="82" h="91" z="60" orient="0" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="108938206">
             <param name="A" value="1" />
             <param name="DPath" value="1" />
@@ -13916,7 +14144,7 @@ Add a new ]]></Sticky>
         </Gfx>
       </graphics>
     </Definition>
-    <Definition classid="UserCmpDefn" name="GGOV1" group="" url="" version="" build="" crc="18263452" instances="0" key="" view="false" date="1626192224" id="2139958349">
+    <Definition classid="UserCmpDefn" name="GGOV1" group="" url="" version="" build="" crc="50412706" instances="0" key="" view="false" date="1626192224" id="2139958349">
       <paramlist name="">
         <param name="Description" value="" />
       </paramlist>
@@ -14187,7 +14415,7 @@ Add a new ]]></Sticky>
             <param name="Name" value="" />
           </paramlist>
         </User>
-        <User classid="UserCmp" defn="master:sumjct" id="1660038826" x="684" y="882" w="83" h="61" z="810" orient="3" link="-1" q="4" disable="false">
+        <User classid="UserCmp" defn="master:sumjct" id="1660038826" x="684" y="882" w="82" h="61" z="810" orient="3" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="16672553">
             <param name="DPath" value="1" />
             <param name="A" value="0" />
@@ -14201,7 +14429,7 @@ Add a new ]]></Sticky>
             <param name="Dim" value="1" />
           </paramlist>
         </User>
-        <User classid="UserCmp" defn="master:integral" id="1886728342" x="684" y="738" w="74" h="80" z="830" orient="3" link="-1" q="4" disable="false">
+        <User classid="UserCmp" defn="master:integral" id="1886728342" x="684" y="738" w="73" h="80" z="830" orient="3" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="126573893">
             <param name="Extrn" value="0" />
             <param name="Reset" value="1" />
@@ -14231,7 +14459,7 @@ Add a new ]]></Sticky>
             <param name="Name" value="Kimw" />
           </paramlist>
         </User>
-        <User classid="UserCmp" defn="master:sumjct" id="1552261403" x="684" y="648" w="80" h="64" z="840" orient="0" link="-1" q="4" disable="false">
+        <User classid="UserCmp" defn="master:sumjct" id="1552261403" x="684" y="648" w="80" h="63" z="840" orient="0" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="16672553">
             <param name="DPath" value="1" />
             <param name="A" value="0" />
@@ -14245,7 +14473,7 @@ Add a new ]]></Sticky>
             <param name="Dim" value="1" />
           </paramlist>
         </User>
-        <User classid="UserCmp" defn="master:sumjct" id="364431281" x="846" y="648" w="80" h="83" z="880" orient="0" link="-1" q="4" disable="false">
+        <User classid="UserCmp" defn="master:sumjct" id="364431281" x="846" y="648" w="80" h="82" z="880" orient="0" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="16672553">
             <param name="DPath" value="1" />
             <param name="A" value="0" />
@@ -14287,7 +14515,7 @@ Add a new ]]></Sticky>
             <param name="DPath" value="1" />
           </paramlist>
         </User>
-        <User classid="UserCmp" defn="master:integral" id="1023166916" x="1386" y="648" w="80" h="74" z="920" orient="0" link="-1" q="4" disable="false">
+        <User classid="UserCmp" defn="master:integral" id="1023166916" x="1386" y="648" w="80" h="73" z="920" orient="0" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="126573893">
             <param name="Extrn" value="0" />
             <param name="Reset" value="1" />
@@ -14353,7 +14581,7 @@ Add a new ]]></Sticky>
             <param name="Name" value="" />
           </paramlist>
         </User>
-        <User classid="UserCmp" defn="master:maxmin" id="874487485" x="1530" y="522" w="80" h="83" z="1050" orient="0" link="-1" q="4" disable="false">
+        <User classid="UserCmp" defn="master:maxmin" id="874487485" x="1530" y="522" w="80" h="82" z="1050" orient="0" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="103689034">
             <param name="DPath" value="1" />
             <param name="Type" value="0" />
@@ -14424,10 +14652,10 @@ Add a new ]]></Sticky>
             <param name="Dim" value="1" />
           </paramlist>
         </User>
-        <User classid="UserCmp" defn="master:delta-t" id="118946042" x="1026" y="414" w="76" h="21" z="200" orient="0" link="-1" layer="" q="4" disable="false">
+        <User classid="UserCmp" defn="master:delta-t" id="118946042" x="1026" y="414" w="76" h="22" z="200" orient="0" link="-1" layer="" q="4" disable="false">
           <paramlist link="-1" name="" crc="58660321" />
         </User>
-        <User classid="UserCmp" defn="master:sumjct" id="1203292798" x="1188" y="522" w="80" h="64" z="1040" orient="0" link="-1" q="4" disable="false">
+        <User classid="UserCmp" defn="master:sumjct" id="1203292798" x="1188" y="522" w="80" h="63" z="1040" orient="0" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="16672553">
             <param name="DPath" value="1" />
             <param name="A" value="0" />
@@ -14441,7 +14669,7 @@ Add a new ]]></Sticky>
             <param name="Dim" value="1" />
           </paramlist>
         </User>
-        <User classid="UserCmp" defn="master:div" id="498237281" x="792" y="306" w="80" h="60" z="690" orient="0" link="-1" q="4" disable="false">
+        <User classid="UserCmp" defn="master:div" id="498237281" x="792" y="306" w="80" h="59" z="690" orient="0" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="74852640">
             <param name="Dim" value="1" />
             <param name="Name" value="" />
@@ -14457,7 +14685,7 @@ Add a new ]]></Sticky>
             <param name="Name" value="Kturb" />
           </paramlist>
         </User>
-        <User classid="UserCmp" defn="master:sumjct" id="1398602287" x="864" y="306" w="80" h="64" z="700" orient="0" link="-1" q="4" disable="false">
+        <User classid="UserCmp" defn="master:sumjct" id="1398602287" x="864" y="306" w="80" h="63" z="700" orient="0" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="16672553">
             <param name="DPath" value="1" />
             <param name="A" value="0" />
@@ -14476,7 +14704,7 @@ Add a new ]]></Sticky>
             <param name="Name" value="Wfnl" />
           </paramlist>
         </User>
-        <User classid="UserCmp" defn="master:sumjct" id="5964346" x="1332" y="324" w="80" h="64" z="980" orient="2" link="-1" q="4" disable="false">
+        <User classid="UserCmp" defn="master:sumjct" id="5964346" x="1332" y="324" w="80" h="63" z="980" orient="2" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="16672553">
             <param name="DPath" value="1" />
             <param name="A" value="0" />
@@ -14499,7 +14727,7 @@ Add a new ]]></Sticky>
             <param name="DPath" value="1" />
           </paramlist>
         </User>
-        <User classid="UserCmp" defn="master:integral" id="2146692068" x="1242" y="432" w="80" h="74" z="1010" orient="0" link="-1" q="4" disable="false">
+        <User classid="UserCmp" defn="master:integral" id="2146692068" x="1242" y="432" w="80" h="73" z="1010" orient="0" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="126573893">
             <param name="Extrn" value="0" />
             <param name="Reset" value="1" />
@@ -14528,7 +14756,7 @@ Add a new ]]></Sticky>
             <param name="DPath" value="1" />
           </paramlist>
         </User>
-        <User classid="UserCmp" defn="master:sumjct" id="1600855034" x="1350" y="396" w="80" h="83" z="1020" orient="0" link="-1" q="4" disable="false">
+        <User classid="UserCmp" defn="master:sumjct" id="1600855034" x="1350" y="396" w="80" h="82" z="1020" orient="0" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="16672553">
             <param name="DPath" value="1" />
             <param name="A" value="0" />
@@ -14567,7 +14795,7 @@ Add a new ]]></Sticky>
             <param name="Name" value="Tact" />
           </paramlist>
         </User>
-        <User classid="UserCmp" defn="master:realpole" id="1546860069" x="1440" y="324" w="80" h="38" z="970" orient="4" link="-1" q="4" disable="false">
+        <User classid="UserCmp" defn="master:realpole" id="1546860069" x="1440" y="324" w="80" h="37" z="970" orient="4" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="96177319">
             <param name="Limit" value="0" />
             <param name="COM" value="Real_Pole" />
@@ -14706,7 +14934,7 @@ Add a new ]]></Sticky>
             <param name="Name" value="Teng" />
           </paramlist>
         </User>
-        <User classid="UserCmp" defn="master:sumjct" id="1303092210" x="2088" y="180" w="61" h="83" z="1170" orient="0" link="-1" q="4" disable="false">
+        <User classid="UserCmp" defn="master:sumjct" id="1303092210" x="2088" y="180" w="61" h="82" z="1170" orient="0" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="16672553">
             <param name="DPath" value="1" />
             <param name="A" value="0" />
@@ -14720,7 +14948,7 @@ Add a new ]]></Sticky>
             <param name="Dim" value="1" />
           </paramlist>
         </User>
-        <User classid="UserCmp" defn="master:select" id="1013137812" x="2016" y="612" w="90" h="82" z="800" orient="3" link="-1" q="4" disable="false">
+        <User classid="UserCmp" defn="master:select" id="1013137812" x="2016" y="612" w="91" h="82" z="800" orient="3" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="108938206">
             <param name="A" value="0" />
             <param name="DPath" value="1" />
@@ -14734,7 +14962,7 @@ Add a new ]]></Sticky>
             <param name="Name" value="Speed" />
           </paramlist>
         </User>
-        <User classid="UserCmp" defn="master:sumjct" id="694519233" x="2016" y="684" w="64" h="80" z="770" orient="3" link="-1" q="4" disable="false">
+        <User classid="UserCmp" defn="master:sumjct" id="694519233" x="2016" y="684" w="63" h="80" z="770" orient="3" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="16672553">
             <param name="DPath" value="1" />
             <param name="A" value="0" />
@@ -14948,7 +15176,7 @@ Add a new ]]></Sticky>
             <param name="Name" value="" />
           </paramlist>
         </User>
-        <User classid="UserCmp" defn="master:sumjct" id="1902824910" x="1656" y="216" w="80" h="64" z="680" orient="0" link="-1" q="4" disable="false">
+        <User classid="UserCmp" defn="master:sumjct" id="1902824910" x="1656" y="216" w="80" h="63" z="680" orient="0" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="16672553">
             <param name="DPath" value="1" />
             <param name="A" value="0" />
@@ -15024,7 +15252,7 @@ Add a new ]]></Sticky>
             <param name="Name" value="state1" />
           </paramlist>
         </User>
-        <User classid="UserCmp" defn="master:sumjct" id="963344909" x="1476" y="648" w="80" h="83" z="940" orient="0" link="-1" q="4" disable="false">
+        <User classid="UserCmp" defn="master:sumjct" id="963344909" x="1476" y="648" w="80" h="82" z="940" orient="0" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="16672553">
             <param name="DPath" value="1" />
             <param name="A" value="0" />
@@ -15638,7 +15866,7 @@ https://www.nerc.com/comm/PC_Reliability_Guidelines_DL/Reliability_Guideline-App
           <vertex x="0" y="0" />
           <vertex x="18" y="0" />
         </Wire>
-        <User classid="UserCmp" defn="master:sumjct" id="1695754309" x="198" y="72" w="80" h="64" z="610" orient="0" link="-1" q="4" disable="false">
+        <User classid="UserCmp" defn="master:sumjct" id="1695754309" x="198" y="72" w="80" h="63" z="610" orient="0" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="16672553">
             <param name="DPath" value="1" />
             <param name="A" value="0" />
@@ -16464,7 +16692,7 @@ Add a simple GGOV1 to PSY and PSID. Build the 14 bus system and do a small signa
             <param name="Name" value="state4_0" />
           </paramlist>
         </User>
-        <User classid="UserCmp" defn="master:div" id="2091072841" x="1116" y="1170" w="80" h="60" z="540" orient="0" link="-1" q="4" disable="false">
+        <User classid="UserCmp" defn="master:div" id="2091072841" x="1116" y="1170" w="80" h="59" z="540" orient="0" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="74852640">
             <param name="Dim" value="1" />
             <param name="Name" value="" />
@@ -16476,7 +16704,7 @@ Add a simple GGOV1 to PSY and PSID. Build the 14 bus system and do a small signa
             <param name="Name" value="Kturb" />
           </paramlist>
         </User>
-        <User classid="UserCmp" defn="master:sumjct" id="1890921120" x="1188" y="1170" w="80" h="64" z="550" orient="0" link="-1" q="4" disable="false">
+        <User classid="UserCmp" defn="master:sumjct" id="1890921120" x="1188" y="1170" w="80" h="63" z="550" orient="0" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="16672553">
             <param name="DPath" value="1" />
             <param name="A" value="0" />
@@ -17076,7 +17304,7 @@ Add a simple GGOV1 to PSY and PSID. Build the 14 bus system and do a small signa
             <Curve classid="Curve" id="463106250" name="test_limiter" link="1108624758" color="0" bold="0" show="-1" mode="0" gradient="false" transparency="255" thresh="0.5" above="High" below="Low" style="0" />
           </Graph>
         </Frame>
-        <User classid="UserCmp" defn="master:integral" id="517494338" x="1926" y="522" w="80" h="74" z="1100" orient="0" link="-1" q="4" disable="false">
+        <User classid="UserCmp" defn="master:integral" id="517494338" x="1926" y="522" w="80" h="73" z="1100" orient="0" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="126573893">
             <param name="Extrn" value="0" />
             <param name="Reset" value="1" />
@@ -17092,7 +17320,7 @@ Add a simple GGOV1 to PSY and PSID. Build the 14 bus system and do a small signa
             <param name="Name" value="" />
           </paramlist>
         </User>
-        <User classid="UserCmp" defn="master:sumjct" id="1456234992" x="1674" y="522" w="80" h="64" z="1070" orient="6" link="-1" q="4" disable="false">
+        <User classid="UserCmp" defn="master:sumjct" id="1456234992" x="1674" y="522" w="80" h="63" z="1070" orient="6" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="16672553">
             <param name="DPath" value="1" />
             <param name="A" value="0" />
@@ -17149,7 +17377,7 @@ Add a simple GGOV1 to PSY and PSID. Build the 14 bus system and do a small signa
           <vertex x="-954" y="378" />
           <vertex x="-1152" y="378" />
         </Wire>
-        <User classid="UserCmp" defn="master:div" id="1192157146" x="342" y="648" w="80" h="60" z="750" orient="0" link="-1" q="4" disable="false">
+        <User classid="UserCmp" defn="master:div" id="1192157146" x="342" y="648" w="80" h="59" z="750" orient="0" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="74852640">
             <param name="Dim" value="1" />
             <param name="Name" value="" />
@@ -17293,7 +17521,7 @@ Add a simple GGOV1 to PSY and PSID. Build the 14 bus system and do a small signa
             <param name="Name" value="" />
           </paramlist>
         </User>
-        <User classid="UserCmp" defn="master:div" id="1244628250" x="2268" y="180" w="80" h="60" z="1180" orient="0" link="-1" q="4" disable="false">
+        <User classid="UserCmp" defn="master:div" id="1244628250" x="2268" y="180" w="80" h="59" z="1180" orient="0" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="74852640">
             <param name="Dim" value="1" />
             <param name="Name" value="" />
@@ -17516,7 +17744,7 @@ Add a simple GGOV1 to PSY and PSID. Build the 14 bus system and do a small signa
         </Gfx>
       </graphics>
     </Definition>
-    <Definition classid="UserCmpDefn" name="BPA_GG" group="" url="" version="" build="" crc="68290390" instances="0" key="" view="false" date="0" id="480270872">
+    <Definition classid="UserCmpDefn" name="BPA_GG" group="" url="" version="" build="" crc="56329289" instances="0" key="" view="false" date="0" id="480270872">
       <paramlist name="">
         <param name="Description" value="" />
       </paramlist>
@@ -17741,7 +17969,7 @@ Add a simple GGOV1 to PSY and PSID. Build the 14 bus system and do a small signa
             <param name="Name" value="" />
           </paramlist>
         </User>
-        <User classid="UserCmp" defn="master:sumjct" id="377041446" x="306" y="252" w="80" h="64" z="40" orient="0" link="-1" q="4" disable="false">
+        <User classid="UserCmp" defn="master:sumjct" id="377041446" x="306" y="252" w="80" h="63" z="40" orient="0" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="16672553">
             <param name="DPath" value="1" />
             <param name="A" value="0" />
@@ -18264,7 +18492,7 @@ Add a simple GGOV1 to PSY and PSID. Build the 14 bus system and do a small signa
           <vertex x="0" y="0" />
           <vertex x="36" y="0" />
         </Wire>
-        <User classid="UserCmp" defn="master:div" id="1269498675" x="216" y="360" w="80" h="60" z="160" orient="0" link="-1" q="4" disable="false">
+        <User classid="UserCmp" defn="master:div" id="1269498675" x="216" y="360" w="80" h="59" z="160" orient="0" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="74852640">
             <param name="Dim" value="1" />
             <param name="Name" value="" />
@@ -18750,7 +18978,7 @@ Add a simple GGOV1 to PSY and PSID. Build the 14 bus system and do a small signa
         </Gfx>
       </graphics>
     </Definition>
-    <Definition classid="UserCmpDefn" name="IEEET1" group="" url="" version="" build="" crc="9527134" instances="0" key="" view="false" date="1626218332" id="1083498486">
+    <Definition classid="UserCmpDefn" name="IEEET1" group="" url="" version="" build="" crc="34510926" instances="0" key="" view="false" date="1626218332" id="1083498486">
       <paramlist name="">
         <param name="Description" value="" />
       </paramlist>
@@ -19020,7 +19248,7 @@ https://www.powerworld.com/WebHelp/Content/TransientModels_HTML/Exciter%20IEEET1
             <param name="Name" value="Ke" />
           </paramlist>
         </User>
-        <User classid="UserCmp" defn="master:sumjct" id="291253868" x="450" y="288" w="80" h="83" z="250" orient="0" link="-1" q="4" disable="false">
+        <User classid="UserCmp" defn="master:sumjct" id="291253868" x="450" y="288" w="80" h="82" z="250" orient="0" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="16672553">
             <param name="DPath" value="1" />
             <param name="A" value="0" />
@@ -19428,7 +19656,7 @@ https://www.powerworld.com/WebHelp/Content/TransientModels_HTML/Exciter%20IEEET1
             <param name="Name" value="" />
           </paramlist>
         </User>
-        <User classid="UserCmp" defn="master:sumjct" id="541652589" x="738" y="288" w="80" h="64" z="320" orient="0" link="-1" q="4" disable="false">
+        <User classid="UserCmp" defn="master:sumjct" id="541652589" x="738" y="288" w="80" h="63" z="320" orient="0" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="16672553">
             <param name="DPath" value="1" />
             <param name="A" value="0" />
@@ -19442,7 +19670,7 @@ https://www.powerworld.com/WebHelp/Content/TransientModels_HTML/Exciter%20IEEET1
             <param name="Dim" value="1" />
           </paramlist>
         </User>
-        <User classid="UserCmp" defn="master:integral" id="1939207591" x="900" y="288" w="80" h="74" z="330" orient="0" link="-1" q="4" disable="false">
+        <User classid="UserCmp" defn="master:integral" id="1939207591" x="900" y="288" w="80" h="73" z="330" orient="0" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="126573893">
             <param name="Extrn" value="0" />
             <param name="Reset" value="1" />
@@ -19475,7 +19703,7 @@ https://www.powerworld.com/WebHelp/Content/TransientModels_HTML/Exciter%20IEEET1
             <param name="DPath" value="1" />
           </paramlist>
         </User>
-        <User classid="UserCmp" defn="master:sumjct" id="1060736984" x="792" y="504" w="80" h="64" z="310" orient="2" link="-1" q="4" disable="false">
+        <User classid="UserCmp" defn="master:sumjct" id="1060736984" x="792" y="504" w="80" h="63" z="310" orient="2" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="16672553">
             <param name="DPath" value="1" />
             <param name="A" value="0" />
@@ -19628,7 +19856,7 @@ https://www.powerworld.com/WebHelp/Content/TransientModels_HTML/Exciter%20IEEET1
           <vertex x="0" y="-18" />
           <vertex x="-18" y="-18" />
         </Wire>
-        <User classid="UserCmp" defn="master:sumjct" id="1673330262" x="792" y="738" w="80" h="64" z="260" orient="0" link="-1" q="4" disable="false">
+        <User classid="UserCmp" defn="master:sumjct" id="1673330262" x="792" y="738" w="80" h="63" z="260" orient="0" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="16672553">
             <param name="DPath" value="1" />
             <param name="A" value="0" />
@@ -19660,7 +19888,7 @@ https://www.powerworld.com/WebHelp/Content/TransientModels_HTML/Exciter%20IEEET1
           <vertex x="0" y="0" />
           <vertex x="90" y="0" />
         </Wire>
-        <User classid="UserCmp" defn="master:div" id="2124934988" x="900" y="738" w="80" h="60" z="270" orient="0" link="-1" q="4" disable="false">
+        <User classid="UserCmp" defn="master:div" id="2124934988" x="900" y="738" w="80" h="59" z="270" orient="0" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="74852640">
             <param name="Dim" value="1" />
             <param name="Name" value="" />
@@ -19687,7 +19915,7 @@ https://www.powerworld.com/WebHelp/Content/TransientModels_HTML/Exciter%20IEEET1
           <vertex x="0" y="0" />
           <vertex x="36" y="0" />
         </Wire>
-        <User classid="UserCmp" defn="master:sumjct" id="1320337161" x="972" y="738" w="80" h="64" z="280" orient="0" link="-1" q="4" disable="false">
+        <User classid="UserCmp" defn="master:sumjct" id="1320337161" x="972" y="738" w="80" h="63" z="280" orient="0" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="16672553">
             <param name="DPath" value="1" />
             <param name="A" value="0" />
@@ -19701,7 +19929,7 @@ https://www.powerworld.com/WebHelp/Content/TransientModels_HTML/Exciter%20IEEET1
             <param name="Dim" value="1" />
           </paramlist>
         </User>
-        <User classid="UserCmp" defn="master:sumjct" id="1408208309" x="918" y="882" w="80" h="83" z="230" orient="0" link="-1" q="4" disable="false">
+        <User classid="UserCmp" defn="master:sumjct" id="1408208309" x="918" y="882" w="80" h="82" z="230" orient="0" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="16672553">
             <param name="DPath" value="1" />
             <param name="A" value="0" />
@@ -20024,7 +20252,7 @@ https://www.powerworld.com/WebHelp/Content/TransientModels_HTML/Exciter%20IEEET1
         </Gfx>
       </graphics>
     </Definition>
-    <Definition classid="UserCmpDefn" name="AVRSimple" group="" url="" version="" build="" crc="121106981" instances="0" key="" view="false" date="1624987756" id="1084307971">
+    <Definition classid="UserCmpDefn" name="AVRSimple" group="" url="" version="" build="" crc="17221398" instances="0" key="" view="false" date="1624987756" id="1084307971">
       <paramlist name="">
         <param name="Description" value="" />
       </paramlist>
@@ -20300,7 +20528,7 @@ https://www.powerworld.com/WebHelp/Content/TransientModels_HTML/Exciter%20IEEET1
             </Curve>
           </Graph>
         </Frame>
-        <User classid="UserCmp" defn="master:integral" id="1228673027" x="576" y="216" w="80" h="74" z="100" orient="0" link="-1" q="4" disable="false">
+        <User classid="UserCmp" defn="master:integral" id="1228673027" x="576" y="216" w="80" h="73" z="100" orient="0" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="126573893">
             <param name="Extrn" value="0" />
             <param name="Reset" value="1" />
@@ -20353,7 +20581,7 @@ https://www.powerworld.com/WebHelp/Content/TransientModels_HTML/Exciter%20IEEET1
           <vertex x="0" y="0" />
           <vertex x="0" y="-18" />
         </Wire>
-        <User classid="UserCmp" defn="master:div" id="1573476018" x="270" y="252" w="80" h="60" z="90" orient="0" link="-1" q="4" disable="false">
+        <User classid="UserCmp" defn="master:div" id="1573476018" x="270" y="252" w="80" h="59" z="90" orient="0" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="74852640">
             <param name="Dim" value="1" />
             <param name="Name" value="" />
@@ -20929,7 +21157,7 @@ https://www.powerworld.com/WebHelp/Content/TransientModels_HTML/Exciter%20IEEET1
         </Gfx>
       </graphics>
     </Definition>
-    <Definition classid="UserCmpDefn" name="ri_abc" group="" url="" version="" build="" crc="97760590" instances="0" key="" view="false" date="1660509198" id="1279234079">
+    <Definition classid="UserCmpDefn" name="ri_abc" group="" url="" version="" build="" crc="39743059" instances="0" key="" view="false" date="1661788661" id="1279234079">
       <paramlist name="">
         <param name="Description" value="" />
       </paramlist>
@@ -21082,7 +21310,7 @@ https://www.powerworld.com/WebHelp/Content/TransientModels_HTML/Exciter%20IEEET1
             <param name="Name" value="" />
           </paramlist>
         </User>
-        <User classid="UserCmp" defn="master:div" id="1391805225" x="396" y="162" w="80" h="60" z="140" orient="0" link="-1" q="4" disable="false">
+        <User classid="UserCmp" defn="master:div" id="1391805225" x="396" y="162" w="80" h="59" z="140" orient="0" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="74852640">
             <param name="Dim" value="1" />
             <param name="Name" value="" />
@@ -21110,7 +21338,7 @@ https://www.powerworld.com/WebHelp/Content/TransientModels_HTML/Exciter%20IEEET1
             <param name="DPath" value="1" />
           </paramlist>
         </User>
-        <User classid="UserCmp" defn="master:sumjct" id="289255083" x="468" y="306" w="80" h="64" z="100" orient="0" link="-1" q="4" disable="false">
+        <User classid="UserCmp" defn="master:sumjct" id="289255083" x="468" y="306" w="80" h="63" z="100" orient="0" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="16672553">
             <param name="DPath" value="1" />
             <param name="A" value="0" />
@@ -21403,14 +21631,14 @@ https://www.powerworld.com/WebHelp/Content/TransientModels_HTML/Exciter%20IEEET1
             <param name="Name" value="i" />
           </paramlist>
         </User>
-        <User classid="UserCmp" defn="master:emtconst" id="1533068582" x="792" y="342" w="76" h="21" z="70" orient="0" link="-1" q="4" disable="false">
+        <User classid="UserCmp" defn="master:emtconst" id="1533068582" x="792" y="342" w="76" h="22" z="70" orient="0" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="116269466">
             <param name="Name" value="" />
             <param name="Value" value="12" />
             <param name="Dim" value="1" />
           </paramlist>
         </User>
-        <User classid="UserCmp" defn="master:emtconst" id="1216778840" x="684" y="342" w="76" h="21" z="60" orient="0" link="-1" q="4" disable="false">
+        <User classid="UserCmp" defn="master:emtconst" id="1216778840" x="684" y="342" w="76" h="22" z="60" orient="0" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="116269466">
             <param name="Name" value="" />
             <param name="Value" value="9" />
@@ -21627,7 +21855,7 @@ https://www.powerworld.com/WebHelp/Content/TransientModels_HTML/Exciter%20IEEET1
         </Gfx>
       </graphics>
     </Definition>
-    <Definition classid="UserCmpDefn" name="ri_dq" group="" url="" version="" build="" crc="125945613" instances="0" key="" view="false" date="1651013585" id="2006725258">
+    <Definition classid="UserCmpDefn" name="ri_dq" group="" url="" version="" build="" crc="121607568" instances="0" key="" view="false" date="1651013585" id="2006725258">
       <paramlist name="">
         <param name="Description" value="" />
       </paramlist>
@@ -21784,7 +22012,7 @@ https://www.powerworld.com/WebHelp/Content/TransientModels_HTML/Exciter%20IEEET1
             <param name="Name" value="" />
           </paramlist>
         </User>
-        <User classid="UserCmp" defn="master:sumjct" id="773021414" x="522" y="198" w="80" h="83" z="140" orient="0" link="-1" q="4" disable="false">
+        <User classid="UserCmp" defn="master:sumjct" id="773021414" x="522" y="198" w="80" h="82" z="140" orient="0" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="16672553">
             <param name="DPath" value="1" />
             <param name="A" value="0" />
@@ -21798,7 +22026,7 @@ https://www.powerworld.com/WebHelp/Content/TransientModels_HTML/Exciter%20IEEET1
             <param name="Dim" value="1" />
           </paramlist>
         </User>
-        <User classid="UserCmp" defn="master:sumjct" id="1638489472" x="522" y="90" w="80" h="83" z="120" orient="0" link="-1" q="4" disable="false">
+        <User classid="UserCmp" defn="master:sumjct" id="1638489472" x="522" y="90" w="80" h="82" z="120" orient="0" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="16672553">
             <param name="DPath" value="1" />
             <param name="A" value="0" />
@@ -21886,7 +22114,7 @@ https://www.powerworld.com/WebHelp/Content/TransientModels_HTML/Exciter%20IEEET1
             <param name="DPath" value="1" />
           </paramlist>
         </User>
-        <User classid="UserCmp" defn="master:sumjct" id="944557770" x="216" y="306" w="80" h="64" z="60" orient="0" link="-1" q="4" disable="false">
+        <User classid="UserCmp" defn="master:sumjct" id="944557770" x="216" y="306" w="80" h="63" z="60" orient="0" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="16672553">
             <param name="DPath" value="1" />
             <param name="A" value="0" />
@@ -22153,7 +22381,7 @@ https://www.powerworld.com/WebHelp/Content/TransientModels_HTML/Exciter%20IEEET1
         </Gfx>
       </graphics>
     </Definition>
-    <Definition classid="UserCmpDefn" name="dq_ri" group="" url="" version="" build="" crc="43774696" instances="0" key="" view="false" date="1660509198" id="1246398893">
+    <Definition classid="UserCmpDefn" name="dq_ri" group="" url="" version="" build="" crc="4064067" instances="0" key="" view="false" date="1661788660" id="1246398893">
       <paramlist name="">
         <param name="Description" value="" />
       </paramlist>
@@ -22240,7 +22468,7 @@ https://www.powerworld.com/WebHelp/Content/TransientModels_HTML/Exciter%20IEEET1
             <param name="Name" value="" />
           </paramlist>
         </User>
-        <User classid="UserCmp" defn="master:sumjct" id="1463344183" x="288" y="342" w="80" h="64" z="60" orient="0" link="-1" q="4" disable="false">
+        <User classid="UserCmp" defn="master:sumjct" id="1463344183" x="288" y="342" w="80" h="63" z="60" orient="0" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="16672553">
             <param name="DPath" value="1" />
             <param name="A" value="0" />
@@ -22328,7 +22556,7 @@ https://www.powerworld.com/WebHelp/Content/TransientModels_HTML/Exciter%20IEEET1
             <param name="DPath" value="1" />
           </paramlist>
         </User>
-        <User classid="UserCmp" defn="master:sumjct" id="1311203782" x="594" y="126" w="80" h="83" z="120" orient="0" link="-1" q="4" disable="false">
+        <User classid="UserCmp" defn="master:sumjct" id="1311203782" x="594" y="126" w="80" h="82" z="120" orient="0" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="16672553">
             <param name="DPath" value="1" />
             <param name="A" value="0" />
@@ -22342,7 +22570,7 @@ https://www.powerworld.com/WebHelp/Content/TransientModels_HTML/Exciter%20IEEET1
             <param name="Dim" value="1" />
           </paramlist>
         </User>
-        <User classid="UserCmp" defn="master:sumjct" id="1386407296" x="594" y="234" w="80" h="83" z="140" orient="0" link="-1" q="4" disable="false">
+        <User classid="UserCmp" defn="master:sumjct" id="1386407296" x="594" y="234" w="80" h="82" z="140" orient="0" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="16672553">
             <param name="DPath" value="1" />
             <param name="A" value="0" />
@@ -22685,7 +22913,7 @@ https://www.powerworld.com/WebHelp/Content/TransientModels_HTML/Exciter%20IEEET1
         </Gfx>
       </graphics>
     </Definition>
-    <Definition classid="UserCmpDefn" name="VirtualInertia_ReactiveDroop" group="" url="" version="" build="" crc="16868307" instances="0" key="" view="false" date="1651013585" id="1146490299">
+    <Definition classid="UserCmpDefn" name="VirtualInertia_ReactiveDroop" group="" url="" version="" build="" crc="63600718" instances="0" key="" view="false" date="1651013585" id="1146490299">
       <paramlist name="">
         <param name="Description" value="" />
       </paramlist>
@@ -22976,7 +23204,7 @@ https://www.powerworld.com/WebHelp/Content/TransientModels_HTML/Exciter%20IEEET1
           <vertex x="0" y="0" />
           <vertex x="36" y="0" />
         </Wire>
-        <User classid="UserCmp" defn="master:sumjct" id="96064033" x="900" y="540" w="80" h="64" z="450" orient="0" link="-1" q="4" disable="false">
+        <User classid="UserCmp" defn="master:sumjct" id="96064033" x="900" y="540" w="80" h="63" z="450" orient="0" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="16672553">
             <param name="DPath" value="1" />
             <param name="A" value="0" />
@@ -23058,7 +23286,7 @@ https://www.powerworld.com/WebHelp/Content/TransientModels_HTML/Exciter%20IEEET1
           <vertex x="0" y="0" />
           <vertex x="18" y="0" />
         </Wire>
-        <User classid="UserCmp" defn="master:sumjct" id="494064086" x="774" y="180" w="80" h="64" z="460" orient="0" link="-1" q="4" disable="false">
+        <User classid="UserCmp" defn="master:sumjct" id="494064086" x="774" y="180" w="80" h="63" z="460" orient="0" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="16672553">
             <param name="DPath" value="1" />
             <param name="A" value="0" />
@@ -23095,7 +23323,7 @@ https://www.powerworld.com/WebHelp/Content/TransientModels_HTML/Exciter%20IEEET1
             <param name="Dim" value="1" />
           </paramlist>
         </User>
-        <User classid="UserCmp" defn="master:sumjct" id="1719320807" x="1008" y="180" w="80" h="83" z="500" orient="0" link="-1" q="4" disable="false">
+        <User classid="UserCmp" defn="master:sumjct" id="1719320807" x="1008" y="180" w="80" h="82" z="500" orient="0" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="16672553">
             <param name="DPath" value="1" />
             <param name="A" value="0" />
@@ -23109,7 +23337,7 @@ https://www.powerworld.com/WebHelp/Content/TransientModels_HTML/Exciter%20IEEET1
             <param name="Dim" value="1" />
           </paramlist>
         </User>
-        <User classid="UserCmp" defn="master:integral" id="2112583661" x="1080" y="180" w="80" h="74" z="510" orient="0" link="-1" q="4" disable="false">
+        <User classid="UserCmp" defn="master:integral" id="2112583661" x="1080" y="180" w="80" h="73" z="510" orient="0" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="126573893">
             <param name="Extrn" value="0" />
             <param name="Reset" value="1" />
@@ -23134,7 +23362,7 @@ https://www.powerworld.com/WebHelp/Content/TransientModels_HTML/Exciter%20IEEET1
             <param name="DPath" value="1" />
           </paramlist>
         </User>
-        <User classid="UserCmp" defn="master:sumjct" id="621047153" x="1170" y="270" w="61" h="83" z="520" orient="4" link="-1" q="4" disable="false">
+        <User classid="UserCmp" defn="master:sumjct" id="621047153" x="1170" y="270" w="61" h="82" z="520" orient="4" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="16672553">
             <param name="DPath" value="1" />
             <param name="A" value="0" />
@@ -23148,7 +23376,7 @@ https://www.powerworld.com/WebHelp/Content/TransientModels_HTML/Exciter%20IEEET1
             <param name="Dim" value="1" />
           </paramlist>
         </User>
-        <User classid="UserCmp" defn="master:integral" id="2100655556" x="1332" y="180" w="80" h="74" z="550" orient="0" link="-1" q="4" disable="false">
+        <User classid="UserCmp" defn="master:integral" id="2100655556" x="1332" y="180" w="80" h="73" z="550" orient="0" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="126573893">
             <param name="Extrn" value="0" />
             <param name="Reset" value="1" />
@@ -23242,14 +23470,14 @@ https://www.powerworld.com/WebHelp/Content/TransientModels_HTML/Exciter%20IEEET1
             <param name="Dim" value="1" />
           </paramlist>
         </User>
-        <User classid="UserCmp" defn="master:div" id="81587113" x="234" y="378" w="80" h="60" z="420" orient="0" link="-1" q="4" disable="false">
+        <User classid="UserCmp" defn="master:div" id="81587113" x="234" y="378" w="80" h="59" z="420" orient="0" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="74852640">
             <param name="Dim" value="1" />
             <param name="Name" value="" />
             <param name="DPath" value="1" />
           </paramlist>
         </User>
-        <User classid="UserCmp" defn="master:emtconst" id="253889038" x="198" y="486" w="21" h="76" z="140" orient="3" link="-1" layer="" q="4" disable="false">
+        <User classid="UserCmp" defn="master:emtconst" id="253889038" x="198" y="486" w="22" h="76" z="140" orient="3" link="-1" layer="" q="4" disable="false">
           <paramlist link="-1" name="" crc="116269466">
             <param name="Name" value="" />
             <param name="Value" value="1" />
@@ -23363,7 +23591,7 @@ https://www.powerworld.com/WebHelp/Content/TransientModels_HTML/Exciter%20IEEET1
             <param name="Name" value="I_dq" />
           </paramlist>
         </User>
-        <User classid="UserCmp" defn="master:sumjct" id="686541557" x="468" y="180" w="80" h="83" z="410" orient="0" link="-1" q="4" disable="false">
+        <User classid="UserCmp" defn="master:sumjct" id="686541557" x="468" y="180" w="80" h="82" z="410" orient="0" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="16672553">
             <param name="DPath" value="1" />
             <param name="A" value="0" />
@@ -23405,7 +23633,7 @@ https://www.powerworld.com/WebHelp/Content/TransientModels_HTML/Exciter%20IEEET1
             <param name="Dim" value="1" />
           </paramlist>
         </User>
-        <User classid="UserCmp" defn="master:sumjct" id="1893276982" x="468" y="540" w="80" h="83" z="430" orient="0" link="-1" q="4" disable="false">
+        <User classid="UserCmp" defn="master:sumjct" id="1893276982" x="468" y="540" w="80" h="82" z="430" orient="0" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="16672553">
             <param name="DPath" value="1" />
             <param name="A" value="0" />
@@ -24020,7 +24248,7 @@ https://www.powerworld.com/WebHelp/Content/TransientModels_HTML/Exciter%20IEEET1
             <Curve classid="Curve" id="2051700217" name="omega_ref_sample" link="1001115739" color="0" bold="0" show="-1" mode="0" gradient="false" transparency="255" thresh="0.5" above="High" below="Low" style="0" />
           </Graph>
         </Frame>
-        <User classid="UserCmp" defn="master:sumjct" id="888135250" x="1260" y="180" w="80" h="64" z="530" orient="6" link="-1" q="4" disable="false">
+        <User classid="UserCmp" defn="master:sumjct" id="888135250" x="1260" y="180" w="80" h="63" z="530" orient="6" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="16672553">
             <param name="DPath" value="1" />
             <param name="A" value="0" />
@@ -24130,7 +24358,7 @@ https://www.powerworld.com/WebHelp/Content/TransientModels_HTML/Exciter%20IEEET1
             <param name="Name" value="Q_ref" />
           </paramlist>
         </User>
-        <User classid="UserCmp" defn="master:div" id="832972908" x="234" y="648" w="80" h="60" z="390" orient="0" link="-1" q="4" disable="false">
+        <User classid="UserCmp" defn="master:div" id="832972908" x="234" y="648" w="80" h="59" z="390" orient="0" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="74852640">
             <param name="Dim" value="1" />
             <param name="Name" value="" />
@@ -24937,7 +25165,7 @@ https://www.powerworld.com/WebHelp/Content/TransientModels_HTML/Exciter%20IEEET1
         </Gfx>
       </graphics>
     </Definition>
-    <Definition classid="UserCmpDefn" name="FixedDCSource" group="" url="" version="" build="" crc="66030461" instances="0" key="" view="false" date="1660509198" id="40583395">
+    <Definition classid="UserCmpDefn" name="FixedDCSource" group="" url="" version="" build="" crc="66030461" instances="0" key="" view="false" date="1661788661" id="40583395">
       <paramlist name="">
         <param name="Description" value="" />
       </paramlist>
@@ -25275,7 +25503,7 @@ https://www.powerworld.com/WebHelp/Content/TransientModels_HTML/Exciter%20IEEET1
         </Gfx>
       </graphics>
     </Definition>
-    <Definition classid="UserCmpDefn" name="AverageConverter" group="" url="" version="" build="" crc="91535826" instances="0" key="" view="false" date="1660509197" id="467840428">
+    <Definition classid="UserCmpDefn" name="AverageConverter" group="" url="" version="" build="" crc="91535826" instances="0" key="" view="false" date="1661788660" id="467840428">
       <paramlist name="">
         <param name="Description" value="" />
       </paramlist>
@@ -25677,7 +25905,7 @@ https://www.powerworld.com/WebHelp/Content/TransientModels_HTML/Exciter%20IEEET1
         </Gfx>
       </graphics>
     </Definition>
-    <Definition classid="UserCmpDefn" name="KauraPLL" group="" url="" version="" build="" crc="115333002" instances="0" key="" view="false" date="1651013584" id="1511733146">
+    <Definition classid="UserCmpDefn" name="KauraPLL" group="" url="" version="" build="" crc="112956101" instances="0" key="" view="false" date="1651013584" id="1511733146">
       <paramlist name="">
         <param name="Description" value="" />
       </paramlist>
@@ -25933,7 +26161,7 @@ https://www.powerworld.com/WebHelp/Content/TransientModels_HTML/Exciter%20IEEET1
             <param name="Dim" value="1" />
           </paramlist>
         </User>
-        <User classid="UserCmp" defn="master:div" id="248305790" x="252" y="324" w="80" h="60" z="180" orient="0" link="-1" q="4" disable="false">
+        <User classid="UserCmp" defn="master:div" id="248305790" x="252" y="324" w="80" h="59" z="180" orient="0" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="74852640">
             <param name="Dim" value="1" />
             <param name="Name" value="" />
@@ -25962,7 +26190,7 @@ https://www.powerworld.com/WebHelp/Content/TransientModels_HTML/Exciter%20IEEET1
             <param name="DPath" value="1" />
           </paramlist>
         </User>
-        <User classid="UserCmp" name="master:integral" id="926160967" x="1026" y="234" w="80" h="74" z="300" orient="0" defn="master:integral" link="-1" q="4" disable="false">
+        <User classid="UserCmp" name="master:integral" id="926160967" x="1026" y="234" w="80" h="73" z="300" orient="0" defn="master:integral" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="126573893">
             <param name="Extrn" value="0" />
             <param name="Reset" value="1" />
@@ -25977,7 +26205,7 @@ https://www.powerworld.com/WebHelp/Content/TransientModels_HTML/Exciter%20IEEET1
             <param name="Name" value="" />
           </paramlist>
         </User>
-        <User classid="UserCmp" name="master:sumjct" id="512740846" x="1170" y="198" w="80" h="83" z="330" orient="0" defn="master:sumjct" link="-1" q="4" disable="false">
+        <User classid="UserCmp" name="master:sumjct" id="512740846" x="1170" y="198" w="80" h="82" z="330" orient="0" defn="master:sumjct" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="16672553">
             <param name="DPath" value="1" />
             <param name="A" value="0" />
@@ -26047,7 +26275,7 @@ https://www.powerworld.com/WebHelp/Content/TransientModels_HTML/Exciter%20IEEET1
           <vertex x="0" y="0" />
           <vertex x="36" y="0" />
         </Wire>
-        <User classid="UserCmp" defn="master:div" id="1175366920" x="774" y="162" w="80" h="60" z="270" orient="0" link="-1" q="4" disable="false">
+        <User classid="UserCmp" defn="master:div" id="1175366920" x="774" y="162" w="80" h="59" z="270" orient="0" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="74852640">
             <param name="Dim" value="1" />
             <param name="Name" value="" />
@@ -26062,7 +26290,7 @@ https://www.powerworld.com/WebHelp/Content/TransientModels_HTML/Exciter%20IEEET1
           <vertex x="54" y="36" />
           <vertex x="72" y="36" />
         </Wire>
-        <User classid="UserCmp" name="master:sumjct" id="1783637452" x="954" y="162" w="80" h="64" z="290" orient="0" defn="master:sumjct" link="-1" q="4" disable="false">
+        <User classid="UserCmp" name="master:sumjct" id="1783637452" x="954" y="162" w="80" h="63" z="290" orient="0" defn="master:sumjct" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="16672553">
             <param name="DPath" value="1" />
             <param name="A" value="0" />
@@ -26090,14 +26318,14 @@ https://www.powerworld.com/WebHelp/Content/TransientModels_HTML/Exciter%20IEEET1
             <param name="Dim" value="1" />
           </paramlist>
         </User>
-        <User classid="UserCmp" defn="master:emtconst" id="1910900244" x="216" y="252" w="21" h="76" z="60" orient="3" link="-1" layer="" q="4" disable="false">
+        <User classid="UserCmp" defn="master:emtconst" id="1910900244" x="216" y="252" w="22" h="76" z="60" orient="3" link="-1" layer="" q="4" disable="false">
           <paramlist link="-1" name="" crc="116269466">
             <param name="Name" value="" />
             <param name="Value" value="1" />
             <param name="Dim" value="1" />
           </paramlist>
         </User>
-        <User classid="UserCmp" defn="master:div" id="2123693065" x="252" y="144" w="80" h="60" z="190" orient="0" link="-1" q="4" disable="false">
+        <User classid="UserCmp" defn="master:div" id="2123693065" x="252" y="144" w="80" h="59" z="190" orient="0" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="74852640">
             <param name="Dim" value="1" />
             <param name="Name" value="" />
@@ -26477,7 +26705,7 @@ https://www.powerworld.com/WebHelp/Content/TransientModels_HTML/Exciter%20IEEET1
             <param name="Name" value="delta_theta_pll_internall" />
           </paramlist>
         </User>
-        <User classid="UserCmp" defn="master:select" id="262000332" x="648" y="414" w="82" h="90" z="280" orient="0" link="-1" q="4" disable="false">
+        <User classid="UserCmp" defn="master:select" id="262000332" x="648" y="414" w="82" h="91" z="280" orient="0" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="108938206">
             <param name="A" value="0" />
             <param name="DPath" value="1" />
@@ -26508,7 +26736,7 @@ https://www.powerworld.com/WebHelp/Content/TransientModels_HTML/Exciter%20IEEET1
             <param name="Name" value="delta_w_pll_internal" />
           </paramlist>
         </User>
-        <User classid="UserCmp" name="master:sumjct" id="2055881488" x="1458" y="126" w="80" h="83" z="340" orient="0" defn="master:sumjct" link="-1" q="4" disable="false">
+        <User classid="UserCmp" name="master:sumjct" id="2055881488" x="1458" y="126" w="80" h="82" z="340" orient="0" defn="master:sumjct" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="16672553">
             <param name="DPath" value="1" />
             <param name="A" value="0" />
@@ -26539,12 +26767,12 @@ https://www.powerworld.com/WebHelp/Content/TransientModels_HTML/Exciter%20IEEET1
             <param name="Name" value="" />
           </paramlist>
         </User>
-        <User classid="UserCmp" name="PSID_Library:ri_dq" id="894185864" x="468" y="126" w="108" h="61" z="220" orient="0" defn="PSID_Library:ri_dq" link="-1" q="4" disable="false">
+        <User classid="UserCmp" name="PSID_Library:ri_dq" id="894185864" x="468" y="126" w="108" h="62" z="220" orient="0" defn="PSID_Library:ri_dq" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="63023770">
             <param name="Name" value="" />
           </paramlist>
         </User>
-        <User classid="UserCmp" defn="master:emtconst" id="786248495" x="486" y="216" w="21" h="76" z="50" orient="3" link="-1" q="4" disable="false">
+        <User classid="UserCmp" defn="master:emtconst" id="786248495" x="486" y="216" w="22" h="76" z="50" orient="3" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="116269466">
             <param name="Name" value="" />
             <param name="Value" value="4" />
@@ -26645,10 +26873,10 @@ https://www.powerworld.com/WebHelp/Content/TransientModels_HTML/Exciter%20IEEET1
             <param name="Name" value="" />
           </paramlist>
         </User>
-        <User classid="UserCmp" defn="master:time-sig" id="849976907" x="522" y="504" w="76" h="21" z="130" orient="0" link="-1" q="4" disable="false">
+        <User classid="UserCmp" defn="master:time-sig" id="849976907" x="522" y="504" w="76" h="22" z="130" orient="0" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="20913136" />
         </User>
-        <User classid="UserCmp" defn="master:delta-t" id="1543165110" x="432" y="504" w="76" h="21" z="120" orient="0" link="-1" q="4" disable="false">
+        <User classid="UserCmp" defn="master:delta-t" id="1543165110" x="432" y="504" w="76" h="22" z="120" orient="0" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="58660321" />
         </User>
         <Wire classid="WireOrthogonal" id="1208625877" name="" x="630" y="504" w="28" h="28" orient="0" disable="false">
@@ -26661,7 +26889,7 @@ https://www.powerworld.com/WebHelp/Content/TransientModels_HTML/Exciter%20IEEET1
             <param name="Name" value="t_INV" />
           </paramlist>
         </User>
-        <User classid="UserCmp" name="master:sumjct" id="1094921233" x="504" y="540" w="80" h="83" z="230" orient="0" defn="master:sumjct" link="-1" q="4" disable="false">
+        <User classid="UserCmp" name="master:sumjct" id="1094921233" x="504" y="540" w="80" h="82" z="230" orient="0" defn="master:sumjct" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="16672553">
             <param name="DPath" value="1" />
             <param name="A" value="0" />
@@ -27197,7 +27425,7 @@ https://www.powerworld.com/WebHelp/Content/TransientModels_HTML/Exciter%20IEEET1
         </Gfx>
       </graphics>
     </Definition>
-    <Definition classid="UserCmpDefn" name="VoltageModeControl" group="" url="" version="" build="" crc="75888444" instances="0" key="" view="false" date="1660509197" id="248922385">
+    <Definition classid="UserCmpDefn" name="VoltageModeControl" group="" url="" version="" build="" crc="93634777" instances="0" key="" view="false" date="1661788660" id="248922385">
       <paramlist name="">
         <param name="Description" value="" />
       </paramlist>
@@ -27662,7 +27890,7 @@ https://www.powerworld.com/WebHelp/Content/TransientModels_HTML/Exciter%20IEEET1
             <param name="DPath" value="1" />
           </paramlist>
         </User>
-        <User classid="UserCmp" name="master:integral" id="496252468" x="1764" y="828" w="80" h="74" z="700" orient="0" defn="master:integral" link="-1" q="4" disable="false">
+        <User classid="UserCmp" name="master:integral" id="496252468" x="1764" y="828" w="80" h="73" z="700" orient="0" defn="master:integral" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="126573893">
             <param name="Extrn" value="0" />
             <param name="Reset" value="1" />
@@ -27702,7 +27930,7 @@ https://www.powerworld.com/WebHelp/Content/TransientModels_HTML/Exciter%20IEEET1
           <vertex x="18" y="0" />
           <vertex x="18" y="-54" />
         </Wire>
-        <User classid="UserCmp" name="master:sumjct" id="1903313190" x="1980" y="792" w="80" h="83" z="830" orient="0" defn="master:sumjct" link="-1" q="4" disable="false">
+        <User classid="UserCmp" name="master:sumjct" id="1903313190" x="1980" y="792" w="80" h="82" z="830" orient="0" defn="master:sumjct" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="16672553">
             <param name="G" value="-1" />
             <param name="F" value="1" />
@@ -27739,7 +27967,7 @@ https://www.powerworld.com/WebHelp/Content/TransientModels_HTML/Exciter%20IEEET1
             <param name="Name" value="Vref_q" />
           </paramlist>
         </User>
-        <User classid="UserCmp" name="master:sumjct" id="848569441" x="1908" y="792" w="80" h="83" z="810" orient="0" defn="master:sumjct" link="-1" q="4" disable="false">
+        <User classid="UserCmp" name="master:sumjct" id="848569441" x="1908" y="792" w="80" h="82" z="810" orient="0" defn="master:sumjct" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="16672553">
             <param name="DPath" value="1" />
             <param name="A" value="0" />
@@ -27765,7 +27993,7 @@ https://www.powerworld.com/WebHelp/Content/TransientModels_HTML/Exciter%20IEEET1
           <vertex x="0" y="0" />
           <vertex x="36" y="0" />
         </Wire>
-        <User classid="UserCmp" name="master:sumjct" id="966980869" x="1692" y="792" w="80" h="64" z="690" orient="0" defn="master:sumjct" link="-1" q="4" disable="false">
+        <User classid="UserCmp" name="master:sumjct" id="966980869" x="1692" y="792" w="80" h="63" z="690" orient="0" defn="master:sumjct" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="16672553">
             <param name="DPath" value="1" />
             <param name="A" value="0" />
@@ -27867,7 +28095,7 @@ https://www.powerworld.com/WebHelp/Content/TransientModels_HTML/Exciter%20IEEET1
             <param name="Name" value="" />
           </paramlist>
         </User>
-        <User classid="UserCmp" defn="master:div" id="1184124259" x="306" y="756" w="80" h="60" z="500" orient="0" link="-1" q="4" disable="false">
+        <User classid="UserCmp" defn="master:div" id="1184124259" x="306" y="756" w="80" h="59" z="500" orient="0" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="74852640">
             <param name="Dim" value="1" />
             <param name="Name" value="" />
@@ -27894,7 +28122,7 @@ https://www.powerworld.com/WebHelp/Content/TransientModels_HTML/Exciter%20IEEET1
           <vertex x="0" y="0" />
           <vertex x="36" y="0" />
         </Wire>
-        <User classid="UserCmp" name="master:sumjct" id="742678707" x="1890" y="990" w="80" h="64" z="570" orient="0" defn="master:sumjct" link="-1" q="4" disable="false">
+        <User classid="UserCmp" name="master:sumjct" id="742678707" x="1890" y="990" w="80" h="63" z="570" orient="0" defn="master:sumjct" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="16672553">
             <param name="G" value="0" />
             <param name="F" value="1" />
@@ -27952,7 +28180,7 @@ https://www.powerworld.com/WebHelp/Content/TransientModels_HTML/Exciter%20IEEET1
             <param name="DPath" value="1" />
           </paramlist>
         </User>
-        <User classid="UserCmp" name="master:integral" id="1332369744" x="1746" y="414" w="80" h="74" z="760" orient="0" defn="master:integral" link="-1" q="4" disable="false">
+        <User classid="UserCmp" name="master:integral" id="1332369744" x="1746" y="414" w="80" h="73" z="760" orient="0" defn="master:integral" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="126573893">
             <param name="Extrn" value="0" />
             <param name="Reset" value="1" />
@@ -27992,7 +28220,7 @@ https://www.powerworld.com/WebHelp/Content/TransientModels_HTML/Exciter%20IEEET1
           <vertex x="18" y="0" />
           <vertex x="18" y="-54" />
         </Wire>
-        <User classid="UserCmp" name="master:sumjct" id="631759714" x="1962" y="378" w="80" h="83" z="820" orient="0" defn="master:sumjct" link="-1" q="4" disable="false">
+        <User classid="UserCmp" name="master:sumjct" id="631759714" x="1962" y="378" w="80" h="82" z="820" orient="0" defn="master:sumjct" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="16672553">
             <param name="G" value="-1" />
             <param name="F" value="-1" />
@@ -28029,7 +28257,7 @@ https://www.powerworld.com/WebHelp/Content/TransientModels_HTML/Exciter%20IEEET1
             <param name="Name" value="Vref_d" />
           </paramlist>
         </User>
-        <User classid="UserCmp" name="master:sumjct" id="1026755692" x="1890" y="378" w="80" h="83" z="800" orient="0" defn="master:sumjct" link="-1" q="4" disable="false">
+        <User classid="UserCmp" name="master:sumjct" id="1026755692" x="1890" y="378" w="80" h="82" z="800" orient="0" defn="master:sumjct" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="16672553">
             <param name="DPath" value="1" />
             <param name="A" value="0" />
@@ -28055,7 +28283,7 @@ https://www.powerworld.com/WebHelp/Content/TransientModels_HTML/Exciter%20IEEET1
           <vertex x="0" y="0" />
           <vertex x="36" y="0" />
         </Wire>
-        <User classid="UserCmp" name="master:sumjct" id="1784617349" x="1674" y="378" w="80" h="64" z="750" orient="0" defn="master:sumjct" link="-1" q="4" disable="false">
+        <User classid="UserCmp" name="master:sumjct" id="1784617349" x="1674" y="378" w="80" h="63" z="750" orient="0" defn="master:sumjct" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="16672553">
             <param name="DPath" value="1" />
             <param name="A" value="0" />
@@ -28121,7 +28349,7 @@ https://www.powerworld.com/WebHelp/Content/TransientModels_HTML/Exciter%20IEEET1
             <param name="Name" value="" />
           </paramlist>
         </User>
-        <User classid="UserCmp" name="master:sumjct" id="142598483" x="1872" y="576" w="80" h="64" z="640" orient="0" defn="master:sumjct" link="-1" q="4" disable="false">
+        <User classid="UserCmp" name="master:sumjct" id="142598483" x="1872" y="576" w="80" h="63" z="640" orient="0" defn="master:sumjct" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="16672553">
             <param name="G" value="0" />
             <param name="F" value="1" />
@@ -28237,7 +28465,7 @@ https://www.powerworld.com/WebHelp/Content/TransientModels_HTML/Exciter%20IEEET1
           <vertex x="18" y="0" />
           <vertex x="18" y="54" />
         </Wire>
-        <User classid="UserCmp" name="master:sumjct" id="1689476090" x="1062" y="792" w="80" h="64" z="520" orient="0" defn="master:sumjct" link="-1" q="4" disable="false">
+        <User classid="UserCmp" name="master:sumjct" id="1689476090" x="1062" y="792" w="80" h="63" z="520" orient="0" defn="master:sumjct" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="16672553">
             <param name="DPath" value="1" />
             <param name="A" value="0" />
@@ -28263,7 +28491,7 @@ https://www.powerworld.com/WebHelp/Content/TransientModels_HTML/Exciter%20IEEET1
           <vertex x="0" y="0" />
           <vertex x="36" y="0" />
         </Wire>
-        <User classid="UserCmp" name="master:sumjct" id="1181225914" x="1278" y="792" w="80" h="83" z="670" orient="0" defn="master:sumjct" link="-1" q="4" disable="false">
+        <User classid="UserCmp" name="master:sumjct" id="1181225914" x="1278" y="792" w="80" h="82" z="670" orient="0" defn="master:sumjct" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="16672553">
             <param name="DPath" value="1" />
             <param name="A" value="0" />
@@ -28295,7 +28523,7 @@ https://www.powerworld.com/WebHelp/Content/TransientModels_HTML/Exciter%20IEEET1
             <param name="DPath" value="1" />
           </paramlist>
         </User>
-        <User classid="UserCmp" name="master:sumjct" id="882066121" x="1350" y="792" w="80" h="83" z="680" orient="0" defn="master:sumjct" link="-1" q="4" disable="false">
+        <User classid="UserCmp" name="master:sumjct" id="882066121" x="1350" y="792" w="80" h="82" z="680" orient="0" defn="master:sumjct" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="16672553">
             <param name="G" value="0" />
             <param name="F" value="1" />
@@ -28329,7 +28557,7 @@ https://www.powerworld.com/WebHelp/Content/TransientModels_HTML/Exciter%20IEEET1
             <param name="DPath" value="1" />
           </paramlist>
         </User>
-        <User classid="UserCmp" name="master:integral" id="1891684365" x="1134" y="828" w="80" h="74" z="530" orient="0" defn="master:integral" link="-1" q="4" disable="false">
+        <User classid="UserCmp" name="master:integral" id="1891684365" x="1134" y="828" w="80" h="73" z="530" orient="0" defn="master:integral" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="126573893">
             <param name="Extrn" value="0" />
             <param name="Reset" value="1" />
@@ -28380,7 +28608,7 @@ https://www.powerworld.com/WebHelp/Content/TransientModels_HTML/Exciter%20IEEET1
             <param name="DPath" value="1" />
           </paramlist>
         </User>
-        <User classid="UserCmp" name="master:integral" id="1673256143" x="1116" y="414" w="80" h="74" z="610" orient="0" defn="master:integral" link="-1" q="4" disable="false">
+        <User classid="UserCmp" name="master:integral" id="1673256143" x="1116" y="414" w="80" h="73" z="610" orient="0" defn="master:integral" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="126573893">
             <param name="Extrn" value="0" />
             <param name="Reset" value="1" />
@@ -28411,7 +28639,7 @@ https://www.powerworld.com/WebHelp/Content/TransientModels_HTML/Exciter%20IEEET1
             <param name="Dim" value="1" />
           </paramlist>
         </User>
-        <User classid="UserCmp" name="master:sumjct" id="1942311583" x="1332" y="378" w="80" h="83" z="740" orient="0" defn="master:sumjct" link="-1" q="4" disable="false">
+        <User classid="UserCmp" name="master:sumjct" id="1942311583" x="1332" y="378" w="80" h="82" z="740" orient="0" defn="master:sumjct" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="16672553">
             <param name="G" value="0" />
             <param name="F" value="1" />
@@ -28443,7 +28671,7 @@ https://www.powerworld.com/WebHelp/Content/TransientModels_HTML/Exciter%20IEEET1
             <param name="DPath" value="1" />
           </paramlist>
         </User>
-        <User classid="UserCmp" name="master:sumjct" id="1994272627" x="1260" y="378" w="80" h="83" z="730" orient="0" defn="master:sumjct" link="-1" q="4" disable="false">
+        <User classid="UserCmp" name="master:sumjct" id="1994272627" x="1260" y="378" w="80" h="82" z="730" orient="0" defn="master:sumjct" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="16672553">
             <param name="DPath" value="1" />
             <param name="A" value="0" />
@@ -28469,7 +28697,7 @@ https://www.powerworld.com/WebHelp/Content/TransientModels_HTML/Exciter%20IEEET1
           <vertex x="0" y="0" />
           <vertex x="36" y="0" />
         </Wire>
-        <User classid="UserCmp" name="master:sumjct" id="1911532811" x="1044" y="378" w="80" h="64" z="600" orient="0" defn="master:sumjct" link="-1" q="4" disable="false">
+        <User classid="UserCmp" name="master:sumjct" id="1911532811" x="1044" y="378" w="80" h="63" z="600" orient="0" defn="master:sumjct" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="16672553">
             <param name="DPath" value="1" />
             <param name="A" value="0" />
@@ -28529,7 +28757,7 @@ https://www.powerworld.com/WebHelp/Content/TransientModels_HTML/Exciter%20IEEET1
             <param name="Name" value="cf" />
           </paramlist>
         </User>
-        <User classid="UserCmp" name="master:sumjct" id="258105138" x="756" y="792" w="61" h="83" z="510" orient="0" defn="master:sumjct" link="-1" q="4" disable="false">
+        <User classid="UserCmp" name="master:sumjct" id="258105138" x="756" y="792" w="61" h="82" z="510" orient="0" defn="master:sumjct" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="16672553">
             <param name="G" value="0" />
             <param name="F" value="-1" />
@@ -28677,7 +28905,7 @@ https://www.powerworld.com/WebHelp/Content/TransientModels_HTML/Exciter%20IEEET1
           <vertex x="0" y="0" />
           <vertex x="18" y="0" />
         </Wire>
-        <User classid="UserCmp" name="master:sumjct" id="334572223" x="756" y="378" w="80" h="83" z="590" orient="0" defn="master:sumjct" link="-1" q="4" disable="false">
+        <User classid="UserCmp" name="master:sumjct" id="334572223" x="756" y="378" w="80" h="82" z="590" orient="0" defn="master:sumjct" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="16672553">
             <param name="G" value="0" />
             <param name="F" value="1" />
@@ -29593,7 +29821,7 @@ https://www.powerworld.com/WebHelp/Content/TransientModels_HTML/Exciter%20IEEET1
         </Gfx>
       </graphics>
     </Definition>
-    <Definition classid="UserCmpDefn" name="LCLFilter" group="" url="" version="" build="" crc="41452471" instances="0" key="" view="false" date="1660509198" id="692469361">
+    <Definition classid="UserCmpDefn" name="LCLFilter" group="" url="" version="" build="" crc="128991166" instances="0" key="" view="false" date="1661788660" id="692469361">
       <paramlist name="">
         <param name="Description" value="" />
       </paramlist>
@@ -29785,7 +30013,7 @@ https://www.powerworld.com/WebHelp/Content/TransientModels_HTML/Exciter%20IEEET1
             <param name="Name" value="POI" />
           </paramlist>
         </User>
-        <User classid="UserCmp" defn="master:varrlc" id="1220053046" x="972" y="252" w="51" h="44" z="1060" orient="5" link="-1" q="4" disable="false">
+        <User classid="UserCmp" defn="master:varrlc" id="1220053046" x="972" y="252" w="52" h="44" z="1060" orient="5" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="130577312">
             <param name="RLC" value="2" />
             <param name="R" value="1.0 [ohm]" />
@@ -29797,7 +30025,7 @@ https://www.powerworld.com/WebHelp/Content/TransientModels_HTML/Exciter%20IEEET1
             <param name="Name" value="" />
           </paramlist>
         </User>
-        <User classid="UserCmp" defn="master:varrlc" id="1092662206" x="1152" y="180" w="44" h="51" z="1080" orient="6" link="-1" q="4" disable="false">
+        <User classid="UserCmp" defn="master:varrlc" id="1092662206" x="1152" y="180" w="44" h="52" z="1080" orient="6" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="130577312">
             <param name="RLC" value="1" />
             <param name="R" value="1.0 [ohm]" />
@@ -29809,7 +30037,7 @@ https://www.powerworld.com/WebHelp/Content/TransientModels_HTML/Exciter%20IEEET1
             <param name="Name" value="" />
           </paramlist>
         </User>
-        <User classid="UserCmp" defn="master:varrlc" id="1868252950" x="1098" y="180" w="50" h="51" z="1100" orient="6" link="-1" q="4" disable="false">
+        <User classid="UserCmp" defn="master:varrlc" id="1868252950" x="1098" y="180" w="50" h="52" z="1100" orient="6" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="130577312">
             <param name="RLC" value="0" />
             <param name="R" value="Rg_ohm" />
@@ -29821,7 +30049,7 @@ https://www.powerworld.com/WebHelp/Content/TransientModels_HTML/Exciter%20IEEET1
             <param name="Name" value="" />
           </paramlist>
         </User>
-        <User classid="UserCmp" defn="master:varrlc" id="1686301449" x="900" y="180" w="44" h="51" z="1110" orient="6" link="-1" q="4" disable="false">
+        <User classid="UserCmp" defn="master:varrlc" id="1686301449" x="900" y="180" w="44" h="52" z="1110" orient="6" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="130577312">
             <param name="RLC" value="1" />
             <param name="R" value="1.0 [ohm]" />
@@ -29833,7 +30061,7 @@ https://www.powerworld.com/WebHelp/Content/TransientModels_HTML/Exciter%20IEEET1
             <param name="Name" value="" />
           </paramlist>
         </User>
-        <User classid="UserCmp" defn="master:varrlc" id="1800310848" x="846" y="180" w="47" h="51" z="1120" orient="6" link="-1" q="4" disable="false">
+        <User classid="UserCmp" defn="master:varrlc" id="1800310848" x="846" y="180" w="47" h="52" z="1120" orient="6" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="130577312">
             <param name="RLC" value="0" />
             <param name="R" value="rf_ohm" />
@@ -29990,7 +30218,7 @@ States don't match PSID because we have a three phase implementation of the filt
             <param name="DPath" value="1" />
           </paramlist>
         </User>
-        <User classid="UserCmp" name="master:div" id="372924368" x="540" y="1422" w="80" h="60" z="370" orient="0" defn="master:div" link="-1" q="4" disable="false">
+        <User classid="UserCmp" name="master:div" id="372924368" x="540" y="1422" w="80" h="59" z="370" orient="0" defn="master:div" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="74852640">
             <param name="Dim" value="1" />
             <param name="Name" value="" />
@@ -30024,7 +30252,7 @@ States don't match PSID because we have a three phase implementation of the filt
             <param name="Dim" value="1" />
           </paramlist>
         </User>
-        <User classid="UserCmp" defn="master:emtconst" id="1866145359" x="468" y="1638" w="76" h="21" z="450" orient="0" link="-1" layer="" q="4" disable="false">
+        <User classid="UserCmp" defn="master:emtconst" id="1866145359" x="468" y="1638" w="76" h="22" z="450" orient="0" link="-1" layer="" q="4" disable="false">
           <paramlist link="-1" name="" crc="116269466">
             <param name="Name" value="" />
             <param name="Value" value="1" />
@@ -30048,7 +30276,7 @@ States don't match PSID because we have a three phase implementation of the filt
           <vertex x="0" y="0" />
           <vertex x="18" y="0" />
         </Wire>
-        <User classid="UserCmp" name="master:div" id="1449128393" x="756" y="1422" w="80" h="60" z="840" orient="0" defn="master:div" link="-1" q="4" disable="false">
+        <User classid="UserCmp" name="master:div" id="1449128393" x="756" y="1422" w="80" h="59" z="840" orient="0" defn="master:div" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="74852640">
             <param name="Dim" value="1" />
             <param name="Name" value="" />
@@ -30101,7 +30329,7 @@ States don't match PSID because we have a three phase implementation of the filt
             <param name="Name" value="omega_base" />
           </paramlist>
         </User>
-        <User classid="UserCmp" name="master:div" id="1654005979" x="792" y="1530" w="80" h="60" z="790" orient="0" defn="master:div" link="-1" q="4" disable="false">
+        <User classid="UserCmp" name="master:div" id="1654005979" x="792" y="1530" w="80" h="59" z="790" orient="0" defn="master:div" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="74852640">
             <param name="Dim" value="1" />
             <param name="Name" value="" />
@@ -30326,7 +30554,7 @@ States don't match PSID because we have a three phase implementation of the filt
             <param name="Name" value="I_base" />
           </paramlist>
         </User>
-        <User classid="UserCmp" name="master:div" id="304719967" x="504" y="1512" w="80" h="60" z="400" orient="0" defn="master:div" link="-1" q="4" disable="false">
+        <User classid="UserCmp" name="master:div" id="304719967" x="504" y="1512" w="80" h="59" z="400" orient="0" defn="master:div" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="74852640">
             <param name="Dim" value="1" />
             <param name="Name" value="" />
@@ -30582,7 +30810,7 @@ States don't match PSID because we have a three phase implementation of the filt
             <param name="Name" value="" />
           </paramlist>
         </User>
-        <User classid="UserCmp" defn="master:emtconst" id="1065343144" x="576" y="306" w="21" h="76" z="70" orient="3" link="-1" q="4" disable="false">
+        <User classid="UserCmp" defn="master:emtconst" id="1065343144" x="576" y="306" w="22" h="76" z="70" orient="3" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="116269466">
             <param name="Name" value="" />
             <param name="Value" value="4" />
@@ -30729,7 +30957,7 @@ States don't match PSID because we have a three phase implementation of the filt
           <vertex x="0" y="0" />
           <vertex x="36" y="0" />
         </Wire>
-        <User classid="UserCmp" defn="master:emtconst" id="1784996281" x="1224" y="1080" w="76" h="21" z="310" orient="0" link="-1" q="4" disable="false">
+        <User classid="UserCmp" defn="master:emtconst" id="1784996281" x="1224" y="1080" w="76" h="22" z="310" orient="0" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="116269466">
             <param name="Name" value="" />
             <param name="Value" value="4" />
@@ -30745,7 +30973,7 @@ States don't match PSID because we have a three phase implementation of the filt
             <param name="Name" value="theta_dqabc_transform" />
           </paramlist>
         </User>
-        <User classid="UserCmp" defn="master:sumjct" id="1426483908" x="1296" y="1080" w="80" h="83" z="630" orient="0" link="-1" q="4" disable="false">
+        <User classid="UserCmp" defn="master:sumjct" id="1426483908" x="1296" y="1080" w="80" h="82" z="630" orient="0" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="16672553">
             <param name="DPath" value="1" />
             <param name="A" value="0" />
@@ -30820,14 +31048,14 @@ States don't match PSID because we have a three phase implementation of the filt
             <param name="Name" value="v_abc_kV" />
           </paramlist>
         </User>
-        <User classid="UserCmp" defn="master:div" id="99364377" x="684" y="882" w="80" h="60" z="710" orient="0" link="-1" q="4" disable="false">
+        <User classid="UserCmp" defn="master:div" id="99364377" x="684" y="882" w="80" h="59" z="710" orient="0" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="74852640">
             <param name="Dim" value="1" />
             <param name="Name" value="" />
             <param name="DPath" value="1" />
           </paramlist>
         </User>
-        <User classid="UserCmp" defn="master:div" id="83151848" x="684" y="954" w="80" h="60" z="670" orient="0" link="-1" q="4" disable="false">
+        <User classid="UserCmp" defn="master:div" id="83151848" x="684" y="954" w="80" h="59" z="670" orient="0" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="74852640">
             <param name="Dim" value="1" />
             <param name="Name" value="" />
@@ -30952,14 +31180,14 @@ States don't match PSID because we have a three phase implementation of the filt
             <param name="Name" value="I_base" />
           </paramlist>
         </User>
-        <User classid="UserCmp" defn="master:div" id="566145673" x="684" y="720" w="80" h="60" z="650" orient="0" link="-1" q="4" disable="false">
+        <User classid="UserCmp" defn="master:div" id="566145673" x="684" y="720" w="80" h="59" z="650" orient="0" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="74852640">
             <param name="Dim" value="1" />
             <param name="Name" value="" />
             <param name="DPath" value="1" />
           </paramlist>
         </User>
-        <User classid="UserCmp" defn="master:div" id="1105526865" x="684" y="648" w="80" h="60" z="720" orient="0" link="-1" q="4" disable="false">
+        <User classid="UserCmp" defn="master:div" id="1105526865" x="684" y="648" w="80" h="59" z="720" orient="0" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="74852640">
             <param name="Dim" value="1" />
             <param name="Name" value="" />
@@ -31072,14 +31300,14 @@ States don't match PSID because we have a three phase implementation of the filt
             <param name="Name" value="I_base" />
           </paramlist>
         </User>
-        <User classid="UserCmp" defn="master:div" id="503623517" x="702" y="1188" w="80" h="60" z="690" orient="0" link="-1" q="4" disable="false">
+        <User classid="UserCmp" defn="master:div" id="503623517" x="702" y="1188" w="80" h="59" z="690" orient="0" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="74852640">
             <param name="Dim" value="1" />
             <param name="Name" value="" />
             <param name="DPath" value="1" />
           </paramlist>
         </User>
-        <User classid="UserCmp" defn="master:div" id="1315174590" x="702" y="1116" w="80" h="60" z="700" orient="0" link="-1" q="4" disable="false">
+        <User classid="UserCmp" defn="master:div" id="1315174590" x="702" y="1116" w="80" h="59" z="700" orient="0" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="74852640">
             <param name="Dim" value="1" />
             <param name="Name" value="" />
@@ -31206,14 +31434,14 @@ States don't match PSID because we have a three phase implementation of the filt
             <param name="Dim" value="1" />
           </paramlist>
         </User>
-        <User classid="UserCmp" defn="master:emtconst" id="1486869056" x="1278" y="1224" w="76" h="21" z="350" orient="0" link="-1" q="4" disable="false">
+        <User classid="UserCmp" defn="master:emtconst" id="1486869056" x="1278" y="1224" w="76" h="22" z="350" orient="0" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="116269466">
             <param name="Name" value="" />
             <param name="Value" value="11" />
             <param name="Dim" value="1" />
           </paramlist>
         </User>
-        <User classid="UserCmp" defn="master:emtconst" id="306366081" x="1224" y="1188" w="76" h="21" z="330" orient="0" link="-1" q="4" disable="false">
+        <User classid="UserCmp" defn="master:emtconst" id="306366081" x="1224" y="1188" w="76" h="22" z="330" orient="0" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="116269466">
             <param name="Name" value="" />
             <param name="Value" value="10" />
@@ -31288,7 +31516,7 @@ States don't match PSID because we have a three phase implementation of the filt
             <param name="Name" value="" />
           </paramlist>
         </User>
-        <User classid="UserCmp" defn="master:emtconst" id="1384989251" x="936" y="774" w="21" h="76" z="210" orient="3" link="-1" q="4" disable="false">
+        <User classid="UserCmp" defn="master:emtconst" id="1384989251" x="936" y="774" w="22" h="76" z="210" orient="3" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="116269466">
             <param name="Name" value="" />
             <param name="Value" value="4" />
@@ -31570,14 +31798,14 @@ States don't match PSID because we have a three phase implementation of the filt
           <vertex x="18" y="0" />
           <vertex x="18" y="-18" />
         </Wire>
-        <User classid="UserCmp" defn="master:emtconst" id="1572527487" x="918" y="1008" w="21" h="76" z="280" orient="3" link="-1" q="4" disable="false">
+        <User classid="UserCmp" defn="master:emtconst" id="1572527487" x="918" y="1008" w="22" h="76" z="280" orient="3" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="116269466">
             <param name="Name" value="" />
             <param name="Value" value="4" />
             <param name="Dim" value="1" />
           </paramlist>
         </User>
-        <User classid="UserCmp" defn="master:emtconst" id="1743659212" x="936" y="1242" w="21" h="76" z="340" orient="3" link="-1" q="4" disable="false">
+        <User classid="UserCmp" defn="master:emtconst" id="1743659212" x="936" y="1242" w="22" h="76" z="340" orient="3" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="116269466">
             <param name="Name" value="" />
             <param name="Value" value="4" />
@@ -32052,7 +32280,7 @@ States don't match PSID because we have a three phase implementation of the filt
             <param name="hl_color_adv" value="#FFFFFF00" />
             <param name="bdr_color_adv" value="#FF95918C" />
           </paramlist><![CDATA[Need to account for a time step delay in order to match PSID exactly! ]]></Sticky>
-        <User classid="UserCmp" defn="master:sumjct" id="1130196585" x="1332" y="882" w="80" h="64" z="580" orient="0" link="-1" q="4" disable="false">
+        <User classid="UserCmp" defn="master:sumjct" id="1130196585" x="1332" y="882" w="80" h="63" z="580" orient="0" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="16672553">
             <param name="DPath" value="1" />
             <param name="A" value="0" />
@@ -32086,7 +32314,7 @@ States don't match PSID because we have a three phase implementation of the filt
           <vertex x="0" y="0" />
           <vertex x="36" y="0" />
         </Wire>
-        <User classid="UserCmp" defn="master:sumjct" id="1758241028" x="1422" y="882" w="80" h="64" z="610" orient="0" link="-1" q="4" disable="false">
+        <User classid="UserCmp" defn="master:sumjct" id="1758241028" x="1422" y="882" w="80" h="63" z="610" orient="0" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="16672553">
             <param name="DPath" value="1" />
             <param name="A" value="0" />
@@ -32104,7 +32332,7 @@ States don't match PSID because we have a three phase implementation of the filt
           <vertex x="0" y="0" />
           <vertex x="36" y="0" />
         </Wire>
-        <User classid="UserCmp" defn="master:delta-t" id="1502944943" x="1314" y="954" w="76" h="21" z="270" orient="0" link="-1" q="4" disable="false">
+        <User classid="UserCmp" defn="master:delta-t" id="1502944943" x="1314" y="954" w="76" h="22" z="270" orient="0" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="58660321" />
         </User>
         <User classid="UserCmp" defn="master:mult" id="390113058" x="1386" y="954" w="80" h="56" z="590" orient="0" link="-1" q="4" disable="false">
@@ -32275,7 +32503,7 @@ States don't match PSID because we have a three phase implementation of the filt
             <param name="Name" value="x0_3" />
           </paramlist>
         </User>
-        <User classid="UserCmp" defn="master:sumjct" id="1458073366" x="540" y="396" w="80" h="83" z="560" orient="0" link="-1" q="4" disable="false">
+        <User classid="UserCmp" defn="master:sumjct" id="1458073366" x="540" y="396" w="80" h="82" z="560" orient="0" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="16672553">
             <param name="DPath" value="1" />
             <param name="A" value="0" />
@@ -32344,7 +32572,7 @@ States don't match PSID because we have a three phase implementation of the filt
             <param name="Name" value="x0_4" />
           </paramlist>
         </User>
-        <User classid="UserCmp" defn="master:sumjct" id="916008125" x="540" y="504" w="80" h="83" z="880" orient="0" link="-1" q="4" disable="false">
+        <User classid="UserCmp" defn="master:sumjct" id="916008125" x="540" y="504" w="80" h="82" z="880" orient="0" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="16672553">
             <param name="DPath" value="1" />
             <param name="A" value="0" />
@@ -33061,7 +33289,7 @@ States don't match PSID because we have a three phase implementation of the filt
         </Gfx>
       </graphics>
     </Definition>
-    <Definition classid="UserCmpDefn" name="SEXS" group="" url="" version="" build="" crc="131310240" instances="0" key="" view="false" date="1637273563" id="586554186">
+    <Definition classid="UserCmpDefn" name="SEXS" group="" url="" version="" build="" crc="93706751" instances="0" key="" view="false" date="1637273563" id="586554186">
       <paramlist name="">
         <param name="Description" value="" />
       </paramlist>
@@ -33316,7 +33544,7 @@ https://www.powerworld.com/WebHelp/Content/TransientModels_HTML/Exciter%20SEXS_P
             <param name="Name" value="E_MAX" />
           </paramlist>
         </User>
-        <User classid="UserCmp" defn="master:sumjct" id="1763751193" x="450" y="216" w="80" h="83" z="270" orient="0" link="-1" q="4" disable="false">
+        <User classid="UserCmp" defn="master:sumjct" id="1763751193" x="450" y="216" w="80" h="82" z="270" orient="0" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="16672553">
             <param name="DPath" value="1" />
             <param name="A" value="0" />
@@ -33594,7 +33822,7 @@ https://www.powerworld.com/WebHelp/Content/TransientModels_HTML/Exciter%20SEXS_P
             <param name="Name" value="V_in" />
           </paramlist>
         </User>
-        <User classid="UserCmp" defn="master:div" id="1677533423" x="612" y="432" w="80" h="60" z="90" orient="0" link="-1" q="4" disable="false">
+        <User classid="UserCmp" defn="master:div" id="1677533423" x="612" y="432" w="80" h="59" z="90" orient="0" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="74852640">
             <param name="Dim" value="1" />
             <param name="Name" value="" />
@@ -33629,7 +33857,7 @@ https://www.powerworld.com/WebHelp/Content/TransientModels_HTML/Exciter%20SEXS_P
             <param name="Name" value="E_C" />
           </paramlist>
         </User>
-        <User classid="UserCmp" defn="master:sumjct" id="1714868497" x="792" y="432" w="80" h="83" z="110" orient="0" link="-1" q="4" disable="false">
+        <User classid="UserCmp" defn="master:sumjct" id="1714868497" x="792" y="432" w="80" h="82" z="110" orient="0" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="16672553">
             <param name="DPath" value="1" />
             <param name="A" value="0" />
@@ -34012,7 +34240,7 @@ https://www.powerworld.com/WebHelp/Content/TransientModels_HTML/Exciter%20SEXS_P
             <param name="Name" value="V_ref_pscad" />
           </paramlist>
         </User>
-        <User classid="UserCmp" defn="master:select" id="1651183434" x="486" y="630" w="82" h="90" z="240" orient="0" link="-1" q="4" disable="false">
+        <User classid="UserCmp" defn="master:select" id="1651183434" x="486" y="630" w="82" h="91" z="240" orient="0" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="108938206">
             <param name="A" value="0" />
             <param name="DPath" value="1" />
@@ -34053,7 +34281,7 @@ https://www.powerworld.com/WebHelp/Content/TransientModels_HTML/Exciter%20SEXS_P
             <param name="Name" value="x0_1_pscad" />
           </paramlist>
         </User>
-        <User classid="UserCmp" defn="master:select" id="956806273" x="702" y="630" w="82" h="90" z="250" orient="0" link="-1" q="4" disable="false">
+        <User classid="UserCmp" defn="master:select" id="956806273" x="702" y="630" w="82" h="91" z="250" orient="0" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="108938206">
             <param name="A" value="0" />
             <param name="DPath" value="1" />
@@ -34094,7 +34322,7 @@ https://www.powerworld.com/WebHelp/Content/TransientModels_HTML/Exciter%20SEXS_P
             <param name="Name" value="x0_2_pscad" />
           </paramlist>
         </User>
-        <User classid="UserCmp" defn="master:select" id="437890337" x="918" y="630" w="82" h="90" z="260" orient="0" link="-1" q="4" disable="false">
+        <User classid="UserCmp" defn="master:select" id="437890337" x="918" y="630" w="82" h="91" z="260" orient="0" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="108938206">
             <param name="A" value="0" />
             <param name="DPath" value="1" />
@@ -34140,7 +34368,7 @@ https://www.powerworld.com/WebHelp/Content/TransientModels_HTML/Exciter%20SEXS_P
             <param name="Name" value="S2M" />
           </paramlist>
         </User>
-        <User classid="UserCmp" name="master:time-sig" id="717457595" x="162" y="756" w="76" h="21" z="180" orient="0" defn="master:time-sig" link="-1" q="4" disable="false">
+        <User classid="UserCmp" name="master:time-sig" id="717457595" x="162" y="756" w="76" h="22" z="180" orient="0" defn="master:time-sig" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="20913136" />
         </User>
         <User classid="UserCmp" name="master:compare" id="1853876429" x="234" y="756" w="80" h="59" z="190" orient="0" defn="master:compare" link="-1" q="4" disable="false">
@@ -34167,7 +34395,7 @@ https://www.powerworld.com/WebHelp/Content/TransientModels_HTML/Exciter%20SEXS_P
           <vertex x="0" y="0" />
           <vertex x="18" y="0" />
         </Wire>
-        <User classid="UserCmp" name="master:time-sig" id="461579124" x="162" y="684" w="76" h="21" z="150" orient="0" defn="master:time-sig" link="-1" q="4" disable="false">
+        <User classid="UserCmp" name="master:time-sig" id="461579124" x="162" y="684" w="76" h="22" z="150" orient="0" defn="master:time-sig" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="20913136" />
         </User>
         <User classid="UserCmp" name="master:compare" id="462064142" x="234" y="684" w="80" h="59" z="160" orient="0" defn="master:compare" link="-1" q="4" disable="false">
@@ -34474,7 +34702,7 @@ https://www.powerworld.com/WebHelp/Content/TransientModels_HTML/Exciter%20SEXS_P
         </Gfx>
       </graphics>
     </Definition>
-    <Definition classid="UserCmpDefn" name="TGOV1" group="" url="" version="" build="" crc="157015" instances="0" key="" view="false" date="1624478747" id="736293719">
+    <Definition classid="UserCmpDefn" name="TGOV1" group="" url="" version="" build="" crc="17967914" instances="0" key="" view="false" date="1624478747" id="736293719">
       <paramlist name="">
         <param name="Description" value="" />
       </paramlist>
@@ -34722,14 +34950,14 @@ https://info.ornl.gov/sites/publications/files/Pub47049.pdf]]></Sticky>
             <param name="Name" value="InitGv" />
           </paramlist>
         </User>
-        <User classid="UserCmp" defn="master:div" id="93373799" x="648" y="216" w="80" h="60" z="200" orient="0" link="-1" q="4" disable="false">
+        <User classid="UserCmp" defn="master:div" id="93373799" x="648" y="216" w="80" h="59" z="200" orient="0" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="74852640">
             <param name="Dim" value="1" />
             <param name="Name" value="" />
             <param name="DPath" value="1" />
           </paramlist>
         </User>
-        <User classid="UserCmp" defn="master:sumjct" id="188930803" x="522" y="216" w="80" h="83" z="190" orient="0" link="-1" q="4" disable="false">
+        <User classid="UserCmp" defn="master:sumjct" id="188930803" x="522" y="216" w="80" h="82" z="190" orient="0" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="16672553">
             <param name="DPath" value="1" />
             <param name="A" value="0" />
@@ -34781,7 +35009,7 @@ https://info.ornl.gov/sites/publications/files/Pub47049.pdf]]></Sticky>
             <param name="Name" value="" />
           </paramlist>
         </User>
-        <User classid="UserCmp" defn="master:sumjct" id="1110967112" x="1026" y="216" w="80" h="64" z="260" orient="0" link="-1" q="4" disable="false">
+        <User classid="UserCmp" defn="master:sumjct" id="1110967112" x="1026" y="216" w="80" h="63" z="260" orient="0" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="16672553">
             <param name="DPath" value="1" />
             <param name="A" value="0" />
@@ -34795,7 +35023,7 @@ https://info.ornl.gov/sites/publications/files/Pub47049.pdf]]></Sticky>
             <param name="Dim" value="1" />
           </paramlist>
         </User>
-        <User classid="UserCmp" defn="master:sumjct" id="79038380" x="450" y="342" w="80" h="64" z="60" orient="0" link="-1" q="4" disable="false">
+        <User classid="UserCmp" defn="master:sumjct" id="79038380" x="450" y="342" w="80" h="63" z="60" orient="0" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="16672553">
             <param name="DPath" value="1" />
             <param name="A" value="0" />
@@ -34983,7 +35211,7 @@ https://info.ornl.gov/sites/publications/files/Pub47049.pdf]]></Sticky>
             <param name="Name" value="xg1_0" />
           </paramlist>
         </User>
-        <User classid="UserCmp" defn="master:div" id="1414392140" x="774" y="558" w="80" h="60" z="220" orient="0" link="-1" q="4" disable="false">
+        <User classid="UserCmp" defn="master:div" id="1414392140" x="774" y="558" w="80" h="59" z="220" orient="0" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="74852640">
             <param name="Dim" value="1" />
             <param name="Name" value="" />
@@ -35013,7 +35241,7 @@ https://info.ornl.gov/sites/publications/files/Pub47049.pdf]]></Sticky>
             <param name="DPath" value="1" />
           </paramlist>
         </User>
-        <User classid="UserCmp" defn="master:div" id="1810001237" x="648" y="648" w="80" h="60" z="150" orient="0" link="-1" q="4" disable="false">
+        <User classid="UserCmp" defn="master:div" id="1810001237" x="648" y="648" w="80" h="59" z="150" orient="0" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="74852640">
             <param name="Dim" value="1" />
             <param name="Name" value="" />
@@ -35030,7 +35258,7 @@ https://info.ornl.gov/sites/publications/files/Pub47049.pdf]]></Sticky>
             <param name="Name" value="T3" />
           </paramlist>
         </User>
-        <User classid="UserCmp" defn="master:sumjct" id="664426627" x="720" y="648" w="80" h="64" z="230" orient="0" link="-1" q="4" disable="false">
+        <User classid="UserCmp" defn="master:sumjct" id="664426627" x="720" y="648" w="80" h="63" z="230" orient="0" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="16672553">
             <param name="DPath" value="1" />
             <param name="A" value="0" />
@@ -35512,7 +35740,7 @@ https://info.ornl.gov/sites/publications/files/Pub47049.pdf]]></Sticky>
         </Gfx>
       </graphics>
     </Definition>
-    <Definition classid="UserCmpDefn" name="TGTypeII" group="" url="" version="" build="" crc="106962064" instances="0" key="" view="false" date="1624987756" id="1453708203">
+    <Definition classid="UserCmpDefn" name="TGTypeII" group="" url="" version="" build="" crc="120639407" instances="0" key="" view="false" date="1624987756" id="1453708203">
       <paramlist name="">
         <param name="Description" value="" />
       </paramlist>
@@ -35704,7 +35932,7 @@ https://info.ornl.gov/sites/publications/files/Pub47049.pdf]]></Sticky>
             <param name="bdr_color_adv" value="#FF95918C" />
           </paramlist><![CDATA[INITIALIZATION
 ]]></Sticky>
-        <User classid="UserCmp" defn="master:sumjct" id="581563299" x="468" y="234" w="80" h="64" z="40" orient="0" link="-1" q="4" disable="false">
+        <User classid="UserCmp" defn="master:sumjct" id="581563299" x="468" y="234" w="80" h="63" z="40" orient="0" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="16672553">
             <param name="DPath" value="1" />
             <param name="A" value="0" />
@@ -35757,7 +35985,7 @@ https://info.ornl.gov/sites/publications/files/Pub47049.pdf]]></Sticky>
             <param name="Name" value="" />
           </paramlist>
         </User>
-        <User classid="UserCmp" defn="master:div" id="1563560253" x="594" y="234" w="80" h="60" z="140" orient="0" link="-1" q="4" disable="false">
+        <User classid="UserCmp" defn="master:div" id="1563560253" x="594" y="234" w="80" h="59" z="140" orient="0" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="74852640">
             <param name="Dim" value="1" />
             <param name="Name" value="" />
@@ -36282,7 +36510,7 @@ Milano, page 359
         <grouping />
       </schematic>
     </Definition>
-    <Definition classid="UserCmpDefn" name="Main" id="1166570604" group="" url="" version="" build="" crc="120780953" view="false" date="0">
+    <Definition classid="UserCmpDefn" name="Main" id="1166570604" group="" url="" version="" build="" crc="102743801" view="false" date="0">
       <paramlist name="">
         <param name="Description" value="" />
       </paramlist>
@@ -37653,7 +37881,7 @@ https://info.ornl.gov/sites/publications/files/Pub47049.pdf]]></Sticky>
             <param name="t_INV" value="0" />
           </paramlist>
         </User>
-        <User classid="UserCmp" name="PSID_Library:AverageConverter" id="791628388" x="630" y="522" w="152" h="82" z="-1" orient="0" defn="PSID_Library:AverageConverter" link="-1" q="4" disable="false">
+        <User classid="UserCmp" name="PSID_Library:AverageConverter" id="791628388" x="630" y="522" w="152" h="83" z="-1" orient="0" defn="PSID_Library:AverageConverter" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="85637438">
             <param name="Name" value="" />
           </paramlist>
@@ -37693,7 +37921,7 @@ https://info.ornl.gov/sites/publications/files/Pub47049.pdf]]></Sticky>
             <param name="Name" value="" />
           </paramlist>
         </User>
-        <User classid="UserCmp" name="PSID_Library:ri_dq" id="1536472840" x="1422" y="216" w="108" h="61" z="-1" orient="0" defn="PSID_Library:ri_dq" link="-1" q="4" disable="false">
+        <User classid="UserCmp" name="PSID_Library:ri_dq" id="1536472840" x="1422" y="216" w="108" h="62" z="-1" orient="0" defn="PSID_Library:ri_dq" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="63023770">
             <param name="Name" value="" />
           </paramlist>
@@ -37704,7 +37932,7 @@ https://info.ornl.gov/sites/publications/files/Pub47049.pdf]]></Sticky>
             <param name="t_RAMP" value="0" />
           </paramlist>
         </User>
-        <User classid="UserCmp" name="PSID_Library:magangle_ri" id="1711448333" x="1422" y="486" w="93" h="60" z="-1" orient="0" defn="PSID_Library:magangle_ri" link="-1" q="4" disable="false">
+        <User classid="UserCmp" name="PSID_Library:magangle_ri" id="1711448333" x="1422" y="486" w="93" h="61" z="-1" orient="0" defn="PSID_Library:magangle_ri" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="63023770">
             <param name="Name" value="" />
           </paramlist>
@@ -37940,7 +38168,7 @@ https://info.ornl.gov/sites/publications/files/Pub47049.pdf]]></Sticky>
             <param name="AL2" value="" />
           </paramlist>
         </User>
-        <User classid="UserCmp" name="PSID_Library:FixedFrequency" id="1868501625" x="936" y="630" w="158" h="68" z="-1" orient="0" defn="PSID_Library:FixedFrequency" link="-1" q="4" disable="false">
+        <User classid="UserCmp" name="PSID_Library:FixedFrequency" id="1868501625" x="936" y="630" w="158" h="69" z="-1" orient="0" defn="PSID_Library:FixedFrequency" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="85637438">
             <param name="Name" value="" />
             <param name="omega_lp" value="omega_lp" />
@@ -37974,7 +38202,7 @@ https://info.ornl.gov/sites/publications/files/Pub47049.pdf]]></Sticky>
           </paramlist>
         </User>
         <User classid="UserCmp" name="PSID_Library:ActiveDroop_ReactiveDroop" id="1340636822" x="900" y="954" w="233" h="116" z="-1" orient="0" defn="PSID_Library:ActiveDroop_ReactiveDroop" link="-1" q="4" disable="false">
-          <paramlist link="-1" name="" crc="50441623">
+          <paramlist link="-1" name="" crc="31269303">
             <param name="Name" value="" />
             <param name="Ta" value="Ta" />
             <param name="kd" value="kd" />
@@ -37991,6 +38219,7 @@ https://info.ornl.gov/sites/publications/files/Pub47049.pdf]]></Sticky>
             <param name="omega_z" value="omega_z" />
             <param name="InitGv" value="INV" />
             <param name="INV" value="InitGv" />
+            <param name="w_sys" value="w_sys" />
           </paramlist>
           <paramlist link="1543432329" name="">
             <param name="xmin" value="0.0" />
@@ -38035,7 +38264,7 @@ https://info.ornl.gov/sites/publications/files/Pub47049.pdf]]></Sticky>
             <param name="AL2" value="" />
           </paramlist>
         </User>
-        <User classid="UserCmp" name="PSID_Library:ReducedOrderPLL" id="285503644" x="702" y="630" w="158" h="63" z="-1" orient="0" defn="PSID_Library:ReducedOrderPLL" link="-1" q="4" disable="false">
+        <User classid="UserCmp" name="PSID_Library:ReducedOrderPLL" id="285503644" x="702" y="630" w="158" h="64" z="-1" orient="0" defn="PSID_Library:ReducedOrderPLL" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="87678228">
             <param name="Name" value="" />
             <param name="omega_lp" value="omega_lp" />
@@ -38206,7 +38435,7 @@ https://info.ornl.gov/sites/publications/files/Pub47049.pdf]]></Sticky>
             <param name="ymax" value="1" />
           </paramlist>
         </User>
-        <User classid="UserCmp" id="302217636" name="PSID_Library:volley_circuit_breaker_logic" x="1458" y="882" w="98" h="65" z="-1" orient="0" defn="PSID_Library:volley_circuit_breaker_logic" link="-1" q="4" disable="false">
+        <User classid="UserCmp" id="302217636" name="PSID_Library:volley_circuit_breaker_logic" x="1458" y="882" w="98" h="63" z="-1" orient="0" defn="PSID_Library:volley_circuit_breaker_logic" link="-1" q="4" disable="false">
           <paramlist name="" link="-1" crc="17490394">
             <param name="Name" value="" />
           </paramlist>
@@ -38243,7 +38472,7 @@ https://info.ornl.gov/sites/publications/files/Pub47049.pdf]]></Sticky>
         </Gfx>
       </graphics>
     </Definition>
-    <Definition classid="UserCmpDefn" name="GAST" group="" url="" version="" build="" crc="24658249" instances="0" key="" view="false" date="1637273564" id="1840107294">
+    <Definition classid="UserCmpDefn" name="GAST" group="" url="" version="" build="" crc="58705766" instances="0" key="" view="false" date="1637273564" id="1840107294">
       <paramlist name="">
         <param name="Description" value="" />
       </paramlist>
@@ -38500,14 +38729,14 @@ https://www.phasetophase.nl/pdf/SynchronousMachineTurbineGoverningSystems.pdf]]>
             <param name="Name" value="InitGv" />
           </paramlist>
         </User>
-        <User classid="UserCmp" defn="master:div" id="656154960" x="432" y="270" w="80" h="60" z="260" orient="0" link="-1" q="4" disable="false">
+        <User classid="UserCmp" defn="master:div" id="656154960" x="432" y="270" w="80" h="59" z="260" orient="0" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="74852640">
             <param name="Dim" value="1" />
             <param name="Name" value="" />
             <param name="DPath" value="1" />
           </paramlist>
         </User>
-        <User classid="UserCmp" defn="master:sumjct" id="1031739295" x="540" y="270" w="80" h="64" z="270" orient="0" link="-1" q="4" disable="false">
+        <User classid="UserCmp" defn="master:sumjct" id="1031739295" x="540" y="270" w="80" h="63" z="270" orient="0" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="16672553">
             <param name="DPath" value="1" />
             <param name="A" value="0" />
@@ -38558,7 +38787,7 @@ https://www.phasetophase.nl/pdf/SynchronousMachineTurbineGoverningSystems.pdf]]>
             <param name="Dim" value="1" />
           </paramlist>
         </User>
-        <User classid="UserCmp" defn="master:sumjct" id="1588976011" x="360" y="270" w="80" h="64" z="50" orient="0" link="-1" q="4" disable="false">
+        <User classid="UserCmp" defn="master:sumjct" id="1588976011" x="360" y="270" w="80" h="63" z="50" orient="0" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="16672553">
             <param name="DPath" value="1" />
             <param name="A" value="0" />
@@ -38867,7 +39096,7 @@ https://www.phasetophase.nl/pdf/SynchronousMachineTurbineGoverningSystems.pdf]]>
             <param name="Name" value="AT" />
           </paramlist>
         </User>
-        <User classid="UserCmp" defn="master:maxmin" id="497352362" x="666" y="270" w="80" h="60" z="320" orient="0" link="-1" q="4" disable="false">
+        <User classid="UserCmp" defn="master:maxmin" id="497352362" x="666" y="270" w="80" h="59" z="320" orient="0" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="103689034">
             <param name="DPath" value="1" />
             <param name="Type" value="0" />
@@ -38918,7 +39147,7 @@ https://www.phasetophase.nl/pdf/SynchronousMachineTurbineGoverningSystems.pdf]]>
           <vertex x="0" y="0" />
           <vertex x="54" y="0" />
         </Wire>
-        <User classid="UserCmp" defn="master:sumjct" id="504173846" x="684" y="396" w="80" h="64" z="310" orient="4" link="-1" q="4" disable="false">
+        <User classid="UserCmp" defn="master:sumjct" id="504173846" x="684" y="396" w="80" h="63" z="310" orient="4" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="16672553">
             <param name="DPath" value="1" />
             <param name="A" value="0" />
@@ -38946,7 +39175,7 @@ https://www.phasetophase.nl/pdf/SynchronousMachineTurbineGoverningSystems.pdf]]>
           <vertex x="0" y="90" />
           <vertex x="18" y="90" />
         </Wire>
-        <User classid="UserCmp" defn="master:sumjct" id="1840995432" x="882" y="396" w="80" h="64" z="360" orient="4" link="-1" q="4" disable="false">
+        <User classid="UserCmp" defn="master:sumjct" id="1840995432" x="882" y="396" w="80" h="63" z="360" orient="4" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="16672553">
             <param name="DPath" value="1" />
             <param name="A" value="0" />
@@ -39424,7 +39653,7 @@ https://www.phasetophase.nl/pdf/SynchronousMachineTurbineGoverningSystems.pdf]]>
             <param name="Name" value="P_ref_pscad" />
           </paramlist>
         </User>
-        <User classid="UserCmp" defn="master:select" id="38729000" x="504" y="918" w="82" h="90" z="210" orient="0" link="-1" q="4" disable="false">
+        <User classid="UserCmp" defn="master:select" id="38729000" x="504" y="918" w="82" h="91" z="210" orient="0" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="108938206">
             <param name="A" value="0" />
             <param name="DPath" value="1" />
@@ -39486,7 +39715,7 @@ https://www.phasetophase.nl/pdf/SynchronousMachineTurbineGoverningSystems.pdf]]>
             <param name="Name" value="x0_1_pscad" />
           </paramlist>
         </User>
-        <User classid="UserCmp" defn="master:select" id="1307833767" x="720" y="918" w="82" h="90" z="280" orient="0" link="-1" q="4" disable="false">
+        <User classid="UserCmp" defn="master:select" id="1307833767" x="720" y="918" w="82" h="91" z="280" orient="0" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="108938206">
             <param name="A" value="0" />
             <param name="DPath" value="1" />
@@ -39527,7 +39756,7 @@ https://www.phasetophase.nl/pdf/SynchronousMachineTurbineGoverningSystems.pdf]]>
             <param name="Name" value="x0_2_pscad" />
           </paramlist>
         </User>
-        <User classid="UserCmp" defn="master:select" id="143362057" x="936" y="918" w="82" h="90" z="290" orient="0" link="-1" q="4" disable="false">
+        <User classid="UserCmp" defn="master:select" id="143362057" x="936" y="918" w="82" h="91" z="290" orient="0" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="108938206">
             <param name="A" value="0" />
             <param name="DPath" value="1" />
@@ -39568,7 +39797,7 @@ https://www.phasetophase.nl/pdf/SynchronousMachineTurbineGoverningSystems.pdf]]>
             <param name="Name" value="x0_3_pscad" />
           </paramlist>
         </User>
-        <User classid="UserCmp" defn="master:select" id="1836443577" x="1152" y="918" w="82" h="90" z="300" orient="0" link="-1" q="4" disable="false">
+        <User classid="UserCmp" defn="master:select" id="1836443577" x="1152" y="918" w="82" h="91" z="300" orient="0" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="108938206">
             <param name="A" value="0" />
             <param name="DPath" value="1" />
@@ -39992,8 +40221,8 @@ https://www.phasetophase.nl/pdf/SynchronousMachineTurbineGoverningSystems.pdf]]>
     </paramlist>
   </GlobalSubstitutions>
   <hierarchy>
-    <call link="1913918102" name="PSID_Library:Station" z="-1" view="false" instance="0">
-      <call link="1121605733" name="PSID_Library:Main" z="-1" view="true" instance="0">
+    <call link="511750253" name="PSID_Library:Station" z="-1" view="false" instance="0">
+      <call link="1121605733" name="PSID_Library:Main" z="-1" view="false" instance="0">
         <call link="1900225599" name="PSID_Library:TGTypeII" z="-1" view="false" instance="0" />
         <call link="590877718" name="PSID_Library:TGOV1" z="-1" view="false" instance="0" />
         <call link="289925425" name="PSID_Library:SEXS" z="-1" view="false" instance="0" />
@@ -40006,14 +40235,13 @@ https://www.phasetophase.nl/pdf/SynchronousMachineTurbineGoverningSystems.pdf]]>
           <call link="909248648" name="PSID_Library:ri_abc" z="1070" view="false" instance="1" />
         </call>
         <call link="1997484035" name="PSID_Library:VoltageModeControl" z="-1" view="false" instance="0" />
-        <call link="791628388" name="PSID_Library:AverageConverter" z="-1" view="false" instance="0" />
         <call link="1212736682" name="PSID_Library:KauraPLL" z="-1" view="false" instance="0">
           <call link="894185864" name="PSID_Library:ri_dq" z="220" view="false" instance="0" />
         </call>
-        <call link="1935923328" name="PSID_Library:VirtualInertia_ReactiveDroop" z="-1" view="false" instance="0" />
-        <call link="117063645" name="PSID_Library:dq_ri" z="-1" view="false" instance="4" />
-        <call link="1536472840" name="PSID_Library:ri_dq" z="-1" view="false" instance="1" />
+        <call link="791628388" name="PSID_Library:AverageConverter" z="-1" view="false" instance="0" />
         <call link="353908200" name="PSID_Library:FixedDCSource" z="-1" view="false" instance="0" />
+        <call link="1935923328" name="PSID_Library:VirtualInertia_ReactiveDroop" z="-1" view="false" instance="0" />
+        <call link="1536472840" name="PSID_Library:ri_dq" z="-1" view="false" instance="1" />
         <call link="970744943" name="PSID_Library:ri_abc" z="-1" view="false" instance="2" />
         <call link="1711448333" name="PSID_Library:magangle_ri" z="-1" view="false" instance="0" />
         <call link="1749606776" name="PSID_Library:AVRSimple" z="-1" view="false" instance="0" />
@@ -40021,22 +40249,23 @@ https://www.phasetophase.nl/pdf/SynchronousMachineTurbineGoverningSystems.pdf]]>
           <call link="1513031148" name="PSID_Library:exciter_saturation" z="140" view="false" instance="0" />
           <call link="746068508" name="PSID_Library:exciter_saturation" z="360" view="false" instance="1" />
         </call>
+        <call link="573480777" name="PSID_Library:exciter_saturation" z="-1" view="false" instance="2" />
+        <call link="32368114" name="PSID_Library:BPA_GG" z="-1" view="false" instance="0" />
+        <call link="1257164115" name="PSID_Library:GGOV1" z="-1" view="false" instance="0">
+          <call link="471511252" name="PSID_Library:DeadBand" z="890" view="false" instance="0" />
+        </call>
+        <call link="1584018673" name="PSID_Library:DeadBand" z="-1" view="false" instance="1" />
+        <call link="117063645" name="PSID_Library:dq_ri" z="-1" view="false" instance="4" />
+        <call link="1496654770" name="PSID_Library:RateLimiter" z="-1" view="false" instance="0" />
         <call link="1099669844" name="PSID_Library:GAST" z="-1" view="false" instance="0" />
         <call link="1689773799" name="PSID_Library:ActivePI_ReactivePI" z="-1" view="false" instance="0" />
-        <call link="1868501625" name="PSID_Library:FixedFrequency" z="-1" view="false" instance="0" />
-        <call link="32368114" name="PSID_Library:BPA_GG" z="-1" view="false" instance="0" />
-        <call link="1496654770" name="PSID_Library:RateLimiter" z="-1" view="false" instance="0" />
-        <call link="573480777" name="PSID_Library:exciter_saturation" z="-1" view="false" instance="2" />
-        <call link="1584018673" name="PSID_Library:DeadBand" z="-1" view="false" instance="0" />
-        <call link="1340636822" name="PSID_Library:ActiveDroop_ReactiveDroop" z="-1" view="false" instance="0" />
-        <call link="1257164115" name="PSID_Library:GGOV1" z="-1" view="false" instance="0">
-          <call link="471511252" name="PSID_Library:DeadBand" z="890" view="false" instance="1" />
-        </call>
-        <call link="302217636" name="PSID_Library:volley_circuit_breaker_logic" z="-1" view="false" instance="0" />
         <call link="771555009" name="PSID_Library:CurrentModeControl" z="-1" view="false" instance="0" />
         <call link="285503644" name="PSID_Library:ReducedOrderPLL" z="-1" view="false" instance="0">
           <call link="2057070710" name="PSID_Library:ri_dq" z="200" view="false" instance="2" />
         </call>
+        <call link="302217636" name="PSID_Library:volley_circuit_breaker_logic" z="-1" view="false" instance="0" />
+        <call link="1340636822" name="PSID_Library:ActiveDroop_ReactiveDroop" z="-1" view="true" instance="0" />
+        <call link="1868501625" name="PSID_Library:FixedFrequency" z="-1" view="false" instance="0" />
       </call>
     </call>
   </hierarchy>

@@ -21,7 +21,7 @@
     <param name="Warn" value="0" />
     <param name="Check" value="0" />
     <param name="description" value="" />
-    <param name="revisor" value="Matt Bossart, 1661173054" />
+    <param name="revisor" value="Matt Bossart, 1661875565" />
     <param name="sparsity_threshold" value="200" />
   </paramlist>
   <Layers>
@@ -21654,6 +21654,397 @@
         <param name="ymax" value="1" />
       </paramlist>
     </Settings>
+    <Settings classid="GraphFrameSettings" id="1610971503" link="629580390">
+      <path>
+        <ref link="223495102" />
+        <ref link="461198950" />
+      </path>
+      <paramlist>
+        <param name="xmin" value="-1" />
+        <param name="xmax" value="1" />
+      </paramlist>
+    </Settings>
+    <Settings classid="OverlayGraphSettings" id="996926400" link="1814858311">
+      <path>
+        <ref link="223495102" />
+        <ref link="461198950" />
+      </path>
+      <paramlist>
+        <param name="ymin" value="-1" />
+        <param name="ymax" value="1" />
+      </paramlist>
+    </Settings>
+    <Settings classid="OverlayGraphSettings" id="829134676" link="563870188">
+      <path>
+        <ref link="223495102" />
+        <ref link="461198950" />
+      </path>
+      <paramlist>
+        <param name="ymin" value="-1" />
+        <param name="ymax" value="1" />
+      </paramlist>
+    </Settings>
+    <Settings classid="GraphFrameSettings" id="49338695" link="1727717747">
+      <path>
+        <ref link="223495102" />
+        <ref link="461198950" />
+      </path>
+      <paramlist>
+        <param name="xmin" value="-1" />
+        <param name="xmax" value="1" />
+      </paramlist>
+    </Settings>
+    <Settings classid="OverlayGraphSettings" id="1365786636" link="2072463498">
+      <path>
+        <ref link="223495102" />
+        <ref link="461198950" />
+      </path>
+      <paramlist>
+        <param name="ymin" value="-1" />
+        <param name="ymax" value="1" />
+      </paramlist>
+    </Settings>
+    <Settings classid="GraphFrameSettings" id="156367103" link="1254710280">
+      <path>
+        <ref link="223495102" />
+        <ref link="461198950" />
+      </path>
+      <paramlist>
+        <param name="xmin" value="-1" />
+        <param name="xmax" value="1" />
+      </paramlist>
+    </Settings>
+    <Settings classid="OverlayGraphSettings" id="964412743" link="292029018">
+      <path>
+        <ref link="223495102" />
+        <ref link="461198950" />
+      </path>
+      <paramlist>
+        <param name="ymin" value="-1" />
+        <param name="ymax" value="1" />
+      </paramlist>
+    </Settings>
+    <Settings classid="OverlayGraphSettings" id="937263457" link="907681944">
+      <path>
+        <ref link="223495102" />
+        <ref link="461198950" />
+      </path>
+      <paramlist>
+        <param name="ymin" value="-1" />
+        <param name="ymax" value="1" />
+      </paramlist>
+    </Settings>
+    <Settings classid="GraphFrameSettings" id="939431765" link="1031513104">
+      <path>
+        <ref link="223495102" />
+        <ref link="461198950" />
+      </path>
+      <paramlist>
+        <param name="xmin" value="-1" />
+        <param name="xmax" value="1" />
+      </paramlist>
+    </Settings>
+    <Settings classid="OverlayGraphSettings" id="249365965" link="1320390113">
+      <path>
+        <ref link="223495102" />
+        <ref link="461198950" />
+      </path>
+      <paramlist>
+        <param name="ymin" value="-1" />
+        <param name="ymax" value="1" />
+      </paramlist>
+    </Settings>
+    <Settings classid="GraphFrameSettings" id="2089699330" link="1193758711">
+      <path>
+        <ref link="223495102" />
+        <ref link="461198950" />
+        <ref link="966491600" />
+      </path>
+      <paramlist>
+        <param name="xmin" value="-1" />
+        <param name="xmax" value="1" />
+      </paramlist>
+    </Settings>
+    <Settings classid="OverlayGraphSettings" id="1838056008" link="1975763288">
+      <path>
+        <ref link="223495102" />
+        <ref link="461198950" />
+        <ref link="966491600" />
+      </path>
+      <paramlist>
+        <param name="ymin" value="-1" />
+        <param name="ymax" value="1" />
+      </paramlist>
+    </Settings>
+    <Settings classid="TraceSettings" id="198368893" link="2084755436">
+      <path>
+        <ref link="223495102" />
+        <ref link="461198950" />
+        <ref link="966491600" />
+      </path>
+      <paramlist>
+        <param name="active_1" value="true" />
+      </paramlist>
+    </Settings>
+    <Settings classid="OverlayGraphSettings" id="889675662" link="958018015">
+      <path>
+        <ref link="223495102" />
+        <ref link="461198950" />
+        <ref link="966491600" />
+      </path>
+      <paramlist>
+        <param name="ymin" value="-1" />
+        <param name="ymax" value="1" />
+      </paramlist>
+    </Settings>
+    <Settings classid="GraphFrameSettings" id="1795108644" link="629580390">
+      <path>
+        <ref link="223495102" />
+        <ref link="461198950" />
+        <ref link="966491600" />
+      </path>
+      <paramlist>
+        <param name="xmin" value="-1" />
+        <param name="xmax" value="1" />
+      </paramlist>
+    </Settings>
+    <Settings classid="OverlayGraphSettings" id="518906777" link="1814858311">
+      <path>
+        <ref link="223495102" />
+        <ref link="461198950" />
+        <ref link="966491600" />
+      </path>
+      <paramlist>
+        <param name="ymin" value="-1" />
+        <param name="ymax" value="1" />
+      </paramlist>
+    </Settings>
+    <Settings classid="OverlayGraphSettings" id="1127412883" link="563870188">
+      <path>
+        <ref link="223495102" />
+        <ref link="461198950" />
+        <ref link="966491600" />
+      </path>
+      <paramlist>
+        <param name="ymin" value="-1" />
+        <param name="ymax" value="1" />
+      </paramlist>
+    </Settings>
+    <Settings classid="GraphFrameSettings" id="641188015" link="1727717747">
+      <path>
+        <ref link="223495102" />
+        <ref link="461198950" />
+        <ref link="966491600" />
+      </path>
+      <paramlist>
+        <param name="xmin" value="-1" />
+        <param name="xmax" value="1" />
+      </paramlist>
+    </Settings>
+    <Settings classid="OverlayGraphSettings" id="1981686289" link="2072463498">
+      <path>
+        <ref link="223495102" />
+        <ref link="461198950" />
+        <ref link="966491600" />
+      </path>
+      <paramlist>
+        <param name="ymin" value="-1" />
+        <param name="ymax" value="1" />
+      </paramlist>
+    </Settings>
+    <Settings classid="GraphFrameSettings" id="2122865175" link="1254710280">
+      <path>
+        <ref link="223495102" />
+        <ref link="461198950" />
+        <ref link="966491600" />
+      </path>
+      <paramlist>
+        <param name="xmin" value="-1" />
+        <param name="xmax" value="1" />
+      </paramlist>
+    </Settings>
+    <Settings classid="OverlayGraphSettings" id="360304426" link="292029018">
+      <path>
+        <ref link="223495102" />
+        <ref link="461198950" />
+        <ref link="966491600" />
+      </path>
+      <paramlist>
+        <param name="ymin" value="-1" />
+        <param name="ymax" value="1" />
+      </paramlist>
+    </Settings>
+    <Settings classid="OverlayGraphSettings" id="1277933401" link="907681944">
+      <path>
+        <ref link="223495102" />
+        <ref link="461198950" />
+        <ref link="966491600" />
+      </path>
+      <paramlist>
+        <param name="ymin" value="-1" />
+        <param name="ymax" value="1" />
+      </paramlist>
+    </Settings>
+    <Settings classid="GraphFrameSettings" id="533793571" link="1031513104">
+      <path>
+        <ref link="223495102" />
+        <ref link="461198950" />
+        <ref link="966491600" />
+      </path>
+      <paramlist>
+        <param name="xmin" value="-1" />
+        <param name="xmax" value="1" />
+      </paramlist>
+    </Settings>
+    <Settings classid="OverlayGraphSettings" id="1478144510" link="1320390113">
+      <path>
+        <ref link="223495102" />
+        <ref link="461198950" />
+        <ref link="966491600" />
+      </path>
+      <paramlist>
+        <param name="ymin" value="-1" />
+        <param name="ymax" value="1" />
+      </paramlist>
+    </Settings>
+    <Settings classid="GraphFrameSettings" id="935825381" link="24381318">
+      <path>
+        <ref link="223495102" />
+        <ref link="238600983" />
+        <ref link="356470831" />
+      </path>
+      <paramlist>
+        <param name="xmin" value="-1" />
+        <param name="xmax" value="1" />
+      </paramlist>
+    </Settings>
+    <Settings classid="OverlayGraphSettings" id="363772437" link="107205215">
+      <path>
+        <ref link="223495102" />
+        <ref link="238600983" />
+        <ref link="356470831" />
+      </path>
+      <paramlist>
+        <param name="ymin" value="-1" />
+        <param name="ymax" value="1" />
+      </paramlist>
+    </Settings>
+    <Settings classid="TraceSettings" id="984200546" link="977555614">
+      <path>
+        <ref link="223495102" />
+        <ref link="238600983" />
+        <ref link="356470831" />
+      </path>
+      <paramlist>
+        <param name="active_1" value="true" />
+      </paramlist>
+    </Settings>
+    <Settings classid="GraphFrameSettings" id="2007713808" link="1135963946">
+      <path>
+        <ref link="223495102" />
+        <ref link="238600983" />
+        <ref link="356470831" />
+      </path>
+      <paramlist>
+        <param name="xmin" value="-1" />
+        <param name="xmax" value="1" />
+      </paramlist>
+    </Settings>
+    <Settings classid="OverlayGraphSettings" id="503504439" link="1163690358">
+      <path>
+        <ref link="223495102" />
+        <ref link="238600983" />
+        <ref link="356470831" />
+      </path>
+      <paramlist>
+        <param name="ymin" value="-1" />
+        <param name="ymax" value="1" />
+      </paramlist>
+    </Settings>
+    <Settings classid="TraceSettings" id="1652332333" link="1574570595">
+      <path>
+        <ref link="223495102" />
+        <ref link="238600983" />
+        <ref link="356470831" />
+      </path>
+      <paramlist>
+        <param name="active_1" value="true" />
+      </paramlist>
+    </Settings>
+    <Settings classid="GraphFrameSettings" id="176497586" link="1906017413">
+      <path>
+        <ref link="223495102" />
+        <ref link="238600983" />
+        <ref link="356470831" />
+      </path>
+      <paramlist>
+        <param name="xmin" value="-1" />
+        <param name="xmax" value="1" />
+      </paramlist>
+    </Settings>
+    <Settings classid="OverlayGraphSettings" id="1563594353" link="448314299">
+      <path>
+        <ref link="223495102" />
+        <ref link="238600983" />
+        <ref link="356470831" />
+      </path>
+      <paramlist>
+        <param name="ymin" value="-1" />
+        <param name="ymax" value="1" />
+      </paramlist>
+    </Settings>
+    <Settings classid="TraceSettings" id="1757568440" link="807807990">
+      <path>
+        <ref link="223495102" />
+        <ref link="238600983" />
+        <ref link="356470831" />
+      </path>
+      <paramlist>
+        <param name="active_1" value="true" />
+      </paramlist>
+    </Settings>
+    <Settings classid="GraphFrameSettings" id="1795774112" link="1046445666">
+      <path>
+        <ref link="223495102" />
+        <ref link="238600983" />
+        <ref link="356470831" />
+      </path>
+      <paramlist>
+        <param name="xmin" value="-1" />
+        <param name="xmax" value="1" />
+      </paramlist>
+    </Settings>
+    <Settings classid="OverlayGraphSettings" id="270243534" link="1633989012">
+      <path>
+        <ref link="223495102" />
+        <ref link="238600983" />
+        <ref link="356470831" />
+      </path>
+      <paramlist>
+        <param name="ymin" value="-1" />
+        <param name="ymax" value="1" />
+      </paramlist>
+    </Settings>
+    <Settings classid="TraceSettings" id="499839981" link="1384284890">
+      <path>
+        <ref link="223495102" />
+        <ref link="238600983" />
+        <ref link="356470831" />
+      </path>
+      <paramlist>
+        <param name="active_1" value="true" />
+      </paramlist>
+    </Settings>
+    <Settings classid="TraceSettings" id="961422299" link="428498558">
+      <path>
+        <ref link="223495102" />
+        <ref link="238600983" />
+        <ref link="356470831" />
+      </path>
+      <paramlist>
+        <param name="active_1" value="true" />
+      </paramlist>
+    </Settings>
   </List>
   <definitions>
     <Definition classid="UserCmpDefn" name="DEMETRIOUS_SC" group="" url="" version="" build="" crc="134199221" instances="0" key="" view="false" date="1635958333" id="550429289">
@@ -25277,7 +25668,7 @@
         </Gfx>
       </graphics>
     </Definition>
-    <Definition classid="UserCmpDefn" name="DROOP_GFM" group="" url="" version="" build="" crc="75217597" instances="0" key="" view="false" date="1660506477" id="744715342">
+    <Definition classid="UserCmpDefn" name="DROOP_GFM" group="" url="" version="" build="" crc="29003837" instances="0" key="" view="false" date="1661788710" id="744715342">
       <paramlist name="">
         <param name="Description" value="" />
       </paramlist>
@@ -25353,6 +25744,12 @@
             <vis />
           </parameter>
           <parameter name="t_RAMP" desc="t_RAMP" type="Real" group="Timing" helpmode="Append" content_type="Constant" intent="Input" dim="1" animate="false" unit="" min="-1E+308" max="1E+308">
+            <value><![CDATA[0]]></value>
+            <cond><![CDATA[true]]></cond>
+            <vis><![CDATA[true]]></vis>
+            <help><![CDATA[]]></help>
+          </parameter>
+          <parameter name="w_sys" desc="system frequency" type="Real" group="Frequency" helpmode="Append" content_type="Variable" intent="Input" dim="1" animate="false" unit="" min="-1E+308" max="1E+308">
             <value><![CDATA[0]]></value>
             <cond><![CDATA[true]]></cond>
             <vis><![CDATA[true]]></vis>
@@ -25640,22 +26037,22 @@
           <param name="virtual_filter" value="" />
           <param name="animation_freq" value="500" />
         </paramlist>
-        <User classid="UserCmp" name="master:export" id="1781739346" x="918" y="126" w="80" h="24" z="560" orient="4" defn="master:export" link="-1" q="4" disable="false">
+        <User classid="UserCmp" name="master:export" id="1781739346" x="918" y="126" w="80" h="24" z="570" orient="4" defn="master:export" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="68967217">
             <param name="Name" value="Q_out" />
           </paramlist>
         </User>
-        <User classid="UserCmp" name="master:export" id="47418413" x="918" y="108" w="78" h="24" z="570" orient="4" defn="master:export" link="-1" q="4" disable="false">
+        <User classid="UserCmp" name="master:export" id="47418413" x="918" y="108" w="78" h="24" z="580" orient="4" defn="master:export" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="68967217">
             <param name="Name" value="P_out" />
           </paramlist>
         </User>
-        <User classid="UserCmp" name="master:export" id="818844609" x="918" y="144" w="75" h="24" z="550" orient="4" defn="master:export" link="-1" q="4" disable="false">
+        <User classid="UserCmp" name="master:export" id="818844609" x="918" y="144" w="75" h="24" z="560" orient="4" defn="master:export" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="68967217">
             <param name="Name" value="f_out" />
           </paramlist>
         </User>
-        <User classid="UserCmp" name="PSID_Library:LCLFilter" id="1958227927" x="486" y="144" w="138" h="98" z="530" orient="0" defn="PSID_Library:LCLFilter" link="-1" q="4" disable="false">
+        <User classid="UserCmp" name="PSID_Library:LCLFilter" id="1958227927" x="486" y="144" w="138" h="98" z="540" orient="0" defn="PSID_Library:LCLFilter" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="110858781">
             <param name="Name" value="" />
             <param name="lf" value="lf" />
@@ -25695,7 +26092,7 @@
             <param name="t_RAMP" value="t_RAMP" />
           </paramlist>
         </User>
-        <User classid="UserCmp" name="PSID_Library:VoltageModeControl" id="2079101627" x="450" y="270" w="133" h="116" z="510" orient="0" defn="PSID_Library:VoltageModeControl" link="-1" q="4" disable="false">
+        <User classid="UserCmp" name="PSID_Library:VoltageModeControl" id="2079101627" x="450" y="270" w="133" h="116" z="520" orient="0" defn="PSID_Library:VoltageModeControl" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="51491315">
             <param name="Name" value="" />
             <param name="kpv" value="kpv" />
@@ -25729,7 +26126,7 @@
             <param name="AL2" value="" />
           </paramlist>
         </User>
-        <User classid="UserCmp" name="PSID_Library:AverageConverter" id="2040622412" x="468" y="234" w="152" h="83" z="520" orient="0" defn="PSID_Library:AverageConverter" link="-1" q="4" disable="false">
+        <User classid="UserCmp" name="PSID_Library:AverageConverter" id="2040622412" x="468" y="234" w="152" h="83" z="530" orient="0" defn="PSID_Library:AverageConverter" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="85637438">
             <param name="Name" value="" />
           </paramlist>
@@ -25764,7 +26161,7 @@
             <param name="Name" value="S_base" />
           </paramlist>
         </User>
-        <User classid="UserCmp" name="PSID_Library:FixedDCSource" id="219331248" x="594" y="216" w="145" h="80" z="540" orient="0" defn="PSID_Library:FixedDCSource" link="-1" q="4" disable="false">
+        <User classid="UserCmp" name="PSID_Library:FixedDCSource" id="219331248" x="594" y="216" w="145" h="80" z="550" orient="0" defn="PSID_Library:FixedDCSource" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="44713234">
             <param name="Name" value="" />
             <param name="voltage" value="voltage" />
@@ -25871,32 +26268,32 @@
             <param name="Name" value="Q_ref" />
           </paramlist>
         </User>
-        <User classid="UserCmp" name="master:import" id="306202843" x="90" y="558" w="105" h="25" z="140" orient="0" defn="master:import" link="-1" q="4" disable="false">
+        <User classid="UserCmp" name="master:import" id="306202843" x="90" y="576" w="105" h="25" z="150" orient="0" defn="master:import" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="117509081">
             <param name="Name" value="filter_x0_1" />
           </paramlist>
         </User>
-        <User classid="UserCmp" name="master:import" id="78030962" x="90" y="576" w="105" h="25" z="160" orient="0" defn="master:import" link="-1" q="4" disable="false">
+        <User classid="UserCmp" name="master:import" id="78030962" x="90" y="594" w="105" h="25" z="170" orient="0" defn="master:import" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="117509081">
             <param name="Name" value="filter_x0_2" />
           </paramlist>
         </User>
-        <User classid="UserCmp" name="master:import" id="1387064648" x="90" y="594" w="105" h="25" z="180" orient="0" defn="master:import" link="-1" q="4" disable="false">
+        <User classid="UserCmp" name="master:import" id="1387064648" x="90" y="612" w="105" h="25" z="190" orient="0" defn="master:import" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="117509081">
             <param name="Name" value="filter_x0_3" />
           </paramlist>
         </User>
-        <User classid="UserCmp" name="master:import" id="1133900060" x="90" y="612" w="105" h="25" z="200" orient="0" defn="master:import" link="-1" q="4" disable="false">
+        <User classid="UserCmp" name="master:import" id="1133900060" x="90" y="630" w="105" h="25" z="210" orient="0" defn="master:import" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="117509081">
             <param name="Name" value="filter_x0_4" />
           </paramlist>
         </User>
-        <User classid="UserCmp" name="master:import" id="343256184" x="90" y="630" w="105" h="25" z="220" orient="0" defn="master:import" link="-1" q="4" disable="false">
+        <User classid="UserCmp" name="master:import" id="343256184" x="90" y="648" w="105" h="25" z="230" orient="0" defn="master:import" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="117509081">
             <param name="Name" value="filter_x0_5" />
           </paramlist>
         </User>
-        <User classid="UserCmp" name="master:import" id="1972206894" x="90" y="648" w="105" h="25" z="240" orient="0" defn="master:import" link="-1" q="4" disable="false">
+        <User classid="UserCmp" name="master:import" id="1972206894" x="90" y="666" w="105" h="25" z="250" orient="0" defn="master:import" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="117509081">
             <param name="Name" value="filter_x0_6" />
           </paramlist>
@@ -25913,7 +26310,7 @@
             <param name="AL2" value="" />
           </paramlist>
         </User>
-        <User classid="UserCmp" name="master:annotation" id="1645547545" x="162" y="522" w="44" h="20" z="1" orient="0" defn="master:annotation" link="-1" q="4" disable="false">
+        <User classid="UserCmp" name="master:annotation" id="1645547545" x="162" y="540" w="44" h="20" z="1" orient="0" defn="master:annotation" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="5338603">
             <param name="AL1" value="FILTER" />
             <param name="AL2" value="" />
@@ -25970,121 +26367,121 @@
           <vertex x="0" y="0" />
           <vertex x="0" y="-18" />
         </Wire>
-        <User classid="UserCmp" name="master:import" id="499385491" x="216" y="558" w="53" h="25" z="150" orient="0" defn="master:import" link="-1" q="4" disable="false">
+        <User classid="UserCmp" name="master:import" id="499385491" x="216" y="576" w="53" h="25" z="160" orient="0" defn="master:import" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="117509081">
             <param name="Name" value="lf" />
           </paramlist>
         </User>
-        <User classid="UserCmp" name="master:import" id="536966439" x="216" y="576" w="58" h="25" z="170" orient="0" defn="master:import" link="-1" q="4" disable="false">
+        <User classid="UserCmp" name="master:import" id="536966439" x="216" y="594" w="58" h="25" z="180" orient="0" defn="master:import" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="117509081">
             <param name="Name" value="rg" />
           </paramlist>
         </User>
-        <User classid="UserCmp" name="master:import" id="1641552101" x="216" y="594" w="55" h="25" z="190" orient="0" defn="master:import" link="-1" q="4" disable="false">
+        <User classid="UserCmp" name="master:import" id="1641552101" x="216" y="612" w="55" h="25" z="200" orient="0" defn="master:import" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="117509081">
             <param name="Name" value="rf" />
           </paramlist>
         </User>
-        <User classid="UserCmp" name="master:import" id="1778690349" x="216" y="612" w="57" h="25" z="210" orient="0" defn="master:import" link="-1" q="4" disable="false">
+        <User classid="UserCmp" name="master:import" id="1778690349" x="216" y="630" w="57" h="25" z="220" orient="0" defn="master:import" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="117509081">
             <param name="Name" value="cf" />
           </paramlist>
         </User>
-        <User classid="UserCmp" name="master:import" id="212468652" x="216" y="630" w="56" h="25" z="230" orient="0" defn="master:import" link="-1" q="4" disable="false">
+        <User classid="UserCmp" name="master:import" id="212468652" x="216" y="648" w="56" h="25" z="240" orient="0" defn="master:import" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="117509081">
             <param name="Name" value="lg" />
           </paramlist>
         </User>
-        <User classid="UserCmp" name="master:import" id="1451985370" x="252" y="882" w="55" h="25" z="350" orient="0" defn="master:import" link="-1" q="4" disable="false">
+        <User classid="UserCmp" name="master:import" id="1451985370" x="252" y="900" w="55" h="25" z="360" orient="0" defn="master:import" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="117509081">
             <param name="Name" value="lv" />
           </paramlist>
         </User>
-        <User classid="UserCmp" name="master:import" id="2073350546" x="252" y="864" w="57" h="25" z="330" orient="0" defn="master:import" link="-1" q="4" disable="false">
+        <User classid="UserCmp" name="master:import" id="2073350546" x="252" y="882" w="57" h="25" z="340" orient="0" defn="master:import" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="117509081">
             <param name="Name" value="rv" />
           </paramlist>
         </User>
-        <User classid="UserCmp" name="master:import" id="1292114786" x="252" y="846" w="67" h="25" z="310" orient="0" defn="master:import" link="-1" q="4" disable="false">
+        <User classid="UserCmp" name="master:import" id="1292114786" x="252" y="864" w="67" h="25" z="320" orient="0" defn="master:import" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="117509081">
             <param name="Name" value="kffv" />
           </paramlist>
         </User>
-        <User classid="UserCmp" name="master:import" id="1190352555" x="252" y="828" w="61" h="25" z="290" orient="0" defn="master:import" link="-1" q="4" disable="false">
+        <User classid="UserCmp" name="master:import" id="1190352555" x="252" y="846" w="61" h="25" z="300" orient="0" defn="master:import" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="117509081">
             <param name="Name" value="kiv" />
           </paramlist>
         </User>
-        <User classid="UserCmp" name="master:import" id="487696467" x="252" y="810" w="66" h="25" z="270" orient="0" defn="master:import" link="-1" q="4" disable="false">
+        <User classid="UserCmp" name="master:import" id="487696467" x="252" y="828" w="66" h="25" z="280" orient="0" defn="master:import" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="117509081">
             <param name="Name" value="kpv" />
           </paramlist>
         </User>
-        <User classid="UserCmp" name="master:import" id="129644869" x="252" y="900" w="66" h="25" z="370" orient="0" defn="master:import" link="-1" q="4" disable="false">
+        <User classid="UserCmp" name="master:import" id="129644869" x="252" y="918" w="66" h="25" z="380" orient="0" defn="master:import" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="117509081">
             <param name="Name" value="kpc" />
           </paramlist>
         </User>
-        <User classid="UserCmp" name="master:import" id="888949404" x="252" y="918" w="61" h="25" z="380" orient="0" defn="master:import" link="-1" q="4" disable="false">
+        <User classid="UserCmp" name="master:import" id="888949404" x="252" y="936" w="61" h="25" z="390" orient="0" defn="master:import" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="117509081">
             <param name="Name" value="kic" />
           </paramlist>
         </User>
-        <User classid="UserCmp" name="master:import" id="724694383" x="252" y="954" w="104" h="25" z="400" orient="0" defn="master:import" link="-1" q="4" disable="false">
+        <User classid="UserCmp" name="master:import" id="724694383" x="252" y="972" w="104" h="25" z="410" orient="0" defn="master:import" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="117509081">
             <param name="Name" value="omega_ad" />
           </paramlist>
         </User>
-        <User classid="UserCmp" name="master:import" id="434957061" x="252" y="936" w="63" h="25" z="390" orient="0" defn="master:import" link="-1" q="4" disable="false">
+        <User classid="UserCmp" name="master:import" id="434957061" x="252" y="954" w="63" h="25" z="400" orient="0" defn="master:import" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="117509081">
             <param name="Name" value="kffi" />
           </paramlist>
         </User>
-        <User classid="UserCmp" name="master:import" id="849441963" x="252" y="972" w="66" h="25" z="410" orient="0" defn="master:import" link="-1" q="4" disable="false">
+        <User classid="UserCmp" name="master:import" id="849441963" x="252" y="990" w="66" h="25" z="420" orient="0" defn="master:import" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="117509081">
             <param name="Name" value="kad" />
           </paramlist>
         </User>
-        <User classid="UserCmp" name="master:import" id="1640883641" x="216" y="738" w="87" h="25" z="250" orient="0" defn="master:import" link="-1" q="4" disable="false">
+        <User classid="UserCmp" name="master:import" id="1640883641" x="216" y="756" w="87" h="25" z="260" orient="0" defn="master:import" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="117509081">
             <param name="Name" value="voltage" />
           </paramlist>
         </User>
-        <User classid="UserCmp" name="master:import" id="124644429" x="252" y="1044" w="95" h="25" z="430" orient="0" defn="master:import" link="-1" q="4" disable="false">
+        <User classid="UserCmp" name="master:import" id="124644429" x="252" y="1062" w="95" h="25" z="440" orient="0" defn="master:import" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="117509081">
             <param name="Name" value="omega_f" />
           </paramlist>
         </User>
-        <User classid="UserCmp" name="master:import" id="1002886130" x="252" y="1062" w="60" h="25" z="450" orient="0" defn="master:import" link="-1" q="4" disable="false">
+        <User classid="UserCmp" name="master:import" id="1002886130" x="252" y="1080" w="60" h="25" z="460" orient="0" defn="master:import" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="117509081">
             <param name="Name" value="kq" />
           </paramlist>
         </User>
-        <User classid="UserCmp" name="master:annotation" id="267183435" x="162" y="666" w="74" h="20" z="1" orient="0" defn="master:annotation" link="-1" q="4" disable="false">
+        <User classid="UserCmp" name="master:annotation" id="267183435" x="162" y="684" w="74" h="20" z="1" orient="0" defn="master:annotation" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="5338603">
             <param name="AL1" value="CONVERTER" />
             <param name="AL2" value="" />
           </paramlist>
         </User>
-        <User classid="UserCmp" name="master:annotation" id="459244758" x="162" y="702" w="70" h="20" z="1" orient="0" defn="master:annotation" link="-1" q="4" disable="false">
+        <User classid="UserCmp" name="master:annotation" id="459244758" x="162" y="720" w="70" h="20" z="1" orient="0" defn="master:annotation" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="5338603">
             <param name="AL1" value="DC SOURCE" />
             <param name="AL2" value="" />
           </paramlist>
         </User>
-        <User classid="UserCmp" name="master:annotation" id="2006782586" x="162" y="756" w="98" h="20" z="1" orient="0" defn="master:annotation" link="-1" q="4" disable="false">
+        <User classid="UserCmp" name="master:annotation" id="2006782586" x="162" y="774" w="98" h="20" z="1" orient="0" defn="master:annotation" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="5338603">
             <param name="AL1" value="INNER CONTROL" />
             <param name="AL2" value="" />
           </paramlist>
         </User>
-        <User classid="UserCmp" name="master:annotation" id="1699315553" x="162" y="990" w="102" h="20" z="1" orient="0" defn="master:annotation" link="-1" q="4" disable="false">
+        <User classid="UserCmp" name="master:annotation" id="1699315553" x="162" y="1008" w="102" h="20" z="1" orient="0" defn="master:annotation" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="5338603">
             <param name="AL1" value="OUTER CONTROL" />
             <param name="AL2" value="" />
           </paramlist>
         </User>
-        <User classid="UserCmp" name="master:annotation" id="467341654" x="162" y="1152" w="144" h="20" z="1" orient="0" defn="master:annotation" link="-1" q="4" disable="false">
+        <User classid="UserCmp" name="master:annotation" id="467341654" x="162" y="1170" w="144" h="20" z="1" orient="0" defn="master:annotation" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="5338603">
             <param name="AL1" value="FREQUENCY ESTIMATOR" />
             <param name="AL2" value="" />
@@ -26102,7 +26499,7 @@
           <vertex x="0" y="0" />
           <vertex x="36" y="0" />
         </Wire>
-        <User classid="UserCmp" name="PSID_Library:FixedFrequency" id="822903436" x="432" y="396" w="158" h="69" z="490" orient="0" defn="PSID_Library:FixedFrequency" link="-1" q="4" disable="false">
+        <User classid="UserCmp" name="PSID_Library:FixedFrequency" id="822903436" x="432" y="396" w="158" h="69" z="500" orient="0" defn="PSID_Library:FixedFrequency" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="85637438">
             <param name="Name" value="" />
             <param name="omega_lp" value="omega_lp" />
@@ -26135,8 +26532,8 @@
             <param name="ymax" value="1" />
           </paramlist>
         </User>
-        <User classid="UserCmp" name="PSID_Library:ActiveDroop_ReactiveDroop" id="966491600" x="486" y="378" w="233" h="116" z="500" orient="0" defn="PSID_Library:ActiveDroop_ReactiveDroop" link="-1" q="4" disable="false">
-          <paramlist link="-1" name="" crc="50441623">
+        <User classid="UserCmp" name="PSID_Library:ActiveDroop_ReactiveDroop" id="966491600" x="486" y="378" w="233" h="116" z="510" orient="0" defn="PSID_Library:ActiveDroop_ReactiveDroop" link="-1" q="4" disable="false">
+          <paramlist link="-1" name="" crc="31269303">
             <param name="Name" value="" />
             <param name="Ta" value="Ta" />
             <param name="kd" value="kd" />
@@ -26152,6 +26549,7 @@
             <param name="Rp" value="Rp" />
             <param name="omega_z" value="omega_z" />
             <param name="INV" value="INV" />
+            <param name="w_sys" value="w_sys" />
           </paramlist>
           <paramlist link="1543432329" name="">
             <param name="xmin" value="0.0" />
@@ -26190,57 +26588,57 @@
             <param name="ymax" value="1" />
           </paramlist>
         </User>
-        <User classid="UserCmp" name="master:import" id="1350344341" x="252" y="1080" w="61" h="25" z="470" orient="0" defn="master:import" link="-1" q="4" disable="false">
+        <User classid="UserCmp" name="master:import" id="1350344341" x="252" y="1098" w="61" h="25" z="480" orient="0" defn="master:import" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="117509081">
             <param name="Name" value="Rp" />
           </paramlist>
         </User>
-        <User classid="UserCmp" name="master:import" id="1064370673" x="252" y="1098" w="96" h="25" z="480" orient="0" defn="master:import" link="-1" q="4" disable="false">
+        <User classid="UserCmp" name="master:import" id="1064370673" x="252" y="1116" w="96" h="25" z="490" orient="0" defn="master:import" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="117509081">
             <param name="Name" value="omega_z" />
           </paramlist>
         </User>
-        <User classid="UserCmp" name="master:import" id="28037140" x="144" y="900" w="146" h="25" z="360" orient="0" defn="master:import" link="-1" q="4" disable="false">
+        <User classid="UserCmp" name="master:import" id="28037140" x="144" y="918" w="146" h="25" z="370" orient="0" defn="master:import" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="117509081">
             <param name="Name" value="innercontrol_x0_6" />
           </paramlist>
         </User>
-        <User classid="UserCmp" name="master:import" id="750759246" x="144" y="882" w="146" h="25" z="340" orient="0" defn="master:import" link="-1" q="4" disable="false">
+        <User classid="UserCmp" name="master:import" id="750759246" x="144" y="900" w="146" h="25" z="350" orient="0" defn="master:import" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="117509081">
             <param name="Name" value="innercontrol_x0_5" />
           </paramlist>
         </User>
-        <User classid="UserCmp" name="master:import" id="814245458" x="144" y="864" w="146" h="25" z="320" orient="0" defn="master:import" link="-1" q="4" disable="false">
+        <User classid="UserCmp" name="master:import" id="814245458" x="144" y="882" w="146" h="25" z="330" orient="0" defn="master:import" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="117509081">
             <param name="Name" value="innercontrol_x0_4" />
           </paramlist>
         </User>
-        <User classid="UserCmp" name="master:import" id="1652106804" x="144" y="846" w="146" h="25" z="300" orient="0" defn="master:import" link="-1" q="4" disable="false">
+        <User classid="UserCmp" name="master:import" id="1652106804" x="144" y="864" w="146" h="25" z="310" orient="0" defn="master:import" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="117509081">
             <param name="Name" value="innercontrol_x0_3" />
           </paramlist>
         </User>
-        <User classid="UserCmp" name="master:import" id="7717257" x="144" y="828" w="146" h="25" z="280" orient="0" defn="master:import" link="-1" q="4" disable="false">
+        <User classid="UserCmp" name="master:import" id="7717257" x="144" y="846" w="146" h="25" z="290" orient="0" defn="master:import" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="117509081">
             <param name="Name" value="innercontrol_x0_2" />
           </paramlist>
         </User>
-        <User classid="UserCmp" name="master:import" id="2144736878" x="144" y="810" w="146" h="25" z="260" orient="0" defn="master:import" link="-1" q="4" disable="false">
+        <User classid="UserCmp" name="master:import" id="2144736878" x="144" y="828" w="146" h="25" z="270" orient="0" defn="master:import" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="117509081">
             <param name="Name" value="innercontrol_x0_1" />
           </paramlist>
         </User>
-        <User classid="UserCmp" name="master:import" id="662748937" x="144" y="1080" w="149" h="25" z="460" orient="0" defn="master:import" link="-1" q="4" disable="false">
+        <User classid="UserCmp" name="master:import" id="662748937" x="144" y="1098" w="149" h="25" z="470" orient="0" defn="master:import" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="117509081">
             <param name="Name" value="outercontrol_x0_3" />
           </paramlist>
         </User>
-        <User classid="UserCmp" name="master:import" id="2073029439" x="144" y="1062" w="149" h="25" z="440" orient="0" defn="master:import" link="-1" q="4" disable="false">
+        <User classid="UserCmp" name="master:import" id="2073029439" x="144" y="1080" w="149" h="25" z="450" orient="0" defn="master:import" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="117509081">
             <param name="Name" value="outercontrol_x0_2" />
           </paramlist>
         </User>
-        <User classid="UserCmp" name="master:import" id="504391699" x="144" y="1044" w="149" h="25" z="420" orient="0" defn="master:import" link="-1" q="4" disable="false">
+        <User classid="UserCmp" name="master:import" id="504391699" x="144" y="1062" w="149" h="25" z="430" orient="0" defn="master:import" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="117509081">
             <param name="Name" value="outercontrol_x0_1" />
           </paramlist>
@@ -26304,13 +26702,18 @@
             <param name="Name" value="V_ref_dq" />
           </paramlist>
         </User>
+        <User classid="UserCmp" name="master:import" id="203168558" x="90" y="522" w="80" h="25" z="140" orient="0" defn="master:import" link="-1" q="4" disable="false">
+          <paramlist link="-1" name="" crc="117509081">
+            <param name="Name" value="w_sys" />
+          </paramlist>
+        </User>
       </schematic>
       <references>
         <using namespace="master" />
         <using namespace="Kenyon_Library" />
         <using namespace="PSID_Library" />
       </references>
-      <graphics>
+      <graphics size="4">
         <paramlist />
         <Port id="702197833" classid="Port" x="108" y="0">
           <paramlist>
@@ -27628,7 +28031,7 @@
         <grouping />
       </schematic>
     </Definition>
-    <Definition classid="UserCmpDefn" name="Main" id="1668162628" group="" url="" version="" build="" crc="2239856" view="false" date="0">
+    <Definition classid="UserCmpDefn" name="Main" id="1668162628" group="" url="" version="" build="" crc="63129080" view="false" date="0">
       <paramlist name="">
         <param name="Description" value="" />
       </paramlist>
@@ -27730,7 +28133,7 @@
           </paramlist>
         </User>
         <User classid="UserCmp" name="PSID_Library_Inverters:DROOP_GFM" id="461198950" x="180" y="216" w="115" h="78" z="-1" orient="0" defn="PSID_Library_Inverters:DROOP_GFM" link="-1" q="4" disable="false">
-          <paramlist link="-1" name="" crc="40294781">
+          <paramlist link="-1" name="" crc="104048060">
             <param name="Name" value="" />
             <param name="f_base" value="60" />
             <param name="S_base" value="1" />
@@ -27800,6 +28203,7 @@
             <param name="innercontrol_x0_6" value="0" />
             <param name="t_INV" value="0.0" />
             <param name="t_RAMP" value="0" />
+            <param name="w_sys" value="0" />
           </paramlist>
         </User>
         <User classid="UserCmp" name="PSID_Library_Inverters:GFL" id="439422545" x="180" y="324" w="115" h="78" z="-1" orient="0" defn="PSID_Library_Inverters:GFL" link="-1" q="4" disable="false">
@@ -32611,7 +33015,7 @@ https://www.phasetophase.nl/pdf/SynchronousMachineTurbineGoverningSystems.pdf]]>
         </Gfx>
       </graphics>
     </Definition>
-    <Definition classid="UserCmpDefn" name="SIMPLE_MACHINE" group="" url="" version="" build="" crc="50646519" instances="0" key="" view="false" date="1660506476" id="749716552">
+    <Definition classid="UserCmpDefn" name="SIMPLE_MACHINE" group="" url="" version="" build="" crc="50646519" instances="0" key="" view="false" date="1661788659" id="749716552">
       <paramlist name="">
         <param name="Description" value="" />
       </paramlist>
@@ -33629,8 +34033,8 @@ https://www.phasetophase.nl/pdf/SynchronousMachineTurbineGoverningSystems.pdf]]>
     </paramlist>
   </GlobalSubstitutions>
   <hierarchy>
-    <call link="1936547532" name="PSID_Library_Inverters:Station" z="-1" view="false" instance="0">
-      <call link="223495102" name="PSID_Library_Inverters:Main" z="-1" view="false" instance="0">
+    <call link="311054094" name="PSID_Library_Inverters:Station" z="-1" view="false" instance="0">
+      <call link="223495102" name="PSID_Library_Inverters:Main" z="-1" view="true" instance="0">
         <call link="788221067" name="PSID_Library_Inverters:DEMETRIOUS_SG" z="-1" view="false" instance="0">
           <call link="13104666" name="PSID_Library:BPA_GG" z="540" view="false" instance="0" />
           <call link="1559344279" name="PSID_Library:IEEET1" z="550" view="false" instance="0">
@@ -33656,11 +34060,11 @@ https://www.phasetophase.nl/pdf/SynchronousMachineTurbineGoverningSystems.pdf]]>
           <call link="1760640988" name="PSID_Library:FixedDCSource" z="520" view="false" instance="0" />
         </call>
         <call link="461198950" name="PSID_Library_Inverters:DROOP_GFM" z="-1" view="false" instance="0">
-          <call link="822903436" name="PSID_Library:FixedFrequency" z="490" view="false" instance="0" />
-          <call link="966491600" name="PSID_Library:ActiveDroop_ReactiveDroop" z="500" view="false" instance="0" />
-          <call link="2079101627" name="PSID_Library:VoltageModeControl" z="510" view="false" instance="0" />
-          <call link="2040622412" name="PSID_Library:AverageConverter" z="520" view="false" instance="1" />
-          <call link="1958227927" name="PSID_Library:LCLFilter" z="530" view="false" instance="1">
+          <call link="822903436" name="PSID_Library:FixedFrequency" z="500" view="false" instance="0" />
+          <call link="966491600" name="PSID_Library:ActiveDroop_ReactiveDroop" z="510" view="false" instance="0" />
+          <call link="2079101627" name="PSID_Library:VoltageModeControl" z="520" view="false" instance="0" />
+          <call link="2040622412" name="PSID_Library:AverageConverter" z="530" view="false" instance="1" />
+          <call link="1958227927" name="PSID_Library:LCLFilter" z="540" view="false" instance="1">
             <call link="777028743" name="PSID_Library:dq_ri" z="490" view="false" instance="4" />
             <call link="514904379" name="PSID_Library:dq_ri" z="850" view="false" instance="5" />
             <call link="2092800291" name="PSID_Library:dq_ri" z="860" view="false" instance="6" />
@@ -33668,7 +34072,7 @@ https://www.phasetophase.nl/pdf/SynchronousMachineTurbineGoverningSystems.pdf]]>
             <call link="1215232083" name="PSID_Library:ri_abc" z="1000" view="false" instance="2" />
             <call link="909248648" name="PSID_Library:ri_abc" z="1070" view="false" instance="3" />
           </call>
-          <call link="219331248" name="PSID_Library:FixedDCSource" z="540" view="false" instance="1" />
+          <call link="219331248" name="PSID_Library:FixedDCSource" z="550" view="false" instance="1" />
         </call>
         <call link="238600983" name="PSID_Library_Inverters:DARCO_VSM" z="-1" view="false" instance="0">
           <call link="356470831" name="PSID_Library:KauraPLL" z="570" view="false" instance="0">
@@ -33687,7 +34091,7 @@ https://www.phasetophase.nl/pdf/SynchronousMachineTurbineGoverningSystems.pdf]]>
           </call>
           <call link="1730679757" name="PSID_Library:FixedDCSource" z="620" view="false" instance="2" />
         </call>
-        <call link="938464238" name="PSID_Library_Inverters:SIMPLE_MACHINE" z="-1" view="true" instance="0" />
+        <call link="938464238" name="PSID_Library_Inverters:SIMPLE_MACHINE" z="-1" view="false" instance="0" />
         <call link="1923570403" name="PSID_Library_Inverters:SEXS_GAST" z="-1" view="false" instance="0">
           <call link="1585206052" name="PSID_Library:SEXS" z="580" view="false" instance="0" />
           <call link="1645426511" name="PSID_Library:GAST" z="590" view="false" instance="0" />

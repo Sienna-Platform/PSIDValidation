@@ -19,7 +19,10 @@ t_offset = 10.0                          #only collect data starting at t_offset
 saveat = 5e-5
 time_step = 5e-6 
 t_span = (0.0, 3.0)
-output_csv_name = "pscad"
+ref_bus_generator = "generator-102-1"    #TODO - automate 
+frequency_reference = "ConstantFrequency"  #["ReferenceBus, "ConstantFrequency"]
+output_csv_name = "pscad_refbus_102"
+
 ######################################################################
 ######################################################################
 ######################################################################
@@ -56,16 +59,39 @@ rm(pscad_output_folder_path, recursive=true, force=true)
 
 #Start up PSCAD and read the PSID system
 pscad = PP.basic_pscad_startup()
-sleep(2)    #Need to wait for the last closed workspace to load and then load the one below
+sleep(3)    #Need to wait for the last closed workspace to load and then load the one below
 pscad.load(PyObject(joinpath(@__DIR__, "..", "pscad_files", pscad_workspace)))
 project = pscad.project(pscad_case)
 sys = System(joinpath(@__DIR__, "..", "psid_files", "system.json"))
 
 #Generic Parameterization (should run this function for every case)
+function enable_gens_by_type(sys, project)
+    for g in get_components(DynamicInjection, sys)
+        psid_name = get_name(g)
+        for f in project.find_all(psid_name)
+            f.add_to_layer("disabled_gens")
+        end 
+        if typeof(g) <: DynamicInverter
+            project.find("PSID_Library_Inverters:DARCO_VSM", psid_name).add_to_layer("enabled_gens") #TODO - distinguish between the types of inverters! 
+        end 
+        if typeof(g) <: DynamicGenerator
+            project.find("PSID_Library_Inverters:SIMPLE_MACHINE", psid_name).add_to_layer("enabled_gens")
+        end  
+    end 
+end 
+enable_gens_by_type(sys, project)
 parameterize_system(sys, project)       
 
 #Special Parameterizations for this particular system/study
-PP.update_parameter_by_name(project.find("generator-102-1"), "omega_ref", "Freq_out")
+PP.update_parameter_by_name(project.find(ref_bus_generator, layer="enabled_gens"), "f_out", "ref_freq_out")
+if frequency_reference == "ReferenceBus"
+    PP.update_parameter_by_name(project.find("w_sys_selector"), "Value", 0)
+elseif frequency_reference == "ConstantFrequency"
+    PP.update_parameter_by_name(project.find("w_sys_selector"), "Value", 1)
+else 
+    @error "invaled value of frequency reference"
+end 
+
 if perturbation_type == "LoadStepDown"
     PP.update_parameter_by_name(project.find("t_LoadStepDownConstant"), "Value", 10.1 )
     PP.update_parameter_by_name(project.find("t_LoadStepUpConstant"), "Value", 100.0 )
@@ -83,8 +109,8 @@ else
 end 
 #See https://www.pscad.com/webhelp-v5-al/reference/project.html#properties for additional keywords
 set_project_parameters!(project; time_duration = t_span[2] + t_offset, sample_step = saveat*1e6, time_step = time_step*1e6,)   
-
 #Run PSCAD, quit when finished, and shutdown logging 
+
 project.run()
 pscad.quit()
 logging.shutdown()

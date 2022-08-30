@@ -23,7 +23,7 @@
     <param name="Warn" value="0" />
     <param name="Check" value="0" />
     <param name="description" value="" />
-    <param name="revisor" value="Matt Bossart, 1661465918" />
+    <param name="revisor" value="Matt Bossart, 1661798681" />
   </paramlist>
   <Layers>
     <Layer id="563951131" classid="Layer" name="dev" state="Disabled">
@@ -1289,7 +1289,7 @@
         </Wire>
       </schematic>
     </Definition>
-    <Definition classid="UserCmpDefn" name="Main" id="1334321687" group="" url="" version="" build="" crc="120794448" view="false" date="1661372297">
+    <Definition classid="UserCmpDefn" name="Main" id="1334321687" group="" url="" version="" build="" crc="66577484" view="false" date="1661372297">
       <paramlist name="">
         <param name="Description" value="" />
       </paramlist>
@@ -1336,7 +1336,8 @@
           <param name="virtual_filter" value="" />
           <param name="animation_freq" value="500" />
         </paramlist>
-        <grouping />
+        <grouping>
+        </grouping>
         <User classid="UserCmp" defn="master:newpi" id="400838062" x="612" y="144" w="116" h="22" z="1" orient="0" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="21478764">
             <param name="Name" value="BUS1-BUS2-i_1" />
@@ -1482,7 +1483,7 @@
           </paramlist>
         </User>
         <User classid="UserCmp" name="PSID_Library_Inverters:DROOP_GFM" id="996706454" x="1314" y="270" w="115" h="78" z="340" orient="4" defn="PSID_Library_Inverters:DROOP_GFM" link="-1" q="4" disable="false">
-          <paramlist link="-1" name="" crc="40294781">
+          <paramlist link="-1" name="" crc="104048060">
             <param name="Name" value="generator-102-1" />
             <param name="f_base" value="60.0" />
             <param name="S_base" value="100.0" />
@@ -1552,6 +1553,7 @@
             <param name="innercontrol_x0_6" value="-0.09942039468102597" />
             <param name="t_INV" value="t_INV" />
             <param name="t_RAMP" value="t_RAMP" />
+            <param name="w_sys" value="0" />
           </paramlist>
         </User>
         <Wire classid="Bus" name="" id="1751064569" x="432" y="126" w="41" h="118" orient="0" disable="false">
@@ -3190,15 +3192,15 @@
   </definitions>
   <List classid="Resource" />
   <hierarchy>
-    <call link="326283669" name="sauerpai_3bus_infinitebus:DS" z="-1" view="false" instance="0">
+    <call link="1290035220" name="sauerpai_3bus_infinitebus:DS" z="-1" view="false" instance="0">
       <call link="1255703834" name="sauerpai_3bus_infinitebus:Main" z="-1" view="true" instance="0">
         <call link="1851570176" name="PSID_Library_Inverters:SIMPLE_MACHINE" z="330" view="false" instance="0" />
         <call link="996706454" name="PSID_Library_Inverters:DROOP_GFM" z="340" view="false" instance="0">
-          <call link="822903436" name="PSID_Library:FixedFrequency" z="490" view="false" instance="0" />
-          <call link="966491600" name="PSID_Library:ActiveDroop_ReactiveDroop" z="500" view="false" instance="0" />
-          <call link="2079101627" name="PSID_Library:VoltageModeControl" z="510" view="false" instance="0" />
-          <call link="2040622412" name="PSID_Library:AverageConverter" z="520" view="false" instance="0" />
-          <call link="1958227927" name="PSID_Library:LCLFilter" z="530" view="false" instance="0">
+          <call link="822903436" name="PSID_Library:FixedFrequency" z="500" view="false" instance="0" />
+          <call link="966491600" name="PSID_Library:ActiveDroop_ReactiveDroop" z="510" view="false" instance="0" />
+          <call link="2079101627" name="PSID_Library:VoltageModeControl" z="520" view="false" instance="0" />
+          <call link="2040622412" name="PSID_Library:AverageConverter" z="530" view="false" instance="0" />
+          <call link="1958227927" name="PSID_Library:LCLFilter" z="540" view="false" instance="0">
             <call link="777028743" name="PSID_Library:dq_ri" z="490" view="false" instance="0" />
             <call link="514904379" name="PSID_Library:dq_ri" z="850" view="false" instance="1" />
             <call link="2092800291" name="PSID_Library:dq_ri" z="860" view="false" instance="2" />
@@ -3206,7 +3208,7 @@
             <call link="1215232083" name="PSID_Library:ri_abc" z="1000" view="false" instance="0" />
             <call link="909248648" name="PSID_Library:ri_abc" z="1070" view="false" instance="1" />
           </call>
-          <call link="219331248" name="PSID_Library:FixedDCSource" z="540" view="false" instance="0" />
+          <call link="219331248" name="PSID_Library:FixedDCSource" z="550" view="false" instance="0" />
         </call>
       </call>
     </call>

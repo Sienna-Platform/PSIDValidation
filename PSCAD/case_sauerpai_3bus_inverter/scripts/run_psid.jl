@@ -42,7 +42,7 @@ for g in get_components(Generator, sys)
         case_gen = dyn_gen_sauerpai(g)
         add_component!(sys, case_gen, g)
     elseif get_number(get_bus(g)) == 102
-        case_gen = inv_darco_droop(g)
+        case_gen = inv_case78(g)  #  inv_darco_droop(g)       
         add_component!(sys, case_gen, g)
     end
 end

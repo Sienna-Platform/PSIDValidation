@@ -256,9 +256,13 @@ function write_parameters(
     pscad_component_name,
     pscad_project,
 )
-    pscad_component = pscad_project.find(pscad_component_name)
+    pscad_component = pscad_project.find(pscad_component_name, layer ="enabled_gens")
     pscad_params = pscad_component.parameters()
     psid_dynamic_injector = get_dynamic_injector(psid_component)
+
+    pscad_params["P_out"] = string("P_out_", get_number(get_bus(psid_component)))
+    pscad_params["Q_out"] = string("Q_out_", get_number(get_bus(psid_component)))
+    pscad_params["f_out"] = string("f_out_", get_number(get_bus(psid_component)))
 
     write_rating!(pscad_params, psid_component, psid_dynamic_injector)
 
@@ -338,7 +342,7 @@ function write_parameters(
     pscad_component_name,
     pscad_project,
 )
-    pscad_component = pscad_project.find(pscad_component_name)
+    pscad_component = pscad_project.find(pscad_component_name, layer ="enabled_gens")
     pscad_params = pscad_component.parameters()
 
     pscad_params["Vbase"] = get_base_voltage(get_bus(psid_component))
@@ -390,7 +394,7 @@ function write_parameters(
     pscad_component_name,
     pscad_project,
 )
-    pscad_component = pscad_project.find(pscad_component_name)
+    pscad_component = pscad_project.find(pscad_component_name, layer ="enabled_gens")
     pscad_params = pscad_component.parameters()
  
     write_parameters!(pscad_params, psid_component.machine)
@@ -411,7 +415,7 @@ function write_parameters(
     pscad_component_name,
     pscad_project,
 )
-    pscad_component = pscad_project.find(pscad_component_name)
+    pscad_component = pscad_project.find(pscad_component_name, layer ="enabled_gens")
     pscad_params = pscad_component.parameters()
 
     write_parameters!(pscad_params, psid_component.filter)
@@ -423,6 +427,7 @@ function write_parameters(
 
     pscad_params["t_INV"] = "t_INV"
     pscad_params["t_RAMP"] = "t_RAMP"
+
     PP.update_parameter_by_dictionary(pscad_component, pscad_params)
 end
 
@@ -447,7 +452,7 @@ function write_initial_conditions(
     pscad_project,
     x0_dict,
 )
-    pscad_component = pscad_project.find(pscad_component_name)
+    pscad_component = pscad_project.find(pscad_component_name, layer = "enabled_gens")
     pscad_params = pscad_component.parameters()
     pscad_params["V_pf"] = get_magnitude(get_bus(psid_component))
     pscad_params["theta_pf"] = get_angle(get_bus(psid_component))
@@ -460,7 +465,7 @@ function write_initial_conditions(
     pscad_project,
     x0_dict,
 )
-    pscad_component = pscad_project.find(pscad_component_name)
+    pscad_component = pscad_project.find(pscad_component_name, layer ="enabled_gens")
     pscad_params = pscad_component.parameters()
 
     for (i, state) in enumerate(get_states(psid_component.avr))
@@ -480,7 +485,7 @@ function write_initial_conditions(
     pscad_project,
     x0_dict,
 )
-    pscad_component = pscad_project.find(pscad_component_name)
+    pscad_component = pscad_project.find(pscad_component_name, layer ="enabled_gens")
     pscad_params = pscad_component.parameters()
     for (i, state) in enumerate(get_states(psid_component.filter))
         name = "filter_x0_" * string(i)
@@ -515,7 +520,7 @@ function write_setpoints(
     pscad_project,
     setpoints_dict,
 )
-    pscad_component = pscad_project.find(pscad_component_name)
+    pscad_component = pscad_project.find(pscad_component_name, layer ="enabled_gens")
     pscad_params = pscad_component.parameters()
 
     pscad_params["V_ref"] = setpoints_dict[get_name(psid_component)]["V_ref"]
