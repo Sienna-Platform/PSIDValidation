@@ -638,6 +638,19 @@ function inv_darco_droop(static_device)
     ) #pss
 end
 
+function inv_gfoll(static_device)
+    return PSY.DynamicInverter(
+        get_name(static_device),
+        1.0, #ω_ref
+        converter_low_power(), #converter
+        outer_control_gfoll(), #outercontrol
+        current_mode_inner(), #inner_control
+        dc_source_lv(),
+        reduced_pll(),
+        filt_gfoll(),
+    ) #pss
+end
+
 function dyn_gen_sauerpai(generator)
     return PSY.DynamicGenerator(
         name = get_name(generator), #static generator
