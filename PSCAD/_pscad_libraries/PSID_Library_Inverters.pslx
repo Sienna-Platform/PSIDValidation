@@ -21,7 +21,7 @@
     <param name="Warn" value="0" />
     <param name="Check" value="0" />
     <param name="description" value="" />
-    <param name="revisor" value="Matt Bossart, 1661875572" />
+    <param name="revisor" value="Matt Bossart, 1661890164" />
     <param name="sparsity_threshold" value="200" />
   </paramlist>
   <Layers>
@@ -34033,23 +34033,14 @@ https://www.phasetophase.nl/pdf/SynchronousMachineTurbineGoverningSystems.pdf]]>
     </paramlist>
   </GlobalSubstitutions>
   <hierarchy>
-    <call link="311054094" name="PSID_Library_Inverters:Station" z="-1" view="false" instance="0">
+    <call link="1551067326" name="PSID_Library_Inverters:Station" z="-1" view="false" instance="0">
       <call link="223495102" name="PSID_Library_Inverters:Main" z="-1" view="true" instance="0">
-        <call link="788221067" name="PSID_Library_Inverters:DEMETRIOUS_SG" z="-1" view="false" instance="0">
-          <call link="13104666" name="PSID_Library:BPA_GG" z="540" view="false" instance="0" />
-          <call link="1559344279" name="PSID_Library:IEEET1" z="550" view="false" instance="0">
-            <call link="1513031148" name="PSID_Library:exciter_saturation" z="140" view="false" instance="0" />
-            <call link="746068508" name="PSID_Library:exciter_saturation" z="360" view="false" instance="1" />
-          </call>
-        </call>
-        <call link="439422545" name="PSID_Library_Inverters:GFL" z="-1" view="false" instance="0">
-          <call link="1494865977" name="PSID_Library:ReducedOrderPLL" z="470" view="false" instance="0">
-            <call link="2057070710" name="PSID_Library:ri_dq" z="200" view="false" instance="0" />
-          </call>
-          <call link="815459201" name="PSID_Library:ActivePI_ReactivePI" z="480" view="false" instance="0" />
-          <call link="2051780060" name="PSID_Library:CurrentModeControl" z="490" view="false" instance="0" />
-          <call link="784303139" name="PSID_Library:AverageConverter" z="500" view="false" instance="0" />
-          <call link="38528684" name="PSID_Library:LCLFilter" z="510" view="false" instance="0">
+        <call link="461198950" name="PSID_Library_Inverters:DROOP_GFM" z="-1" view="false" instance="0">
+          <call link="822903436" name="PSID_Library:FixedFrequency" z="500" view="false" instance="0" />
+          <call link="966491600" name="PSID_Library:ActiveDroop_ReactiveDroop" z="510" view="false" instance="0" />
+          <call link="2079101627" name="PSID_Library:VoltageModeControl" z="520" view="false" instance="0" />
+          <call link="2040622412" name="PSID_Library:AverageConverter" z="530" view="false" instance="0" />
+          <call link="1958227927" name="PSID_Library:LCLFilter" z="540" view="false" instance="0">
             <call link="777028743" name="PSID_Library:dq_ri" z="490" view="false" instance="0" />
             <call link="514904379" name="PSID_Library:dq_ri" z="850" view="false" instance="1" />
             <call link="2092800291" name="PSID_Library:dq_ri" z="860" view="false" instance="2" />
@@ -34057,14 +34048,20 @@ https://www.phasetophase.nl/pdf/SynchronousMachineTurbineGoverningSystems.pdf]]>
             <call link="1215232083" name="PSID_Library:ri_abc" z="1000" view="false" instance="0" />
             <call link="909248648" name="PSID_Library:ri_abc" z="1070" view="false" instance="1" />
           </call>
-          <call link="1760640988" name="PSID_Library:FixedDCSource" z="520" view="false" instance="0" />
+          <call link="219331248" name="PSID_Library:FixedDCSource" z="550" view="false" instance="0" />
         </call>
-        <call link="461198950" name="PSID_Library_Inverters:DROOP_GFM" z="-1" view="false" instance="0">
-          <call link="822903436" name="PSID_Library:FixedFrequency" z="500" view="false" instance="0" />
-          <call link="966491600" name="PSID_Library:ActiveDroop_ReactiveDroop" z="510" view="false" instance="0" />
-          <call link="2079101627" name="PSID_Library:VoltageModeControl" z="520" view="false" instance="0" />
-          <call link="2040622412" name="PSID_Library:AverageConverter" z="530" view="false" instance="1" />
-          <call link="1958227927" name="PSID_Library:LCLFilter" z="540" view="false" instance="1">
+        <call link="1923570403" name="PSID_Library_Inverters:SEXS_GAST" z="-1" view="false" instance="0">
+          <call link="1585206052" name="PSID_Library:SEXS" z="580" view="false" instance="0" />
+          <call link="1645426511" name="PSID_Library:GAST" z="590" view="false" instance="0" />
+        </call>
+        <call link="439422545" name="PSID_Library_Inverters:GFL" z="-1" view="false" instance="0">
+          <call link="1494865977" name="PSID_Library:ReducedOrderPLL" z="470" view="false" instance="0">
+            <call link="2057070710" name="PSID_Library:ri_dq" z="200" view="false" instance="0" />
+          </call>
+          <call link="815459201" name="PSID_Library:ActivePI_ReactivePI" z="480" view="false" instance="0" />
+          <call link="2051780060" name="PSID_Library:CurrentModeControl" z="490" view="false" instance="0" />
+          <call link="784303139" name="PSID_Library:AverageConverter" z="500" view="false" instance="1" />
+          <call link="38528684" name="PSID_Library:LCLFilter" z="510" view="false" instance="1">
             <call link="777028743" name="PSID_Library:dq_ri" z="490" view="false" instance="4" />
             <call link="514904379" name="PSID_Library:dq_ri" z="850" view="false" instance="5" />
             <call link="2092800291" name="PSID_Library:dq_ri" z="860" view="false" instance="6" />
@@ -34072,7 +34069,7 @@ https://www.phasetophase.nl/pdf/SynchronousMachineTurbineGoverningSystems.pdf]]>
             <call link="1215232083" name="PSID_Library:ri_abc" z="1000" view="false" instance="2" />
             <call link="909248648" name="PSID_Library:ri_abc" z="1070" view="false" instance="3" />
           </call>
-          <call link="219331248" name="PSID_Library:FixedDCSource" z="550" view="false" instance="1" />
+          <call link="1760640988" name="PSID_Library:FixedDCSource" z="520" view="false" instance="1" />
         </call>
         <call link="238600983" name="PSID_Library_Inverters:DARCO_VSM" z="-1" view="false" instance="0">
           <call link="356470831" name="PSID_Library:KauraPLL" z="570" view="false" instance="0">
@@ -34092,12 +34089,15 @@ https://www.phasetophase.nl/pdf/SynchronousMachineTurbineGoverningSystems.pdf]]>
           <call link="1730679757" name="PSID_Library:FixedDCSource" z="620" view="false" instance="2" />
         </call>
         <call link="938464238" name="PSID_Library_Inverters:SIMPLE_MACHINE" z="-1" view="false" instance="0" />
-        <call link="1923570403" name="PSID_Library_Inverters:SEXS_GAST" z="-1" view="false" instance="0">
-          <call link="1585206052" name="PSID_Library:SEXS" z="580" view="false" instance="0" />
-          <call link="1645426511" name="PSID_Library:GAST" z="590" view="false" instance="0" />
-        </call>
         <call link="408889240" name="PSID_Library_Inverters:DEMETRIOUS_SC" z="-1" view="false" instance="0">
-          <call link="1253756838" name="PSID_Library:IEEET1" z="460" view="false" instance="1">
+          <call link="1253756838" name="PSID_Library:IEEET1" z="460" view="false" instance="0">
+            <call link="1513031148" name="PSID_Library:exciter_saturation" z="140" view="false" instance="0" />
+            <call link="746068508" name="PSID_Library:exciter_saturation" z="360" view="false" instance="1" />
+          </call>
+        </call>
+        <call link="788221067" name="PSID_Library_Inverters:DEMETRIOUS_SG" z="-1" view="false" instance="0">
+          <call link="13104666" name="PSID_Library:BPA_GG" z="540" view="false" instance="0" />
+          <call link="1559344279" name="PSID_Library:IEEET1" z="550" view="false" instance="1">
             <call link="1513031148" name="PSID_Library:exciter_saturation" z="140" view="false" instance="2" />
             <call link="746068508" name="PSID_Library:exciter_saturation" z="360" view="false" instance="3" />
           </call>
