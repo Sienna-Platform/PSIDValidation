@@ -7,6 +7,36 @@ function set_project_parameters!(project; kwargs... )
     PP.update_parameter_by_dictionary(project, project_params)
 end 
 
+function _add_to_enabled_gens_layer(g::DynamicInverter{AverageConverter, OuterControl{VirtualInertia, ReactivePowerDroop}, VoltageModeControl, FixedDCSource, KauraPLL, LCLFilter})
+    psid_name = get_name(g)
+    project.find("PSID_Library_Inverters:DARCO_VSM", psid_name).add_to_layer("enabled_gens")
+end 
+
+function _add_to_enabled_gens_layer(g::DynamicInverter{AverageConverter, OuterControl{ActivePowerDroop, ReactivePowerDroop}, VoltageModeControl, FixedDCSource, FixedFrequency, LCLFilter})
+    psid_name = get_name(g)
+    project.find("PSID_Library_Inverters:DROOP_GFM", psid_name).add_to_layer("enabled_gens")
+end 
+
+function _add_to_enabled_gens_layer(g::DynamicInverter{AverageConverter, OuterControl{ActivePowerPI, ReactivePowerPI}, CurrentModeControl, FixedDCSource, ReducedOrderPLL, LCLFilter})
+    psid_name = get_name(g)
+    project.find("PSID_Library_Inverters:GFL", psid_name).add_to_layer("enabled_gens")
+end 
+
+function _add_to_enabled_gens_layer(g::DynamicGenerator{SauerPaiMachine, SingleMass, AVRFixed, TGFixed, PSSFixed})
+    psid_name = get_name(g)
+    project.find("PSID_Library_Inverters:SIMPLE_MACHINE", psid_name).add_to_layer("enabled_gens")  
+end 
+
+function enable_dynamic_injection_by_type(sys, project)
+    for g in get_components(DynamicInjection, sys)
+        psid_name = get_name(g)     
+        for f in project.find_all(psid_name)
+            f.add_to_layer("disabled_gens")
+        end 
+        _add_to_enabled_gens_layer(g)    
+    end 
+end 
+
 function parameterize_system(sys::System, project)
     sim = Simulation!(MassMatrixModel, sys, pwd(), (0.0, 0.0))
     ss = small_signal_analysis(sim)
