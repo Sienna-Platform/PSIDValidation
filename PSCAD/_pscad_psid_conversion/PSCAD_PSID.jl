@@ -1,41 +1,91 @@
-function set_project_parameters!(project; kwargs... )
+function set_project_parameters!(project; kwargs...)
     project_params = project.parameters()
-    for k in kwargs 
+    for k in kwargs
         @warn k
         project_params[string(k[1])] = k[2]
-    end 
+    end
     PP.update_parameter_by_dictionary(project, project_params)
-end 
+end
 
-function _add_to_enabled_gens_layer(g::DynamicInverter{AverageConverter, OuterControl{VirtualInertia, ReactivePowerDroop}, VoltageModeControl, FixedDCSource, KauraPLL, LCLFilter})
+function _add_to_enabled_gens_layer(
+    g::DynamicInverter{
+        AverageConverter,
+        OuterControl{VirtualInertia, ReactivePowerDroop},
+        VoltageModeControl,
+        FixedDCSource,
+        KauraPLL,
+        LCLFilter,
+    },
+    project,
+)
     psid_name = get_name(g)
     project.find("PSID_Library_Inverters:DARCO_VSM", psid_name).add_to_layer("enabled_gens")
-end 
+end
 
-function _add_to_enabled_gens_layer(g::DynamicInverter{AverageConverter, OuterControl{ActivePowerDroop, ReactivePowerDroop}, VoltageModeControl, FixedDCSource, FixedFrequency, LCLFilter})
+function _add_to_enabled_gens_layer(
+    g::DynamicInverter{
+        AverageConverter,
+        OuterControl{ActivePowerDroop, ReactivePowerDroop},
+        VoltageModeControl,
+        FixedDCSource,
+        FixedFrequency,
+        LCLFilter,
+    },
+    project,
+)
     psid_name = get_name(g)
     project.find("PSID_Library_Inverters:DROOP_GFM", psid_name).add_to_layer("enabled_gens")
-end 
+end
 
-function _add_to_enabled_gens_layer(g::DynamicInverter{AverageConverter, OuterControl{ActivePowerPI, ReactivePowerPI}, CurrentModeControl, FixedDCSource, ReducedOrderPLL, LCLFilter})
+function _add_to_enabled_gens_layer(
+    g::DynamicInverter{
+        AverageConverter,
+        OuterControl{ActivePowerPI, ReactivePowerPI},
+        CurrentModeControl,
+        FixedDCSource,
+        ReducedOrderPLL,
+        LCLFilter,
+    },
+    project,
+)
     psid_name = get_name(g)
     project.find("PSID_Library_Inverters:GFL", psid_name).add_to_layer("enabled_gens")
-end 
+end
 
-function _add_to_enabled_gens_layer(g::DynamicGenerator{SauerPaiMachine, SingleMass, AVRFixed, TGFixed, PSSFixed})
+function _add_to_enabled_gens_layer(
+    g::DynamicGenerator{SauerPaiMachine, SingleMass, AVRFixed, TGFixed, PSSFixed},
+    project,
+)
     psid_name = get_name(g)
-    project.find("PSID_Library_Inverters:SIMPLE_MACHINE", psid_name).add_to_layer("enabled_gens")  
-end 
+    project.find("PSID_Library_Inverters:FIXED_SAUER_PAI", psid_name).add_to_layer(
+        "enabled_gens",
+    )
+    #project.find("PSID_Library_Inverters:SIMPLE_MACHINE", psid_name).add_to_layer("enabled_gens")           #SWITCH HERE TO DECIDE WHICH MACHINE MODEL 
+end
+
+function _add_to_enabled_gens_layer(g::Source)
+    psid_name = get_name(g)
+    project.find("PSID_Library_Inverters:INFINITE_BUS", psid_name).add_to_layer(
+        "enabled_gens",
+    )
+end
 
 function enable_dynamic_injection_by_type(sys, project)
     for g in get_components(DynamicInjection, sys)
-        psid_name = get_name(g)     
+        psid_name = get_name(g)
         for f in project.find_all(psid_name)
             f.add_to_layer("disabled_gens")
-        end 
-        _add_to_enabled_gens_layer(g)    
-    end 
-end 
+        end
+        _add_to_enabled_gens_layer(g, project)
+    end
+    for g in get_components(Source, sys)
+        psid_name = get_name(g)
+        for f in project.find_all(psid_name)
+            f.add_to_layer("disabled_gens")
+        end
+        _add_to_enabled_gens_layer(g, project)
+    end
+end
 
 function parameterize_system(sys::System, project)
     sim = Simulation!(MassMatrixModel, sys, pwd(), (0.0, 0.0))
@@ -43,33 +93,32 @@ function parameterize_system(sys::System, project)
     @warn ss.stable
     x0_dict = read_initial_conditions(sim)
     setpoints_dict = get_setpoints(sim)
-    
+
     thermal = collect(get_components(ThermalStandard, sys))
     for t in thermal
         @info "writing ThermalStandard initial conditions: $(get_name(t))"
         write_initial_conditions(t, get_name(t), project, x0_dict)
     end
-    
+
     injectors = collect(get_components(DynamicInjection, sys))
     for i in injectors
-        @info "writing DynamicInjection initial conditions and setpoints: $(get_name(i))" 
+        @info "writing DynamicInjection initial conditions and setpoints: $(get_name(i))"
         write_setpoints(i, get_name(i), project, setpoints_dict)
         write_initial_conditions(i, get_name(i), project, x0_dict)
     end
-    
+
     buses = collect(get_components(Bus, sys))
     for b in buses
         @info "writing Bus initial conditions and setpoints: $(get_name(b))"
         write_initial_conditions(b, get_name(b), project, x0_dict)
     end
-    
+
     components = collect(get_components(Component, sys))
     for c in components
-        @info "writing Component parameters: $(get_name(c))"
+        @info "writing Component parameters: $(get_name(c)) of type $(typeof(c))"
         write_parameters(c, get_name(c), project)
     end
-
-end 
+end
 
 function write_parameters!(pscad_params, filter::LCLFilter)
     pscad_params["lf"] = get_lf(filter)
@@ -194,23 +243,23 @@ end
 
 function write_parameters!(pscad_params, machine::SauerPaiMachine)
     @warn "Saturation not considered in SauerPai machine"
-    pscad_params["Ra"] = get_R(machine)
-    pscad_params["Tdo_"] = get_Td0_p(machine)
-    pscad_params["Tdo__"] = get_Td0_pp(machine)
-    pscad_params["Tqo_"] = get_Tq0_p(machine)
-    pscad_params["Tqo__"] = get_Tq0_pp(machine)
+    pscad_params["R"] = get_R(machine)
+    pscad_params["Td0_p"] = get_Td0_p(machine)
+    pscad_params["Td0_pp"] = get_Td0_pp(machine)
+    pscad_params["Tq0_p"] = get_Tq0_p(machine)
+    pscad_params["Tq0_pp"] = get_Tq0_pp(machine)
     pscad_params["Xd"] = get_Xd(machine)
     pscad_params["Xq"] = get_Xq(machine)
-    pscad_params["Xd_"] = get_Xd_p(machine)
-    pscad_params["Xq_"] = get_Xq_p(machine)
-    pscad_params["Xd__"] = get_Xd_pp(machine)
-    pscad_params["Xq__"] = get_Xd_pp(machine) #Xd_pp = Xq_pp for round rotor 
-    pscad_params["Xp"] = get_Xl(machine)  #Xl = Xp if Airgap factor = 1 
-end 
+    pscad_params["Xd_p"] = get_Xd_p(machine)
+    pscad_params["Xq_p"] = get_Xq_p(machine)
+    pscad_params["Xd_pp"] = get_Xd_pp(machine)
+    pscad_params["Xq_pp"] = get_Xq_pp(machine)
+    pscad_params["Xl"] = get_Xl(machine)  #Xl = Xp if Airgap factor = 1 
+end
 
 function write_parameters!(pscad_params, shaft::SingleMass)
     pscad_params["H"] = get_H(shaft)
-    pscad_params["Dm"] = get_D(shaft)
+    pscad_params["D"] = get_D(shaft)
 end
 
 function write_parameters!(pscad_params, avr::ESAC1A)
@@ -279,6 +328,9 @@ function write_rating!(pscad_params, thermal::ThermalStandard, dynamic::DynamicG
     pscad_params["I_phase"] =
         get_base_power(dynamic) / get_base_voltage(get_bus(thermal)) / sqrt(3)
     pscad_params["V_ln"] = get_base_voltage(get_bus(thermal)) / sqrt(3)
+    pscad_params["f_base"] = 60.0
+    pscad_params["S_base"] = get_base_power(dynamic)
+    pscad_params["V_base"] = get_base_voltage(get_bus(thermal))
 end
 
 function write_parameters(
@@ -286,7 +338,7 @@ function write_parameters(
     pscad_component_name,
     pscad_project,
 )
-    pscad_component = pscad_project.find(pscad_component_name, layer ="enabled_gens")
+    pscad_component = pscad_project.find(pscad_component_name, layer = "enabled_gens")
     pscad_params = pscad_component.parameters()
     psid_dynamic_injector = get_dynamic_injector(psid_component)
 
@@ -312,11 +364,13 @@ function write_parameters(psid_component::PowerLoad, pscad_component_name, pscad
     PP.update_parameter_by_dictionary(pscad_component, pscad_params)
 end
 
-function write_parameters(psid_component::Line, pscad_component_name, pscad_project)
+function write_parameters(psid_component::Line, pscad_component_name, pscad_project) end
 
-end
-
-function write_parameters(psid_component::DynamicBranch, pscad_component_name, pscad_project)
+function write_parameters(
+    psid_component::DynamicBranch,
+    pscad_component_name,
+    pscad_project,
+)
     pscad_component_name = filter(x -> !isspace(x), pscad_component_name)
     pscad_component = pscad_project.find(pscad_component_name)
     @error "IN LINE"
@@ -367,21 +421,17 @@ function write_ideal_source(
     PP.update_parameter_by_dictionary(pscad_component, pscad_params)
 end
 
-function write_parameters(
-    psid_component::Source,
-    pscad_component_name,
-    pscad_project,
-)
-    pscad_component = pscad_project.find(pscad_component_name, layer ="enabled_gens")
+function write_parameters(psid_component::Source, pscad_component_name, pscad_project)
+    pscad_component = pscad_project.find(pscad_component_name, layer = "enabled_gens")
     pscad_params = pscad_component.parameters()
 
-    pscad_params["Vbase"] = get_base_voltage(get_bus(psid_component))
-    pscad_params["Sbase"] = get_base_power(psid_component)
-    pscad_params["Vpu"] = get_magnitude(get_bus(psid_component))
-    pscad_params["PhT"] = get_angle(get_bus(psid_component)) * (180 / pi)
-    pscad_params["Pinit"] = get_active_power(psid_component)
-    pscad_params["Qinit"] = get_reactive_power(psid_component)
-    pscad_params["Spec"]  = 1   #Sets Spec to be "AT_THE_TERMINAL" 
+    pscad_params["V_base"] = get_base_voltage(get_bus(psid_component))
+    pscad_params["S_base"] = get_base_power(psid_component)
+    pscad_params["V_pf"] = get_magnitude(get_bus(psid_component))
+    pscad_params["theta_pf"] = get_angle(get_bus(psid_component)) * (180 / pi)
+    #pscad_params["P_out"] = get_active_power(psid_component)
+    #pscad_params["Q_out"] = get_reactive_power(psid_component)
+    #pscad_params["Spec"]  = 1   #Sets Spec to be "AT_THE_TERMINAL" 
 
     PP.update_parameter_by_dictionary(pscad_component, pscad_params)
 end
@@ -424,15 +474,15 @@ function write_parameters(
     pscad_component_name,
     pscad_project,
 )
-    pscad_component = pscad_project.find(pscad_component_name, layer ="enabled_gens")
+    pscad_component = pscad_project.find(pscad_component_name, layer = "enabled_gens")
     pscad_params = pscad_component.parameters()
- 
+
     write_parameters!(pscad_params, psid_component.machine)
     write_parameters!(pscad_params, psid_component.shaft)
     write_parameters!(pscad_params, psid_component.avr)
     write_parameters!(pscad_params, psid_component.prime_mover)
     write_parameters!(pscad_params, psid_component.pss)
-
+    pscad_params["t_GEN"] = "t_GEN"
     pscad_params["t_S2M"] = "t_S2M"
     pscad_params["t_L2N"] = "t_L2N"
     pscad_params["t_RAMP"] = "t_RAMP"
@@ -445,7 +495,7 @@ function write_parameters(
     pscad_component_name,
     pscad_project,
 )
-    pscad_component = pscad_project.find(pscad_component_name, layer ="enabled_gens")
+    pscad_component = pscad_project.find(pscad_component_name, layer = "enabled_gens")
     pscad_params = pscad_component.parameters()
 
     write_parameters!(pscad_params, psid_component.filter)
@@ -467,7 +517,6 @@ function write_initial_conditions(
     pscad_project,
     x0_dict,
 )
-
     pscad_component_name = filter(x -> !isspace(x), pscad_component_name)
     pscad_component = pscad_project.find(pscad_component_name)
     pscad_params = pscad_component.parameters()
@@ -495,9 +544,16 @@ function write_initial_conditions(
     pscad_project,
     x0_dict,
 )
-    pscad_component = pscad_project.find(pscad_component_name, layer ="enabled_gens")
+    pscad_component = pscad_project.find(pscad_component_name, layer = "enabled_gens")
     pscad_params = pscad_component.parameters()
-
+    for (i, state) in enumerate(get_states(psid_component.machine))
+        name = "machine_x0_" * string(i)
+        pscad_params[name] = x0_dict[get_name(psid_component)][state]
+    end
+    for (i, state) in enumerate(get_states(psid_component.shaft))
+        name = "shaft_x0_" * string(i)
+        pscad_params[name] = x0_dict[get_name(psid_component)][state]
+    end
     for (i, state) in enumerate(get_states(psid_component.avr))
         name = "avr_x0_" * string(i)
         pscad_params[name] = x0_dict[get_name(psid_component)][state]
@@ -515,7 +571,7 @@ function write_initial_conditions(
     pscad_project,
     x0_dict,
 )
-    pscad_component = pscad_project.find(pscad_component_name, layer ="enabled_gens")
+    pscad_component = pscad_project.find(pscad_component_name, layer = "enabled_gens")
     pscad_params = pscad_component.parameters()
     for (i, state) in enumerate(get_states(psid_component.filter))
         name = "filter_x0_" * string(i)
@@ -550,7 +606,7 @@ function write_setpoints(
     pscad_project,
     setpoints_dict,
 )
-    pscad_component = pscad_project.find(pscad_component_name, layer ="enabled_gens")
+    pscad_component = pscad_project.find(pscad_component_name, layer = "enabled_gens")
     pscad_params = pscad_component.parameters()
 
     pscad_params["V_ref"] = setpoints_dict[get_name(psid_component)]["V_ref"]

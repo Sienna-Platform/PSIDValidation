@@ -12,7 +12,7 @@ open(joinpath(pwd(), "test_arrow"), "w") do io
 end
  =#
 #Returns a vector of dataframes, where each dataframe corresponds to a simulation either standalone or in a volley
-function collect_pscad_outputs(pscad_output_folder)
+function collect_pscad_outputs(pscad_output_folder_path)
     dfs = []
     inf_files =
         filter(x -> endswith(x, ".inf"), readdir(pscad_output_folder_path, join = true))
@@ -50,7 +50,7 @@ function collect_pscad_outputs(pscad_output_folder)
             (i !== 1) && (df_temp = df_temp[!, 2:end])
             df = hcat(df, df_temp, makeunique = true)
         end
-        rename!(df, Symbol.(signal_names))
+        rename!(df, Symbol.(signal_names), makeunique = true)
         push!(dfs, df)
     end
     return dfs
