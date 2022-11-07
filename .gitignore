@@ -28,7 +28,14 @@ docs/site/
 
 #Figures
 *.pdf
+*.png
 *.ipynb
+
+*.pyc 
+
+#outputs
+*.csv
+*.gf46
 
 Manifest.toml
 .vscode
