@@ -1,11 +1,45 @@
 using PowerSystems
 
+device_mapping = Dict(
+    "B" => (ThermalStandard, PrimeMovers.ST, ThermalFuels.COAL),
+    "C" => (ThermalStandard, PrimeMovers.ST, ThermalFuels.COAL),
+    "CE" => (ThermalStandard, PrimeMovers.ST, ThermalFuels.COAL),
+    "CG" => (ThermalStandard, PrimeMovers.CA, ThermalFuels.NATURAL_GAS),
+    "DG" => (ThermalStandard, PrimeMovers.CA, ThermalFuels.NATURAL_GAS),
+    "DP" => (RenewableFix, PrimeMovers.PVe, missing),
+    "E" => (ThermalStandard, PrimeMovers.CA, ThermalFuels.NATURAL_GAS),
+    "EG" => (ThermalStandard, PrimeMovers.CA, ThermalFuels.NATURAL_GAS),
+    "G" => (ThermalStandard, PrimeMovers.CA, ThermalFuels.NATURAL_GAS),
+    "H" => (HydroDispatch, PrimeMovers.HY, missing),
+    "MG" => (ThermalStandard, PrimeMovers.CA, ThermalFuels.NATURAL_GAS),
+    "N" => (ThermalStandard, PrimeMovers.ST, ThermalFuels.COAL),
+    "NB" => (ThermalStandard, PrimeMovers.ST, ThermalFuels.COAL),
+    "ND" => (ThermalStandard, PrimeMovers.ST, ThermalFuels.COAL),
+    "NE" => (ThermalStandard, PrimeMovers.ST, ThermalFuels.NATURAL_GAS),
+    "NG" => (ThermalStandard, PrimeMovers.CA, ThermalFuels.NATURAL_GAS),
+    "NH" => (HydroDispatch, PrimeMovers.HY, missing),
+    "NN" => (ThermalStandard, PrimeMovers.ST, ThermalFuels.COAL),
+    "NP" => (ThermalStandard, PrimeMovers.ST, ThermalFuels.DISTILLATE_FUEL_OIL),
+    "NW" => (RenewableDispatch, PrimeMovers.WT, missing),
+    "P" => (ThermalStandard, PrimeMovers.IC, ThermalFuels.DISTILLATE_FUEL_OIL),
+    "R" => (ThermalStandard, PrimeMovers.IC, ThermalFuels.DISTILLATE_FUEL_OIL),
+    "RG" => (ThermalStandard, PrimeMovers.IC, ThermalFuels.NATURAL_GAS),
+    "S" => (RenewableDispatch, PrimeMovers.PVe, missing),
+    "SC" => (ThermalStandard, PrimeMovers.OT, ThermalFuels.OTHER),
+    "SG" => (ThermalStandard, PrimeMovers.CA, ThermalFuels.NATURAL_GAS),
+    "SH" => (HydroDispatch, PrimeMovers.HY, missing),
+    "SW" => (RenewableDispatch, PrimeMovers.WT, missing),
+    "TG" => (ThermalStandard, PrimeMovers.CA, ThermalFuels.NATURAL_GAS),
+    "W" => (RenewableDispatch, PrimeMovers.WT, missing),
+    "WG" => (ThermalStandard, PrimeMovers.CA, ThermalFuels.NATURAL_GAS),
+)
+
 ######################################
 ############ Generators ##############
 ######################################
 
 ######## Machine Data #########
-function update_gen_to_machine_sauerpai(gen::DynamicGenerator{RoundRotorQuadratic, T, U, V, W}) where {T, U, V, W}
+function make_dynamic_gen(gen::DynamicGenerator{RoundRotorQuadratic, T, U, V, W}) where {T, U, V, W}
     old_machine = get_machine(gen)
     new_machine =  SauerPaiMachine(
             get_R(old_machine),
@@ -59,12 +93,12 @@ pll() = KauraPLL(
 )
 
 reduced_pll() = ReducedOrderPLL(
-    ω_lp = 1.32 * 2 * pi * 50, #Cut-off frequency for LowPass filter of PLL filter.
+    ω_lp = 1.32 * 2 * pi * 60, #Cut-off frequency for LowPass filter of PLL filter.
     kp_pll = 20.0,  #PLL proportional gain
     ki_pll = 200.0,   #PLL integral gain
 )
 
-no_pll() = PSY.FixedFrequency()
+no_pll() = FixedFrequency()
 
 ###### Outer Control ######
 function outer_control()
@@ -89,7 +123,7 @@ end
 
 function outer_control_droop()
     function active_droop()
-        return PSY.ActivePowerDroop(Rp = 0.05, ωz = 2 * pi * 5)
+        return ActivePowerDroop(Rp = 0.05, ωz = 2 * pi * 5)
     end
     function reactive_droop()
         return ReactivePowerDroop(kq = 0.2, ωf = 1000.0)
@@ -109,10 +143,10 @@ end
 
 function outer_voc()
     function active_voc()
-        return PSY.ActiveVirtualOscillator(k1 = 0.0033, ψ = pi / 4)
+        return ActiveVirtualOscillator(k1 = 0.0033, ψ = pi / 4)
     end
     function reactive_voc()
-        return PSY.ReactiveVirtualOscillator(k2 = 0.0796)
+        return ReactiveVirtualOscillator(k2 = 0.0796)
     end
     return OuterControl(active_voc(), reactive_voc())
 end
@@ -137,8 +171,8 @@ current_mode_inner() = CurrentModeControl(
     kffv = 1.0,     #Binary variable enabling the voltage feed-forward in output of current controllers
 )
 
-function update_inverter_to_vsm(sys, static_device)
-    dyn_device = DynamicInverter(
+function update_inverter_to_vsm(static_device)
+    return DynamicInverter(
         name = get_name(static_device),
         ω_ref = 1.0, # ω_ref,
         converter = converter_high_power(), #converter
@@ -148,12 +182,10 @@ function update_inverter_to_vsm(sys, static_device)
         freq_estimator = pll(), #pll
         filter = filt(), #filter
     )
-    add_component!(sys, dyn_device, static_device)
-    return
 end
 
-function update_inverter_to_droop(sys, static_device)
-    dyn_device = PSY.DynamicInverter(
+function update_inverter_to_droop(static_device)
+    return DynamicInverter(
         get_name(static_device),
         1.0, #ω_ref
         converter_low_power(), #converter
@@ -162,12 +194,11 @@ function update_inverter_to_droop(sys, static_device)
         dc_source_lv(),
         no_pll(),
         filt(),
-    ) #pss
-    add_component!(sys, dyn_device, static_device)
+    )
 end
 
-function update_inverter_to_grid_following(sys, static_device)
-    dyn_device = PSY.DynamicInverter(
+function update_inverter_to_grid_following(static_device)
+    return DynamicInverter(
         get_name(static_device),
         1.0, #ω_ref
         converter_low_power(), #converter
@@ -176,6 +207,110 @@ function update_inverter_to_grid_following(sys, static_device)
         dc_source_lv(),
         reduced_pll(),
         filt_gfoll(),
-    ) #pss
-    add_component!(sys, dyn_device, static_device)
+    )
+end
+
+function update_gen_to_machine_sauerpai(sys, static_device::ThermalStandard)
+    old_dyn_device = get_dynamic_injector(static_device)
+    remove_component!(typeof(old_dyn_device), sys, get_name(old_dyn_device))
+    new_dyn_device = make_dynamic_gen(old_dyn_device)
+    add_component!(sys, new_dyn_device, static_device)
+end
+
+function update_gen_data(g::ThermalStandard, sys, ::Type{ThermalStandard}, pm, fuel)
+    set_prime_mover!(g, pm)
+    set_fuel!(g, fuel)
+    update_gen_to_machine_sauerpai(sys, g)
+end
+
+function update_gen_data(g::ThermalStandard, sys, ::Type{HydroDispatch}, pm, fuel::Missing)
+    old_dyn_device = get_dynamic_injector(g)
+    new_dyn_device = make_dynamic_gen(old_dyn_device)
+    new_gen = HydroDispatch(
+        name = get_name(g),
+        available = get_available(g),
+        bus = get_bus(g),
+        active_power = get_active_power(g),
+        reactive_power = get_reactive_power(g),
+        rating = get_rating(g),
+        prime_mover = pm,
+        active_power_limits = get_active_power_limits(g),
+        reactive_power_limits = get_reactive_power_limits(g),
+        ramp_limits = get_ramp_limits(g),
+        time_limits = get_time_limits(g),
+        base_power = get_base_power(g),
+    )
+    remove_component!(typeof(old_dyn_device), sys, get_name(old_dyn_device))
+    remove_component!(ThermalStandard, sys, get_name(g))
+    add_component!(sys, new_gen)
+    add_component!(sys, new_dyn_device, new_gen)
+    return
+end
+
+control_map = Dict(
+    "vsm" => update_inverter_to_vsm,
+    "droop" => update_inverter_to_droop,
+    "gfl" => update_inverter_to_grid_following,
+)
+
+function update_gen_data(g::ThermalStandard, sys::System, ::Type{RenewableDispatch}, pm, fuel::Missing)
+    old_dyn_device = get_dynamic_injector(g)
+    remove_component!(typeof(old_dyn_device), sys, get_name(old_dyn_device))
+    remove_component!(sys, g)
+    for control_type in ["vsm", "droop", "gfl"]
+        base_power = get_base_power(g)
+        if base_power < 1.1
+            continue
+        end
+        new_gen = RenewableDispatch(
+            name = join(push!(split(get_name(g), "-"), control_type), "-"),
+            available = control_type == "droop" ? get_available(g) : false,
+            bus = get_bus(g),
+            active_power = get_active_power(g),
+            reactive_power = get_reactive_power(g),
+            rating = get_rating(g),
+            prime_mover = pm,
+            reactive_power_limits = get_reactive_power_limits(g),
+            power_factor = sin(atan(get_active_power(g), get_reactive_power(g))),
+            base_power = base_power,
+            operation_cost = TwoPartCost(nothing)
+        )
+        add_component!(sys, new_gen)
+        add_component!(sys, control_map[control_type](new_gen), new_gen)
+    end
+end
+
+function update_gen_data(g::ThermalStandard, sys::System, ::Type{RenewableFix}, pm, fuel::Missing)
+    old_dyn_device = get_dynamic_injector(g)
+    remove_component!(typeof(old_dyn_device), sys, get_name(old_dyn_device))
+    remove_component!(sys, g)
+    base_power = get_base_power(g)
+    if base_power < 1.1
+        return
+    end
+    control_type = "gfl"
+    new_gen = RenewableFix(
+        name = join(push!(split(get_name(g), "-"), control_type), "-"),
+        available = get_available(g),
+        bus = get_bus(g),
+        active_power = get_active_power(g),
+        reactive_power = get_reactive_power(g),
+        rating = get_rating(g),
+        prime_mover = pm,
+        power_factor = sin(atan(get_active_power(g), get_reactive_power(g))),
+        base_power = base_power,
+    )
+    add_component!(sys, new_gen)
+    add_component!(sys, control_map[control_type](new_gen), new_gen)
+    return
+end
+
+
+function update_generation_units!(sys::System)
+    for g in get_components(ThermalStandard, sys)
+        gen_type = split(get_name(g), "-")[3]
+        gen_cat = device_mapping[gen_type]
+        update_gen_data(g, sys, gen_cat...)
+    end
+    return
 end

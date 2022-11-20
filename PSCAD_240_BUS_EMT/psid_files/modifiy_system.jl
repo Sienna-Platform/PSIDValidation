@@ -1,6 +1,8 @@
 using PowerSystems
 using PowerSimulationsDynamics
 
+include("new_system_data.jl")
+
 sys = System(
     joinpath(@__DIR__, "PSCAD_VALIDATION_RAW.raw"),
     joinpath(@__DIR__, "PSCAD_VALIDATION_DYR.dyr");
@@ -8,7 +10,7 @@ sys = System(
     runchecks = false,
 )
 
-# Remove lines with negatie impedances
+update_generation_units!(sys)
 
 for br in get_components(Line, sys)
     if get_x(br) < 0
