@@ -162,11 +162,13 @@ new_line = Line(
 remove_component!(Bus, sys, "GATES1-3891")
 add_component!(sys, new_line,)
 
+###### Update Generation Data to match prime mover and fuel ######
 set_units_base_system!(sys, "DEVICE_BASE")
 update_generation_units!(sys)
-
-
-
-
 set_units_base_system!(sys, "SYSTEM_BASE")
+run_powerflow!(sys)
+
+# Change setpoints to avoid reactive power limitations
+b = get_component(Bus, sys, "NORTH G3-4231")
+set_magnitude!(b, 1.1)
 run_powerflow!(sys)
