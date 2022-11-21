@@ -11,6 +11,10 @@ sys = System(
     runchecks = false,
 )
 
+run_powerflow!(sys)
+
+###### Correct Line Data to avoid lines with negatice impedances ######
+
 for br in get_components(Line, sys)
     if get_x(br) < 0
         @info "Line $(get_name(br)) has negative impedance"
@@ -160,4 +164,9 @@ add_component!(sys, new_line,)
 
 set_units_base_system!(sys, "DEVICE_BASE")
 update_generation_units!(sys)
+
+
+
+
 set_units_base_system!(sys, "SYSTEM_BASE")
+run_powerflow!(sys)
