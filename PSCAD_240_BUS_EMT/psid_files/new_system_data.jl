@@ -297,7 +297,7 @@ function update_gen_data(g::ThermalStandard, sys::System, ::Type{RenewableFix}, 
         reactive_power = get_reactive_power(g),
         rating = get_rating(g),
         prime_mover = pm,
-        power_factor = sin(atan(get_active_power(g), get_reactive_power(g))),
+        power_factor = 1.0,
         base_power = base_power,
     )
     add_component!(sys, new_gen)
