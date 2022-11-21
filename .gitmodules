@@ -1,0 +1,3 @@
+[submodule "PSID2PSCAD"]
+	path = PSID2PSCAD
+	url = git@github.com:NREL-SIIP/PSID2PSCAD.git
