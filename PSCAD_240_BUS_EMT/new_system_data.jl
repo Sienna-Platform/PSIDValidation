@@ -1,6 +1,7 @@
 using PowerSystems
 
-device_mapping = Dict(
+const sys_frequency = 2.0 * π * 60.0
+const device_mapping = Dict(
     "B" => (ThermalStandard, PrimeMovers.ST, ThermalFuels.COAL),
     "C" => (ThermalStandard, PrimeMovers.ST, ThermalFuels.COAL),
     "CE" => (ThermalStandard, PrimeMovers.ST, ThermalFuels.COAL),
@@ -72,28 +73,62 @@ end
 ######################################
 
 ###### Converter Data ######
-converter_low_power() = AverageConverter(rated_voltage = 690.0, rated_current = 2.75)
+const converter_base_voltage = 690.0
+const converter_base_power = 2.75*1e6
+const converter_base_current = (1/sqrt(3))*converter_base_power/converter_base_voltage
+const converter_base_impedance = converter_base_voltage^2/converter_base_power
+const converter_base_inductance = converter_base_impedance/(2*π*50.0)
+const converter_base_capacitance = 1/((2*π*50.0)*(converter_base_impedance))
+const converter_current_voltage_ratio = converter_base_current/converter_base_voltage
+const converter_voltage_current_ratio = converter_base_voltage/converter_base_current
 
-converter_high_power() = AverageConverter(rated_voltage = 138.0, rated_current = 100.0)
+converter() = AverageConverter(rated_voltage = converter_base_voltage, rated_current = 1.1*converter_base_current)
 
 ###### DC Source Data ######
-dc_source_lv() = FixedDCSource(voltage = 600.0) #Not in the original data, guessed.
-dc_source_hv() = FixedDCSource(voltage = 1500.0) #Not in the original data, guessed.
+dc_source() = FixedDCSource(voltage = 600.0) #Not in the original data, guessed.
 
 ###### Filter Data ######
-filt() = LCLFilter(lf = 0.08, rf = 0.003, cf = 0.074, lg = 0.2, rg = 0.01)
-filt_gfoll() = LCLFilter(lf = 0.009, rf = 0.016, cf = 2.5, lg = 0.002, rg = 0.003)
-filt_voc() = LCLFilter(lf = 0.0196, rf = 0.0139, cf = 0.1086, lg = 0.0196, rg = 0.0139)
+
+function filt(device_base_power::Float64, device_base_voltage::Float64)
+    device_base_impedance = device_base_voltage^2/device_base_power
+    device_base_inductance = device_base_impedance/(sys_frequency)
+    device_base_capacitance =  1/((sys_frequency)*(device_base_impedance))
+
+    impedance_ratio = converter_base_impedance/device_base_impedance
+    inductance_ratio = converter_base_inductance/device_base_inductance
+    capacitance_ratio = converter_base_capacitance/device_base_capacitance
+    return LCLFilter(lf = 0.08*inductance_ratio,
+                     rf = 0.003*impedance_ratio,
+                     cf = 0.074*capacitance_ratio,
+                     lg = 0.2*inductance_ratio,
+                     rg = 0.01*impedance_ratio)
+end
+
+function filt_gfoll(device_base_power::Float64, device_base_voltage::Float64)
+    device_base_impedance = device_base_voltage^2/device_base_power
+    device_base_inductance = device_base_impedance/(sys_frequency)
+    device_base_capacitance =  1/((sys_frequency)*(device_base_impedance))
+
+    impedance_ratio = converter_base_impedance/device_base_impedance
+    inductance_ratio = converter_base_inductance/device_base_inductance
+    capacitance_ratio = converter_base_capacitance/device_base_capacitance
+    return LCLFilter(lf = 0.009*inductance_ratio,
+        rf = 0.016*impedance_ratio,
+        cf = 2.5*capacitance_ratio,
+        lg = 0.002*inductance_ratio,
+        rg = 0.003*impedance_ratio
+        )
+end
 
 ###### PLL Data ######
 pll() = KauraPLL(
-    ω_lp = 500.0, #Cut-off frequency for LowPass filter of PLL filter.
+    ω_lp = (10.0/(2*π))*sys_frequency, #Cut-off frequency for LowPass filter of PLL filter.
     kp_pll = 0.084,  #PLL proportional gain
     ki_pll = 4.69,   #PLL integral gain
 )
 
 reduced_pll() = ReducedOrderPLL(
-    ω_lp = 1.32 * 2 * pi * 60, #Cut-off frequency for LowPass filter of PLL filter.
+    ω_lp = 1.32 * sys_frequency, #Cut-off frequency for LowPass filter of PLL filter.
     kp_pll = 20.0,  #PLL proportional gain
     ki_pll = 200.0,   #PLL integral gain
 )
@@ -123,7 +158,7 @@ end
 
 function outer_control_droop()
     function active_droop()
-        return ActivePowerDroop(Rp = 0.05, ωz = 2 * pi * 5)
+        return ActivePowerDroop(Rp = 0.05, ωz = 0.1 * sys_frequency)
     end
     function reactive_droop()
         return ReactivePowerDroop(kq = 0.2, ωf = 1000.0)
@@ -133,10 +168,10 @@ end
 
 function outer_control_gfoll()
     function active_pi()
-        return ActivePowerPI(Kp_p = 2.0, Ki_p = 30.0, ωz = 0.132 * 2 * pi * 50)
+        return ActivePowerPI(Kp_p = 2.0, Ki_p = 30.0, ωz = 0.132 * sys_frequency)
     end
     function reactive_pi()
-        return ReactivePowerPI(Kp_q = 2.0, Ki_q = 30.0, ωf = 0.132 * 2 * pi * 50.0)
+        return ReactivePowerPI(Kp_q = 2.0, Ki_q = 30.0, ωf = 0.132 * sys_frequency)
     end
     return OuterControl(active_pi(), reactive_pi())
 end
@@ -152,61 +187,88 @@ function outer_voc()
 end
 
 ######## Inner Control ######
-inner_control() = VoltageModeControl(
-    kpv = 0.59,     #Voltage controller proportional gain
-    kiv = 736.0,    #Voltage controller integral gain
-    kffv = 0.0,     #Binary variable enabling the voltage feed-forward in output of current controllers
-    rv = 0.0,       #Virtual resistance in pu
-    lv = 0.2,       #Virtual inductance in pu
-    kpc = 1.27,     #Current controller proportional gain
-    kic = 14.3,     #Current controller integral gain
-    kffi = 0.0,     #Binary variable enabling the current feed-forward in output of current controllers
-    ωad = 50.0,     #Active damping low pass filter cut-off frequency
-    kad = 0.2,
-)
+function inner_control(device_base_power::Float64, device_base_voltage::Float64)
 
-current_mode_inner() = CurrentModeControl(
-    kpc = 0.37,     #Current controller proportional gain
-    kic = 0.7,     #Current controller integral gain
-    kffv = 1.0,     #Binary variable enabling the voltage feed-forward in output of current controllers
-)
+    device_base_current = (1/sqrt(3))*device_base_power/device_base_voltage
+    device_base_impedance = device_base_voltage^2/device_base_power
+    device_base_inductance = device_base_impedance/(sys_frequency)
+    device_current_voltage_ratio = device_base_current/device_base_voltage
+    device_voltage_current_ratio = device_base_voltage/device_base_current
+
+    impedance_ratio = converter_base_impedance/device_base_impedance
+    inductance_ratio = converter_base_inductance/device_base_inductance # Frequencies don't match so this is needed
+    kpc_ratio = converter_voltage_current_ratio/device_voltage_current_ratio
+    kpv_ratio = converter_current_voltage_ratio/device_current_voltage_ratio
+
+    return VoltageModeControl(
+        kpv = 0.59*kpv_ratio,     #Voltage controller proportional gain
+        kiv = 736.0*kpv_ratio,    #Voltage controller integral gain
+        kffv = 0.0,     #Binary variable enabling the voltage feed-forward in output of current controllers
+        rv = 0.0*impedance_ratio, #Virtual resistance in pu
+        lv = 0.2*inductance_ratio, #Virtual inductance in pu
+        kpc = 1.27*kpc_ratio,     #Current controller proportional gain
+        kic = 14.3*kpc_ratio,     #Current controller integral gain
+        kffi = 0.0,     #Binary variable enabling the current feed-forward in output of current controllers
+        ωad = (1/(2*π))*sys_frequency,     #Active damping low pass filter cut-off frequency
+        kad = 0.2,
+    )
+end
+
+function current_mode_inner(device_base_power::Float64, device_base_voltage::Float64)
+    device_base_current = (1/sqrt(3))*device_base_power/device_base_voltage
+    device_voltage_current_ratio = device_base_voltage/device_base_current
+    kpc_ratio = converter_voltage_current_ratio/device_voltage_current_ratio
+
+    return CurrentModeControl(
+        kpc = 0.37*kpc_ratio,     #Current controller proportional gain
+        kic = 0.7*kpc_ratio,     #Current controller integral gain
+        kffv = 1.0,     #Binary variable enabling the voltage feed-forward in output of current controllers
+    )
+
+end
 
 function update_inverter_to_vsm(static_device)
+    base_power = get_base_power(static_device)*1e6
+    base_voltage = get_base_voltage(get_bus(static_device))*1e3
     return DynamicInverter(
         name = get_name(static_device),
         ω_ref = 1.0, # ω_ref,
-        converter = converter_high_power(), #converter
+        converter = converter(), #converter
         outer_control = outer_control(), #outer control
-        inner_control = inner_control(), #inner control voltage source
-        dc_source = dc_source_lv(), #dc source
+        inner_control = inner_control(base_power, base_voltage), #inner control voltage source
+        dc_source = dc_source(), #dc source
         freq_estimator = pll(), #pll
-        filter = filt(), #filter
+        filter = filt(base_power, base_voltage), #filter
     )
 end
 
 function update_inverter_to_droop(static_device)
+    base_power = get_base_power(static_device)*1e6
+    base_voltage = get_base_voltage(get_bus(static_device))*1e3
     return DynamicInverter(
         get_name(static_device),
         1.0, #ω_ref
-        converter_low_power(), #converter
+        converter(), #converter
         outer_control_droop(), #outercontrol
-        inner_control(), #inner_control
-        dc_source_lv(),
+        inner_control(base_power, base_voltage), #inner_control
+        dc_source(),
         no_pll(),
-        filt(),
+        filt(base_power, base_voltage),
     )
 end
 
 function update_inverter_to_grid_following(static_device)
+    base_power = get_base_power(static_device)*1e6
+    base_voltage = get_base_voltage(get_bus(static_device))*1e6
     return DynamicInverter(
         get_name(static_device),
         1.0, #ω_ref
-        converter_low_power(), #converter
+        converter(), #converter
         outer_control_gfoll(), #outercontrol
-        current_mode_inner(), #inner_control
-        dc_source_lv(),
+        current_mode_inner(base_power, base_voltage), #inner_control
+        dc_source(),
         reduced_pll(),
-        filt_gfoll(),
+        filt_gfoll(base_power, base_voltage),
     )
 end
 
@@ -247,7 +309,7 @@ function update_gen_data(g::ThermalStandard, sys, ::Type{HydroDispatch}, pm, fue
     return
 end
 
-control_map = Dict(
+const control_map = Dict(
     "vsm" => update_inverter_to_vsm,
     "droop" => update_inverter_to_droop,
     "gfl" => update_inverter_to_grid_following,
