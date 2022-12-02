@@ -194,6 +194,6 @@ b = get_component(Bus, sys, "NORTH G3-4231")
 set_magnitude!(b, 1.1)
 run_powerflow!(sys)
 
-#Serialize system - TODO: error when reading back
+#Serialize deseralize system
 to_json(sys, joinpath(@__DIR__, "psid_files", "system.json"), force = true)
 System(joinpath(@__DIR__, "psid_files", "system.json"); runchecks = false)
