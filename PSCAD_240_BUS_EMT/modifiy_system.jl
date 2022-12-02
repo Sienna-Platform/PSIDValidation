@@ -5,15 +5,15 @@ using PowerFlows
 include("new_system_data.jl")
 
 sys = System(
-    joinpath(@__DIR__, "PSCAD_VALIDATION_RAW.raw"),
-    joinpath(@__DIR__, "PSCAD_VALIDATION_DYR.dyr");
+    joinpath(@__DIR__, "psid_files", "PSCAD_VALIDATION_RAW.raw"),
+    joinpath(@__DIR__, "psid_files", "PSCAD_VALIDATION_DYR.dyr");
     bus_name_formatter = x -> strip(string(x["name"])) * "-" * string(x["index"]),
     runchecks = false,
 )
 
 run_powerflow!(sys)
 
-###### Correct Line Data to avoid lines with negatice impedances ######
+###### Correct Line Data to avoid lines with negative impedances ######
 
 for br in get_components(Line, sys)
     if get_x(br) < 0
@@ -172,3 +172,6 @@ run_powerflow!(sys)
 b = get_component(Bus, sys, "NORTH G3-4231")
 set_magnitude!(b, 1.1)
 run_powerflow!(sys)
+
+#Serialize system - TODO: error when reading back 
+to_json(sys, joinpath(@__DIR__, "psid_files", "system.json"), force = true)

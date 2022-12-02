@@ -1,0 +1,17 @@
+<workspace name="workspace_240bus" version="5.0.1" crc="39126052">
+  <projects>
+    <project type="library" name="PSID_Library" filepath="..\..\PSID2PSCAD\_pscad_libraries\PSID_Library.pslx" />
+    <project type="library" name="PSID_Library_Inverters" filepath="..\..\PSID2PSCAD\_pscad_libraries\PSID_Library_Inverters.pslx" />
+    <project type="library" name="WECC_Components" filepath=".\WECC_Components.pslx" />
+    <project type="project" name="case_240bus" filepath=".\case_240bus.pscx" />
+  </projects>
+  <simulations />
+  <pmr />
+  <messagegrid expanded="">
+    <column name="Icon" />
+    <column name="Id" />
+    <column name="Component" />
+    <column name="Namespace" />
+    <column name="Description" />
+  </messagegrid>
+</workspace>

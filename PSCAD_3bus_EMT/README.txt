@@ -25,9 +25,9 @@ Usefull conda commands
 `conda env remove -n <env_name>' : remove (delete) a conda environment
 
 Making a new case in PSCAD 
-- Copy the file directory structure from existing case ("pscad_files", "psid_files", "scripts")
+- Copy the file directory structure from existing case ("pscad_files", "psid_files", "src", "test")
 - Make a new workspace file is PSCAD.
-- Open libraries in the new workspace from _pscad_libraries folder.
+- Open libraries in the new workspace from PSID2PSCAD/_pscad_libraries folder.
 - To copy and modify an existing case, save case with new name in the new directory. 
 - Unload the case in the old workspace and re-load the original case.
 - Load the new case in the new workspace. 

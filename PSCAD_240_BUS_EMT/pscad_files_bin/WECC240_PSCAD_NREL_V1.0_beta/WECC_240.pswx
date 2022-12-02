@@ -1,0 +1,166 @@
+<workspace name="WECC_240" version="5.0.0" crc="59652451">
+  <paramlist name="options">
+    <param name="compile_save_enable" value="false" />
+    <param name="autosave_interval" value="0" />
+    <param name="display_project_file_name" value="false" />
+    <param name="sort_messages" value="false" />
+    <param name="type_conversion_warn" value="1" />
+    <param name="private_env" value="true" />
+    <param name="unit_system_warn" value="1" />
+    <param name="case_sensitivity" value="true" />
+    <param name="ss_limit" value="256" />
+    <param name="MaxRadioCount" value="256" />
+    <param name="cim_compatibility" value="true" />
+    <param name="MaxConcurrentSim" value="32" />
+    <param name="SocketPortBase" value="30000" />
+    <param name="memory_notify" value="256" />
+    <param name="output_empty" value="1" />
+    <param name="output_excess" value="1" />
+    <param name="output_density" value="1" />
+    <param name="waveform_overwrite" value="1" />
+    <param name="snapshot_overwrite" value="1" />
+    <param name="duplicate_messages" value="100" />
+    <param name="runtime_canvas_lock" value="0" />
+  </paramlist>
+  <projects>
+    <project type="library" name="WECC_240_library" filepath=".\WECC_240_library.pslx" />
+    <project type="project" name="WECC_240_A" filepath=".\WECC_240_A.pscx" />
+    <project type="project" name="WECC_240_B" filepath=".\WECC_240_B.pscx" />
+    <project type="project" name="WECC_240_C" filepath=".\WECC_240_C.pscx" />
+    <project type="project" name="WECC_240_D" filepath=".\WECC_240_D.pscx" />
+    <project type="project" name="WECC_240_E" filepath=".\WECC_240_E.pscx" />
+    <project type="project" name="WECC_240_F" filepath=".\WECC_240_F.pscx" />
+    <project type="project" name="WECC_240_G" filepath=".\WECC_240_G.pscx" />
+    <project type="project" name="WECC_240_H" filepath=".\WECC_240_H.pscx" />
+  </projects>
+  <simulations>
+    <simulation name="WECC_240" dependson="None" id="2143972174" classid="SimulationSet">
+      <paramlist name="Default">
+        <param name="enabled" value="true" />
+        <param name="before_run" value="" />
+        <param name="before_block" value="true" />
+        <param name="after_run" value="" />
+        <param name="after_block" value="true" />
+      </paramlist>
+      <task namespace="WECC_240_A" classid="SimulationTask" id="1226821114" order="0" pmr="false" volley="1" ammunition="1" rank_snap="false" clean="false">
+        <paramlist name="Options">
+          <param name="simulationset" value="" />
+          <param name="namespace" value="WECC_240_A" />
+          <param name="name" value="" />
+          <param name="ammunition" value="1" />
+          <param name="volley" value="1" />
+          <param name="affinity_type" value="1" />
+          <param name="affinity" value="1" />
+          <param name="rank_snap" value="false" />
+          <param name="substitutions" value="" />
+          <param name="clean" value="false" />
+        </paramlist>
+      </task>
+      <task namespace="WECC_240_B" classid="SimulationTask" id="284172261" order="0" pmr="false" volley="1" ammunition="1" rank_snap="false" clean="false">
+        <paramlist name="Options">
+          <param name="simulationset" value="" />
+          <param name="namespace" value="WECC_240_B" />
+          <param name="name" value="" />
+          <param name="ammunition" value="1" />
+          <param name="volley" value="1" />
+          <param name="affinity_type" value="1" />
+          <param name="affinity" value="1" />
+          <param name="rank_snap" value="false" />
+          <param name="substitutions" value="" />
+          <param name="clean" value="false" />
+        </paramlist>
+      </task>
+      <task namespace="WECC_240_C" classid="SimulationTask" id="97195126" order="0" pmr="false" volley="1" ammunition="1" rank_snap="false" clean="false">
+        <paramlist name="Options">
+          <param name="simulationset" value="" />
+          <param name="namespace" value="WECC_240_C" />
+          <param name="name" value="" />
+          <param name="ammunition" value="1" />
+          <param name="volley" value="1" />
+          <param name="affinity_type" value="1" />
+          <param name="affinity" value="1" />
+          <param name="rank_snap" value="false" />
+          <param name="substitutions" value="" />
+          <param name="clean" value="false" />
+        </paramlist>
+      </task>
+      <task namespace="WECC_240_D" classid="SimulationTask" id="505546474" order="0" pmr="false" volley="1" ammunition="1" rank_snap="false" clean="false">
+        <paramlist name="Options">
+          <param name="simulationset" value="" />
+          <param name="namespace" value="WECC_240_D" />
+          <param name="name" value="" />
+          <param name="ammunition" value="1" />
+          <param name="volley" value="1" />
+          <param name="affinity_type" value="1" />
+          <param name="affinity" value="1" />
+          <param name="rank_snap" value="false" />
+          <param name="substitutions" value="" />
+          <param name="clean" value="false" />
+        </paramlist>
+      </task>
+      <task namespace="WECC_240_E" classid="SimulationTask" id="759182415" order="0" pmr="false" volley="1" ammunition="1" rank_snap="false" clean="false">
+        <paramlist name="Options">
+          <param name="simulationset" value="" />
+          <param name="namespace" value="WECC_240_E" />
+          <param name="name" value="" />
+          <param name="ammunition" value="1" />
+          <param name="volley" value="1" />
+          <param name="affinity_type" value="1" />
+          <param name="affinity" value="1" />
+          <param name="rank_snap" value="false" />
+          <param name="substitutions" value="" />
+          <param name="clean" value="false" />
+        </paramlist>
+      </task>
+      <task namespace="WECC_240_F" classid="SimulationTask" id="960820633" order="0" pmr="false" volley="1" ammunition="1" rank_snap="false" clean="false">
+        <paramlist name="Options">
+          <param name="simulationset" value="" />
+          <param name="namespace" value="WECC_240_F" />
+          <param name="name" value="" />
+          <param name="ammunition" value="1" />
+          <param name="volley" value="1" />
+          <param name="affinity_type" value="1" />
+          <param name="affinity" value="1" />
+          <param name="rank_snap" value="false" />
+          <param name="substitutions" value="" />
+          <param name="clean" value="false" />
+        </paramlist>
+      </task>
+      <task namespace="WECC_240_G" classid="SimulationTask" id="301405416" order="0" pmr="false" volley="1" ammunition="1" rank_snap="false" clean="false">
+        <paramlist name="Options">
+          <param name="simulationset" value="" />
+          <param name="namespace" value="WECC_240_G" />
+          <param name="name" value="" />
+          <param name="ammunition" value="1" />
+          <param name="volley" value="1" />
+          <param name="affinity_type" value="1" />
+          <param name="affinity" value="1" />
+          <param name="rank_snap" value="false" />
+          <param name="substitutions" value="" />
+          <param name="clean" value="false" />
+        </paramlist>
+      </task>
+      <task namespace="WECC_240_H" classid="SimulationTask" id="1670868440" order="0" pmr="false" volley="1" ammunition="1" rank_snap="false" clean="false">
+        <paramlist name="Options">
+          <param name="simulationset" value="" />
+          <param name="namespace" value="WECC_240_H" />
+          <param name="name" value="" />
+          <param name="ammunition" value="1" />
+          <param name="volley" value="1" />
+          <param name="affinity_type" value="1" />
+          <param name="affinity" value="1" />
+          <param name="rank_snap" value="false" />
+          <param name="substitutions" value="" />
+          <param name="clean" value="false" />
+        </paramlist>
+      </task>
+    </simulation>
+  </simulations>
+  <messagegrid expanded="">
+    <column name="Icon" />
+    <column name="Id" />
+    <column name="Component" />
+    <column name="Namespace" />
+    <column name="Description" />
+  </messagegrid>
+</workspace>
