@@ -23,10 +23,13 @@ end
 
 from_line = get_component(Line, sys, "VINCENT-2404-MIDWAY6-3897-i_1")
 remove_component!(Line, sys, "VINCENT-2404-MIDWAY6-3897-i_1")
+remove_component!(Arc, sys, get_name(get_arc(from_line)))
 to_line = get_component(Line, sys, "MIDWAY-3803-MIDWAY5-3896-i_1")
 remove_component!(Line, sys, "MIDWAY-3803-MIDWAY5-3896-i_1")
+remove_component!(Arc, sys, get_name(get_arc(to_line)))
 line = get_component(Line, sys,  "MIDWAY5-3896-MIDWAY6-3897-i_1")
 remove_component!(Line, sys, "MIDWAY5-3896-MIDWAY6-3897-i_1")
+remove_component!(Arc, sys, get_name(get_arc(line)))
 
 new_line = Line(
     name = "VINCENT-2404-MIDWAY-3803-i_1",
@@ -46,10 +49,13 @@ add_component!(sys, new_line,)
 
 from_line = get_component(Line, sys, "VINCENT-2404-MIDWAY2-3893-i_1")
 remove_component!(Line, sys, "VINCENT-2404-MIDWAY2-3893-i_1")
+remove_component!(Arc, sys, get_name(get_arc(from_line)))
 to_line = get_component(Line, sys, "MIDWAY-3803-MIDWAY3-3894-i_1")
 remove_component!(Line, sys, "MIDWAY-3803-MIDWAY3-3894-i_1")
+remove_component!(Arc, sys, get_name(get_arc(to_line)))
 line = get_component(Line, sys,  "MIDWAY1-3892-MIDWAY2-3893-i_1")
 remove_component!(Line, sys, "MIDWAY1-3892-MIDWAY2-3893-i_1")
+remove_component!(Arc, sys, get_name(get_arc(line)))
 
 new_line = Line(
     name = "VINCENT-2404-MIDWAY-3803-i_2",
@@ -69,10 +75,13 @@ add_component!(sys, new_line,)
 
 from_line = get_component(Line, sys, "VINCENT-2404-MIDWAY4-3895-i_1")
 remove_component!(Line, sys, "VINCENT-2404-MIDWAY4-3895-i_1")
+remove_component!(Arc, sys, get_name(get_arc(from_line)))
 to_line = get_component(Line, sys, "MIDWAY-3803-MIDWAY1-3892-i_1")
 remove_component!(Line, sys, "MIDWAY-3803-MIDWAY1-3892-i_1")
+remove_component!(Arc, sys, get_name(get_arc(to_line)))
 line = get_component(Line, sys,  "MIDWAY3-3894-MIDWAY4-3895-i_1")
 remove_component!(Line, sys, "MIDWAY3-3894-MIDWAY4-3895-i_1")
+remove_component!(Arc, sys, get_name(get_arc(line)))
 
 new_line = Line(
     name = "VINCENT-2404-MIDWAY-3803-i_3",
@@ -92,12 +101,16 @@ add_component!(sys, new_line,)
 
 mid_line1 = get_component(Line, sys, "GRIZZLY6-4096-GRIZZLY7-4097-i_1")
 remove_component!(Line, sys, "GRIZZLY6-4096-GRIZZLY7-4097-i_1")
+remove_component!(Arc, sys, get_name(get_arc(mid_line1)))
 mid_line2 = get_component(Line, sys, "GRIZZLY5-4095-GRIZZLY6-4096-i_1")
 remove_component!(Line, sys, "GRIZZLY5-4095-GRIZZLY6-4096-i_1")
+remove_component!(Arc, sys, get_name(get_arc(mid_line2)))
 line_from = get_component(Line, sys,  "MALIN-4001-GRIZZLY7-4097-i_1")
 remove_component!(Line, sys, "MALIN-4001-GRIZZLY7-4097-i_1")
+remove_component!(Arc, sys, get_name(get_arc(line_from)))
 line_to = get_component(Line, sys,  "GRIZZLY-4004-GRIZZLY5-4095-i_1")
 remove_component!(Line, sys, "GRIZZLY-4004-GRIZZLY5-4095-i_1")
+remove_component!(Arc, sys, get_name(get_arc(line_to)))
 
 new_line = Line(
     name = "MALIN-4001-GRIZZLY-4004-i_1",
@@ -119,12 +132,16 @@ add_component!(sys, new_line,)
 
 mid_line1 = get_component(Line, sys, "GRIZZLY2-4092-GRIZZLY3-4093-i_1")
 remove_component!(Line, sys, "GRIZZLY2-4092-GRIZZLY3-4093-i_1")
+remove_component!(Arc, sys, get_name(get_arc(mid_line1)))
 mid_line2 = get_component(Line, sys, "GRIZZLY3-4093-GRIZZLY4-4094-i_1")
 remove_component!(Line, sys, "GRIZZLY3-4093-GRIZZLY4-4094-i_1")
+remove_component!(Arc, sys, get_name(get_arc(mid_line2)))
 line_from = get_component(Line, sys,  "MALIN-4001-GRIZZLY4-4094-i_1")
 remove_component!(Line, sys, "MALIN-4001-GRIZZLY4-4094-i_1")
+remove_component!(Arc, sys, get_name(get_arc(line_from)))
 line_to = get_component(Line, sys,  "GRIZZLY-4004-GRIZZLY2-4092-i_1")
 remove_component!(Line, sys, "GRIZZLY-4004-GRIZZLY2-4092-i_1")
+remove_component!(Arc, sys, get_name(get_arc(line_to)))
 
 new_line = Line(
     name = "MALIN-4001-GRIZZLY-4004-i_2",
@@ -141,11 +158,15 @@ new_line = Line(
 remove_component!(Bus, sys, get_name(mid_line1.arc.to))
 remove_component!(Bus, sys, get_name(mid_line1.arc.from))
 remove_component!(Bus, sys, get_name(mid_line2.arc.to))
+
+
 add_component!(sys, new_line,)
 
 line_from = get_component(Line, sys,  "MIDWAY-3803-GATES1-3891-i_1")
+remove_component!(Arc, sys, get_name(get_arc(line_from)))
 remove_component!(Line, sys, "MIDWAY-3803-GATES1-3891-i_1")
 line_to = get_component(Line, sys,  "GATES-3802-GATES1-3891-i_1")
+remove_component!(Arc, sys, get_name(get_arc(line_to)))
 remove_component!(Line, sys, "GATES-3802-GATES1-3891-i_1")
 new_line = Line(
     name = "MIDWAY-3803-GATES-3802-i_1",
@@ -173,5 +194,6 @@ b = get_component(Bus, sys, "NORTH G3-4231")
 set_magnitude!(b, 1.1)
 run_powerflow!(sys)
 
-#Serialize system - TODO: error when reading back 
+#Serialize system - TODO: error when reading back
 to_json(sys, joinpath(@__DIR__, "psid_files", "system.json"), force = true)
+System(joinpath(@__DIR__, "psid_files", "system.json"); runchecks = false)
