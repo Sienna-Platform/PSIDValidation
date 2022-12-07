@@ -13,6 +13,8 @@ sys = System(
 
 run_powerflow!(sys)
 
+o_sys = run_powerflow(sys)
+
 ###### Correct Line Data to avoid lines with negative impedances ######
 
 for br in get_components(Line, sys)
@@ -183,11 +185,41 @@ new_line = Line(
 remove_component!(Bus, sys, "GATES1-3891")
 add_component!(sys, new_line,)
 
+### Change some components settings
+gen = get_component(ThermalStandard, sys, "generator-4231-H")
+set_active_power!(gen, get_active_power(gen) - 2.5)
+
+gen = get_component(ThermalStandard, sys, "generator-4231-S")
+set_status!(gen, true)
+set_base_power!(gen, 353.0)
+set_rating!(gen, 1.0)
+set_active_power!(gen, 2.50)
+set_reactive_power!(gen, 1.7)
+set_active_power_limits!(gen, (min = 0.0, max = 2.5))
+set_reactive_power_limits!(gen, (min = -2.5, max = 2.5))
+
+gen = get_component(ThermalStandard, sys, "generator-4039-H")
+set_active_power!(gen, get_active_power(gen) - 2.0)
+
+gen = get_component(ThermalStandard, sys, "generator-4039-S")
+set_status!(gen, true)
+set_base_power!(gen, 565.0)
+set_rating!(gen, 1.0)
+set_active_power!(gen, 2.00)
+set_reactive_power!(gen, 1.2)
+set_active_power_limits!(gen, (min = 0.0, max = 4.0))
+set_reactive_power_limits!(gen, (min = -4.0, max = 4.0))
+
+
 ###### Update Generation Data to match prime mover and fuel ######
 set_units_base_system!(sys, "DEVICE_BASE")
 update_generation_units!(sys)
 set_units_base_system!(sys, "SYSTEM_BASE")
 run_powerflow!(sys)
+
+res = run_powerflow(sys)
+
+# Enable additional components
 
 # Change setpoints to avoid reactive power limitations
 b = get_component(Bus, sys, "NORTH G3-4231")
