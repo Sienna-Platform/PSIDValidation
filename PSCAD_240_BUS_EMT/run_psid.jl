@@ -42,5 +42,5 @@ for state_ix in 1:length(ss.eigenvalues)
 end
 
 for i in findall(x -> real(x) > 0, ss.eigenvalues)
-    @show eig_state_map[i]
+    println("state $i with λ=$(ss.eigenvalues[i]) has $(eig_state_map[i])")
 end
