@@ -366,7 +366,7 @@ function update_gen_data(g::ThermalStandard, sys::System, ::Type{Source}, ::Miss
         active_power = min(get_active_power(g), get_max_active_power(g)*0.9),
         reactive_power = get_reactive_power(g),
         R_th = 0.0,
-        X_th = 0.0,
+        X_th = 0.001,
         internal_voltage = 1.1,
         internal_angle = 0.0,
     )
