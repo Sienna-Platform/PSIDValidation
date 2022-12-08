@@ -15,14 +15,14 @@ const device_mapping = Dict(
     "MG" => (ThermalStandard, PrimeMovers.CA, ThermalFuels.NATURAL_GAS),
     "N" => (ThermalStandard, PrimeMovers.ST, ThermalFuels.COAL),
     "NB" => (ThermalStandard, PrimeMovers.ST, ThermalFuels.COAL),
-    "ND" => (ThermalStandard, PrimeMovers.ST, ThermalFuels.COAL),
+    "ND" => (Source, missing, missing), # DC Source
     "NE" => (ThermalStandard, PrimeMovers.ST, ThermalFuels.NATURAL_GAS),
     "NG" => (ThermalStandard, PrimeMovers.CA, ThermalFuels.NATURAL_GAS),
     "NH" => (HydroDispatch, PrimeMovers.HY, missing),
     "NN" => (ThermalStandard, PrimeMovers.ST, ThermalFuels.COAL),
-    "NP" => (ThermalStandard, PrimeMovers.ST, ThermalFuels.DISTILLATE_FUEL_OIL),
+    "NP" => (HydroPumpedStorage, PrimeMovers.HY, missing),
     "NW" => (RenewableDispatch, PrimeMovers.WT, missing),
-    "P" => (ThermalStandard, PrimeMovers.IC, ThermalFuels.DISTILLATE_FUEL_OIL),
+    "P" => (HydroPumpedStorage, PrimeMovers.HY, missing),
     "R" => (ThermalStandard, PrimeMovers.IC, ThermalFuels.DISTILLATE_FUEL_OIL),
     "RG" => (ThermalStandard, PrimeMovers.IC, ThermalFuels.NATURAL_GAS),
     "S" => (RenewableDispatch, PrimeMovers.PVe, missing),
@@ -112,6 +112,9 @@ function filt_gfoll(device_base_power::Float64, device_base_voltage::Float64)
     impedance_ratio = converter_base_impedance/device_base_impedance
     inductance_ratio = converter_base_inductance/device_base_inductance
     capacitance_ratio = converter_base_capacitance/device_base_capacitance
+    @assert impedance_ratio < 1e6
+    @assert inductance_ratio < 1e6
+    @assert capacitance_ratio < 1e6 device_base_impedance
     return LCLFilter(lf = 0.009*inductance_ratio,
         rf = 0.016*impedance_ratio,
         cf = 2.5*capacitance_ratio,
@@ -259,7 +262,7 @@ end
 
 function update_inverter_to_grid_following(static_device)
     base_power = get_base_power(static_device)*1e6
-    base_voltage = get_base_voltage(get_bus(static_device))*1e6
+    base_voltage = get_base_voltage(get_bus(static_device))*1e3
     return DynamicInverter(
         get_name(static_device),
         1.0, #ω_ref
@@ -277,12 +280,16 @@ function update_gen_to_machine_sauerpai(sys, static_device::ThermalStandard)
     remove_component!(typeof(old_dyn_device), sys, get_name(old_dyn_device))
     new_dyn_device = make_dynamic_gen(old_dyn_device)
     add_component!(sys, new_dyn_device, static_device)
+    active_power = min(get_active_power(static_device), get_max_active_power(static_device)*0.9)
+    set_active_power!(static_device, active_power)
+    return
 end
 
 function update_gen_data(g::ThermalStandard, sys, ::Type{ThermalStandard}, pm, fuel)
     set_prime_mover!(g, pm)
     set_fuel!(g, fuel)
     update_gen_to_machine_sauerpai(sys, g)
+    return
 end
 
 function update_gen_data(g::ThermalStandard, sys, ::Type{HydroDispatch}, pm, fuel::Missing)
@@ -292,7 +299,7 @@ function update_gen_data(g::ThermalStandard, sys, ::Type{HydroDispatch}, pm, fue
         name = get_name(g),
         available = get_available(g),
         bus = get_bus(g),
-        active_power = get_active_power(g),
+        active_power = min(get_active_power(g), get_max_active_power(g)*0.9),
         reactive_power = get_reactive_power(g),
         rating = get_rating(g),
         prime_mover = pm,
@@ -309,11 +316,62 @@ function update_gen_data(g::ThermalStandard, sys, ::Type{HydroDispatch}, pm, fue
     return
 end
 
+function update_gen_data(g::ThermalStandard, sys, ::Type{HydroPumpedStorage}, pm, fuel::Missing)
+    old_dyn_device = get_dynamic_injector(g)
+    new_dyn_device = make_dynamic_gen(old_dyn_device)
+    new_gen = HydroPumpedStorage(
+        name = get_name(g),
+        available = get_available(g),
+        bus = get_bus(g),
+        rating_pump = -1.0*get_active_power_limits(g).min,
+        active_power = min(get_active_power(g), get_max_active_power(g)*0.9),
+        reactive_power = get_reactive_power(g),
+        rating = get_rating(g),
+        prime_mover = pm,
+        active_power_limits = (min = 0.0, max = get_active_power_limits(g).max),
+        active_power_limits_pump = (min = 0.0, max = -1*get_active_power_limits(g).min),
+        reactive_power_limits = get_reactive_power_limits(g),
+        reactive_power_limits_pump = get_reactive_power_limits(g),
+        ramp_limits_pump = (up = 1.0, down = 1.0),
+        time_limits_pump = (up = 100.0, down = 100.0),
+        ramp_limits = get_ramp_limits(g),
+        time_limits = get_time_limits(g),
+        base_power = get_base_power(g),
+        storage_capacity = (up = get_active_power_limits(g).max, down = get_active_power_limits(g).max*300.0),
+        inflow = 0.5,
+        outflow = 0.0,
+        initial_storage = (up = 0.5, down = 0.5)
+    )
+    remove_component!(typeof(old_dyn_device), sys, get_name(old_dyn_device))
+    remove_component!(ThermalStandard, sys, get_name(g))
+    add_component!(sys, new_gen)
+    add_component!(sys, new_dyn_device, new_gen)
+    return
+end
+
 const control_map = Dict(
     "vsm" => update_inverter_to_vsm,
     "droop" => update_inverter_to_droop,
     "gfl" => update_inverter_to_grid_following,
 )
+
+function update_gen_data(g::ThermalStandard, sys::System, ::Type{Source}, ::Missing, ::Missing)
+    old_dyn_device = get_dynamic_injector(g)
+    remove_component!(typeof(old_dyn_device), sys, get_name(old_dyn_device))
+    remove_component!(sys, g)
+    new_source = Source(
+        name = get_name(g),
+        available = get_available(g),
+        bus = get_bus(g),
+        active_power = min(get_active_power(g), get_max_active_power(g)*0.9),
+        reactive_power = get_reactive_power(g),
+        R_th = 0.0,
+        X_th = 0.0,
+        internal_voltage = 1.1,
+        internal_angle = 0.0,
+    )
+    add_component!(sys, new_source)
+end
 
 function update_gen_data(g::ThermalStandard, sys::System, ::Type{RenewableDispatch}, pm, fuel::Missing)
     old_dyn_device = get_dynamic_injector(g)

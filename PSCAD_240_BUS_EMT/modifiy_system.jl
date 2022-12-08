@@ -13,8 +13,6 @@ sys = System(
 
 run_powerflow!(sys)
 
-o_sys = run_powerflow(sys)
-
 ###### Correct Line Data to avoid lines with negative impedances ######
 
 for br in get_components(Line, sys)
@@ -160,8 +158,6 @@ new_line = Line(
 remove_component!(Bus, sys, get_name(mid_line1.arc.to))
 remove_component!(Bus, sys, get_name(mid_line1.arc.from))
 remove_component!(Bus, sys, get_name(mid_line2.arc.to))
-
-
 add_component!(sys, new_line,)
 
 line_from = get_component(Line, sys,  "MIDWAY-3803-GATES1-3891-i_1")
@@ -185,31 +181,206 @@ new_line = Line(
 remove_component!(Bus, sys, "GATES1-3891")
 add_component!(sys, new_line,)
 
+existing_line = get_component(Line, sys, "NAUGHTON-6305-BENLOMND-6510-i_2")
+set_x!(existing_line, get_x(existing_line)*0.8)
+set_r!(existing_line, get_x(existing_line)*0.8)
+new_line = Line(
+    name = "NAUGHTON-6305-BENLOMND-6510-i_3",
+    available = true,
+    active_power_flow = get_active_power_flow(existing_line),
+    reactive_power_flow = get_reactive_power_flow(existing_line),
+    arc = get_arc(existing_line),
+    r = get_r(existing_line),
+    x = get_x(existing_line),
+    b = get_b(existing_line),
+    rate = get_rate(existing_line),
+    angle_limits = get_angle_limits(existing_line)
+)
+add_component!(sys, new_line,)
+
+new_line = Line(
+    name = "NAUGHTON-6305-BENLOMND-6510-i_4",
+    available = true,
+    active_power_flow = get_active_power_flow(existing_line),
+    reactive_power_flow = get_reactive_power_flow(existing_line),
+    arc = get_arc(existing_line),
+    r = get_r(existing_line),
+    x = get_x(existing_line),
+    b = get_b(existing_line),
+    rate = get_rate(existing_line),
+    angle_limits = get_angle_limits(existing_line)
+)
+add_component!(sys, new_line,)
+
+existing_line = get_component(Line, sys, "BORAH-6104-NAUGHTON-6305-i_1")
+set_x!(existing_line, get_x(existing_line)*0.8)
+set_r!(existing_line, get_x(existing_line)*0.8)
+new_line = Line(
+    name = "BORAH-6104-NAUGHTON-6305-i_2",
+    available = true,
+    active_power_flow = get_active_power_flow(existing_line),
+    reactive_power_flow = get_reactive_power_flow(existing_line),
+    arc = get_arc(existing_line),
+    r = get_r(existing_line),
+    x = get_x(existing_line),
+    b = get_b(existing_line),
+    rate = get_rate(existing_line),
+    angle_limits = get_angle_limits(existing_line)
+)
+add_component!(sys, new_line,)
+
+existing_line = get_component(Line, sys, "BRIDGER2-6303-NAUGHTON-6305-i_1")
+set_x!(existing_line, get_x(existing_line)*0.8)
+set_r!(existing_line, get_x(existing_line)*0.8)
+new_line = Line(
+    name = "BRIDGER2-6303-NAUGHTON-6305-i_3",
+    available = true,
+    active_power_flow = get_active_power_flow(existing_line),
+    reactive_power_flow = get_reactive_power_flow(existing_line),
+    arc = get_arc(existing_line),
+    r = get_r(existing_line),
+    x = get_x(existing_line),
+    b = get_b(existing_line),
+    rate = get_rate(existing_line),
+    angle_limits = get_angle_limits(existing_line)
+)
+add_component!(sys, new_line,)
+
+existing_line = get_component(Line, sys, "BORAH-6104-GARRISON-6204-i_1")
+
+new_line = Line(
+    name = "BORAH-6104-GARRISON-6204-i_2",
+    available = true,
+    active_power_flow = get_active_power_flow(existing_line),
+    reactive_power_flow = get_reactive_power_flow(existing_line),
+    arc = get_arc(existing_line),
+    r = get_r(existing_line),
+    x = get_x(existing_line),
+    b = get_b(existing_line),
+    rate = get_rate(existing_line),
+    angle_limits = get_angle_limits(existing_line)
+)
+add_component!(sys, new_line,)
+
 ### Change some components settings
 gen = get_component(ThermalStandard, sys, "generator-4231-H")
-set_active_power!(gen, get_active_power(gen) - 2.5)
+set_active_power!(gen, get_active_power(gen) - 1.5)
+
+gen = get_component(ThermalStandard, sys, "generator-4231-C")
+set_active_power!(gen, get_active_power(gen) - 0.75)
+set_reactive_power_limits!(gen, (min = -7.35, max = 7.35))
 
 gen = get_component(ThermalStandard, sys, "generator-4231-S")
 set_status!(gen, true)
-set_base_power!(gen, 353.0)
+set_base_power!(gen, 292.0)
 set_rating!(gen, 1.0)
-set_active_power!(gen, 2.50)
-set_reactive_power!(gen, 1.7)
+set_active_power!(gen, 2.25)
+set_reactive_power!(gen, 1.0)
 set_active_power_limits!(gen, (min = 0.0, max = 2.5))
-set_reactive_power_limits!(gen, (min = -2.5, max = 2.5))
+set_reactive_power_limits!(gen, (min = -1.6, max = 1.6))
 
 gen = get_component(ThermalStandard, sys, "generator-4039-H")
 set_active_power!(gen, get_active_power(gen) - 2.0)
 
 gen = get_component(ThermalStandard, sys, "generator-4039-S")
 set_status!(gen, true)
-set_base_power!(gen, 565.0)
+set_base_power!(gen, 447.0)
 set_rating!(gen, 1.0)
 set_active_power!(gen, 2.00)
 set_reactive_power!(gen, 1.2)
 set_active_power_limits!(gen, (min = 0.0, max = 4.0))
-set_reactive_power_limits!(gen, (min = -4.0, max = 4.0))
+set_reactive_power_limits!(gen, (min = -2.0, max = 2.0))
 
+gen = get_component(ThermalStandard, sys, "generator-4039-W")
+set_reactive_power_limits!(gen, (min = -5.1, max = 5.1))
+
+gen = get_component(ThermalStandard, sys, "generator-4035-G")
+set_reactive_power_limits!(gen, (min = -3.3, max = 3.3))
+
+gen = get_component(ThermalStandard, sys, "generator-6333-W")
+set_reactive_power_limits!(gen, (min = -3.51, max = 3.51))
+
+gen = get_component(ThermalStandard, sys, "generator-6235-H")
+set_active_power!(gen, get_active_power(gen) - 1.0)
+
+gen = get_component(ThermalStandard, sys, "generator-6235-S")
+set_status!(gen, true)
+set_base_power!(gen, 111.0)
+set_rating!(gen, 1.0)
+set_active_power!(gen, 1.0)
+set_reactive_power!(gen, 0.1)
+set_active_power_limits!(gen, (min = 0.0, max = 1.0))
+set_reactive_power_limits!(gen, (min = -0.4, max = 0.4))
+
+gen = get_component(ThermalStandard, sys, "generator-4035-G")
+set_active_power!(gen, get_active_power(gen) - 1.0)
+
+gen = get_component(ThermalStandard, sys, "generator-4035-H")
+set_active_power!(gen, get_active_power(gen) + 0.5)
+
+gen = get_component(ThermalStandard, sys, "generator-4035-W")
+set_active_power!(gen, get_active_power(gen) + 0.5)
+
+gen = get_component(ThermalStandard, sys, "generator-6132-G")
+set_active_power!(gen, get_active_power(gen) - 1.5)
+
+gen = get_component(ThermalStandard, sys, "generator-6132-S")
+set_active_power!(gen, get_active_power(gen) + 1.5)
+
+gen = get_component(ThermalStandard, sys, "generator-6533-W")
+set_active_power!(gen, get_active_power(gen) - 0.75)
+
+gen = get_component(ThermalStandard, sys, "generator-4031-G")
+set_reactive_power_limits!(gen, (min = -5.1, max = 5.1))
+set_active_power!(gen, get_active_power(gen) - 1.2)
+
+load = get_component(PowerLoad, sys, "load40081")
+set_active_power!(load, get_active_power(load) + 2.8)
+
+gen = get_component(ThermalStandard, sys, "generator-4031-W")
+set_active_power!(gen, get_active_power(gen) + 1.25)
+
+gen = get_component(ThermalStandard, sys, "generator-4031-H")
+set_active_power!(gen, get_active_power(gen) + 1.25)
+
+gen = get_component(ThermalStandard, sys, "generator-4031-S")
+set_active_power!(gen, get_active_power(gen) + 0.7)
+
+gen = get_component(ThermalStandard, sys, "generator-6533-H")
+set_active_power!(gen, get_active_power(gen) + 0.65)
+
+gen = get_component(ThermalStandard, sys, "generator-6533-S")
+set_active_power!(gen, get_active_power(gen) + 1.1)
+
+gen = get_component(ThermalStandard, sys, "generator-3133-S")
+set_status!(gen, true)
+set_base_power!(gen, 292.0)
+set_rating!(gen, 1.0)
+set_active_power!(gen, 1.0)
+set_reactive_power!(gen, 0.0)
+set_active_power_limits!(gen, (min = 0.0, max = 2.5))
+set_reactive_power_limits!(gen, (min = -1.6, max = 1.6))
+
+gen = get_component(ThermalStandard, sys, "generator-3133-NG")
+set_active_power!(gen, 0.3)
+
+load = get_component(PowerLoad, sys, "load31031")
+set_active_power!(load, get_active_power(load) + 1.8)
+
+gen = get_component(ThermalStandard, sys, "generator-6433-E")
+set_active_power!(gen, get_active_power(gen) - 1.1)
+
+gen = get_component(ThermalStandard, sys, "generator-6303-DP")
+set_status!(gen, true)
+set_base_power!(gen, 170.0)
+set_rating!(gen, 1.0)
+set_active_power!(gen, 1.0)
+set_reactive_power!(gen, 0.0)
+set_active_power_limits!(gen, (min = 0.0, max = 1.0))
+set_reactive_power_limits!(gen, (min = -0.0, max = 0.0))
+
+xfr = get_component(Transformer2W, sys, "MONTANA-6205-MONTA G1-6235-i_1")
+set_x!(xfr, get_x(xfr)*3)
 
 ###### Update Generation Data to match prime mover and fuel ######
 set_units_base_system!(sys, "DEVICE_BASE")
@@ -217,15 +388,19 @@ update_generation_units!(sys)
 set_units_base_system!(sys, "SYSTEM_BASE")
 run_powerflow!(sys)
 
-res = run_powerflow(sys)
+for b in get_components(Bus, sys)
+    if abs(get_angle(b)) > 1.5
+        @error get_name(b) get_angle(b)
+    end
+    set_voltage_limits!(b, (min = -0.8, max = 1.2))
+end
 
-# Enable additional components
+# Make proper load model
+for l in get_components(PowerLoad, sys)
+    set_model!(l, LoadModels.ConstantImpedance)
+end
 
-# Change setpoints to avoid reactive power limitations
-b = get_component(Bus, sys, "NORTH G3-4231")
-set_magnitude!(b, 1.1)
-run_powerflow!(sys)
 
 #Serialize deseralize system
 to_json(sys, joinpath(@__DIR__, "psid_files", "system.json"), force = true)
-System(joinpath(@__DIR__, "psid_files", "system.json"); runchecks = false)
+System(joinpath(@__DIR__, "psid_files", "system.json"))
