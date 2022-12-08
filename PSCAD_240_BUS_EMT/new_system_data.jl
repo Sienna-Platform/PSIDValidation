@@ -43,7 +43,7 @@ const device_mapping = Dict(
 function make_dynamic_gen(gen::DynamicGenerator{RoundRotorQuadratic, T, U, V, W}) where {T, U, V, W}
     old_machine = get_machine(gen)
     new_machine =  SauerPaiMachine(
-            get_R(old_machine),
+            min(get_R(old_machine), 0.001),
             get_Xd(old_machine),
             get_Xq(old_machine),
             get_Xd_p(old_machine),
@@ -56,11 +56,13 @@ function make_dynamic_gen(gen::DynamicGenerator{RoundRotorQuadratic, T, U, V, W}
             get_Td0_pp(old_machine),
             get_Tq0_pp(old_machine),)
 
+    new_shaft = deepcopy(get_shaft(gen))
+    set_D!(new_shaft, 0.005)
     return DynamicGenerator(
             get_name(gen),
             get_ω_ref(gen),
             new_machine,
-            deepcopy(get_shaft(gen)),
+            new_shaft,
             deepcopy(get_avr(gen)),
             deepcopy(get_prime_mover(gen)),
             deepcopy(get_pss(gen)),
@@ -97,6 +99,9 @@ function filt(device_base_power::Float64, device_base_voltage::Float64)
     impedance_ratio = converter_base_impedance/device_base_impedance
     inductance_ratio = converter_base_inductance/device_base_inductance
     capacitance_ratio = converter_base_capacitance/device_base_capacitance
+    @assert impedance_ratio < 1e3
+    @assert inductance_ratio < 1e3
+    @assert capacitance_ratio < 1e3 device_base_impedance
     return LCLFilter(lf = 0.08*inductance_ratio,
                      rf = 0.003*impedance_ratio,
                      cf = 0.074*capacitance_ratio,
@@ -112,14 +117,13 @@ function filt_gfoll(device_base_power::Float64, device_base_voltage::Float64)
     impedance_ratio = converter_base_impedance/device_base_impedance
     inductance_ratio = converter_base_inductance/device_base_inductance
     capacitance_ratio = converter_base_capacitance/device_base_capacitance
-    @assert impedance_ratio < 1e6
-    @assert inductance_ratio < 1e6
-    @assert capacitance_ratio < 1e6 device_base_impedance
-    return LCLFilter(lf = 0.009*inductance_ratio,
-        rf = 0.016*impedance_ratio,
-        cf = 2.5*capacitance_ratio,
-        lg = 0.002*inductance_ratio,
-        rg = 0.003*impedance_ratio
+
+    return LCLFilter(
+        lf = 0.08*inductance_ratio,
+        rf = 0.003*impedance_ratio,
+        cf = 0.074*capacitance_ratio,
+        lg = 0.2*inductance_ratio,
+        rg = 0.01*impedance_ratio
         )
 end
 
@@ -224,8 +228,8 @@ function current_mode_inner(device_base_power::Float64, device_base_voltage::Flo
 
     return CurrentModeControl(
         kpc = 0.37*kpc_ratio,     #Current controller proportional gain
-        kic = 0.7*kpc_ratio,     #Current controller integral gain
-        kffv = 1.0,     #Binary variable enabling the voltage feed-forward in output of current controllers
+        kic = 0.07*kpc_ratio,     #Current controller integral gain
+        kffv = 0.0,     #Binary variable enabling the voltage feed-forward in output of current controllers
     )
 
 end

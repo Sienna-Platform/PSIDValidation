@@ -10,6 +10,7 @@ using CSV
 using PowerFlows
 const PSY = PowerSystems
 
+include("modifiy_system.jl")
 system = System(joinpath(@__DIR__, "psid_files", "system.json"))
 run_powerflow!(system)
 
