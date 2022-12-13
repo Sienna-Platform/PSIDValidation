@@ -131,11 +131,11 @@ function filt_gfoll(device_base_power::Float64, device_base_voltage::Float64)
     capacitance_ratio = gfl_converter_base_capacitance/device_base_capacitance
 
     return LCLFilter(
-        lf = 0.15*inductance_ratio ,
-        rf = 0.005*impedance_ratio,
+        lf = 0.009*inductance_ratio,
+        rf = 0.016*impedance_ratio,
         cf = 2.5*capacitance_ratio,
-        lg = 0.15*inductance_ratio + 0.0625,
-        rg = 0.005*impedance_ratio
+        lg = 0.002*inductance_ratio,
+        rg = 0.003*impedance_ratio
         )
 end
 
@@ -147,9 +147,9 @@ pll() = KauraPLL(
 )
 
 reduced_pll() = ReducedOrderPLL(
-    ω_lp = 1.32 * sys_frequency, #Cut-off frequency for LowPass filter of PLL filter.
-    kp_pll = 20.0,  #PLL proportional gain
-    ki_pll = 200.0,   #PLL integral gain
+    ω_lp = 1.32,
+    kp_pll = 40.0,  #PLL proportional gain
+    ki_pll = 410.0,   #PLL integral gain
 )
 
 no_pll() = FixedFrequency()
@@ -187,10 +187,10 @@ end
 
 function outer_control_gfoll()
     function active_pi()
-        return ActivePowerPI(Kp_p = 2.0, Ki_p = 30.0, ωz = 1/0.132)
+        return ActivePowerPI(Kp_p = 2.0, Ki_p = 20.0, ωz = 0.132)
     end
     function reactive_pi()
-        return ReactivePowerPI(Kp_q = 2.0, Ki_q = 30.0, ωf = 10.0)
+        return ReactivePowerPI(Kp_q = 2.0, Ki_q = 20.0, ωf = 0.132)
     end
     return OuterControl(active_pi(), reactive_pi())
 end
@@ -239,9 +239,9 @@ function current_mode_inner(device_base_power::Float64, device_base_voltage::Flo
     kpc_ratio = converter_voltage_current_ratio/device_voltage_current_ratio
 
     return CurrentModeControl(
-        kpc = 0.37*kpc_ratio,     #Current controller proportional gain
-        kic = 0.07*kpc_ratio,     #Current controller integral gain
-        kffv = 0.0,     #Binary variable enabling the voltage feed-forward in output of current controllers
+        kpc = 0.38*kpc_ratio,     #Current controller proportional gain
+        kic = 0.7*kpc_ratio,     #Current controller integral gain
+        kffv = 1.0,     #Binary variable enabling the voltage feed-forward in output of current controllers
     )
 
 end
