@@ -10,12 +10,13 @@ using CSV
 using PowerFlows
 const PSY = PowerSystems
 
+include("debug_utils.jl")
 include("modifiy_system.jl")
-system = System(joinpath(@__DIR__, "psid_files", "system.json"))
+sys = exchange_device("generator-2203-DP-gfl")
 
 sim_ref = Simulation(
         MassMatrixModel,
-        system,
+        sys,
         "PSCAD_240_BUS_EMT",
         (0.0, 20.0);
         file_level = Logging.Error,
@@ -38,13 +39,6 @@ for state_ix in 1:length(ss.eigenvalues)
     end
 end
 
-bus_eig = Dict()
-for i in findall(x -> real(x) > -1e-6, ss.eigenvalues)
-    bus_no = split(eig_state_map[i][1], "-")[2]
-    if haskey(bus_eig, bus_no)
-        push!(bus_eig[bus_no], eig_state_map[i])
-    else
-        bus_eig[bus_no] = [eig_state_map[i]]
-    end
+for i in findall(x -> real(x) > -Inf, ss.eigenvalues)
     println("state $i with λ=$(ss.eigenvalues[i]) has $(eig_state_map[i])")
 end
