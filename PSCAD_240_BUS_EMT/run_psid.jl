@@ -23,7 +23,7 @@ sim_ref = Simulation(
         (0.0, 20.0),
         GeneratorTrip(1.0, th);
         file_level = Logging.Error,
-        console_level = Logging.Debug
+        console_level = Logging.Error
         )
 
 ss = small_signal_analysis(sim_ref)
@@ -42,6 +42,6 @@ for state_ix in 1:length(ss.eigenvalues)
     end
 end
 
-for i in findall(x -> real(x) > 0, ss.eigenvalues)
+for i in findall(x -> real(x) > -1e-6, ss.eigenvalues)
     println("state $i with λ=$(ss.eigenvalues[i]) has $(eig_state_map[i])")
 end

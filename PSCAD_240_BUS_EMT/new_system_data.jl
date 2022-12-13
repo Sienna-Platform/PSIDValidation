@@ -57,7 +57,7 @@ function make_dynamic_gen(gen::DynamicGenerator{RoundRotorQuadratic, T, U, V, W}
             get_Tq0_pp(old_machine),)
 
     new_shaft = deepcopy(get_shaft(gen))
-    set_D!(new_shaft, 0.005)
+    set_D!(new_shaft, 0.05)
     return DynamicGenerator(
             get_name(gen),
             get_ω_ref(gen),
@@ -78,11 +78,20 @@ end
 const converter_base_voltage = 690.0
 const converter_base_power = 2.75*1e6
 const converter_base_current = (1/sqrt(3))*converter_base_power/converter_base_voltage
-const converter_base_impedance = converter_base_voltage^2/converter_base_power
+const converter_base_impedance = converter_base_voltage/converter_base_current
 const converter_base_inductance = converter_base_impedance/(2*π*50.0)
 const converter_base_capacitance = 1/((2*π*50.0)*(converter_base_impedance))
 const converter_current_voltage_ratio = converter_base_current/converter_base_voltage
 const converter_voltage_current_ratio = converter_base_voltage/converter_base_current
+
+const gfl_converter_base_voltage = 18.0*1e3
+const gfl_converter_base_power = 200*1e6
+const gfl_converter_base_current = (1/sqrt(3))*gfl_converter_base_power/gfl_converter_base_voltage
+const gfl_converter_base_impedance = gfl_converter_base_voltage/gfl_converter_base_current
+const gfl_converter_base_inductance = gfl_converter_base_impedance/(2*π*60.0)
+const gfl_converter_base_capacitance = 1/((2*π*60.0)*(gfl_converter_base_impedance))
+const gfl_converter_current_voltage_ratio = gfl_converter_base_current/gfl_converter_base_voltage
+const gfl_converter_voltage_current_ratio = gfl_converter_base_voltage/gfl_converter_base_current
 
 converter() = AverageConverter(rated_voltage = converter_base_voltage, rated_current = 1.1*converter_base_current)
 
@@ -92,7 +101,8 @@ dc_source() = FixedDCSource(voltage = 600.0) #Not in the original data, guessed.
 ###### Filter Data ######
 
 function filt(device_base_power::Float64, device_base_voltage::Float64)
-    device_base_impedance = device_base_voltage^2/device_base_power
+    device_base_current = (1/sqrt(3))*device_base_power/device_base_voltage
+    device_base_impedance = device_base_voltage/device_base_current
     device_base_inductance = device_base_impedance/(sys_frequency)
     device_base_capacitance =  1/((sys_frequency)*(device_base_impedance))
 
@@ -110,20 +120,21 @@ function filt(device_base_power::Float64, device_base_voltage::Float64)
 end
 
 function filt_gfoll(device_base_power::Float64, device_base_voltage::Float64)
-    device_base_impedance = device_base_voltage^2/device_base_power
+    device_base_current = (1/sqrt(3))*device_base_power/device_base_voltage
+    device_base_impedance = device_base_voltage/device_base_current
     device_base_inductance = device_base_impedance/(sys_frequency)
     device_base_capacitance =  1/((sys_frequency)*(device_base_impedance))
 
-    impedance_ratio = converter_base_impedance/device_base_impedance
-    inductance_ratio = converter_base_inductance/device_base_inductance
-    capacitance_ratio = converter_base_capacitance/device_base_capacitance
+    impedance_ratio = gfl_converter_base_impedance/device_base_impedance
+    inductance_ratio = gfl_converter_base_inductance/device_base_inductance
+    capacitance_ratio = gfl_converter_base_capacitance/device_base_capacitance
 
     return LCLFilter(
-        lf = 0.08*inductance_ratio,
-        rf = 0.003*impedance_ratio,
-        cf = 0.074*capacitance_ratio,
-        lg = 0.2*inductance_ratio,
-        rg = 0.01*impedance_ratio
+        lf = 0.15*inductance_ratio ,
+        rf = 0.005*impedance_ratio,
+        cf = 2.5*capacitance_ratio,
+        lg = 0.15*inductance_ratio + 0.0625,
+        rg = 0.005*impedance_ratio
         )
 end
 
@@ -175,10 +186,10 @@ end
 
 function outer_control_gfoll()
     function active_pi()
-        return ActivePowerPI(Kp_p = 2.0, Ki_p = 30.0, ωz = 0.132 * sys_frequency)
+        return ActivePowerPI(Kp_p = 2.0, Ki_p = 30.0, ωz = 1/0.132)
     end
     function reactive_pi()
-        return ReactivePowerPI(Kp_q = 2.0, Ki_q = 30.0, ωf = 0.132 * sys_frequency)
+        return ReactivePowerPI(Kp_q = 2.0, Ki_q = 30.0, ωf = 10.0)
     end
     return OuterControl(active_pi(), reactive_pi())
 end
