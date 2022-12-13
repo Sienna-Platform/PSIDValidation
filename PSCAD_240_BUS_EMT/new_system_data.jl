@@ -148,8 +148,8 @@ pll() = KauraPLL(
 
 reduced_pll() = ReducedOrderPLL(
     ω_lp = 1.32*sys_frequency,
-    kp_pll = 50.0/sys_frequency,  #PLL proportional gain
-    ki_pll = 410.0/sys_frequency,   #PLL integral gain
+    kp_pll = 30.0/sys_frequency,  #PLL proportional gain
+    ki_pll = 0.18/sys_frequency,   #PLL integral gain
 )
 
 no_pll() = FixedFrequency()
@@ -158,16 +158,6 @@ no_pll() = FixedFrequency()
 function outer_control()
     function virtual_inertia()
         return VirtualInertia(Ta = 2.0, kd = 400.0, kω = 20.0)
-    end
-    function reactive_droop()
-        return ReactivePowerDroop(kq = 0.2, ωf = 1000.0)
-    end
-    return OuterControl(virtual_inertia(), reactive_droop())
-end
-
-function outer_control_nopll()
-    function virtual_inertia()
-        return VirtualInertia(Ta = 2.0, kd = 0.0, kω = 20.0)
     end
     function reactive_droop()
         return ReactivePowerDroop(kq = 0.2, ωf = 1000.0)
@@ -187,10 +177,10 @@ end
 
 function outer_control_gfoll()
     function active_pi()
-        return ActivePowerPI(Kp_p = 2.0, Ki_p = 20.0, ωz = 0.132)
+        return ActivePowerPI(Kp_p = 1.0, Ki_p = 100.0, ωz = 600.0)
     end
     function reactive_pi()
-        return ReactivePowerPI(Kp_q = 2.0, Ki_q = 20.0, ωf = 0.132)
+        return ReactivePowerPI(Kp_q = 2.0, Ki_q = 20.0, ωf = 600.0)
     end
     return OuterControl(active_pi(), reactive_pi())
 end
