@@ -131,11 +131,11 @@ function filt_gfoll(device_base_power::Float64, device_base_voltage::Float64)
     capacitance_ratio = gfl_converter_base_capacitance/device_base_capacitance
 
     return LCLFilter(
-        lf = 0.009*inductance_ratio,
-        rf = 0.016*impedance_ratio,
-        cf = 2.5*capacitance_ratio,
-        lg = 0.002*inductance_ratio,
-        rg = 0.003*impedance_ratio
+        lf = 0.009, #*inductance_ratio,
+        rf = 0.016, #*impedance_ratio,
+        cf = 1/2.5, #*capacitance_ratio,
+        lg = 0.002, #*inductance_ratio,
+        rg = 0.003, #*impedance_ratio
         )
 end
 
@@ -147,9 +147,9 @@ pll() = KauraPLL(
 )
 
 reduced_pll() = ReducedOrderPLL(
-    ω_lp = 1.32*sys_frequency,
-    kp_pll = 30.0/sys_frequency,  #PLL proportional gain
-    ki_pll = 0.18/sys_frequency,   #PLL integral gain
+    ω_lp = 1.32*sys_frequency, # *sys_frequency,
+    kp_pll = 200.0/18e3,  #PLL proportional gain
+    ki_pll = 4100.0/18e3,   #PLL integral gain
 )
 
 no_pll() = FixedFrequency()
@@ -177,23 +177,14 @@ end
 
 function outer_control_gfoll()
     function active_pi()
-        return ActivePowerPI(Kp_p = 1.0, Ki_p = 100.0, ωz = 600.0)
+        return ActivePowerPI(Kp_p = 0.5, Ki_p = 2.90, ωz = 0.132 * sys_frequency)
     end
     function reactive_pi()
-        return ReactivePowerPI(Kp_q = 2.0, Ki_q = 20.0, ωf = 600.0)
+        return ReactivePowerPI(Kp_q = 0.5, Ki_q = 2.90, ωf = 0.132 * sys_frequency)
     end
     return OuterControl(active_pi(), reactive_pi())
 end
 
-function outer_voc()
-    function active_voc()
-        return ActiveVirtualOscillator(k1 = 0.0033, ψ = pi / 4)
-    end
-    function reactive_voc()
-        return ReactiveVirtualOscillator(k2 = 0.0796)
-    end
-    return OuterControl(active_voc(), reactive_voc())
-end
 
 ######## Inner Control ######
 function inner_control(device_base_power::Float64, device_base_voltage::Float64)
@@ -229,8 +220,8 @@ function current_mode_inner(device_base_power::Float64, device_base_voltage::Flo
     kpc_ratio = converter_voltage_current_ratio/device_voltage_current_ratio
 
     return CurrentModeControl(
-        kpc = 0.38*kpc_ratio,     #Current controller proportional gain
-        kic = 0.7*kpc_ratio,     #Current controller integral gain
+        kpc = 0.38, #*kpc_ratio,     #Current controller proportional gain
+        kic = 1.99, #*kpc_ratio,     #Current controller integral gain
         kffv = 1.0,     #Binary variable enabling the voltage feed-forward in output of current controllers
     )
 
