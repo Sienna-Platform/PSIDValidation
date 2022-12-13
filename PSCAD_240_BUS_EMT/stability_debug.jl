@@ -8,8 +8,10 @@ using DataFrames
 using Sundials
 using CSV
 using PowerFlows
+using Logging
 const PSY = PowerSystems
 
+configure_logging(console_level = Logging.Error)
 include("debug_utils.jl")
 include("modifiy_system.jl")
 sys = exchange_device("generator-2203-DP-gfl")
@@ -39,6 +41,6 @@ for state_ix in 1:length(ss.eigenvalues)
     end
 end
 
-for i in findall(x -> real(x) > -Inf, ss.eigenvalues)
+for i in findall(x -> real(x) > -1e-6, ss.eigenvalues)
     println("state $i with λ=$(ss.eigenvalues[i]) has $(eig_state_map[i])")
 end

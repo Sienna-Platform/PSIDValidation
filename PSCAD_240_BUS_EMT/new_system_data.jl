@@ -147,9 +147,9 @@ pll() = KauraPLL(
 )
 
 reduced_pll() = ReducedOrderPLL(
-    ω_lp = 1.32,
-    kp_pll = 40.0,  #PLL proportional gain
-    ki_pll = 410.0,   #PLL integral gain
+    ω_lp = 1.32*sys_frequency,
+    kp_pll = 50.0/sys_frequency,  #PLL proportional gain
+    ki_pll = 410.0/sys_frequency,   #PLL integral gain
 )
 
 no_pll() = FixedFrequency()
