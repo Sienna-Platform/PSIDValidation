@@ -408,6 +408,15 @@ for l in get_components(PowerLoad, sys)
     set_model!(l, LoadModels.ConstantImpedance)
 end
 
+avr = get_avr(get_dynamic_injector(get_component(HydroDispatch, sys, "generator-4131-H")))
+set_K!(avr, 700.0)
+
+pss = get_pss(get_dynamic_injector(get_component(HydroDispatch, sys, "generator-4131-H")))
+set_Ks!(pss, 40.0)
+set_T1!(pss, 10.0)
+
+avr = get_avr(get_dynamic_injector(get_component(ThermalStandard, sys, "generator-5032-C")))
+set_K!(avr, 50.0)
 
 #Serialize deseralize system
 to_json(sys, joinpath(@__DIR__, "psid_files", "system.json"), force = true)

@@ -59,7 +59,7 @@ function make_dynamic_gen(gen::DynamicGenerator{RoundRotorQuadratic, T, U, V, W}
 
 
     new_shaft = deepcopy(get_shaft(gen))
-    set_D!(new_shaft, 0.05)
+    set_D!(new_shaft, max(0.1, get_D(new_shaft)))
     return DynamicGenerator(
             get_name(gen),
             get_ω_ref(gen),
@@ -67,7 +67,7 @@ function make_dynamic_gen(gen::DynamicGenerator{RoundRotorQuadratic, T, U, V, W}
             new_shaft,
             deepcopy(get_avr(gen)),
             deepcopy(get_prime_mover(gen)),
-            PSSFixed(0.0),
+            get_name(gen) == "generator-5032-C" ? get_pss(gen) : PSSFixed(0.0),
             get_base_power(gen),
     )
 end
@@ -99,7 +99,7 @@ function make_dynamic_gen(gen::DynamicGenerator{RoundRotorQuadratic, T, V, Hydro
             new_shaft,
             deepcopy(get_avr(gen)),
             deepcopy(get_prime_mover(gen)),
-            PSSFixed(0.0),
+            get_name(gen) == "generator-4131-H" ? get_pss(gen) : PSSFixed(0.0),
             get_base_power(gen),
     )
 end
