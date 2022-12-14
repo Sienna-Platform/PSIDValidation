@@ -14,7 +14,7 @@ const PSY = PowerSystems
 configure_logging(console_level = Logging.Error)
 include("debug_utils.jl")
 include("modifiy_system.jl")
-sys = exchange_device("generator-2203-DP-gfl")
+sys = exchange_device("generator-5032-R")
 
 sim_ref = Simulation(
         MassMatrixModel,
@@ -22,6 +22,7 @@ sim_ref = Simulation(
         "PSCAD_240_BUS_EMT",
         (0.0, 20.0);
         file_level = Logging.Error,
+        all_lines_dynamic = true,
         console_level = Logging.Error
         )
 

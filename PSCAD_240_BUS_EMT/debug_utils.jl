@@ -10,10 +10,11 @@ function exchange_device(device_name::String, large_system_file = "PSCAD_240_BUS
     remove_component!(DynamicInverter{AverageConverter, OuterControl{ActivePowerDroop, ReactivePowerDroop}, VoltageModeControl, FixedDCSource, FixedFrequency, LCLFilter}, small_system, "generator-102-1")
     remove_component!(ThermalStandard, small_system, "generator-102-1")
     bus = get_component(Bus, small_system, "BUS 2")
+    #set_bustype!(bus, BusTypes.PQ)
     set_bus!(old_gen, bus)
     add_component!(small_system, old_gen)
     add_component!(small_system, dev, old_gen)
-
+    #set_reactive_power!(old_gen, 0.0)
     total_power = get_active_power(old_gen)
     for l in get_components(PSY.PowerLoad, small_system)
         PSY.set_model!(l, PSY.LoadModels.ConstantImpedance)

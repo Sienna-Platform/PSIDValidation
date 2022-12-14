@@ -19,7 +19,8 @@ sim_ref = Simulation(
         "PSCAD_240_BUS_EMT",
         (0.0, 20.0);
         file_level = Logging.Error,
-        console_level = Logging.Error
+        console_level = Logging.Error,
+        #all_lines_dynamic = true,
         )
 
 ss = small_signal_analysis(sim_ref)
