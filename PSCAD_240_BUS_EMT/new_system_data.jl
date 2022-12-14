@@ -440,15 +440,34 @@ function update_gen_data(g::ThermalStandard, sys::System, ::Type{RenewableFix}, 
         return
     end
     control_type = "gfl"
+    if get_name(g) in ["generator-3923-DP", "generator-6401-DP"]
+        control_type = "droop"
+        new_gen = RenewableDispatch(
+            name = join(push!(split(get_name(g), "-"), control_type), "-"),
+            available = get_available(g),
+            bus = get_bus(g),
+            active_power = get_active_power(g),
+            reactive_power = get_reactive_power(g),
+            rating = get_rating(g),
+            prime_mover = pm,
+            reactive_power_limits = (min = -0.1, max = 0.1),
+            power_factor = cos(atan(get_active_power(g), abs(get_reactive_power(g)))),
+            base_power = base_power,
+            operation_cost = TwoPartCost(nothing)
+        )
+        add_component!(sys, new_gen)
+        add_component!(sys, control_map[control_type](new_gen), new_gen)
+        return
+    end
     new_gen = RenewableFix(
         name = join(push!(split(get_name(g), "-"), control_type), "-"),
         available = get_available(g),
         bus = get_bus(g),
         active_power = get_active_power(g),
-        reactive_power = get_reactive_power(g),
+        reactive_power = get_reactive_power(g), #get_reactive_power(g),
         rating = get_rating(g),
         prime_mover = pm,
-        power_factor = 1.0,
+        power_factor = cos(atan(get_active_power(g), abs(get_reactive_power(g)))),
         base_power = base_power,
     )
     add_component!(sys, new_gen)

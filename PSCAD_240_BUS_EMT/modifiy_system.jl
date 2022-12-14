@@ -382,7 +382,15 @@ set_reactive_power_limits!(gen, (min = -0.0, max = 0.0))
 xfr = get_component(Transformer2W, sys, "MONTANA-6205-MONTA G1-6235-i_1")
 set_x!(xfr, get_x(xfr)*3)
 
+load = get_component(PowerLoad, sys, "load39231")
+set_active_power!(load, 7.3)
+set_reactive_power!(load, 2.82)
+
+fxa = get_component(FixedAdmittance, sys, "6")
+set_Y!(fxa, get_Y(fxa) - 1.88im)
+
 ###### Update Generation Data to match prime mover and fuel ######
+run_powerflow!(sys)
 set_units_base_system!(sys, "DEVICE_BASE")
 update_generation_units!(sys)
 set_units_base_system!(sys, "SYSTEM_BASE")
