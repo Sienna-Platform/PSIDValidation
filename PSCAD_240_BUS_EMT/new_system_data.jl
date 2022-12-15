@@ -59,7 +59,12 @@ function make_dynamic_gen(gen::DynamicGenerator{RoundRotorQuadratic, T, U, V, W}
 
 
     new_shaft = deepcopy(get_shaft(gen))
-    set_D!(new_shaft, max(0.1, get_D(new_shaft)))
+    gens_require_damping = ["generator-5032-C", "generator-5032-G", "generator-4031-G"]
+    if get_name(gen) ∈ gens_require_damping
+        set_D!(new_shaft, 2.0)
+    else
+        set_D!(new_shaft, max(0.1, get_D(new_shaft)))
+    end
     return DynamicGenerator(
             get_name(gen),
             get_ω_ref(gen),

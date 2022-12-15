@@ -54,7 +54,9 @@ end
 eig_state_map = Dict()
 for (device, states) in ss.participation_factors
     for (state, factors) in states
-        val = factors[end]
+        val = factors[end-2]
         eig_state_map[(device, state)] = val
     end
 end
+
+eigs_sorted = sort(collect(eig_state_map), by = x->x[2])
