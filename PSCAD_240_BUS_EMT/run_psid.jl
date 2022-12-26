@@ -10,6 +10,7 @@ using CSV
 using PowerFlows
 const PSY = PowerSystems
 
+configure_logging(console_level = Logging.Error)
 include("modifiy_system.jl")
 system = System(joinpath(@__DIR__, "psid_files", "system.json"))
 
@@ -19,7 +20,8 @@ sim_ref = Simulation(
         "PSCAD_240_BUS_EMT",
         (0.0, 20.0);
         file_level = Logging.Error,
-        console_level = Logging.Error
+        console_level = Logging.Error,
+        #all_lines_dynamic = true,
         )
 
 ss = small_signal_analysis(sim_ref)
@@ -39,7 +41,7 @@ for state_ix in 1:length(ss.eigenvalues)
 end
 
 bus_eig = Dict()
-for i in findall(x -> real(x) > -1e-6, ss.eigenvalues)
+for i in findall(x -> real(x) > -0.1, ss.eigenvalues)
     bus_no = split(eig_state_map[i][1], "-")[2]
     if haskey(bus_eig, bus_no)
         push!(bus_eig[bus_no], eig_state_map[i])
@@ -48,3 +50,13 @@ for i in findall(x -> real(x) > -1e-6, ss.eigenvalues)
     end
     println("state $i with λ=$(ss.eigenvalues[i]) has $(eig_state_map[i])")
 end
+
+eig_state_map = Dict()
+for (device, states) in ss.participation_factors
+    for (state, factors) in states
+        val = factors[end-2]
+        eig_state_map[(device, state)] = val
+    end
+end
+
+eigs_sorted = sort(collect(eig_state_map), by = x->x[2])

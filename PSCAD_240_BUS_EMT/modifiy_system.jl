@@ -382,7 +382,15 @@ set_reactive_power_limits!(gen, (min = -0.0, max = 0.0))
 xfr = get_component(Transformer2W, sys, "MONTANA-6205-MONTA G1-6235-i_1")
 set_x!(xfr, get_x(xfr)*3)
 
+load = get_component(PowerLoad, sys, "load39231")
+set_active_power!(load, 7.3)
+set_reactive_power!(load, 2.82)
+
+fxa = get_component(FixedAdmittance, sys, "6")
+set_Y!(fxa, get_Y(fxa) - 1.88im)
+
 ###### Update Generation Data to match prime mover and fuel ######
+run_powerflow!(sys)
 set_units_base_system!(sys, "DEVICE_BASE")
 update_generation_units!(sys)
 set_units_base_system!(sys, "SYSTEM_BASE")
@@ -400,6 +408,15 @@ for l in get_components(PowerLoad, sys)
     set_model!(l, LoadModels.ConstantImpedance)
 end
 
+avr = get_avr(get_dynamic_injector(get_component(HydroDispatch, sys, "generator-4131-H")))
+set_K!(avr, 700.0)
+
+pss = get_pss(get_dynamic_injector(get_component(HydroDispatch, sys, "generator-4131-H")))
+set_Ks!(pss, 40.0)
+set_T1!(pss, 10.0)
+
+avr = get_avr(get_dynamic_injector(get_component(ThermalStandard, sys, "generator-5032-C")))
+set_K!(avr, 50.0)
 
 #Serialize deseralize system
 to_json(sys, joinpath(@__DIR__, "psid_files", "system.json"), force = true)

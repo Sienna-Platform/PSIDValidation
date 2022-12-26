@@ -43,7 +43,7 @@ const device_mapping = Dict(
 function make_dynamic_gen(gen::DynamicGenerator{RoundRotorQuadratic, T, U, V, W}) where {T, U, V, W}
     old_machine = get_machine(gen)
     new_machine =  SauerPaiMachine(
-            min(get_R(old_machine), 0.001),
+            max(get_R(old_machine), 0.001),
             get_Xd(old_machine),
             get_Xq(old_machine),
             get_Xd_p(old_machine),
@@ -54,11 +54,17 @@ function make_dynamic_gen(gen::DynamicGenerator{RoundRotorQuadratic, T, U, V, W}
             get_Td0_p(old_machine),
             get_Tq0_p(old_machine),
             get_Td0_pp(old_machine),
-            get_Tq0_pp(old_machine),)
+            get_Tq0_pp(old_machine),
+            )
 
 
     new_shaft = deepcopy(get_shaft(gen))
-    set_D!(new_shaft, 0.05)
+    gens_require_damping = ["generator-5032-C", "generator-5032-G", "generator-4031-G"]
+    if get_name(gen) ∈ gens_require_damping
+        set_D!(new_shaft, 2.0)
+    else
+        set_D!(new_shaft, max(0.1, get_D(new_shaft)))
+    end
     return DynamicGenerator(
             get_name(gen),
             get_ω_ref(gen),
@@ -66,7 +72,39 @@ function make_dynamic_gen(gen::DynamicGenerator{RoundRotorQuadratic, T, U, V, W}
             new_shaft,
             deepcopy(get_avr(gen)),
             deepcopy(get_prime_mover(gen)),
-            PSSFixed(0.0),
+            get_name(gen) == "generator-5032-C" ? get_pss(gen) : PSSFixed(0.0),
+            get_base_power(gen),
+    )
+end
+
+function make_dynamic_gen(gen::DynamicGenerator{RoundRotorQuadratic, T, V, HydroTurbineGov, W}) where {T, V, W}
+    old_machine = get_machine(gen)
+    new_machine =  SauerPaiMachine(
+            max(get_R(old_machine), 0.001),
+            get_Xd(old_machine),
+            get_Xq(old_machine),
+            get_Xd_p(old_machine),
+            get_Xq_p(old_machine),
+            get_Xd_pp(old_machine),
+            get_Xd_pp(old_machine), # Field corresponds to Xq_pp, we assume the same value
+            get_Xl(old_machine),
+            get_Td0_p(old_machine),
+            get_Tq0_p(old_machine),
+            get_Td0_pp(old_machine),
+            get_Tq0_pp(old_machine),
+            )
+
+
+    new_shaft = deepcopy(get_shaft(gen))
+    set_D!(new_shaft, 2.0)
+    return DynamicGenerator(
+            get_name(gen),
+            get_ω_ref(gen),
+            new_machine,
+            new_shaft,
+            deepcopy(get_avr(gen)),
+            deepcopy(get_prime_mover(gen)),
+            get_name(gen) == "generator-4131-H" ? get_pss(gen) : PSSFixed(0.0),
             get_base_power(gen),
     )
 end
@@ -110,14 +148,15 @@ function filt(device_base_power::Float64, device_base_voltage::Float64)
     impedance_ratio = converter_base_impedance/device_base_impedance
     inductance_ratio = converter_base_inductance/device_base_inductance
     capacitance_ratio = converter_base_capacitance/device_base_capacitance
-    @assert impedance_ratio < 1e3
-    @assert inductance_ratio < 1e3
-    @assert capacitance_ratio < 1e3 device_base_impedance
-    return LCLFilter(lf = 0.08*inductance_ratio,
-                     rf = 0.003*impedance_ratio,
-                     cf = 0.074*capacitance_ratio,
-                     lg = 0.2*inductance_ratio,
-                     rg = 0.01*impedance_ratio)
+    @assert impedance_ratio < 1e6
+    @assert inductance_ratio < 1e6
+    @assert capacitance_ratio < 1e6 device_base_impedance
+    return LCLFilter(lf = 0.08, #*inductance_ratio,
+                     rf = 0.003, #*impedance_ratio,
+                     cf = 0.074, #*capacitance_ratio,
+                     lg = 0.2, #*inductance_ratio,
+                     rg = 0.01, #*impedance_ratio
+                     )
 end
 
 function filt_gfoll(device_base_power::Float64, device_base_voltage::Float64)
@@ -131,11 +170,11 @@ function filt_gfoll(device_base_power::Float64, device_base_voltage::Float64)
     capacitance_ratio = gfl_converter_base_capacitance/device_base_capacitance
 
     return LCLFilter(
-        lf = 0.009*inductance_ratio,
-        rf = 0.016*impedance_ratio,
-        cf = 2.5*capacitance_ratio,
-        lg = 0.002*inductance_ratio,
-        rg = 0.003*impedance_ratio
+        lf = 0.08, #*inductance_ratio,
+        rf = 0.003, #*impedance_ratio,
+        cf = 0.074, #*capacitance_ratio,
+        lg = 0.2, #*inductance_ratio,
+        rg = 0.01, #*impedance_ratio
         )
 end
 
@@ -147,9 +186,9 @@ pll() = KauraPLL(
 )
 
 reduced_pll() = ReducedOrderPLL(
-    ω_lp = 1.32*sys_frequency,
-    kp_pll = 30.0/sys_frequency,  #PLL proportional gain
-    ki_pll = 0.18/sys_frequency,   #PLL integral gain
+    ω_lp = 1.32*sys_frequency, # *sys_frequency,
+    kp_pll = 0.4,  #PLL proportional gain
+    ki_pll = 4.69,   #PLL integral gain
 )
 
 no_pll() = FixedFrequency()
@@ -177,23 +216,14 @@ end
 
 function outer_control_gfoll()
     function active_pi()
-        return ActivePowerPI(Kp_p = 1.0, Ki_p = 100.0, ωz = 600.0)
+        return ActivePowerPI(Kp_p = 1.5, Ki_p = 20.90, ωz = 0.132 * sys_frequency)
     end
     function reactive_pi()
-        return ReactivePowerPI(Kp_q = 2.0, Ki_q = 20.0, ωf = 600.0)
+        return ReactivePowerPI(Kp_q = 1.5, Ki_q = 20.90, ωf = 0.132 * sys_frequency)
     end
     return OuterControl(active_pi(), reactive_pi())
 end
 
-function outer_voc()
-    function active_voc()
-        return ActiveVirtualOscillator(k1 = 0.0033, ψ = pi / 4)
-    end
-    function reactive_voc()
-        return ReactiveVirtualOscillator(k2 = 0.0796)
-    end
-    return OuterControl(active_voc(), reactive_voc())
-end
 
 ######## Inner Control ######
 function inner_control(device_base_power::Float64, device_base_voltage::Float64)
@@ -210,15 +240,15 @@ function inner_control(device_base_power::Float64, device_base_voltage::Float64)
     kpv_ratio = converter_current_voltage_ratio/device_current_voltage_ratio
 
     return VoltageModeControl(
-        kpv = 0.59*kpv_ratio,     #Voltage controller proportional gain
-        kiv = 736.0*kpv_ratio,    #Voltage controller integral gain
+        kpv = 0.59, #*kpv_ratio,     #Voltage controller proportional gain
+        kiv = 736.0, #*kpv_ratio,    #Voltage controller integral gain
         kffv = 0.0,     #Binary variable enabling the voltage feed-forward in output of current controllers
-        rv = 0.0*impedance_ratio, #Virtual resistance in pu
-        lv = 0.2*inductance_ratio, #Virtual inductance in pu
-        kpc = 1.27*kpc_ratio,     #Current controller proportional gain
-        kic = 14.3*kpc_ratio,     #Current controller integral gain
+        rv = 0.0, #*impedance_ratio, #Virtual resistance in pu
+        lv = 0.2, #*inductance_ratio, #Virtual inductance in pu
+        kpc = 1.27, #*kpc_ratio,     #Current controller proportional gain
+        kic = 14.3, #*kpc_ratio,     #Current controller integral gain
         kffi = 0.0,     #Binary variable enabling the current feed-forward in output of current controllers
-        ωad = (1/(2*π))*sys_frequency,     #Active damping low pass filter cut-off frequency
+        ωad = (1/(2*π)), #*sys_frequency,     #Active damping low pass filter cut-off frequency
         kad = 0.2,
     )
 end
@@ -229,9 +259,9 @@ function current_mode_inner(device_base_power::Float64, device_base_voltage::Flo
     kpc_ratio = converter_voltage_current_ratio/device_voltage_current_ratio
 
     return CurrentModeControl(
-        kpc = 0.38*kpc_ratio,     #Current controller proportional gain
-        kic = 0.7*kpc_ratio,     #Current controller integral gain
-        kffv = 1.0,     #Binary variable enabling the voltage feed-forward in output of current controllers
+        kpc = 4.0, #*kpc_ratio,     #Current controller proportional gain
+        kic = 410.0, #*kpc_ratio,     #Current controller integral gain
+        kffv = 0.0,     #Binary variable enabling the voltage feed-forward in output of current controllers
     )
 
 end
@@ -415,15 +445,34 @@ function update_gen_data(g::ThermalStandard, sys::System, ::Type{RenewableFix}, 
         return
     end
     control_type = "gfl"
+    if get_name(g) in ["generator-3923-DP", "generator-6401-DP"]
+        control_type = "droop"
+        new_gen = RenewableDispatch(
+            name = join(push!(split(get_name(g), "-"), control_type), "-"),
+            available = get_available(g),
+            bus = get_bus(g),
+            active_power = get_active_power(g),
+            reactive_power = get_reactive_power(g),
+            rating = get_rating(g),
+            prime_mover = pm,
+            reactive_power_limits = (min = -0.1, max = 0.1),
+            power_factor = cos(atan(get_active_power(g), abs(get_reactive_power(g)))),
+            base_power = base_power,
+            operation_cost = TwoPartCost(nothing)
+        )
+        add_component!(sys, new_gen)
+        add_component!(sys, control_map[control_type](new_gen), new_gen)
+        return
+    end
     new_gen = RenewableFix(
         name = join(push!(split(get_name(g), "-"), control_type), "-"),
         available = get_available(g),
         bus = get_bus(g),
         active_power = get_active_power(g),
-        reactive_power = get_reactive_power(g),
+        reactive_power = get_reactive_power(g), #get_reactive_power(g),
         rating = get_rating(g),
         prime_mover = pm,
-        power_factor = 1.0,
+        power_factor = cos(atan(get_active_power(g), abs(get_reactive_power(g)))),
         base_power = base_power,
     )
     add_component!(sys, new_gen)
