@@ -48,17 +48,17 @@ function run_3bus_pscad(
     PP.update_parameter_by_name(project.find("t_INV_constant"), "Value", t_INV)
     PP.update_parameter_by_name(project.find("t_GEN_constant"), "Value", t_GEN)
     if perturbation_type == "LoadStepDown"
-        PP.update_parameter_by_name(project.find("t_LoadStepDownConstant"), "Value", 10.1)
+        PP.update_parameter_by_name(project.find("t_LoadStepDownConstant"), "Value", t_offset + 0.1)
         PP.update_parameter_by_name(project.find("t_LoadStepUpConstant"), "Value", 100.0)
         PP.update_parameter_by_name(project.find("t_LineTripConstant"), "Value", 100.0)
     elseif perturbation_type == "LoadStepUp"
         PP.update_parameter_by_name(project.find("t_LoadStepDownConstant"), "Value", 100.0)
-        PP.update_parameter_by_name(project.find("t_LoadStepUpConstant"), "Value", 10.1)
+        PP.update_parameter_by_name(project.find("t_LoadStepUpConstant"), "Value", t_offset + 0.1)
         PP.update_parameter_by_name(project.find("t_LineTripConstant"), "Value", 100.0)
     elseif perturbation_type == "LineTrip"
         PP.update_parameter_by_name(project.find("t_LoadStepDownConstant"), "Value", 100.0)
         PP.update_parameter_by_name(project.find("t_LoadStepUpConstant"), "Value", 100.0)
-        PP.update_parameter_by_name(project.find("t_LineTripConstant"), "Value", 10.1)
+        PP.update_parameter_by_name(project.find("t_LineTripConstant"), "Value",  t_offset + 0.1)
     else
         @error "Provided perturbation not found!"
     end
@@ -75,8 +75,8 @@ function run_3bus_pscad(
     ##
     #Run PSCAD, quit when finished, and shutdown logging 
     project.run()
-    pscad.quit()
-    logging.shutdown()
+    #pscad.quit()
+    #logging.shutdown()
 
     #Collect pscad outputs and write as dataframe to csv
     df1 = collect_pscad_outputs(pscad_output_folder_path)[1]

@@ -35,12 +35,26 @@ function run_3bus_psid(;
             bus_1_device == "vsm" && add_inv_case78!(sys, g)
             bus_1_device == "droop" && add_inv_darco_droop!(sys, g)
             bus_1_device == "gfl" && add_inv_gfoll!(sys, g)
+            bus_1_device == "fixed_classic" && add_dyn_gen_classic!(sys, g)
+            bus_1_device == "sauerpai_sexs_gastg_ieeest" && add_sauerpai_sexs_gastg_ieeest!(sys, g)
+            bus_1_device == "sauerpai_sexs_gastg_fixed" && add_sauerpai_sexs_gastg_fixed!(sys, g)
+            bus_1_device == "sauerpai_sexs_hygov_ieeest" && add_sauerpai_sexs_hygov_ieeest!(sys, g)
+            bus_1_device == "sauerpai_sexs_hygov_fixed" && add_sauerpai_sexs_hygov_fixed!(sys, g)
+            bus_1_device == "sauerpai_sexs_tgov1_ieeest" && add_sauerpai_sexs_tgov1_ieeest!(sys, g)
+            bus_1_device == "sauerpai_sexs_tgov1_fixed" && add_sauerpai_sexs_tgov1_fixed!(sys, g)
             bus_1_device == "fixed_sauerpai" && add_dyn_gen_sauerpai!(sys, g)
             bus_1_device == "ib" && replace_with_source!(sys, g)
         elseif get_number(get_bus(g)) == 102
             bus_2_device == "vsm" && add_inv_case78!(sys, g)
             bus_2_device == "droop" && add_inv_darco_droop!(sys, g)
             bus_2_device == "gfl" && add_inv_gfoll!(sys, g)
+            bus_2_device == "fixed_classic" && add_dyn_gen_classic!(sys, g)
+            bus_2_device == "sauerpai_sexs_gastg_ieeest" && add_sauerpai_sexs_gastg_ieeest!(sys, g)
+            bus_2_device == "sauerpai_sexs_gastg_fixed" && add_sauerpai_sexs_gastg_fixed!(sys, g)
+            bus_2_device == "sauerpai_sexs_hygov_ieeest" && add_sauerpai_sexs_hygov_ieeest!(sys, g)
+            bus_2_device == "sauerpai_sexs_hygov_fixed" && add_sauerpai_sexs_hygov_fixed!(sys, g)
+            bus_2_device == "sauerpai_sexs_tgov1_ieeest" && add_sauerpai_sexs_tgov1_ieeest!(sys, g)
+            bus_2_device == "sauerpai_sexs_tgov1_fixed" && add_sauerpai_sexs_tgov1_fixed!(sys, g)
             bus_2_device == "fixed_sauerpai" && add_dyn_gen_sauerpai!(sys, g)
             bus_2_device == "ib" && replace_with_source!(sys, g)
         end
@@ -145,6 +159,7 @@ function run_3bus_psid(;
     end
 
     ss = small_signal_analysis(sim)
+    display(ss.eigenvalues)
     if ss.stable == false
         @error "System is not small-signal stable"
         display(ss.eigenvalues)
@@ -158,7 +173,7 @@ function run_3bus_psid(;
     end
 
     result_psid = read_results(sim)
-    show_states_initial_value(result_psid)
+    #show_states_initial_value(result_psid)
     return sys, result_psid
 end
 

@@ -206,6 +206,26 @@ pss_stab1() = PSY.STAB1(
     H_lim = 0.2,
 )
 
+pss_ieeest() = IEEEST(
+    input_code = 1,
+    remote_bus_control = 0,
+    A1 = 1.013,
+    A2 = 0.013,
+    A3 = 0.0,
+    A4 = 0.0,
+    A5 = 1.013,
+    A6 = 0.113,
+    T1 = 4.0, #4.0, 0.0? 
+    T2 = 0.02,
+    T3 = 0.0,
+    T4 = 0.0,
+    T5 = 1.65,
+    T6 = 1.65,
+    Ks = 3.0,
+    Ls_lim = (-0.1, 0.1),
+    Vcu = 0.0,
+    Vcl = 0.0,
+)
 ######## TG Data #########
 
 tg_none() = TGFixed(1.0) #eff
@@ -227,6 +247,47 @@ tg_type2() = TGTypeII(
     (min = 0.1, max = 1.5), #τ_lims
 )
 
+tg_gastg() = GasTG(
+    R = 0.33, 
+    T1 = 0.5,
+    T2 = 0.5,
+    T3 = 3.0,
+    AT = 1.0,
+    Kt = 2.0,
+    V_lim = (0.0, 1.0),
+    D_turb = 0.0,
+    P_ref = 1.0,
+)
+
+#parameterization from WECC-240 bus case 
+tg_tgov1() = SteamTurbineGov1(
+    R = 0.33,
+    T1 = 2.0,
+    valve_position_limits = (min = 0.0, max=1.0),
+    T2 = 3.0,
+    T3 = 15.0, 
+    D_T = 0.4,
+    DB_h = 0.0,
+    DB_l = 0.0, 
+    T_rate = 0.0,
+    P_ref = 1.0,
+)
+
+#parameterization from WECC-240 bus case 
+tg_hygov() = HydroTurbineGov(
+    R = 0.33,
+    r = 1.0, 
+    Tr = 10.0,
+    Tf = 0.05,
+    Tg = 10.0,
+    VELM = 0.001, 
+    gate_position_limits = (min = 0.0, max = 1.0),
+    Tw = 1.0,
+    At = 1.5,
+    D_T = 0.0,
+    q_nl = 0.08,
+    P_ref = 1.0,
+)
 ########  AVR Data #########
 
 avr_none() = AVRFixed(0.0)
@@ -261,6 +322,16 @@ avr_type2() = AVRTypeII(
     0.0,
 ) #Be - 2nd ceiling coefficient
 
+avr_sexs() = SEXS(
+    Ta_Tb = 0.1,
+    Tb = 10.0,
+    K = 100.0,
+    Te = 0.1,
+    V_lim = (min= 0.0, max=3.0),
+    V_ref = 1.0
+)
+
+#'SEXS' 1    0.4    5.0      20.0     1.0     -50.0       50.0
 avr_exst1() = PSY.EXST1(
     Tr = 0.01,
     Vi_lim = (-5.0, 5.0),
@@ -655,6 +726,19 @@ function add_inv_gfoll!(sys, static_device)
     add_component!(sys, dyn_device, static_device)
 end
 
+function add_dyn_gen_classic!(sys, static_device)
+        dyn_device = PSY.DynamicGenerator(
+            name = get_name(static_device), #static generator
+            ω_ref = 1.0, # ω_ref
+            machine = machine_classic(), #machine
+            shaft = shaft_no_damping(), #shaft
+            avr = avr_none(), #avr
+            prime_mover = tg_none(), #tg
+            pss = pss_none(),
+        ) #pss
+        add_component!(sys, dyn_device, static_device)
+    end
+
 function add_dyn_gen_sauerpai!(sys, static_device)
     dyn_device = PSY.DynamicGenerator(
         name = get_name(static_device), #static generator
@@ -667,6 +751,87 @@ function add_dyn_gen_sauerpai!(sys, static_device)
     ) #pss
     add_component!(sys, dyn_device, static_device)
 end
+
+function add_sauerpai_sexs_gastg_ieeest!(sys, static_device)
+    dyn_device = PSY.DynamicGenerator(
+        name = get_name(static_device), #static generator
+        ω_ref = 1.0, # ω_ref
+        machine = machine_sauerpai(), #machine
+        shaft = shaft_no_damping(), #shaft
+        avr = avr_sexs(), #avr 
+        prime_mover = tg_gastg(), #tg
+        pss = pss_ieeest(),
+    ) #pss
+    add_component!(sys, dyn_device, static_device)
+end
+
+function add_sauerpai_sexs_gastg_fixed!(sys, static_device)
+    dyn_device = PSY.DynamicGenerator(
+        name = get_name(static_device), #static generator
+        ω_ref = 1.0, # ω_ref
+        machine = machine_sauerpai(), #machine
+        shaft = shaft_no_damping(), #shaft     
+        avr = avr_sexs(), #avr 
+        prime_mover = tg_gastg(), #tg
+        pss = pss_none(),
+    ) #pss
+    add_component!(sys, dyn_device, static_device)
+end
+
+function add_sauerpai_sexs_hygov_ieeest!(sys, static_device)
+    dyn_device = PSY.DynamicGenerator(
+        name = get_name(static_device), #static generator
+        ω_ref = 1.0, # ω_ref
+        machine = machine_sauerpai(), #machine
+        shaft = shaft_no_damping(), #shaft
+        avr = avr_sexs(), #avr 
+        prime_mover = tg_hygov(), 
+        pss = pss_ieeest(),
+    ) #pss
+    add_component!(sys, dyn_device, static_device)
+end
+
+function add_sauerpai_sexs_hygov_fixed!(sys, static_device)
+    dyn_device = PSY.DynamicGenerator(
+        name = get_name(static_device), #static generator
+        ω_ref = 1.0, # ω_ref
+        machine = machine_sauerpai(), #machine
+        shaft = shaft_no_damping(), #shaft
+        avr = avr_sexs(), #avr 
+        prime_mover = tg_hygov(), 
+        pss = pss_none(),
+    ) #pss
+    add_component!(sys, dyn_device, static_device)
+end
+
+function add_sauerpai_sexs_tgov1_ieeest!(sys, static_device)
+    dyn_device = PSY.DynamicGenerator(
+        name = get_name(static_device), #static generator
+        ω_ref = 1.0, # ω_ref
+        machine = machine_sauerpai(), #machine
+        shaft = shaft_no_damping(), #shaft
+        avr = avr_sexs(), #avr 
+        prime_mover =  tg_tgov1(), 
+        pss = pss_ieeest(),
+    ) #pss
+    add_component!(sys, dyn_device, static_device)
+end
+
+function add_sauerpai_sexs_tgov1_fixed!(sys, static_device)
+    dyn_device = PSY.DynamicGenerator(
+        name = get_name(static_device), #static generator
+        ω_ref = 1.0, # ω_ref
+        machine = machine_sauerpai(), #machine
+        shaft = shaft_no_damping(), #shaft
+        avr = avr_sexs(), #avr 
+        prime_mover = tg_tgov1(), 
+        pss = pss_none(),
+    ) #pss
+    add_component!(sys, dyn_device, static_device)
+end
+
+
+
 
 function replace_with_source!(sys, static_device)
     @warn "replacing typical thermal standard with source "
