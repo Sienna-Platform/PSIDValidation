@@ -7,7 +7,7 @@ include("new_system_data.jl")
 sys = System(
     joinpath(@__DIR__, "psid_files", "PSCAD_VALIDATION_RAW.raw"),
     joinpath(@__DIR__, "psid_files", "PSCAD_VALIDATION_DYR.dyr");
-    bus_name_formatter = x -> strip(string(x["name"])) * "-" * string(x["index"]),
+    bus_name_formatter = x -> "B" * strip(string(x["index"])) * "_" * replace(strip(string(x["name"])),  "." => "_", "-" =>"_", " " => "_"),
     runchecks = false,
 )
 
@@ -21,18 +21,18 @@ for br in get_components(Line, sys)
     end
 end
 
-from_line = get_component(Line, sys, "VINCENT-2404-MIDWAY6-3897-i_1")
-remove_component!(Line, sys, "VINCENT-2404-MIDWAY6-3897-i_1")
+from_line = get_component(Line, sys, "B2404_VINCENT-B3897_MIDWAY6-i_1")
+remove_component!(Line, sys, "B2404_VINCENT-B3897_MIDWAY6-i_1")
 remove_component!(Arc, sys, get_name(get_arc(from_line)))
-to_line = get_component(Line, sys, "MIDWAY-3803-MIDWAY5-3896-i_1")
-remove_component!(Line, sys, "MIDWAY-3803-MIDWAY5-3896-i_1")
+to_line = get_component(Line, sys, "B3803_MIDWAY-B3896_MIDWAY5-i_1")
+remove_component!(Line, sys, "B3803_MIDWAY-B3896_MIDWAY5-i_1")
 remove_component!(Arc, sys, get_name(get_arc(to_line)))
-line = get_component(Line, sys,  "MIDWAY5-3896-MIDWAY6-3897-i_1")
-remove_component!(Line, sys, "MIDWAY5-3896-MIDWAY6-3897-i_1")
+line = get_component(Line, sys,  "B3896_MIDWAY5-B3897_MIDWAY6-i_1")
+remove_component!(Line, sys, "B3896_MIDWAY5-B3897_MIDWAY6-i_1")
 remove_component!(Arc, sys, get_name(get_arc(line)))
 
 new_line = Line(
-    name = "VINCENT-2404-MIDWAY-3803-i_1",
+    name = "B2404_VINCENT-B3803_MIDWAY-i_1",
     available = true,
     active_power_flow = get_active_power_flow(line),
     reactive_power_flow = get_reactive_power_flow(line),
@@ -47,18 +47,18 @@ remove_component!(Bus, sys, get_name(line.arc.to))
 remove_component!(Bus, sys, get_name(line.arc.from))
 add_component!(sys, new_line,)
 
-from_line = get_component(Line, sys, "VINCENT-2404-MIDWAY2-3893-i_1")
-remove_component!(Line, sys, "VINCENT-2404-MIDWAY2-3893-i_1")
+from_line = get_component(Line, sys, "B2404_VINCENT-B3893_MIDWAY2-i_1")
+remove_component!(Line, sys, "B2404_VINCENT-B3893_MIDWAY2-i_1")
 remove_component!(Arc, sys, get_name(get_arc(from_line)))
-to_line = get_component(Line, sys, "MIDWAY-3803-MIDWAY3-3894-i_1")
-remove_component!(Line, sys, "MIDWAY-3803-MIDWAY3-3894-i_1")
+to_line = get_component(Line, sys, "B3803_MIDWAY-B3894_MIDWAY3-i_1")
+remove_component!(Line, sys, "B3803_MIDWAY-B3894_MIDWAY3-i_1")
 remove_component!(Arc, sys, get_name(get_arc(to_line)))
-line = get_component(Line, sys,  "MIDWAY1-3892-MIDWAY2-3893-i_1")
-remove_component!(Line, sys, "MIDWAY1-3892-MIDWAY2-3893-i_1")
+line = get_component(Line, sys,  "B3892_MIDWAY1-B3893_MIDWAY2-i_1")
+remove_component!(Line, sys, "B3892_MIDWAY1-B3893_MIDWAY2-i_1")
 remove_component!(Arc, sys, get_name(get_arc(line)))
 
 new_line = Line(
-    name = "VINCENT-2404-MIDWAY-3803-i_2",
+    name = "B2404_VINCENT-B3803_MIDWAY-i_2",
     available = true,
     active_power_flow = get_active_power_flow(line),
     reactive_power_flow = get_reactive_power_flow(line),
@@ -73,18 +73,19 @@ remove_component!(Bus, sys, get_name(line.arc.to))
 remove_component!(Bus, sys, get_name(line.arc.from))
 add_component!(sys, new_line,)
 
-from_line = get_component(Line, sys, "VINCENT-2404-MIDWAY4-3895-i_1")
-remove_component!(Line, sys, "VINCENT-2404-MIDWAY4-3895-i_1")
+from_line = get_component(Line, sys, "B2404_VINCENT-B3895_MIDWAY4-i_1")
+remove_component!(Line, sys, "B2404_VINCENT-B3895_MIDWAY4-i_1")
 remove_component!(Arc, sys, get_name(get_arc(from_line)))
-to_line = get_component(Line, sys, "MIDWAY-3803-MIDWAY1-3892-i_1")
-remove_component!(Line, sys, "MIDWAY-3803-MIDWAY1-3892-i_1")
+to_line = get_component(Line, sys, "B3803_MIDWAY-B3892_MIDWAY1-i_1")
+remove_component!(Line, sys, "B3803_MIDWAY-B3892_MIDWAY1-i_1")
 remove_component!(Arc, sys, get_name(get_arc(to_line)))
 line = get_component(Line, sys,  "MIDWAY3-3894-MIDWAY4-3895-i_1")
-remove_component!(Line, sys, "MIDWAY3-3894-MIDWAY4-3895-i_1")
+line = get_component(Line, sys,  "B3894_MIDWAY3-B3895_MIDWAY4-i_1")
+remove_component!(Line, sys, "B3894_MIDWAY3-B3895_MIDWAY4-i_1")
 remove_component!(Arc, sys, get_name(get_arc(line)))
 
 new_line = Line(
-    name = "VINCENT-2404-MIDWAY-3803-i_3",
+    name = "B2404_VINCENT-B3803_MIDWAY-i_3",
     available = true,
     active_power_flow = get_active_power_flow(line),
     reactive_power_flow = get_reactive_power_flow(line),
@@ -99,21 +100,21 @@ remove_component!(Bus, sys, get_name(line.arc.to))
 remove_component!(Bus, sys, get_name(line.arc.from))
 add_component!(sys, new_line,)
 
-mid_line1 = get_component(Line, sys, "GRIZZLY6-4096-GRIZZLY7-4097-i_1")
-remove_component!(Line, sys, "GRIZZLY6-4096-GRIZZLY7-4097-i_1")
+mid_line1 = get_component(Line, sys, "B4096_GRIZZLY6-B4097_GRIZZLY7-i_1")
+remove_component!(Line, sys, "B4096_GRIZZLY6-B4097_GRIZZLY7-i_1")
 remove_component!(Arc, sys, get_name(get_arc(mid_line1)))
-mid_line2 = get_component(Line, sys, "GRIZZLY5-4095-GRIZZLY6-4096-i_1")
-remove_component!(Line, sys, "GRIZZLY5-4095-GRIZZLY6-4096-i_1")
+mid_line2 = get_component(Line, sys, "B4095_GRIZZLY5-B4096_GRIZZLY6-i_1")
+remove_component!(Line, sys, "B4095_GRIZZLY5-B4096_GRIZZLY6-i_1")
 remove_component!(Arc, sys, get_name(get_arc(mid_line2)))
-line_from = get_component(Line, sys,  "MALIN-4001-GRIZZLY7-4097-i_1")
-remove_component!(Line, sys, "MALIN-4001-GRIZZLY7-4097-i_1")
+line_from = get_component(Line, sys,  "B4001_MALIN-B4097_GRIZZLY7-i_1")
+remove_component!(Line, sys, "B4001_MALIN-B4097_GRIZZLY7-i_1")
 remove_component!(Arc, sys, get_name(get_arc(line_from)))
-line_to = get_component(Line, sys,  "GRIZZLY-4004-GRIZZLY5-4095-i_1")
-remove_component!(Line, sys, "GRIZZLY-4004-GRIZZLY5-4095-i_1")
+line_to = get_component(Line, sys,  "B4004_GRIZZLY-B4095_GRIZZLY5-i_1")
+remove_component!(Line, sys, "B4004_GRIZZLY-B4095_GRIZZLY5-i_1")
 remove_component!(Arc, sys, get_name(get_arc(line_to)))
 
 new_line = Line(
-    name = "MALIN-4001-GRIZZLY-4004-i_1",
+    name = "B4001_MALIN-B4004_GRIZZLY-i_1",
     available = true,
     active_power_flow = get_active_power_flow(mid_line1),
     reactive_power_flow = get_reactive_power_flow(mid_line1),
@@ -130,21 +131,21 @@ remove_component!(Bus, sys, get_name(mid_line2.arc.from))
 add_component!(sys, new_line,)
 
 
-mid_line1 = get_component(Line, sys, "GRIZZLY2-4092-GRIZZLY3-4093-i_1")
-remove_component!(Line, sys, "GRIZZLY2-4092-GRIZZLY3-4093-i_1")
+mid_line1 = get_component(Line, sys, "B4092_GRIZZLY2-B4093_GRIZZLY3-i_1")
+remove_component!(Line, sys, "B4092_GRIZZLY2-B4093_GRIZZLY3-i_1")
 remove_component!(Arc, sys, get_name(get_arc(mid_line1)))
-mid_line2 = get_component(Line, sys, "GRIZZLY3-4093-GRIZZLY4-4094-i_1")
-remove_component!(Line, sys, "GRIZZLY3-4093-GRIZZLY4-4094-i_1")
+mid_line2 = get_component(Line, sys, "B4093_GRIZZLY3-B4094_GRIZZLY4-i_1")
+remove_component!(Line, sys, "B4093_GRIZZLY3-B4094_GRIZZLY4-i_1")
 remove_component!(Arc, sys, get_name(get_arc(mid_line2)))
-line_from = get_component(Line, sys,  "MALIN-4001-GRIZZLY4-4094-i_1")
-remove_component!(Line, sys, "MALIN-4001-GRIZZLY4-4094-i_1")
+line_from = get_component(Line, sys, "B4001_MALIN-B4094_GRIZZLY4-i_1")
+remove_component!(Line, sys, "B4001_MALIN-B4094_GRIZZLY4-i_1")
 remove_component!(Arc, sys, get_name(get_arc(line_from)))
-line_to = get_component(Line, sys,  "GRIZZLY-4004-GRIZZLY2-4092-i_1")
-remove_component!(Line, sys, "GRIZZLY-4004-GRIZZLY2-4092-i_1")
+line_to = get_component(Line, sys,  "B4004_GRIZZLY-B4092_GRIZZLY2-i_1")
+remove_component!(Line, sys, "B4004_GRIZZLY-B4092_GRIZZLY2-i_1")
 remove_component!(Arc, sys, get_name(get_arc(line_to)))
 
 new_line = Line(
-    name = "MALIN-4001-GRIZZLY-4004-i_2",
+    name = "B4001_MALIN-B4004_GRIZZLY-i_2",
     available = true,
     active_power_flow = get_active_power_flow(mid_line1),
     reactive_power_flow = get_reactive_power_flow(mid_line1),
@@ -160,14 +161,14 @@ remove_component!(Bus, sys, get_name(mid_line1.arc.from))
 remove_component!(Bus, sys, get_name(mid_line2.arc.to))
 add_component!(sys, new_line,)
 
-line_from = get_component(Line, sys,  "MIDWAY-3803-GATES1-3891-i_1")
+line_from = get_component(Line, sys,  "B3803_MIDWAY-B3891_GATES1-i_1")
 remove_component!(Arc, sys, get_name(get_arc(line_from)))
-remove_component!(Line, sys, "MIDWAY-3803-GATES1-3891-i_1")
-line_to = get_component(Line, sys,  "GATES-3802-GATES1-3891-i_1")
+remove_component!(Line, sys, "B3803_MIDWAY-B3891_GATES1-i_1")
+line_to = get_component(Line, sys,  "B3802_GATES-B3891_GATES1-i_1")
 remove_component!(Arc, sys, get_name(get_arc(line_to)))
-remove_component!(Line, sys, "GATES-3802-GATES1-3891-i_1")
+remove_component!(Line, sys, "B3802_GATES-B3891_GATES1-i_1")
 new_line = Line(
-    name = "MIDWAY-3803-GATES-3802-i_1",
+    name = "B3803_MIDWAY-B3802_GATES-i_1",
     available = true,
     active_power_flow = get_active_power_flow(line_from),
     reactive_power_flow = get_reactive_power_flow(line_from),
@@ -178,14 +179,14 @@ new_line = Line(
     rate = get_rate(line_from),
     angle_limits = get_angle_limits(line_from)
 )
-remove_component!(Bus, sys, "GATES1-3891")
+remove_component!(Bus, sys, "B3891_GATES1")
 add_component!(sys, new_line,)
 
-existing_line = get_component(Line, sys, "NAUGHTON-6305-BENLOMND-6510-i_2")
+existing_line = get_component(Line, sys, "B6305_NAUGHTON-B6510_BENLOMND-i_2")
 set_x!(existing_line, get_x(existing_line)*0.8)
 set_r!(existing_line, get_x(existing_line)*0.8)
 new_line = Line(
-    name = "NAUGHTON-6305-BENLOMND-6510-i_3",
+    name = "B6305_NAUGHTON-B6510_BENLOMND-i_3",
     available = true,
     active_power_flow = get_active_power_flow(existing_line),
     reactive_power_flow = get_reactive_power_flow(existing_line),
@@ -199,7 +200,7 @@ new_line = Line(
 add_component!(sys, new_line,)
 
 new_line = Line(
-    name = "NAUGHTON-6305-BENLOMND-6510-i_4",
+    name = "B6305_NAUGHTON-B6510_BENLOMND-i_4",
     available = true,
     active_power_flow = get_active_power_flow(existing_line),
     reactive_power_flow = get_reactive_power_flow(existing_line),
@@ -212,11 +213,11 @@ new_line = Line(
 )
 add_component!(sys, new_line,)
 
-existing_line = get_component(Line, sys, "BORAH-6104-NAUGHTON-6305-i_1")
+existing_line = get_component(Line, sys, "B6104_BORAH-B6305_NAUGHTON-i_1")
 set_x!(existing_line, get_x(existing_line)*0.8)
 set_r!(existing_line, get_x(existing_line)*0.8)
 new_line = Line(
-    name = "BORAH-6104-NAUGHTON-6305-i_2",
+    name = "B6104_BORAH-B6305_NAUGHTON-i_2",
     available = true,
     active_power_flow = get_active_power_flow(existing_line),
     reactive_power_flow = get_reactive_power_flow(existing_line),
@@ -229,11 +230,11 @@ new_line = Line(
 )
 add_component!(sys, new_line,)
 
-existing_line = get_component(Line, sys, "BRIDGER2-6303-NAUGHTON-6305-i_1")
+existing_line = get_component(Line, sys, "B6303_BRIDGER2-B6305_NAUGHTON-i_1")
 set_x!(existing_line, get_x(existing_line)*0.8)
 set_r!(existing_line, get_x(existing_line)*0.8)
 new_line = Line(
-    name = "BRIDGER2-6303-NAUGHTON-6305-i_3",
+    name = "B6303_BRIDGER2-B6305_NAUGHTON-i_3",
     available = true,
     active_power_flow = get_active_power_flow(existing_line),
     reactive_power_flow = get_reactive_power_flow(existing_line),
@@ -246,10 +247,9 @@ new_line = Line(
 )
 add_component!(sys, new_line,)
 
-existing_line = get_component(Line, sys, "BORAH-6104-GARRISON-6204-i_1")
-
+existing_line = get_component(Line, sys, "B6104_BORAH-B6204_GARRISON-i_1")
 new_line = Line(
-    name = "BORAH-6104-GARRISON-6204-i_2",
+    name = "B6104_BORAH-B6204_GARRISON-i_2",
     available = true,
     active_power_flow = get_active_power_flow(existing_line),
     reactive_power_flow = get_reactive_power_flow(existing_line),
@@ -379,7 +379,7 @@ set_reactive_power!(gen, 0.0)
 set_active_power_limits!(gen, (min = 0.0, max = 1.0))
 set_reactive_power_limits!(gen, (min = -0.0, max = 0.0))
 
-xfr = get_component(Transformer2W, sys, "MONTANA-6205-MONTA G1-6235-i_1")
+xfr = get_component(Transformer2W, sys, "B6205_MONTANA-B6235_MONTA_G1-i_1")
 set_x!(xfr, get_x(xfr)*3)
 
 load = get_component(PowerLoad, sys, "load39231")
