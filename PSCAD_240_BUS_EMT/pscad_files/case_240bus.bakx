@@ -23,7 +23,7 @@
     <param name="Warn" value="0" />
     <param name="Check" value="0" />
     <param name="description" value="" />
-    <param name="revisor" value="Matt Bossart, 1670001867" />
+    <param name="revisor" value="Matt Bossart, 1672771907" />
   </paramlist>
   <Layers>
     <Layer id="731679093" classid="Layer" name="G_5032_C" state="Enabled">
@@ -1788,6 +1788,73 @@
         <param name="ymax" value="1" />
       </paramlist>
     </Settings>
+    <Settings classid="GraphFrameSettings" id="2021323029" link="1255558821">
+      <path>
+        <ref link="1542301038" />
+        <ref link="768779842" />
+      </path>
+      <paramlist>
+        <param name="xmin" value="-1" />
+        <param name="xmax" value="1" />
+      </paramlist>
+    </Settings>
+    <Settings classid="OverlayGraphSettings" id="1930137678" link="1642972257">
+      <path>
+        <ref link="1542301038" />
+        <ref link="768779842" />
+      </path>
+      <paramlist>
+        <param name="ymin" value="-1" />
+        <param name="ymax" value="1" />
+      </paramlist>
+    </Settings>
+    <Settings classid="TraceSettings" id="1298589383" link="245785480">
+      <path>
+        <ref link="1542301038" />
+        <ref link="768779842" />
+      </path>
+      <paramlist>
+        <param name="active_1" value="true" />
+      </paramlist>
+    </Settings>
+    <Settings classid="TraceSettings" id="956016221" link="1226873465">
+      <path>
+        <ref link="1542301038" />
+        <ref link="768779842" />
+      </path>
+      <paramlist>
+        <param name="active_1" value="true" />
+      </paramlist>
+    </Settings>
+    <Settings classid="GraphFrameSettings" id="1895046218" link="1109380239">
+      <path>
+        <ref link="1542301038" />
+        <ref link="1547282159" />
+      </path>
+      <paramlist>
+        <param name="xmin" value="-1" />
+        <param name="xmax" value="1" />
+      </paramlist>
+    </Settings>
+    <Settings classid="OverlayGraphSettings" id="2002217434" link="241043969">
+      <path>
+        <ref link="1542301038" />
+        <ref link="1547282159" />
+      </path>
+      <paramlist>
+        <param name="ymin" value="-1" />
+        <param name="ymax" value="1" />
+      </paramlist>
+    </Settings>
+    <Settings classid="TraceSettings" id="1840750342" link="1038632670">
+      <path>
+        <ref link="1542301038" />
+        <ref link="1547282159" />
+      </path>
+      <paramlist>
+        <param name="active_1" value="true" />
+      </paramlist>
+    </Settings>
   </List>
   <bookmarks />
   <GlobalSubstitutions name="Default">
@@ -1829,7 +1896,7 @@
         </Wire>
       </schematic>
     </Definition>
-    <Definition classid="UserCmpDefn" name="Main" id="877675945" group="" url="" version="" build="" crc="131080978" view="false" date="0">
+    <Definition classid="UserCmpDefn" name="Main" id="877675945" group="" url="" version="" build="" crc="24636315" view="false" date="0">
       <paramlist name="">
         <param name="Description" value="" />
       </paramlist>
@@ -1877,9 +1944,9 @@
           <param name="animation_freq" value="500" />
         </paramlist>
         <grouping />
-        <User classid="UserCmp" id="1547282159" name="WECC_Components:SectionA" x="702" y="216" w="220" h="99" z="-1" orient="0" defn="WECC_Components:SectionA" link="-1" q="4" disable="false">
+        <User classid="UserCmp" id="1547282159" name="WECC_Components:SectionA" x="702" y="216" w="220" h="100" z="-1" orient="0" defn="WECC_Components:SectionA" link="-1" q="4" disable="false">
           <paramlist name="" link="-1" crc="14242604">
-            <param name="Name" value="" />
+            <param name="Name" value="SectionA" />
           </paramlist>
         </User>
         <User classid="UserCmp" id="1100829638" name="WECC_Components:SectionC" x="1224" y="486" w="350" h="96" z="-1" orient="0" defn="WECC_Components:SectionC" link="-1" q="4" disable="false">
@@ -1892,7 +1959,7 @@
             <param name="Name" value="" />
           </paramlist>
         </User>
-        <User classid="UserCmp" id="416110694" name="WECC_Components:SectionE" x="1224" y="756" w="375" h="99" z="-1" orient="0" defn="WECC_Components:SectionE" link="-1" q="4" disable="false">
+        <User classid="UserCmp" id="416110694" name="WECC_Components:SectionE" x="1224" y="756" w="375" h="100" z="-1" orient="0" defn="WECC_Components:SectionE" link="-1" q="4" disable="false">
           <paramlist name="" link="-1" crc="14242604">
             <param name="Name" value="" />
           </paramlist>
@@ -1902,17 +1969,17 @@
             <param name="Name" value="" />
           </paramlist>
         </User>
-        <User classid="UserCmp" id="768779842" name="WECC_Components:SectionG" x="252" y="648" w="344" h="83" z="-1" orient="0" defn="WECC_Components:SectionG" link="-1" q="4" disable="false">
+        <User classid="UserCmp" id="768779842" name="WECC_Components:SectionG" x="252" y="648" w="344" h="82" z="-1" orient="0" defn="WECC_Components:SectionG" link="-1" q="4" disable="false">
           <paramlist name="" link="-1" crc="14242604">
             <param name="Name" value="" />
           </paramlist>
         </User>
-        <User classid="UserCmp" id="335926273" name="WECC_Components:SectionB" x="1134" y="216" w="354" h="99" z="-1" orient="0" defn="WECC_Components:SectionB" link="-1" q="4" disable="false">
+        <User classid="UserCmp" id="335926273" name="WECC_Components:SectionB" x="1134" y="216" w="354" h="100" z="-1" orient="0" defn="WECC_Components:SectionB" link="-1" q="4" disable="false">
           <paramlist name="" link="-1" crc="14242604">
             <param name="Name" value="" />
           </paramlist>
         </User>
-        <User classid="UserCmp" id="1312251092" name="WECC_Components:SectionH" x="648" y="504" w="336" h="86" z="-1" orient="0" defn="WECC_Components:SectionH" link="-1" q="4" disable="false">
+        <User classid="UserCmp" id="1312251092" name="WECC_Components:SectionH" x="648" y="504" w="336" h="85" z="-1" orient="0" defn="WECC_Components:SectionH" link="-1" q="4" disable="false">
           <paramlist name="" link="-1" crc="14242604">
             <param name="Name" value="" />
           </paramlist>
@@ -5616,16 +5683,16 @@
   </definitions>
   <List classid="Resource" />
   <hierarchy>
-    <call link="868907522" name="case_240bus:DS" z="-1" view="false" instance="0">
-      <call link="1542301038" name="case_240bus:Main" z="-1" view="true" instance="0">
+    <call link="173273436" name="case_240bus:DS" z="-1" view="false" instance="0">
+      <call link="1542301038" name="case_240bus:Main" z="-1" view="false" instance="0">
         <call link="1547282159" name="WECC_Components:SectionA" z="-1" view="false" instance="0" />
-        <call link="1100829638" name="WECC_Components:SectionC" z="-1" view="false" instance="0" />
-        <call link="566800107" name="WECC_Components:SectionD" z="-1" view="false" instance="0" />
-        <call link="416110694" name="WECC_Components:SectionE" z="-1" view="false" instance="0" />
-        <call link="1568751975" name="WECC_Components:SectionF" z="-1" view="false" instance="0" />
         <call link="768779842" name="WECC_Components:SectionG" z="-1" view="false" instance="0" />
-        <call link="335926273" name="WECC_Components:SectionB" z="-1" view="false" instance="0" />
+        <call link="1568751975" name="WECC_Components:SectionF" z="-1" view="false" instance="0" />
+        <call link="416110694" name="WECC_Components:SectionE" z="-1" view="false" instance="0" />
+        <call link="566800107" name="WECC_Components:SectionD" z="-1" view="true" instance="0" />
+        <call link="1100829638" name="WECC_Components:SectionC" z="-1" view="false" instance="0" />
         <call link="1312251092" name="WECC_Components:SectionH" z="-1" view="false" instance="0" />
+        <call link="335926273" name="WECC_Components:SectionB" z="-1" view="false" instance="0" />
       </call>
     </call>
   </hierarchy>
