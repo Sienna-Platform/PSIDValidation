@@ -389,6 +389,13 @@ set_reactive_power!(load, 2.82)
 fxa = get_component(FixedAdmittance, sys, "6")
 set_Y!(fxa, get_Y(fxa) - 1.88im)
 
+for xtr in get_components(Transformer2W, sys)
+    if get_r(xtr) > 0
+        continue
+    end
+    set_r!(xtr, get_x(xtr)/10)
+end
+
 ###### Update Generation Data to match prime mover and fuel ######
 run_powerflow!(sys)
 set_units_base_system!(sys, "DEVICE_BASE")
