@@ -1,3 +1,5 @@
+import DataStructures: OrderedDict
+
 function exchange_device(device_name::String, large_system_file = "PSCAD_240_BUS_EMT/psid_files/system.json", small_system_file = "PSCAD_3bus_EMT/psid_files/system.json")
     small_system = System(small_system_file)
     large_system = System(large_system_file)
@@ -87,7 +89,7 @@ end
 function summary_participation_factors(sm::PowerSimulationsDynamics.SmallSignalOutput)
     eigs = sm.eigenvalues
     pf = sm.participation_factors
-    return summary_participation_factors(pf,eigs)
+    return summary_participation_factors(pf, eigs)
 end
 
 function summary_eigenvalues(pf::Dict{String, Dict{Symbol, Array{Float64}}}, eigs::Vector{ComplexF64})
