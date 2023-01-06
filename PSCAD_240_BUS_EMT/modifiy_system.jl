@@ -389,17 +389,91 @@ set_reactive_power!(load, 2.82)
 fxa = get_component(FixedAdmittance, sys, "6")
 set_Y!(fxa, get_Y(fxa) - 1.88im)
 
-for xtr in get_components(Transformer2W, sys)
-    if get_r(xtr) > 0
-        continue
-    end
-    set_r!(xtr, get_x(xtr)/10)
-end
-
 ###### Update Generation Data to match prime mover and fuel ######
 run_powerflow!(sys)
 set_units_base_system!(sys, "DEVICE_BASE")
 update_generation_units!(sys)
+
+gen = get_component(HydroDispatch, sys, "generator-4231-H")
+dyn_gen = get_component(DynamicGenerator{SauerPaiMachine, SingleMass, SEXS, HydroTurbineGov, PSSFixed},  sys, "generator-4231-H")
+bus = get_bus(gen)
+remove_component!(sys, dyn_gen)
+remove_component!(sys, gen)
+set_magnitude!(bus, 1.1)
+new_bus = Bus(
+    name = "$(get_name(bus))_H",
+    number = 4233,
+    bustype = "PV",
+    angle = get_angle(bus)+0.0216,
+    magnitude = get_magnitude(bus),
+    voltage_limits = get_voltage_limits(bus),
+    base_voltage = get_base_voltage(bus),
+    area = get_area(bus),
+    load_zone = get_load_zone(bus),
+)
+add_component!(sys, new_bus,)
+set_bus!(gen, new_bus)
+set_name!(gen, "generator-4233-H")
+set_name!(dyn_gen, "generator-4233-H")
+set_name!(dyn_gen, "generator-4233-H")
+add_component!(sys, gen)
+add_component!(sys, dyn_gen, gen)
+set_ext!(gen, Dict{String, Any}())
+xfr = get_component(Transformer2W, sys, "B4201_NORTH-B4231_NORTH_G3-i_1")
+set_x!(xfr, get_x(xfr)*3)
+new_xfr = Transformer2W(
+    name = "B4201_NORTH-B4231_NORTH_G3_H-i_1",
+    available = true,
+    active_power_flow = get_active_power(gen),
+    reactive_power_flow = get_reactive_power(gen),
+    arc = Arc(from = get_arc(xfr).from, to = new_bus),
+    r = get_r(xfr),
+    x = get_x(xfr)*3,
+    primary_shunt = 0.0,
+    rate = get_base_power(xfr),
+)
+add_component!(sys, new_xfr)
+
+gen = get_component(HydroDispatch, sys, "generator-4231-H")
+dyn_gen = get_component(DynamicGenerator{SauerPaiMachine, SingleMass, SEXS, HydroTurbineGov, PSSFixed},  sys, "generator-4231-H")
+bus = get_bus(gen)
+remove_component!(sys, dyn_gen)
+remove_component!(sys, gen)
+set_magnitude!(bus, 1.1)
+new_bus = Bus(
+    name = "$(get_name(bus))_H",
+    number = 4233,
+    bustype = "PV",
+    angle = get_angle(bus)+0.0216,
+    magnitude = get_magnitude(bus),
+    voltage_limits = get_voltage_limits(bus),
+    base_voltage = get_base_voltage(bus),
+    area = get_area(bus),
+    load_zone = get_load_zone(bus),
+)
+add_component!(sys, new_bus,)
+set_bus!(gen, new_bus)
+set_name!(gen, "generator-4233-H")
+set_name!(dyn_gen, "generator-4233-H")
+set_name!(dyn_gen, "generator-4233-H")
+add_component!(sys, gen)
+add_component!(sys, dyn_gen, gen)
+set_ext!(gen, Dict{String, Any}())
+xfr = get_component(Transformer2W, sys, "B4201_NORTH-B4231_NORTH_G3-i_1")
+set_x!(xfr, get_x(xfr)*3)
+new_xfr = Transformer2W(
+    name = "B4201_NORTH-B4231_NORTH_G3_H-i_1",
+    available = true,
+    active_power_flow = get_active_power(gen),
+    reactive_power_flow = get_reactive_power(gen),
+    arc = Arc(from = get_arc(xfr).from, to = new_bus),
+    r = get_r(xfr),
+    x = get_x(xfr)*3,
+    primary_shunt = 0.0,
+    rate = get_base_power(xfr),
+)
+add_component!(sys, new_xfr)
+
 set_units_base_system!(sys, "SYSTEM_BASE")
 run_powerflow!(sys)
 
