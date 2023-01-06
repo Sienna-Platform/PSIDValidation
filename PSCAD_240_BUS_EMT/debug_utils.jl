@@ -103,7 +103,7 @@ function summary_eigenvalues(pf::Dict{String, Dict{Symbol, Array{Float64}}}, eig
     df_summary = DataFrame([name => [] for name in col_names])
     for (ix, eig) in enumerate(eigs)
         eig_associated = most_associated[ix]
-        state_name = df[ix, "Name"]
+        state_name = df[eig_associated, "Name"]
         pf_val = df_noname[eig_associated, ix]
         freq_rad = abs(eig)
         damping = - real(eig) / freq_rad
