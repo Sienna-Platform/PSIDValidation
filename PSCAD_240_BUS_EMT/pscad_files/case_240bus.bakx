@@ -1,4 +1,4 @@
-<project name="case_240bus" version="5.0.1" schema="" Target="EMTDC">
+<project name="case_240bus" version="5.0.0" schema="" Target="EMTDC">
   <paramlist name="Settings">
     <param name="creator" value="maren,1668199333" />
     <param name="time_duration" value="0.5" />
@@ -23,7 +23,7 @@
     <param name="Warn" value="0" />
     <param name="Check" value="0" />
     <param name="description" value="" />
-    <param name="revisor" value="Matt Bossart, 1672771907" />
+    <param name="revisor" value="maren, 1673045155" />
   </paramlist>
   <Layers>
     <Layer id="731679093" classid="Layer" name="G_5032_C" state="Enabled">
@@ -1896,7 +1896,7 @@
         </Wire>
       </schematic>
     </Definition>
-    <Definition classid="UserCmpDefn" name="Main" id="877675945" group="" url="" version="" build="" crc="24636315" view="false" date="0">
+    <Definition classid="UserCmpDefn" name="Main" id="877675945" group="" url="" version="" build="" crc="84712528" view="false" date="0">
       <paramlist name="">
         <param name="Description" value="" />
       </paramlist>
@@ -2040,8 +2040,8 @@
         </Wire>
         <Wire classid="WireOrthogonal" id="2075263001" name="" x="864" y="324" w="226" h="154" orient="0" disable="false">
           <vertex x="0" y="0" />
-          <vertex x="72" y="0" />
-          <vertex x="72" y="-144" />
+          <vertex x="36" y="0" />
+          <vertex x="36" y="-144" />
           <vertex x="216" y="-144" />
         </Wire>
         <User classid="UserCmp" defn="master:newpi" id="781698542" x="846" y="306" w="44" h="22" z="0" orient="0" link="-1" q="4" disable="false">
@@ -2431,107 +2431,6 @@
           <vertex x="-378" y="54" />
           <vertex x="-180" y="54" />
         </Wire>
-        <User classid="UserCmp" defn="master:newpi" id="1289477261" x="900" y="414" w="22" h="44" z="0" orient="1" link="-1" q="4" disable="false">
-          <paramlist link="-1" name="" crc="21478764">
-            <param name="Name" value="MALIN-4001-GRIZZLY7-4097-i_1" />
-            <param name="PU" value="1" />
-            <param name="Config" value="1" />
-            <param name="F" value="60.0 [Hz]" />
-            <param name="len" value="1.0E5 [m]" />
-            <param name="Estim" value="0" />
-            <param name="View" value="3" />
-            <param name="REst" value="1.5" />
-            <param name="ZEst" value="1.5" />
-            <param name="TEst" value="1.5" />
-            <param name="VR" value="230.0 [kV]" />
-            <param name="MVA" value="100.0 [MVA]" />
-            <param name="RPUP" value=".336786E-7 [pu/m]" />
-            <param name="XLPUP" value=".593346E-6 [pu/m]" />
-            <param name="XCPUP" value=".517098E6 [pu*m]" />
-            <param name="RPUZ" value=".558072E-6 [pu/m]" />
-            <param name="XLPUZ" value=".196578E-5 [pu/m]" />
-            <param name="XCPUZ" value=".782919E6 [pu*m]" />
-            <param name="Rp" value=".1781598E-4 [ohm/m]" />
-            <param name="Xp" value=".31388E-3 [ohm/m]" />
-            <param name="Bp" value="273.5448 [Mohm*m]" />
-            <param name="Rz" value=".2952201E-3 [ohm/m]" />
-            <param name="Xz" value=".1039898E-2 [ohm/m]" />
-            <param name="Bz" value="414.1642 [Mohm*m]" />
-            <param name="RTP" value=".1781598E-4 [ohm/m]" />
-            <param name="TTP" value=".2841427 [ms]" />
-            <param name="ZTP" value="293.0192 [ohm]" />
-            <param name="RTZ" value=".2952201E-3 [ohm/m]" />
-            <param name="TTZ" value=".4203179 [ms]" />
-            <param name="ZTZ" value="656.2685 [ohm]" />
-            <param name="VR2" value="230.0 [kV]" />
-            <param name="MVA2" value="100.0 [MVA]" />
-            <param name="RPUP2" value=".336786E-7 [pu/m]" />
-            <param name="XLPUP2" value=".593346E-6 [pu/m]" />
-            <param name="BPUP2" value="1.933869E-6 [pu/m]" />
-            <param name="RPUZ2" value=".558072E-6 [pu/m]" />
-            <param name="XLPUZ2" value=".196578E-5 [pu/m]" />
-            <param name="BPUZ2" value="1.277271E-6 [pu/m]" />
-            <param name="Rp2" value="1.781598E-5" />
-            <param name="Lp" value="8.3259256E-7" />
-            <param name="Cp" value="9.697067E-6" />
-            <param name="Rz2" value="2.952201E-4" />
-            <param name="Lz" value="2.758415E-6" />
-            <param name="Cz" value="6.4046636E-6" />
-          </paramlist>
-        </User>
-        <User classid="UserCmp" defn="master:newpi" id="665332931" x="918" y="414" w="22" h="44" z="0" orient="1" link="-1" q="4" disable="false">
-          <paramlist link="-1" name="" crc="21478764">
-            <param name="Name" value="MALIN-4001-GRIZZLY4-4094-i_1" />
-            <param name="PU" value="1" />
-            <param name="Config" value="1" />
-            <param name="F" value="60.0 [Hz]" />
-            <param name="len" value="1.0E5 [m]" />
-            <param name="Estim" value="0" />
-            <param name="View" value="3" />
-            <param name="REst" value="1.5" />
-            <param name="ZEst" value="1.5" />
-            <param name="TEst" value="1.5" />
-            <param name="VR" value="230.0 [kV]" />
-            <param name="MVA" value="100.0 [MVA]" />
-            <param name="RPUP" value=".336786E-7 [pu/m]" />
-            <param name="XLPUP" value=".593346E-6 [pu/m]" />
-            <param name="XCPUP" value=".517098E6 [pu*m]" />
-            <param name="RPUZ" value=".558072E-6 [pu/m]" />
-            <param name="XLPUZ" value=".196578E-5 [pu/m]" />
-            <param name="XCPUZ" value=".782919E6 [pu*m]" />
-            <param name="Rp" value=".1781598E-4 [ohm/m]" />
-            <param name="Xp" value=".31388E-3 [ohm/m]" />
-            <param name="Bp" value="273.5448 [Mohm*m]" />
-            <param name="Rz" value=".2952201E-3 [ohm/m]" />
-            <param name="Xz" value=".1039898E-2 [ohm/m]" />
-            <param name="Bz" value="414.1642 [Mohm*m]" />
-            <param name="RTP" value=".1781598E-4 [ohm/m]" />
-            <param name="TTP" value=".2841427 [ms]" />
-            <param name="ZTP" value="293.0192 [ohm]" />
-            <param name="RTZ" value=".2952201E-3 [ohm/m]" />
-            <param name="TTZ" value=".4203179 [ms]" />
-            <param name="ZTZ" value="656.2685 [ohm]" />
-            <param name="VR2" value="230.0 [kV]" />
-            <param name="MVA2" value="100.0 [MVA]" />
-            <param name="RPUP2" value=".336786E-7 [pu/m]" />
-            <param name="XLPUP2" value=".593346E-6 [pu/m]" />
-            <param name="BPUP2" value="1.933869E-6 [pu/m]" />
-            <param name="RPUZ2" value=".558072E-6 [pu/m]" />
-            <param name="XLPUZ2" value=".196578E-5 [pu/m]" />
-            <param name="BPUZ2" value="1.277271E-6 [pu/m]" />
-            <param name="Rp2" value="1.781598E-5" />
-            <param name="Lp" value="8.3259256E-7" />
-            <param name="Cp" value="9.697067E-6" />
-            <param name="Rz2" value="2.952201E-4" />
-            <param name="Lz" value="2.758415E-6" />
-            <param name="Cz" value="6.4046636E-6" />
-          </paramlist>
-        </User>
-        <Wire classid="WireOrthogonal" id="1411273143" name="" x="1080" y="216" w="172" h="190" orient="0" disable="false">
-          <vertex x="0" y="0" />
-          <vertex x="-162" y="0" />
-          <vertex x="-162" y="180" />
-        </Wire>
         <Wire classid="WireOrthogonal" id="1079239144" name="" x="648" y="180" w="172" h="190" orient="0" disable="false">
           <vertex x="0" y="0" />
           <vertex x="-162" y="0" />
@@ -2542,14 +2441,9 @@
           <vertex x="0" y="72" />
           <vertex x="108" y="72" />
         </Wire>
-        <Wire classid="WireOrthogonal" id="1728137546" name="" x="1080" y="198" w="190" h="208" orient="0" disable="false">
+        <Wire classid="WireOrthogonal" id="1250546471" name="" x="810" y="432" w="334" h="10" orient="0" disable="false">
           <vertex x="0" y="0" />
-          <vertex x="-180" y="0" />
-          <vertex x="-180" y="198" />
-        </Wire>
-        <Wire classid="WireOrthogonal" id="1250546471" name="" x="900" y="432" w="424" h="10" orient="0" disable="false">
-          <vertex x="0" y="0" />
-          <vertex x="-414" y="0" />
+          <vertex x="-324" y="0" />
         </Wire>
         <User classid="UserCmp" defn="master:newpi" id="1202302460" x="972" y="414" w="22" h="44" z="0" orient="1" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="21478764">
@@ -3054,7 +2948,7 @@
             <param name="Cz" value="6.4046636E-6" />
           </paramlist>
         </User>
-        <User classid="UserCmp" defn="master:newpi" id="371041287" x="1422" y="324" w="22" h="44" z="0" orient="1" link="-1" q="4" disable="false">
+        <User classid="UserCmp" defn="master:newpi" id="371041287" x="1404" y="324" w="22" h="44" z="0" orient="1" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="21478764">
             <param name="Name" value="BRIDGER2-6303-LARAMIE-6304-i_1" />
             <param name="PU" value="1" />
@@ -3108,20 +3002,14 @@
           <vertex x="-18" y="-18" />
           <vertex x="-18" y="0" />
         </Wire>
-        <Wire classid="WireOrthogonal" id="1723067111" name="" x="1422" y="306" w="244" h="100" orient="0" disable="false">
+        <Wire classid="WireOrthogonal" id="1723067111" name="" x="1422" y="216" w="244" h="10" orient="0" disable="false">
           <vertex x="0" y="0" />
-          <vertex x="0" y="-90" />
-          <vertex x="-234" y="-90" />
+          <vertex x="-234" y="0" />
         </Wire>
         <Wire classid="WireOrthogonal" id="1706004589" name="" x="1440" y="288" w="28" h="82" orient="0" disable="false">
           <vertex x="0" y="0" />
           <vertex x="0" y="-72" />
           <vertex x="-18" y="-72" />
-        </Wire>
-        <Wire classid="WireOrthogonal" id="1624446517" name="" x="1422" y="342" w="154" h="136" orient="0" disable="false">
-          <vertex x="0" y="0" />
-          <vertex x="0" y="126" />
-          <vertex x="-144" y="126" />
         </Wire>
         <Wire classid="WireOrthogonal" id="154946799" name="" x="1440" y="342" w="28" h="28" orient="0" disable="false">
           <vertex x="0" y="0" />
@@ -3133,7 +3021,7 @@
           <vertex x="0" y="0" />
           <vertex x="0" y="126" />
         </Wire>
-        <User classid="UserCmp" defn="master:newpi" id="1306313809" x="1404" y="324" w="22" h="44" z="0" orient="1" link="-1" q="4" disable="false">
+        <User classid="UserCmp" defn="master:newpi" id="1306313809" x="1386" y="324" w="22" h="44" z="0" orient="1" link="-1" q="4" disable="false">
           <paramlist link="-1" name="" crc="21478764">
             <param name="Name" value="COLSTRP-6203-LARAMIE-6304-i_1" />
             <param name="PU" value="1" />
@@ -3181,15 +3069,6 @@
             <param name="Cz" value="6.4046636E-6" />
           </paramlist>
         </User>
-        <Wire classid="WireOrthogonal" id="735101923" name="" x="1404" y="306" w="226" h="82" orient="0" disable="false">
-          <vertex x="0" y="0" />
-          <vertex x="0" y="-72" />
-          <vertex x="-216" y="-72" />
-        </Wire>
-        <Wire classid="WireOrthogonal" id="1353914065" name="" x="1404" y="342" w="10" h="136" orient="0" disable="false">
-          <vertex x="0" y="0" />
-          <vertex x="0" y="126" />
-        </Wire>
         <Wire classid="WireOrthogonal" id="1338305954" name="" x="864" y="306" w="28" h="28" orient="0" disable="false">
           <vertex x="0" y="0" />
           <vertex x="18" y="0" />
@@ -3203,11 +3082,6 @@
         <Wire classid="WireOrthogonal" id="2076921509" name="" x="810" y="450" w="10" h="28" orient="0" disable="false">
           <vertex x="0" y="0" />
           <vertex x="0" y="-18" />
-        </Wire>
-        <Wire classid="WireOrthogonal" id="860667302" name="" x="918" y="432" w="118" h="28" orient="0" disable="false">
-          <vertex x="0" y="0" />
-          <vertex x="0" y="18" />
-          <vertex x="-108" y="18" />
         </Wire>
         <Wire classid="WireOrthogonal" id="1439635245" name="" x="1080" y="234" w="118" h="172" orient="0" disable="false">
           <vertex x="0" y="0" />
@@ -5678,21 +5552,273 @@
           <vertex x="0" y="0" />
           <vertex x="0" y="-144" />
         </Wire>
+        <User classid="UserCmp" defn="master:newpi" id="727445715" x="1476" y="324" w="22" h="44" z="0" orient="1" link="-1" q="4" disable="false">
+          <paramlist link="-1" name="" crc="21478764">
+            <param name="Name" value="BORAH-6104-NAUGHTON-6305-i_2" />
+            <param name="PU" value="1" />
+            <param name="Config" value="1" />
+            <param name="F" value="60.0 [Hz]" />
+            <param name="len" value="1.0E5 [m]" />
+            <param name="Estim" value="0" />
+            <param name="View" value="3" />
+            <param name="REst" value="1.5" />
+            <param name="ZEst" value="1.5" />
+            <param name="TEst" value="1.5" />
+            <param name="VR" value="230.0 [kV]" />
+            <param name="MVA" value="100.0 [MVA]" />
+            <param name="RPUP" value=".336786E-7 [pu/m]" />
+            <param name="XLPUP" value=".593346E-6 [pu/m]" />
+            <param name="XCPUP" value=".517098E6 [pu*m]" />
+            <param name="RPUZ" value=".558072E-6 [pu/m]" />
+            <param name="XLPUZ" value=".196578E-5 [pu/m]" />
+            <param name="XCPUZ" value=".782919E6 [pu*m]" />
+            <param name="Rp" value=".1781598E-4 [ohm/m]" />
+            <param name="Xp" value=".31388E-3 [ohm/m]" />
+            <param name="Bp" value="273.5448 [Mohm*m]" />
+            <param name="Rz" value=".2952201E-3 [ohm/m]" />
+            <param name="Xz" value=".1039898E-2 [ohm/m]" />
+            <param name="Bz" value="414.1642 [Mohm*m]" />
+            <param name="RTP" value=".1781598E-4 [ohm/m]" />
+            <param name="TTP" value=".2841427 [ms]" />
+            <param name="ZTP" value="293.0192 [ohm]" />
+            <param name="RTZ" value=".2952201E-3 [ohm/m]" />
+            <param name="TTZ" value=".4203179 [ms]" />
+            <param name="ZTZ" value="656.2685 [ohm]" />
+            <param name="VR2" value="230.0 [kV]" />
+            <param name="MVA2" value="100.0 [MVA]" />
+            <param name="RPUP2" value=".336786E-7 [pu/m]" />
+            <param name="XLPUP2" value=".593346E-6 [pu/m]" />
+            <param name="BPUP2" value="1.933869E-6 [pu/m]" />
+            <param name="RPUZ2" value=".558072E-6 [pu/m]" />
+            <param name="XLPUZ2" value=".196578E-5 [pu/m]" />
+            <param name="BPUZ2" value="1.277271E-6 [pu/m]" />
+            <param name="Rp2" value="1.781598E-5" />
+            <param name="Lp" value="8.3259256E-7" />
+            <param name="Cp" value="9.697067E-6" />
+            <param name="Rz2" value="2.952201E-4" />
+            <param name="Lz" value="2.758415E-6" />
+            <param name="Cz" value="6.4046636E-6" />
+          </paramlist>
+        </User>
+        <Wire classid="WireOrthogonal" id="1606016605" name="" x="1476" y="306" w="28" h="28" orient="0" disable="false">
+          <vertex x="0" y="0" />
+          <vertex x="0" y="-18" />
+          <vertex x="18" y="-18" />
+        </Wire>
+        <Wire classid="WireOrthogonal" id="1033320932" name="" x="1476" y="342" w="28" h="28" orient="0" disable="false">
+          <vertex x="0" y="0" />
+          <vertex x="0" y="18" />
+          <vertex x="18" y="18" />
+        </Wire>
+        <Wire classid="WireOrthogonal" id="1517371541" name="" x="1386" y="306" w="208" h="82" orient="0" disable="false">
+          <vertex x="0" y="0" />
+          <vertex x="0" y="-72" />
+          <vertex x="-198" y="-72" />
+        </Wire>
+        <Wire classid="WireOrthogonal" id="54909850" name="" x="1386" y="342" w="10" h="136" orient="0" disable="false">
+          <vertex x="0" y="0" />
+          <vertex x="0" y="126" />
+        </Wire>
+        <Wire classid="WireOrthogonal" id="1742287639" name="" x="1404" y="306" w="10" h="100" orient="0" disable="false">
+          <vertex x="0" y="0" />
+          <vertex x="0" y="-90" />
+        </Wire>
+        <Wire classid="WireOrthogonal" id="693014536" name="" x="1404" y="342" w="10" h="136" orient="0" disable="false">
+          <vertex x="0" y="0" />
+          <vertex x="0" y="126" />
+        </Wire>
+        <Wire classid="WireOrthogonal" id="986069587" name="" x="1404" y="468" w="136" h="10" orient="0" disable="false">
+          <vertex x="0" y="0" />
+          <vertex x="-126" y="0" />
+        </Wire>
+        <User classid="UserCmp" defn="master:newpi" id="637219162" x="1422" y="324" w="22" h="44" z="0" orient="1" link="-1" q="4" disable="false">
+          <paramlist link="-1" name="" crc="21478764">
+            <param name="Name" value="BRIDGER2-6303-NAUGHTON-6305-i_3" />
+            <param name="PU" value="1" />
+            <param name="Config" value="1" />
+            <param name="F" value="60.0 [Hz]" />
+            <param name="len" value="1.0E5 [m]" />
+            <param name="Estim" value="0" />
+            <param name="View" value="3" />
+            <param name="REst" value="1.5" />
+            <param name="ZEst" value="1.5" />
+            <param name="TEst" value="1.5" />
+            <param name="VR" value="230.0 [kV]" />
+            <param name="MVA" value="100.0 [MVA]" />
+            <param name="RPUP" value=".336786E-7 [pu/m]" />
+            <param name="XLPUP" value=".593346E-6 [pu/m]" />
+            <param name="XCPUP" value=".517098E6 [pu*m]" />
+            <param name="RPUZ" value=".558072E-6 [pu/m]" />
+            <param name="XLPUZ" value=".196578E-5 [pu/m]" />
+            <param name="XCPUZ" value=".782919E6 [pu*m]" />
+            <param name="Rp" value=".1781598E-4 [ohm/m]" />
+            <param name="Xp" value=".31388E-3 [ohm/m]" />
+            <param name="Bp" value="273.5448 [Mohm*m]" />
+            <param name="Rz" value=".2952201E-3 [ohm/m]" />
+            <param name="Xz" value=".1039898E-2 [ohm/m]" />
+            <param name="Bz" value="414.1642 [Mohm*m]" />
+            <param name="RTP" value=".1781598E-4 [ohm/m]" />
+            <param name="TTP" value=".2841427 [ms]" />
+            <param name="ZTP" value="293.0192 [ohm]" />
+            <param name="RTZ" value=".2952201E-3 [ohm/m]" />
+            <param name="TTZ" value=".4203179 [ms]" />
+            <param name="ZTZ" value="656.2685 [ohm]" />
+            <param name="VR2" value="230.0 [kV]" />
+            <param name="MVA2" value="100.0 [MVA]" />
+            <param name="RPUP2" value=".336786E-7 [pu/m]" />
+            <param name="XLPUP2" value=".593346E-6 [pu/m]" />
+            <param name="BPUP2" value="1.933869E-6 [pu/m]" />
+            <param name="RPUZ2" value=".558072E-6 [pu/m]" />
+            <param name="XLPUZ2" value=".196578E-5 [pu/m]" />
+            <param name="BPUZ2" value="1.277271E-6 [pu/m]" />
+            <param name="Rp2" value="1.781598E-5" />
+            <param name="Lp" value="8.3259256E-7" />
+            <param name="Cp" value="9.697067E-6" />
+            <param name="Rz2" value="2.952201E-4" />
+            <param name="Lz" value="2.758415E-6" />
+            <param name="Cz" value="6.4046636E-6" />
+          </paramlist>
+        </User>
+        <Wire classid="WireOrthogonal" id="251120384" name="" x="1422" y="342" w="28" h="28" orient="0" disable="false">
+          <vertex x="0" y="0" />
+          <vertex x="0" y="18" />
+          <vertex x="18" y="18" />
+        </Wire>
+        <Wire classid="WireOrthogonal" id="1191388875" name="" x="1422" y="306" w="28" h="28" orient="0" disable="false">
+          <vertex x="0" y="0" />
+          <vertex x="0" y="-18" />
+          <vertex x="18" y="-18" />
+        </Wire>
+        <User classid="UserCmp" defn="master:newpi" id="841125443" x="954" y="234" w="22" h="44" z="0" orient="1" link="-1" q="4" disable="false">
+          <paramlist link="-1" name="" crc="21478764">
+            <param name="Name" value="MALIN-4001-GRIZZLY-4004-i_1" />
+            <param name="PU" value="1" />
+            <param name="Config" value="1" />
+            <param name="F" value="60.0 [Hz]" />
+            <param name="len" value="1.0E5 [m]" />
+            <param name="Estim" value="0" />
+            <param name="View" value="3" />
+            <param name="REst" value="1.5" />
+            <param name="ZEst" value="1.5" />
+            <param name="TEst" value="1.5" />
+            <param name="VR" value="230.0 [kV]" />
+            <param name="MVA" value="100.0 [MVA]" />
+            <param name="RPUP" value=".336786E-7 [pu/m]" />
+            <param name="XLPUP" value=".593346E-6 [pu/m]" />
+            <param name="XCPUP" value=".517098E6 [pu*m]" />
+            <param name="RPUZ" value=".558072E-6 [pu/m]" />
+            <param name="XLPUZ" value=".196578E-5 [pu/m]" />
+            <param name="XCPUZ" value=".782919E6 [pu*m]" />
+            <param name="Rp" value=".1781598E-4 [ohm/m]" />
+            <param name="Xp" value=".31388E-3 [ohm/m]" />
+            <param name="Bp" value="273.5448 [Mohm*m]" />
+            <param name="Rz" value=".2952201E-3 [ohm/m]" />
+            <param name="Xz" value=".1039898E-2 [ohm/m]" />
+            <param name="Bz" value="414.1642 [Mohm*m]" />
+            <param name="RTP" value=".1781598E-4 [ohm/m]" />
+            <param name="TTP" value=".2841427 [ms]" />
+            <param name="ZTP" value="293.0192 [ohm]" />
+            <param name="RTZ" value=".2952201E-3 [ohm/m]" />
+            <param name="TTZ" value=".4203179 [ms]" />
+            <param name="ZTZ" value="656.2685 [ohm]" />
+            <param name="VR2" value="230.0 [kV]" />
+            <param name="MVA2" value="100.0 [MVA]" />
+            <param name="RPUP2" value=".336786E-7 [pu/m]" />
+            <param name="XLPUP2" value=".593346E-6 [pu/m]" />
+            <param name="BPUP2" value="1.933869E-6 [pu/m]" />
+            <param name="RPUZ2" value=".558072E-6 [pu/m]" />
+            <param name="XLPUZ2" value=".196578E-5 [pu/m]" />
+            <param name="BPUZ2" value="1.277271E-6 [pu/m]" />
+            <param name="Rp2" value="1.781598E-5" />
+            <param name="Lp" value="8.3259256E-7" />
+            <param name="Cp" value="9.697067E-6" />
+            <param name="Rz2" value="2.952201E-4" />
+            <param name="Lz" value="2.758415E-6" />
+            <param name="Cz" value="6.4046636E-6" />
+          </paramlist>
+        </User>
+        <Wire classid="WireOrthogonal" id="1005391459" name="" x="954" y="252" w="10" h="226" orient="0" disable="false">
+          <vertex x="0" y="0" />
+          <vertex x="0" y="216" />
+        </Wire>
+        <Wire classid="WireOrthogonal" id="1387938163" name="" x="1080" y="198" w="136" h="28" orient="0" disable="false">
+          <vertex x="0" y="0" />
+          <vertex x="-126" y="0" />
+          <vertex x="-126" y="18" />
+        </Wire>
+        <User classid="UserCmp" defn="master:newpi" id="1708592665" x="936" y="234" w="22" h="44" z="0" orient="1" link="-1" q="4" disable="false">
+          <paramlist link="-1" name="" crc="21478764">
+            <param name="Name" value="MALIN-4001-GRIZZLY-4004-i_2" />
+            <param name="PU" value="1" />
+            <param name="Config" value="1" />
+            <param name="F" value="60.0 [Hz]" />
+            <param name="len" value="1.0E5 [m]" />
+            <param name="Estim" value="0" />
+            <param name="View" value="3" />
+            <param name="REst" value="1.5" />
+            <param name="ZEst" value="1.5" />
+            <param name="TEst" value="1.5" />
+            <param name="VR" value="230.0 [kV]" />
+            <param name="MVA" value="100.0 [MVA]" />
+            <param name="RPUP" value=".336786E-7 [pu/m]" />
+            <param name="XLPUP" value=".593346E-6 [pu/m]" />
+            <param name="XCPUP" value=".517098E6 [pu*m]" />
+            <param name="RPUZ" value=".558072E-6 [pu/m]" />
+            <param name="XLPUZ" value=".196578E-5 [pu/m]" />
+            <param name="XCPUZ" value=".782919E6 [pu*m]" />
+            <param name="Rp" value=".1781598E-4 [ohm/m]" />
+            <param name="Xp" value=".31388E-3 [ohm/m]" />
+            <param name="Bp" value="273.5448 [Mohm*m]" />
+            <param name="Rz" value=".2952201E-3 [ohm/m]" />
+            <param name="Xz" value=".1039898E-2 [ohm/m]" />
+            <param name="Bz" value="414.1642 [Mohm*m]" />
+            <param name="RTP" value=".1781598E-4 [ohm/m]" />
+            <param name="TTP" value=".2841427 [ms]" />
+            <param name="ZTP" value="293.0192 [ohm]" />
+            <param name="RTZ" value=".2952201E-3 [ohm/m]" />
+            <param name="TTZ" value=".4203179 [ms]" />
+            <param name="ZTZ" value="656.2685 [ohm]" />
+            <param name="VR2" value="230.0 [kV]" />
+            <param name="MVA2" value="100.0 [MVA]" />
+            <param name="RPUP2" value=".336786E-7 [pu/m]" />
+            <param name="XLPUP2" value=".593346E-6 [pu/m]" />
+            <param name="BPUP2" value="1.933869E-6 [pu/m]" />
+            <param name="RPUZ2" value=".558072E-6 [pu/m]" />
+            <param name="XLPUZ2" value=".196578E-5 [pu/m]" />
+            <param name="BPUZ2" value="1.277271E-6 [pu/m]" />
+            <param name="Rp2" value="1.781598E-5" />
+            <param name="Lp" value="8.3259256E-7" />
+            <param name="Cp" value="9.697067E-6" />
+            <param name="Rz2" value="2.952201E-4" />
+            <param name="Lz" value="2.758415E-6" />
+            <param name="Cz" value="6.4046636E-6" />
+          </paramlist>
+        </User>
+        <Wire classid="WireOrthogonal" id="1823970336" name="" x="936" y="216" w="28" h="28" orient="0" disable="false">
+          <vertex x="0" y="0" />
+          <vertex x="0" y="-18" />
+          <vertex x="18" y="-18" />
+        </Wire>
+        <Wire classid="WireOrthogonal" id="55905218" name="" x="936" y="252" w="28" h="28" orient="0" disable="false">
+          <vertex x="0" y="0" />
+          <vertex x="0" y="18" />
+          <vertex x="18" y="18" />
+        </Wire>
       </schematic>
     </Definition>
   </definitions>
   <List classid="Resource" />
   <hierarchy>
-    <call link="173273436" name="case_240bus:DS" z="-1" view="false" instance="0">
-      <call link="1542301038" name="case_240bus:Main" z="-1" view="false" instance="0">
-        <call link="1547282159" name="WECC_Components:SectionA" z="-1" view="false" instance="0" />
-        <call link="768779842" name="WECC_Components:SectionG" z="-1" view="false" instance="0" />
-        <call link="1568751975" name="WECC_Components:SectionF" z="-1" view="false" instance="0" />
+    <call link="232831242" name="case_240bus:DS" z="-1" view="false" instance="0">
+      <call link="1542301038" name="case_240bus:Main" z="-1" view="true" instance="0">
         <call link="416110694" name="WECC_Components:SectionE" z="-1" view="false" instance="0" />
-        <call link="566800107" name="WECC_Components:SectionD" z="-1" view="true" instance="0" />
-        <call link="1100829638" name="WECC_Components:SectionC" z="-1" view="false" instance="0" />
-        <call link="1312251092" name="WECC_Components:SectionH" z="-1" view="false" instance="0" />
+        <call link="566800107" name="WECC_Components:SectionD" z="-1" view="false" instance="0" />
+        <call link="768779842" name="WECC_Components:SectionG" z="-1" view="false" instance="0" />
         <call link="335926273" name="WECC_Components:SectionB" z="-1" view="false" instance="0" />
+        <call link="1568751975" name="WECC_Components:SectionF" z="-1" view="false" instance="0" />
+        <call link="1312251092" name="WECC_Components:SectionH" z="-1" view="false" instance="0" />
+        <call link="1100829638" name="WECC_Components:SectionC" z="-1" view="false" instance="0" />
+        <call link="1547282159" name="WECC_Components:SectionA" z="-1" view="false" instance="0" />
       </call>
     </call>
   </hierarchy>
