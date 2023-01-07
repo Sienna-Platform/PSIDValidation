@@ -25,6 +25,10 @@ sim_ref = Simulation(
         )
 
 ss = small_signal_analysis(sim_ref)
+
+df_pf = summary_participation_factors(ss)
+df_ei = summary_eigenvalues(ss)
+
 eig_state_map = Dict(1:length(ss.eigenvalues) .=> [("gen", :state, -1.0)])
 
 for state_ix in 1:length(ss.eigenvalues)
