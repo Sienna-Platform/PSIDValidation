@@ -4,6 +4,9 @@ import LinearAlgebra
 using Conda
 using Pkg
 using PyCall
+using PowerSystems
+using PowerSimulationsDynamics
+using PowerFlows
 
 #DOCUMENTATION FOR AUTOMATION LIBRARY: https://www.pscad.com/webhelp/al-help/index.html#
 
@@ -50,7 +53,7 @@ rm(pscad_output_folder_path, recursive = true, force = true)
 
 #Start up PSCAD and read the PSID system
 pscad = PP.basic_pscad_startup()
-sleep(3)    #Need to wait for the last closed workspace to load and then load the one below
+sleep(5)    #Need to wait for the last closed workspace to load and then load the one below
 pscad.load(PyObject(joinpath(@__DIR__, "pscad_files", pscad_workspace)))
 
 #project = pscad.project(pscad_case)
@@ -80,33 +83,6 @@ for p in pscad.projects()
     end 
 end  =#
 
-
-#WRITE INITIAL CONDITIONS FOR BUSES (WORKING)
-#= for (ix,b) in enumerate(collect(buses))
-    @error  "writing Bus initial conditions and setpoints: $(get_name(b))"
-    println("ADD $(ix-1)")
-    project = find_project_bus(pscad, get_name(b))  #Find the project where the component can be found
-    write_initial_conditions(b, get_name(b), project, x0_dict)
-end =#
-
-#PRINT NAMES OF LINES IN PSCAD
-for p in pscad.projects()
-    project = pscad.project(p["name"])
-    lines = project.find_all("master:newpi")
-    for l in lines
-        pscad_params = l.parameters()
-        name  = pscad_params["Name"]
-        #LOGIC FOR CHANGING LINE NAMES
-
-        println(name)
-    end 
-end 
-
-#PRINT NAMES OF LINES IN PSID 
-for l in get_components(Line, sys)
-    println(get_name(l))
-end 
-
 function find_project_bus(pscad_workspace, component_name)
     project = nothing 
     for p in pscad_workspace.projects()
@@ -120,6 +96,35 @@ function find_project_bus(pscad_workspace, component_name)
     return false 
 end   
 
+#WRITE INITIAL CONDITIONS FOR BUSES (WORKING)
+#=for (ix,b) in enumerate(collect(buses))
+    @error  "writing Bus initial conditions and setpoints: $(get_name(b))"
+    project = find_project_bus(pscad, get_name(b))  #Find the project where the component can be found
+    write_initial_conditions(b, get_name(b), project, x0_dict)
+end =#
+
+#PRINT NAMES OF LINES IN PSCAD
+for p in pscad.projects() 
+    project = pscad.project(p["name"])
+    lines = project.find_all("master:newpi") 
+    for l in lines
+        pscad_params = l.parameters()
+        name  = pscad_params["Name"]
+        println("name:", name)
+        #LOGIC FOR CHANGING LINE NAMES
+        newname = replace(name, "." => "_", " " => "_")
+        newname = split(newname, "-")
+        newname = "B" * newname[2] * "_" * newname[1] * "-" * "B" * newname[4] * "_" * newname[3] * "-" *newname[5]
+        println(newname)
+        #pscad_params["Name"] = newname
+        #PP.update_parameter_by_dictionary(l, pscad_params)
+    end 
+end 
+
+#PRINT NAMES OF LINES IN PSID 
+for l in get_components(Line, sys)
+    println(get_name(l))
+end 
 
 #TODO - made changes to the pscad system so that these two functions run and parameterize the entire system... 
     #parameterize_system(sys, project)
