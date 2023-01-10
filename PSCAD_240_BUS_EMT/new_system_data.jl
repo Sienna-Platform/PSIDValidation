@@ -96,7 +96,7 @@ const DANGLING_BUSES = [
 function make_dynamic_gen(gen::DynamicGenerator{RoundRotorQuadratic, T, U, V, W}) where {T, U, V, W}
     old_machine = get_machine(gen)
     new_machine =  SauerPaiMachine(
-            max(get_R(old_machine), 0.005),
+            max(get_R(old_machine), 0.008),
             get_Xd(old_machine),
             get_Xq(old_machine),
             get_Xd_p(old_machine),
@@ -133,7 +133,7 @@ end
 function make_dynamic_gen(gen::DynamicGenerator{RoundRotorQuadratic, T, V, HydroTurbineGov, W}) where {T, V, W}
     old_machine = get_machine(gen)
     new_machine =  SauerPaiMachine(
-            max(get_R(old_machine), 0.02),
+            max(get_R(old_machine), 0.025),
             get_Xd(old_machine),
             get_Xq(old_machine),
             get_Xd_p(old_machine),

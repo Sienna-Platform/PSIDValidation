@@ -21,7 +21,7 @@ sim_ref = Simulation(
         "PSCAD_240_BUS_EMT",
         (0.0, 20.0);
         file_level = Logging.Error,
-        console_level = Logging.Info,
+        console_level = Logging.Debug,
         #all_lines_dynamic = true,
         )
 

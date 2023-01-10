@@ -434,6 +434,8 @@ set_magnitude!(pv_bus, 1.06)
 
 gen = get_component(ThermalStandard, sys, "generator-5035-R")
 set_base_power!(gen, get_base_power(gen)*1.3)
+set_base_power!(gen.dynamic_injector, get_base_power(gen))
+
 
 set_units_base_system!(sys, "SYSTEM_BASE")
 run_powerflow!(sys)
