@@ -12,6 +12,7 @@ const PSY = PowerSystems
 
 configure_logging(console_level = Logging.Error)
 include("modifiy_system.jl")
+include("debug_utils.jl")
 system = System(joinpath(@__DIR__, "psid_files", "system.json"))
 
 sim_ref = Simulation(
@@ -20,7 +21,7 @@ sim_ref = Simulation(
         "PSCAD_240_BUS_EMT",
         (0.0, 20.0);
         file_level = Logging.Error,
-        console_level = Logging.Error,
+        console_level = Logging.Info,
         #all_lines_dynamic = true,
         )
 

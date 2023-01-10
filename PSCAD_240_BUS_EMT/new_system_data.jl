@@ -35,6 +35,59 @@ const device_mapping = Dict(
     "WG" => (ThermalStandard, PrimeMovers.CA, ThermalFuels.NATURAL_GAS),
 )
 
+const SPLIT_BUSES = [
+    1032
+    1034
+    1131
+    1232
+    1331
+    1333
+    1431
+    2030
+    2130
+    2233
+    2438
+    3133
+    3135
+    3234
+    3333
+    3531
+    3631
+    3931
+    3933
+    4031
+    4035
+    4039
+    4131
+    4132
+    4231
+    4232
+    5031
+    5032
+    6132
+    6231
+    6235
+    6335
+    6433
+    6533
+    7031
+    7032
+    8034
+]
+
+const DANGLING_BUSES = [
+    "B1131_CORONADO",
+    "B1232_NAVAJO_2",
+    "B1331_HOOVER",
+    "B2030_MEXICO",
+    "B2233_MISSION",
+    "B3135_POTRERO",
+    "B3333_METCALF",
+    "B3531_FULTON",
+    "B3631_HUMBOLDT",
+    "B3931_ROUND_MT"
+]
+
 ######################################
 ############ Generators ##############
 ######################################
@@ -43,7 +96,7 @@ const device_mapping = Dict(
 function make_dynamic_gen(gen::DynamicGenerator{RoundRotorQuadratic, T, U, V, W}) where {T, U, V, W}
     old_machine = get_machine(gen)
     new_machine =  SauerPaiMachine(
-            max(get_R(old_machine), 0.001),
+            max(get_R(old_machine), 0.005),
             get_Xd(old_machine),
             get_Xq(old_machine),
             get_Xd_p(old_machine),
@@ -80,7 +133,7 @@ end
 function make_dynamic_gen(gen::DynamicGenerator{RoundRotorQuadratic, T, V, HydroTurbineGov, W}) where {T, V, W}
     old_machine = get_machine(gen)
     new_machine =  SauerPaiMachine(
-            max(get_R(old_machine), 0.001),
+            max(get_R(old_machine), 0.02),
             get_Xd(old_machine),
             get_Xq(old_machine),
             get_Xd_p(old_machine),
@@ -316,7 +369,7 @@ function update_gen_to_machine_sauerpai(sys, static_device::ThermalStandard)
     remove_component!(typeof(old_dyn_device), sys, get_name(old_dyn_device))
     new_dyn_device = make_dynamic_gen(old_dyn_device)
     add_component!(sys, new_dyn_device, static_device)
-    active_power = min(get_active_power(static_device), get_max_active_power(static_device)*0.9)
+    active_power = min(get_active_power(static_device), get_max_active_power(static_device))
     set_active_power!(static_device, active_power)
     return
 end
@@ -360,7 +413,7 @@ function update_gen_data(g::ThermalStandard, sys, ::Type{HydroPumpedStorage}, pm
         available = get_available(g),
         bus = get_bus(g),
         rating_pump = -1.0*get_active_power_limits(g).min,
-        active_power = min(get_active_power(g), get_max_active_power(g)*0.9),
+        active_power = min(get_active_power(g) + 0.03, get_max_active_power(g)*0.9),
         reactive_power = get_reactive_power(g),
         rating = get_rating(g),
         prime_mover = pm,
@@ -469,7 +522,7 @@ function update_gen_data(g::ThermalStandard, sys::System, ::Type{RenewableFix}, 
         available = get_available(g),
         bus = get_bus(g),
         active_power = get_active_power(g),
-        reactive_power = get_reactive_power(g), #get_reactive_power(g),
+        reactive_power = get_reactive_power(g),
         rating = get_rating(g),
         prime_mover = pm,
         power_factor = cos(atan(get_active_power(g), abs(get_reactive_power(g)))),
@@ -480,12 +533,124 @@ function update_gen_data(g::ThermalStandard, sys::System, ::Type{RenewableFix}, 
     return
 end
 
-
 function update_generation_units!(sys::System)
     for g in get_components(ThermalStandard, sys)
         gen_type = split(get_name(g), "-")[3]
         gen_cat = device_mapping[gen_type]
         update_gen_data(g, sys, gen_cat...)
+    end
+    return
+end
+
+function _find_area(num::Int)::Int
+    n = round(Int, num / (10^3))
+    return n
+end
+
+function get_next_bus_number(bus_numbers::Vector{Int}, current_bus::Int)
+    area = _find_area(current_bus) + 1
+    return maximum(bus_numbers[findall(x -> x < area*1000, bus_numbers)]) + 1
+end
+
+function get_bus_transformer(sys::System, bus::Bus)
+    xtr = get_components(Transformer2W, sys, x -> get_arc(x).to == bus)
+    if isempty(xtr)
+        xtr = get_components(Transformer2W, sys, x -> get_arc(x).from == bus)
+    end
+
+    if isempty(xtr)
+        error("xtr for bus $(get_name(bus)) not found")
+    end
+    if length(xtr) == 1
+        return first(xtr)
+    else
+        error("more than one xtr for bus $(get_name(bus))")
+    end
+end
+
+function _split_generation_units(sys::System, bus_number::Int)
+    th = get_components(ThermalStandard, sys, x -> get_number(get_bus(x)) == bus_number)
+    hy = get_components(HydroGen, sys, x -> get_number(get_bus(x)) == bus_number)
+    machines = Iterators.flatten((th, hy))
+    bus_numbers = get_number.(get_components(Bus, sys))
+    bus = first(get_components(Bus, sys, x -> get_number(x) == bus_number))
+    xfr = get_bus_transformer(sys, bus)
+    for gen in machines
+        dyn_gen = get_dynamic_injector(gen)
+        bus = get_bus(gen)
+        next_bus_number = get_next_bus_number(bus_numbers, get_number(bus))
+        push!(bus_numbers, next_bus_number)
+        remove_component!(sys, dyn_gen)
+        remove_component!(sys, gen)
+        unit_type = split(get_name(gen), "-")[end]
+        new_bus = Bus(
+            name = "B$(next_bus_number)_$unit_type",
+            number = next_bus_number,
+            bustype = "PV",
+            angle = get_angle(bus),
+            magnitude = get_magnitude(bus),
+            voltage_limits = get_voltage_limits(bus),
+            base_voltage = get_base_voltage(bus),
+            area = get_area(bus),
+            load_zone = get_load_zone(bus),
+        )
+
+        add_component!(sys, new_bus,)
+        set_bus!(gen, new_bus)
+        set_name!(gen, "generator-$(next_bus_number)-$unit_type")
+        set_name!(dyn_gen, "generator-$(next_bus_number)-$unit_type")
+        add_component!(sys, gen)
+        add_component!(sys, dyn_gen, gen)
+        new_xfr = Transformer2W(
+            name = "B$(get_number(get_arc(xfr).from))_$(get_name(get_arc(xfr).from))-B$(next_bus_number)_$(get_name(bus))_$unit_type-i_1",
+            available = true,
+            active_power_flow = get_active_power(gen),
+            reactive_power_flow = get_reactive_power(gen),
+            arc = Arc(from = get_arc(xfr).from, to = new_bus),
+            r = 5e-5,
+            x = get_x(xfr)*3,
+            primary_shunt = 0.0,
+            rate = get_base_power(gen)*1.1,
+        )
+        add_component!(sys, new_xfr)
+    end
+    set_magnitude!(bus, get_magnitude(bus)*0.97)
+    return
+end
+
+function split_generation_units(sys::System)
+    for b in SPLIT_BUSES
+        _split_generation_units(sys, b)
+    end
+    for g in get_components(Generator, sys, x -> get_number(get_bus(x)) == 3933)
+        new_inj = deepcopy(get_dynamic_injector(g))
+        new_inj.internal = PSY.IS.InfrastructureSystemsInternal()
+        new_g = deepcopy(g)
+        new_g.time_series_container = PSY.IS.TimeSeriesContainer()
+        new_g.internal = PSY.IS.InfrastructureSystemsInternal()
+        set_dynamic_injector!(new_g, nothing)
+        set_name!(new_g, "$(get_name(new_g))_2")
+        set_name!(new_inj, get_name(new_g))
+        set_bus!(new_g, get_bus(g))
+        add_component!(sys, new_g)
+        add_component!(sys, new_inj, new_g)
+    end
+    return
+end
+
+function _remove_dangling_buses(sys::System, bus_name::String)
+    bus = get_component(Bus, sys, bus_name)
+    xfr = get_bus_transformer(sys, bus)
+    remove_component!(sys, xfr)
+    remove_component!(sys, get_arc(xfr))
+    remove_component!(sys, bus)
+    return
+end
+
+
+function remove_dangling_buses(sys::System)
+    for b in DANGLING_BUSES
+        _remove_dangling_buses(sys, b)
     end
     return
 end
