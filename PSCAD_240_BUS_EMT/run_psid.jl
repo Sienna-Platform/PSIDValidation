@@ -12,6 +12,27 @@ const PSY = PowerSystems
 
 configure_logging(console_level = Logging.Error)
 include("modifiy_system.jl")
+
+for b in get_components(Bus, sys)
+    if get_bustype(b) == BusTypes.PV
+        gens = get_components(RenewableGen, sys, x-> get_bus(x) == b)
+        if isempty(gens)
+            continue
+        end
+        gfm_found = false
+        for g in gens
+            if get_inner_control(get_dynamic_injector(g)) isa VoltageModeControl
+                gfm_found = true
+                break
+            end
+        end
+        if !gfm_found
+            @show get_name(b) length(gens)
+        end
+    end
+end
+
+
 include("debug_utils.jl")
 system = System(joinpath(@__DIR__, "psid_files", "system.json"))
 
@@ -21,7 +42,7 @@ sim_ref = Simulation(
         "PSCAD_240_BUS_EMT",
         (0.0, 20.0);
         file_level = Logging.Error,
-        console_level = Logging.Debug,
+        console_level = Logging.Info,
         #all_lines_dynamic = true,
         )
 
