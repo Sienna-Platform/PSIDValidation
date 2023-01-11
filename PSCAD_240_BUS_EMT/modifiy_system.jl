@@ -441,8 +441,42 @@ pv_bus = get_component(Bus, sys, "B6533_EMERY")
 set_magnitude!(pv_bus, 1.06)
 
 gen = get_component(ThermalStandard, sys, "generator-5035-R")
-set_base_power!(gen, get_base_power(gen)*1.3)
+set_base_power!(gen, get_base_power(gen)*1.7)
 set_base_power!(gen.dynamic_injector, get_base_power(gen))
+
+for b in get_components(Bus, sys)
+    if get_bustype(b) == BusTypes.PV
+        gfm_found = false
+        gens = get_components(ThermalStandard, sys, x-> get_bus(x) == b)
+        # If PV bus has thermal units continue
+        if !isempty(gens)
+            gfm_found = true
+            continue
+        end
+        hgens = get_components(HydroGen, sys, x-> get_bus(x) == b)
+        # If PV bus has hydro units continue
+        if !isempty(hgens)
+            gfm_found = true
+            continue
+        end
+        invs = get_components(RenewableGen, sys, x-> get_bus(x) == b)
+        # If PV bus has no inverters and it is PV Bus then change to PQ
+        if isempty(invs)
+            continue
+        end
+        for g in invs
+            # If PV has inverters but none have voltage control, change to PQ
+            if get_inner_control(get_dynamic_injector(g)) isa VoltageModeControl
+                gfm_found = true
+                break
+            end
+        end
+        if !gfm_found
+            @debug "changing bus $(get_name(b)) to PQ"
+            set_bustype!(b, BusTypes.PQ)
+        end
+    end
+end
 
 
 set_units_base_system!(sys, "SYSTEM_BASE")
