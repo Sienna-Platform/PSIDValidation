@@ -21,6 +21,14 @@ for br in get_components(Line, sys)
     end
 end
 
+for br in get_components(Line, sys)
+    if get_r(br) <= 0
+        @info "Line $(get_name(br)) has no resistance"
+        @info "Adding resistance to line $(get_name(br)) r = $(get_r(br)*7.0)"
+        set_r!(br, get_r(br)*7.0)
+    end
+end
+
 from_line = get_component(Line, sys, "B2404_VINCENT-B3897_MIDWAY6-i_1")
 remove_component!(Line, sys, "B2404_VINCENT-B3897_MIDWAY6-i_1")
 remove_component!(Arc, sys, get_name(get_arc(from_line)))
