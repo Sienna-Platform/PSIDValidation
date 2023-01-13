@@ -294,7 +294,7 @@ gen = get_component(ThermalStandard, sys, "generator-4039-S")
 set_status!(gen, true)
 set_base_power!(gen, 447.0)
 set_rating!(gen, 1.0)
-set_active_power!(gen, 2.00)
+set_active_power!(gen, 3.30)
 set_reactive_power!(gen, 1.2)
 set_active_power_limits!(gen, (min = 0.0, max = 4.0))
 set_reactive_power_limits!(gen, (min = -2.0, max = 2.0))
@@ -426,7 +426,7 @@ pv_bus = get_component(Bus, sys, "B3933_TESLA")
 set_magnitude!(pv_bus, 1.025)
 
 pv_bus = get_component(Bus, sys, "B4039_DALLES21")
-set_magnitude!(pv_bus, 1.12)
+set_magnitude!(pv_bus, 1.13)
 
 pv_bus = get_component(Bus, sys, "B5032_CMAIN_GM")
 set_magnitude!(pv_bus, 1.04)
@@ -438,10 +438,29 @@ pv_bus = get_component(Bus, sys, "B6235_MONTA_G1")
 set_magnitude!(pv_bus, 1.08)
 
 pv_bus = get_component(Bus, sys, "B6533_EMERY")
-set_magnitude!(pv_bus, 1.06)
+set_magnitude!(pv_bus, 1.065)
+
+pv_bus = get_component(Bus, sys, "B1032_FCNGN4CC")
+set_magnitude!(pv_bus, 1.01)
+
+pv_bus = get_component(Bus, sys, "B6401_TRACYSPP")
+set_magnitude!(pv_bus, 1.031)
+run_powerflow!(sys)
 
 gen = get_component(ThermalStandard, sys, "generator-5035-R")
 set_base_power!(gen, get_base_power(gen)*1.7)
+set_base_power!(gen.dynamic_injector, get_base_power(gen))
+
+gen = get_component(ThermalStandard, sys, "generator-7037-SC")
+set_base_power!(gen, get_base_power(gen)*1.7)
+set_base_power!(gen.dynamic_injector, get_base_power(gen))
+
+gen = get_component(ThermalStandard, sys, "generator-1432-C")
+set_base_power!(gen, get_base_power(gen)*1.2)
+set_base_power!(gen.dynamic_injector, get_base_power(gen))
+
+gen = get_component(ThermalStandard, sys, "generator-4238-NB")
+set_base_power!(gen, get_base_power(gen)*1.2)
 set_base_power!(gen.dynamic_injector, get_base_power(gen))
 
 for b in get_components(Bus, sys)

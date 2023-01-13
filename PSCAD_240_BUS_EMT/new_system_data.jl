@@ -607,14 +607,14 @@ function _split_generation_units(sys::System, bus_number::Int)
             active_power_flow = get_active_power(gen),
             reactive_power_flow = get_reactive_power(gen),
             arc = Arc(from = get_arc(xfr).from, to = new_bus),
-            r = 5e-5,
-            x = get_x(xfr)*3,
+            r = get_x(xfr)*2/10,
+            x = get_x(xfr)*2,
             primary_shunt = 0.0,
             rate = get_base_power(gen)*1.1,
         )
         add_component!(sys, new_xfr)
     end
-    set_magnitude!(bus, get_magnitude(bus)*0.97)
+    set_magnitude!(bus, get_magnitude(bus)*0.96)
     return
 end
 

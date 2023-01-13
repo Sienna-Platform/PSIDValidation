@@ -11,7 +11,21 @@ using PowerFlows
 const PSY = PowerSystems
 
 configure_logging(console_level = Logging.Error)
+
 include("modifiy_system.jl")
+for g in get_components(Generator, sys, x -> !isa(x, RenewableFix))
+    rp = get_reactive_power(g)
+    limits = get_reactive_power_limits(g)
+    if rp > limits.max
+        @error "at max limit $(get_name(g))" rp limits.max get_name(get_bus(g)) get_magnitude(get_bus(g))
+    end
+    if rp < limits.min
+        @error "below min $(get_name(g))" rp limits.min get_name(get_bus(g)) get_magnitude(get_bus(g))
+    end
+end
+
+
+
 include("debug_utils.jl")
 system = System(joinpath(@__DIR__, "psid_files", "system.json"))
 
@@ -21,8 +35,8 @@ sim_ref = Simulation(
         "PSCAD_240_BUS_EMT",
         (0.0, 20.0);
         file_level = Logging.Error,
-        console_level = Logging.Debug,
-        #all_lines_dynamic = true,
+        console_level = Logging.Info,
+        all_lines_dynamic = true,
         )
 
 ss = small_signal_analysis(sim_ref)
