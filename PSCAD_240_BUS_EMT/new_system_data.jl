@@ -568,16 +568,77 @@ function get_bus_transformer(sys::System, bus::Bus)
     end
 end
 
+function _get_transformer_parameters(unit, to_bus, initial_x)
+    # Unit is connected in the From Bus
+    V_j0 = get_magnitude(to_bus)
+    θ_j0 = get_magnitude(to_bus)
+
+    from_bus = get_bus(unit)
+    if get_bustype(from_bus) == BusTypes.PQ
+        @error "Incorrect Bus Type for $(get_name(unit))"
+    end
+
+    V_i0 = get_magnitude(from_bus)
+    θ_i0 = max(θ_j0+0.1, get_angle(from_bus))
+    if V_i0 < V_j0
+        @error "bad voltage set points"
+    end
+    unit_base_power = get_base_power(unit)
+    P0 = get_active_power(unit)*unit_base_power/100.0
+    Q0 = get_reactive_power(unit)*unit_base_power/100.0
+
+    if P0 > 0.0
+        x_tf0 = V_j0*V_i0*sin(θ_i0 - θ_j0)/P0
+    elseif Q0 > 0.0
+        x_tf0 = V_j0*V_i0*cos(θ_i0 - θ_j0)/Q0
+    else
+        x_tf0 = initial_x
+    end
+
+    @show x_tf0
+    @assert x_tf0 > 0.0
+
+    function pf!(res, x, p)
+        θ_i  = x[1]
+        x_tf = x[2]
+        # Fix X/R ≈ 10
+        g = 0.099/x_tf # 0.1*x/((0.1*x)^2 + x^2)
+        b = -0.99/x_tf # -x/((0.1*x)^2 + x^2)
+        V_i  = p[1]
+        V_j = p[2]
+        θ_j = p[3]
+        P = p[4]
+        Q = p[5]
+        res[1] = P - (V_i*V_j*(g*cos(θ_i - θ_j) + b*sin(θ_i - θ_j)))
+        res[2] = Q - (V_i*V_j*(g*sin(θ_i - θ_j) - b*cos(θ_i - θ_j)))
+    end
+
+    f! = (x, y) -> pf!(x, y, [V_i0, V_j0, θ_j0, P0, Q0])
+
+    sol = nlsolve(f!, [θ_i0 x_tf0])
+    new_x = sol.zero[2]
+    new_r = sol.zero[2]*0.1
+    if new_x > 0.05 || new_x < 0.001
+        @error "The solution of the problem for unit $(get_name(unit)) to_bus $(get_name(to_bus)) is unrealistic $new_x $(θ_j0-sol.zero[1]) $V_i0 $V_j0"
+        return x_tf0, x_tf0*0.1
+    end
+    return new_x, new_r
+end
+
+
 function _split_generation_units(sys::System, bus_number::Int)
     th = get_components(ThermalStandard, sys, x -> get_number(get_bus(x)) == bus_number)
     hy = get_components(HydroGen, sys, x -> get_number(get_bus(x)) == bus_number)
     machines = Iterators.flatten((th, hy))
     bus_numbers = get_number.(get_components(Bus, sys))
-    bus = first(get_components(Bus, sys, x -> get_number(x) == bus_number))
-    xfr = get_bus_transformer(sys, bus)
+    bus_ = first(get_components(Bus, sys, x -> get_number(x) == bus_number))
+    xfr = get_bus_transformer(sys, bus_)
+    pv_setpoint = get_magnitude(get_arc(xfr).from)
+    set_magnitude!(get_arc(xfr).from, pv_setpoint*0.98)
     for gen in machines
         dyn_gen = get_dynamic_injector(gen)
         bus = get_bus(gen)
+        @assert bus == get_arc(xfr).to
         next_bus_number = get_next_bus_number(bus_numbers, get_number(bus))
         push!(bus_numbers, next_bus_number)
         remove_component!(sys, dyn_gen)
@@ -588,39 +649,77 @@ function _split_generation_units(sys::System, bus_number::Int)
             number = next_bus_number,
             bustype = "PV",
             angle = get_angle(bus),
-            magnitude = get_magnitude(bus),
+            magnitude = pv_setpoint,
             voltage_limits = get_voltage_limits(bus),
             base_voltage = get_base_voltage(bus),
             area = get_area(bus),
             load_zone = get_load_zone(bus),
         )
 
-        add_component!(sys, new_bus,)
+        add_component!(sys, new_bus)
         set_bus!(gen, new_bus)
         set_name!(gen, "generator-$(next_bus_number)-$unit_type")
         set_name!(dyn_gen, "generator-$(next_bus_number)-$unit_type")
         add_component!(sys, gen)
         add_component!(sys, dyn_gen, gen)
+        x_new, r_new = _get_transformer_parameters(gen, get_arc(xfr).from, get_x(xfr)*100.0/get_base_power(gen))
         new_xfr = Transformer2W(
             name = "B$(get_number(get_arc(xfr).from))_$(get_name(get_arc(xfr).from))-B$(next_bus_number)_$(get_name(bus))_$unit_type-i_1",
             available = true,
-            active_power_flow = get_active_power(gen),
-            reactive_power_flow = get_reactive_power(gen),
-            arc = Arc(from = get_arc(xfr).from, to = new_bus),
-            r = get_x(xfr)*2/10,
-            x = get_x(xfr)*2,
+            active_power_flow = -get_active_power(gen),
+            reactive_power_flow = -get_reactive_power(gen),
+            arc = Arc(to = get_arc(xfr).from, from = new_bus),
+            r = r_new,
+            x = x_new,
             primary_shunt = 0.0,
             rate = get_base_power(gen)*1.1,
         )
         add_component!(sys, new_xfr)
     end
-    set_magnitude!(bus, get_magnitude(bus)*0.96)
     return
 end
 
 function split_generation_units(sys::System)
     for b in SPLIT_BUSES
         _split_generation_units(sys, b)
+        bus_name = get_name.(get_components(Bus, sys, x -> get_number(x) == b))[1]
+        if bus_name in DANGLING_BUSES
+            _remove_dangling_buses(sys, bus_name)
+            if !run_powerflow!(sys)
+                error("split of bus $b failed")
+            end
+            continue
+        end
+        gfm_found = false
+        gens = get_components(ThermalStandard, sys, x-> get_bus(x) == b)
+        # If PV bus has thermal units continue
+        if !isempty(gens)
+            gfm_found = true
+        end
+        hgens = get_components(HydroGen, sys, x-> get_bus(x) == b)
+        # If PV bus has hydro units continue
+        if !isempty(hgens)
+            gfm_found = true
+        end
+        invs = get_components(RenewableGen, sys, x-> get_bus(x) == b)
+        # If PV bus has no inverters and it is PV Bus then change to PQ
+        if !isempty(invs)
+            for g in invs
+                # If PV has inverters but none have voltage control, change to PQ
+                if get_inner_control(get_dynamic_injector(g)) isa VoltageModeControl
+                    gfm_found = true
+                    break
+                end
+            end
+        end
+        if !gfm_found
+            @debug "changing bus $(get_name(b)) to PQ"
+            b_ = first(get_components(Bus, sys, x -> get_number(x) == b))
+            set_bustype!(b_, "PQ")
+        end
+        if !run_powerflow!(sys)
+            error("split of bus $b failed")
+        end
     end
     for g in get_components(Generator, sys, x -> get_number(get_bus(x)) == 3933)
         new_inj = deepcopy(get_dynamic_injector(g))
@@ -635,22 +734,21 @@ function split_generation_units(sys::System)
         add_component!(sys, new_g)
         add_component!(sys, new_inj, new_g)
     end
+    if !run_powerflow!(sys)
+        @error "Gen split not successful"
+    end
     return
 end
 
 function _remove_dangling_buses(sys::System, bus_name::String)
     bus = get_component(Bus, sys, bus_name)
+    if bus === nothing
+        @error "$bus_name not found"
+        return
+    end
     xfr = get_bus_transformer(sys, bus)
     remove_component!(sys, xfr)
     remove_component!(sys, get_arc(xfr))
     remove_component!(sys, bus)
-    return
-end
-
-
-function remove_dangling_buses(sys::System)
-    for b in DANGLING_BUSES
-        _remove_dangling_buses(sys, b)
-    end
     return
 end

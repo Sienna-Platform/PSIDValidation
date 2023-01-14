@@ -1,6 +1,7 @@
 using PowerSystems
 using PowerSimulationsDynamics
 using PowerFlows
+using NLsolve
 
 include("new_system_data.jl")
 
@@ -401,52 +402,10 @@ set_Y!(fxa, get_Y(fxa) - 1.88im)
 run_powerflow!(sys)
 set_units_base_system!(sys, "DEVICE_BASE")
 update_generation_units!(sys)
+
 split_generation_units(sys)
-remove_dangling_buses(sys)
 
-pv_bus = get_component(Bus, sys, "B2438_MESA_CAL")
-set_magnitude!(pv_bus, 1.01)
-
-pv_bus = get_component(Bus, sys, "B4031_MALIN")
-set_bustype!(pv_bus, "PQ")
-
-pv_bus = get_component(Bus, sys, "B5031_CANAD_G1")
-set_bustype!(pv_bus, "PQ")
-
-pv_bus = get_component(Bus, sys, "B6231_COLSTRP")
-set_bustype!(pv_bus, "PQ")
-
-pv_bus = get_component(Bus, sys, "B8034_RNCHSECO")
-set_bustype!(pv_bus, "PQ")
-
-pv_bus = get_component(Bus, sys, "B6335_NAUGHT")
-set_bustype!(pv_bus, "PQ")
-
-pv_bus = get_component(Bus, sys, "B3933_TESLA")
-set_magnitude!(pv_bus, 1.025)
-
-pv_bus = get_component(Bus, sys, "B4039_DALLES21")
-set_magnitude!(pv_bus, 1.13)
-
-pv_bus = get_component(Bus, sys, "B5032_CMAIN_GM")
-set_magnitude!(pv_bus, 1.04)
-
-pv_bus = get_component(Bus, sys, "B6132_MIDPOINT")
-set_magnitude!(pv_bus, 1.13)
-
-pv_bus = get_component(Bus, sys, "B6235_MONTA_G1")
-set_magnitude!(pv_bus, 1.08)
-
-pv_bus = get_component(Bus, sys, "B6533_EMERY")
-set_magnitude!(pv_bus, 1.065)
-
-pv_bus = get_component(Bus, sys, "B1032_FCNGN4CC")
-set_magnitude!(pv_bus, 1.01)
-
-pv_bus = get_component(Bus, sys, "B6401_TRACYSPP")
-set_magnitude!(pv_bus, 1.031)
-run_powerflow!(sys)
-
+#=
 gen = get_component(ThermalStandard, sys, "generator-5035-R")
 set_base_power!(gen, get_base_power(gen)*1.7)
 set_base_power!(gen.dynamic_injector, get_base_power(gen))
@@ -462,6 +421,9 @@ set_base_power!(gen.dynamic_injector, get_base_power(gen))
 gen = get_component(ThermalStandard, sys, "generator-4238-NB")
 set_base_power!(gen, get_base_power(gen)*1.2)
 set_base_power!(gen.dynamic_injector, get_base_power(gen))
+=#
+
+run_powerflow!(sys)
 
 for b in get_components(Bus, sys)
     if get_bustype(b) == BusTypes.PV
