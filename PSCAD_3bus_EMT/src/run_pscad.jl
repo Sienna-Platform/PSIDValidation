@@ -39,6 +39,8 @@ function run_3bus_pscad(
     ########################################################################################
     #Generic Parameterization Based on PSID System (should run this function for every case)
     ########################################################################################
+    bus_coordinates = Dict{String, Tuple{Int64, Int64}}("bus_name" => (1,2))
+    #build_pscad_network(sys::System, bus_coordinates)
     enable_dynamic_injection_by_type(sys, project)
     parameterize_system(sys, project)
 

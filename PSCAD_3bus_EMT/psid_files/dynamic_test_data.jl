@@ -259,10 +259,10 @@ tg_gastg() = GasTG(
     P_ref = 1.0,
 )
 
-#parameterization from WECC-240 bus case 
+#parameterization from WECC-240 bus case - This doesn't make sense (droop is super low, timeconstant is slow)
 tg_tgov1() = SteamTurbineGov1(
-    R = 0.33,
-    T1 = 2.0,
+    R = 0.05,
+    T1 = 0.2,
     valve_position_limits = (min = 0.0, max=1.0),
     T2 = 3.0,
     T3 = 15.0, 

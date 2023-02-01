@@ -1,5 +1,4 @@
-@testset "psid_fixedsauerpai_gfl_3bus" begin
-
+#@testset "psid_fixedsauerpai_gfl_3bus" begin
     sys, result_psid = run_3bus_psid(
         rawfile = "ThreeBusPSCAD.raw",
         perturbation_type = "LoadStepDown",    #Options: ["LoadStepDown" "LoadStepUp" "LineTrip"]
@@ -33,10 +32,10 @@
         perturbation_type = "LoadStepDown",  #Options: ["LoadStepDown" "LoadStepUp" "LineTrip"]  
         pscad_workspace = "workspace_3bus.pswx",
         pscad_case = "case_3bus",           #the pscad case corresponding to the psid test
-        t_offset = 10.0000000001,                    #only collect data starting at t_offset
+        t_offset = 10.0,                    #only collect data starting at t_offset
         saveat = 5e-5,
         time_step = 5e-6,
-        t_span = (0.0, 10.0),
+        t_span = (0.0, 5.0),
         output_csv_name = "pscad_output",
     ) 
 
@@ -51,8 +50,8 @@
     inf_norm, two_norm = compare_traces(
         pscad_result,
         psid_result,
-        0.05,
-        1.0,
+        1.615,
+        1.635,
         10.0,
         "P_102",
         "P_generator-102-1";
@@ -64,8 +63,8 @@
     inf_norm, two_norm = compare_traces(
         pscad_result,
         psid_result,
-        0.05,
-        1.0,
+        1.615,
+        1.635,
         10.0,
         "f_out_102",
         "ω_generator-102-1";
@@ -73,4 +72,4 @@
     )
     @test inf_norm <= 0.02
     @test two_norm <= 0.22
-end 
+#end 

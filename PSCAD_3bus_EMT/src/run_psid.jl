@@ -29,6 +29,12 @@ function run_3bus_psid(;
         PSY.set_model!(l, PSY.LoadModels.ConstantImpedance)
     end
 
+    l = get_component(PSY.PowerLoad, sys, "load1032")
+#=     println(l)
+    PSY.set_active_power!(l, PSY.get_active_power(l)/2)
+    PSY.set_reactive_power!(l, PSY.get_reactive_power(l)/2)
+    println(l) =#
+
     #Different mechanism for adding an ideal source (IB)
     for g in get_components(Generator, sys)
         if get_number(get_bus(g)) == 101
@@ -159,6 +165,8 @@ function run_3bus_psid(;
     end
 
     ss = small_signal_analysis(sim)
+    display(sort(summary_eigenvalues(ss), 5))
+    display(summary_participation_factors(ss))
     display(ss.eigenvalues)
     if ss.stable == false
         @error "System is not small-signal stable"
@@ -174,6 +182,7 @@ function run_3bus_psid(;
 
     result_psid = read_results(sim)
     #show_states_initial_value(result_psid)
+    display(sys)
     return sys, result_psid
 end
 

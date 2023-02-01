@@ -27,41 +27,46 @@ function compare_traces(
 )
     signal_psid = [
         x[2] for x in get_zoom_plot(
-            [psid_df[!, "time"], psid_df[!, psid_signal]],
-            tstart,
-            tend,
+            [psid_df[!, "time"] .+ toffset, psid_df[!, psid_signal]],
+            tstart + toffset,
+            tend + toffset,
         )
     ]
     t_psid = [
         x[1] for x in get_zoom_plot(
-            [psid_df[!, "time"], psid_df[!, psid_signal]],
-            tstart,
-            tend,
+            [psid_df[!, "time"] .+ toffset, psid_df[!, psid_signal]],
+            tstart + toffset,
+            tend + toffset,
         )
     ]
     signal_pscad = [
         x[2] for x in get_zoom_plot(
-            [pscad_df[!, "time"] .- toffset, pscad_df[!, pscad_signal]],
-            tstart,
-            tend,
+            [pscad_df[!, "time"] , pscad_df[!, pscad_signal]],
+            tstart + toffset,
+            tend + toffset,
         )
     ]
     t_pscad = [
-        x[1] for x in get_zoom_plot(
-            [pscad_df[!, "time"] .- toffset, pscad_df[!, pscad_signal]],
-            tstart,
-            tend,
+        round(x[1], digits=6) for x in get_zoom_plot(
+            [pscad_df[!, "time"] , pscad_df[!, pscad_signal]],
+            tstart + toffset,
+            tend + toffset,
         )
     ]
-    if length(t_pscad) == length(t_psid) + 1 
-        t_pscad = t_pscad[1:end-1]
-        signal_pscad = signal_pscad[1:end-1]
-    end 
+
+    @assert isapprox(t_psid[1], t_pscad[1]; atol = 1e-14)
+    @assert isapprox(t_psid[end], t_pscad[end]; atol = 1e-14)
+    @assert isapprox(LinearAlgebra.norm(t_psid - t_pscad), 0.0; atol=1e-10)
+#=     if length(t_pscad) == length(t_psid) + 1 
+        t_pscad = t_pscad[2:end]
+        signal_pscad = signal_pscad[2:end]
+    end  =#
     if display_plot == true
         p1 = plot(t_psid, signal_psid, label = "PSID-- $(psid_signal)")
         display(plot!(p1, t_pscad, signal_pscad, label = "PSCAD-- $(pscad_signal)"))
     end
-    @assert LinearAlgebra.norm(t_psid - round.(t_pscad, digits = 6)) == 0.0
+
+
     return LinearAlgebra.norm(signal_psid .- signal_pscad, Inf),
     LinearAlgebra.norm(signal_psid .- signal_pscad, 2)
 end

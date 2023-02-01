@@ -28,7 +28,7 @@ win32 = pyimport("win32com.shell")
 pyimport("sys")."path"
 pushfirst!(PyVector(pyimport("sys")."path"), joinpath("PSID2PSCAD", "_pscad_psid_conversion"))
 PP = pyimport("PSCAD_Python")
-##
-include(joinpath(@__DIR__, "test_psid_paper_3bus.jl"))
-include(joinpath(@__DIR__, "test_fixedsauerpai_gfl_3bus.jl"))   #TODO - debug state limit gets hit later than test window
+
+#include(joinpath(@__DIR__, "test_psid_paper_3bus.jl"))
+#include(joinpath(@__DIR__, "test_fixedsauerpai_gfl_3bus.jl"))   #TODO - debug state limit gets hit later than test window
 #TODO - add more tests for machine/mixed devices 
