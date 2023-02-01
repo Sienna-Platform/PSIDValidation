@@ -32,7 +32,6 @@ docs/site/
 *.ipynb
 
 *.pyc 
-
 #outputs
 *.csv
 *.gf46

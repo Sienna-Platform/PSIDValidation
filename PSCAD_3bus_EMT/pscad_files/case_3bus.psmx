@@ -1,91 +1,149 @@
 <Meta name="case_3bus">
   <messagelist>
-    <message status="normal" label="build" groupid="400002" scope="case_3bus" id="1772305335" classid="MessageObj"><![CDATA[Begin compiling with PSCAD Version 5.0.1]]></message>
-    <message status="normal" label="build" groupid="100006" id="319290216" classid="CmpNavigator">
-      <User scope="case_3bus" name="PSID_Library_Inverters:FIXED_SAUER_PAI" status="normal" link="1064733549" /><![CDATA[Compiling 'FIXED_SAUER_PAI'. Generating network and data files.]]></message>
-    <message status="normal" label="build" groupid="100006" id="14491161" classid="CmpNavigator">
-      <User scope="PSID_Library_Inverters" name="PSID_Library:AVRFixed" status="normal" link="1018815231" /><![CDATA[Compiling 'AVRFixed'. Generating network and data files.]]></message>
-    <message status="normal" label="build" groupid="100006" id="1663386374" classid="CmpNavigator">
-      <User scope="PSID_Library_Inverters" name="PSID_Library:ReferenceFrameConversion_GEN" status="normal" link="361948377" /><![CDATA[Compiling 'ReferenceFrameConversion_GEN'. Generating network and data files.]]></message>
-    <message status="normal" label="build" groupid="100006" id="1895872365" classid="CmpNavigator">
-      <User scope="PSID_Library" name="timestep_delay_angle" status="normal" link="1686720077" /><![CDATA[Compiling 'timestep_delay_angle'. Generating network and data files.]]></message>
-    <message status="normal" label="build" groupid="100006" id="1701894733" classid="CmpNavigator">
-      <User scope="PSID_Library" name="dq_abc_psid" status="normal" link="1115078297" /><![CDATA[Compiling 'dq_abc_psid'. Generating network and data files.]]></message>
-    <message status="normal" label="build" groupid="100006" id="551184686" classid="CmpNavigator">
-      <User scope="PSID_Library" name="abc_dq_psid" status="normal" link="1416558759" /><![CDATA[Compiling 'abc_dq_psid'. Generating network and data files.]]></message>
-    <message status="normal" label="build" groupid="100006" id="255636796" classid="CmpNavigator">
-      <User scope="PSID_Library_Inverters" name="PSID_Library:TGFixed" status="normal" link="1589381465" /><![CDATA[Compiling 'TGFixed'. Generating network and data files.]]></message>
-    <message status="normal" label="build" groupid="100006" id="490488889" classid="CmpNavigator">
-      <User scope="PSID_Library_Inverters" name="PSID_Library:SingleMass" status="normal" link="1624598015" /><![CDATA[Compiling 'SingleMass'. Generating network and data files.]]></message>
-    <message status="warning" label="build" groupid="206502" id="282631727" classid="CmpNavigator">
-      <User scope="PSID_Library" name="master:integral" status="warning" link="879215536" /><![CDATA[Signal 'GEN' type conversion may lose accuracy at connection 'R']]></message>
-    <message status="normal" label="build" groupid="100006" id="1398887855" classid="CmpNavigator">
-      <User scope="PSID_Library_Inverters" name="PSID_Library:SauerPaiMachine" status="normal" link="1522084081" /><![CDATA[Compiling 'SauerPaiMachine'. Generating network and data files.]]></message>
-    <message status="warning" label="build" groupid="206502" id="2091776028" classid="CmpNavigator">
-      <User scope="PSID_Library" name="master:integral" status="warning" link="730570091" /><![CDATA[Signal 'GEN' type conversion may lose accuracy at connection 'R']]></message>
-    <message status="warning" label="build" groupid="206502" id="632532562" classid="CmpNavigator">
-      <User scope="PSID_Library" name="master:integral" status="warning" link="2124658985" /><![CDATA[Signal 'GEN' type conversion may lose accuracy at connection 'R']]></message>
-    <message status="warning" label="build" groupid="206502" id="341175566" classid="CmpNavigator">
-      <User scope="PSID_Library" name="master:integral" status="warning" link="1188742786" /><![CDATA[Signal 'GEN' type conversion may lose accuracy at connection 'R']]></message>
-    <message status="warning" label="build" groupid="206502" id="620577822" classid="CmpNavigator">
-      <User scope="PSID_Library" name="master:integral" status="warning" link="1096188767" /><![CDATA[Signal 'GEN' type conversion may lose accuracy at connection 'R']]></message>
-    <message status="warning" label="build" groupid="206502" id="1722980033" classid="CmpNavigator">
-      <User scope="PSID_Library" name="master:integral" status="warning" link="877303017" /><![CDATA[Signal 'GEN' type conversion may lose accuracy at connection 'R']]></message>
-    <message status="warning" label="build" groupid="206502" id="928183179" classid="CmpNavigator">
-      <User scope="PSID_Library" name="master:integral" status="warning" link="1117486909" /><![CDATA[Signal 'GEN' type conversion may lose accuracy at connection 'R']]></message>
-    <message status="normal" label="build" groupid="100006" id="65350934" classid="CmpNavigator">
-      <User scope="PSID_Library_Inverters" name="PSID_Library:CurrentSourceInterface" status="normal" link="1967639684" /><![CDATA[Compiling 'CurrentSourceInterface'. Generating network and data files.]]></message>
-    <message status="normal" label="build" groupid="100006" id="1391730746" classid="CmpNavigator">
-      <User scope="case_3bus" name="PSID_Library_Inverters:DARCO_VSM" status="normal" link="329269441" /><![CDATA[Compiling 'DARCO_VSM'. Generating network and data files.]]></message>
-    <message status="normal" label="build" groupid="100006" id="1566524258" classid="CmpNavigator">
-      <User scope="PSID_Library_Inverters" name="PSID_Library:ReferenceFrameConversion_INV" status="normal" link="1229355875" /><![CDATA[Compiling 'ReferenceFrameConversion_INV'. Generating network and data files.]]></message>
-    <message status="normal" label="build" groupid="100006" id="631267377" classid="CmpNavigator">
-      <User scope="PSID_Library_Inverters" name="PSID_Library:LCLFilter" status="normal" link="1822229676" /><![CDATA[Compiling 'LCLFilter'. Generating network and data files.]]></message>
-    <message status="normal" label="build" groupid="100006" id="1300497215" classid="CmpNavigator">
-      <User scope="PSID_Library" name="ri_abc" status="normal" link="645843216" /><![CDATA[Compiling 'ri_abc'. Generating network and data files.]]></message>
-    <message status="normal" label="build" groupid="100006" id="266625575" classid="CmpNavigator">
-      <User scope="PSID_Library_Inverters" name="PSID_Library:KauraPLL" status="normal" link="356470831" /><![CDATA[Compiling 'KauraPLL'. Generating network and data files.]]></message>
-    <message status="warning" label="build" groupid="206502" id="813650838" classid="CmpNavigator">
-      <User scope="PSID_Library" name="master:realpole" status="warning" link="1188308993" /><![CDATA[Signal 'INV' type conversion may lose accuracy at connection 'R']]></message>
-    <message status="warning" label="build" groupid="206502" id="1702270935" classid="CmpNavigator">
-      <User scope="PSID_Library" name="master:realpole" status="warning" link="513146012" /><![CDATA[Signal 'INV' type conversion may lose accuracy at connection 'R']]></message>
-    <message status="warning" label="build" groupid="206502" id="445824553" classid="CmpNavigator">
-      <User scope="PSID_Library" name="master:integral" status="warning" link="926160967" /><![CDATA[Signal 'INV' type conversion may lose accuracy at connection 'R']]></message>
-    <message status="normal" label="build" groupid="100006" id="1322181675" classid="CmpNavigator">
-      <User scope="PSID_Library_Inverters" name="PSID_Library:VirtualInertia_ReactiveDroop" status="normal" link="157850209" /><![CDATA[Compiling 'VirtualInertia_ReactiveDroop'. Generating network and data files.]]></message>
-    <message status="error" label="build" groupid="307508" classid="MessageObj">
-      <Definition scope="PSID_Library" name="VirtualInertia_ReactiveDroop" status="error" link="157850209" /><![CDATA[Input parameter 'INV' has no matching 'VirtualInertia_ReactiveDroop' with that name.]]></message>
-    <message status="normal" label="build" groupid="100006" id="1490500468" classid="CmpNavigator">
-      <User scope="PSID_Library_Inverters" name="PSID_Library:VoltageModeControl" status="normal" link="2079101627" /><![CDATA[Compiling 'VoltageModeControl'. Generating network and data files.]]></message>
-    <message status="warning" label="build" groupid="206502" id="1408181196" classid="CmpNavigator">
-      <User scope="PSID_Library" name="master:integral" status="warning" link="1891684365" /><![CDATA[Signal 'INV' type conversion may lose accuracy at connection 'R']]></message>
-    <message status="warning" label="build" groupid="206502" id="821179959" classid="CmpNavigator">
-      <User scope="PSID_Library" name="master:realpole" status="warning" link="231561493" /><![CDATA[Signal 'INV' type conversion may lose accuracy at connection 'R']]></message>
-    <message status="warning" label="build" groupid="206502" id="1261935247" classid="CmpNavigator">
-      <User scope="PSID_Library" name="master:integral" status="warning" link="1673256143" /><![CDATA[Signal 'INV' type conversion may lose accuracy at connection 'R']]></message>
-    <message status="warning" label="build" groupid="206502" id="172937673" classid="CmpNavigator">
-      <User scope="PSID_Library" name="master:realpole" status="warning" link="393200150" /><![CDATA[Signal 'INV' type conversion may lose accuracy at connection 'R']]></message>
-    <message status="warning" label="build" groupid="206502" id="1115293957" classid="CmpNavigator">
-      <User scope="PSID_Library" name="master:integral" status="warning" link="496252468" /><![CDATA[Signal 'INV' type conversion may lose accuracy at connection 'R']]></message>
-    <message status="warning" label="build" groupid="206502" id="1135935255" classid="CmpNavigator">
-      <User scope="PSID_Library" name="master:integral" status="warning" link="1332369744" /><![CDATA[Signal 'INV' type conversion may lose accuracy at connection 'R']]></message>
-    <message status="normal" label="build" groupid="100006" id="55316836" classid="CmpNavigator">
+    <message status="normal" label="build" groupid="400002" scope="case_3bus" id="1580090763" classid="MessageObj"><![CDATA[Begin compiling with PSCAD Version 5.0.1]]></message>
+    <message status="normal" label="build" groupid="100006" id="1554557732" classid="CmpNavigator">
+      <User scope="case_3bus" name="PSID_Library_Inverters:GFL" status="normal" link="519867759" /><![CDATA[Compiling 'GFL'. Generating network and data files.]]></message>
+    <message status="normal" label="build" groupid="100006" id="800385045" classid="CmpNavigator">
       <User scope="PSID_Library_Inverters" name="PSID_Library:FixedDCSource" status="normal" link="1760640988" /><![CDATA[Compiling 'FixedDCSource'. Generating network and data files.]]></message>
-    <message status="normal" label="build" groupid="100006" id="386309804" classid="CmpNavigator">
+    <message status="normal" label="build" groupid="100006" id="533856382" classid="CmpNavigator">
+      <User scope="PSID_Library_Inverters" name="PSID_Library:ReferenceFrameConversion_INV" status="normal" link="1229355875" /><![CDATA[Compiling 'ReferenceFrameConversion_INV'. Generating network and data files.]]></message>
+    <message status="normal" label="build" groupid="100006" id="1300942532" classid="CmpNavigator">
+      <User scope="PSID_Library" name="timestep_delay_angle" status="normal" link="1686720077" /><![CDATA[Compiling 'timestep_delay_angle'. Generating network and data files.]]></message>
+    <message status="normal" label="build" groupid="100006" id="1513174264" classid="CmpNavigator">
+      <User scope="PSID_Library" name="dq_abc_psid" status="normal" link="1115078297" /><![CDATA[Compiling 'dq_abc_psid'. Generating network and data files.]]></message>
+    <message status="normal" label="build" groupid="100006" id="1947196039" classid="CmpNavigator">
+      <User scope="PSID_Library" name="abc_dq_psid" status="normal" link="1416558759" /><![CDATA[Compiling 'abc_dq_psid'. Generating network and data files.]]></message>
+    <message status="normal" label="build" groupid="100006" id="1340376227" classid="CmpNavigator">
+      <User scope="PSID_Library_Inverters" name="PSID_Library:LCLFilter" status="normal" link="1822229676" /><![CDATA[Compiling 'LCLFilter'. Generating network and data files.]]></message>
+    <message status="normal" label="build" groupid="100006" id="1458567364" classid="CmpNavigator">
+      <User scope="PSID_Library" name="ri_abc" status="normal" link="645843216" /><![CDATA[Compiling 'ri_abc'. Generating network and data files.]]></message>
+    <message status="normal" label="build" groupid="100006" id="816473640" classid="CmpNavigator">
+      <User scope="PSID_Library_Inverters" name="PSID_Library:ReducedOrderPLL" status="normal" link="1494865977" /><![CDATA[Compiling 'ReducedOrderPLL'. Generating network and data files.]]></message>
+    <message status="warning" label="build" groupid="206502" id="1875713670" classid="CmpNavigator">
+      <User scope="PSID_Library" name="master:realpole" status="warning" link="11072055" /><![CDATA[Signal 'INV' type conversion may lose accuracy at connection 'R']]></message>
+    <message status="warning" label="build" groupid="206502" id="1939316020" classid="CmpNavigator">
+      <User scope="PSID_Library" name="master:integral" status="warning" link="492855705" /><![CDATA[Signal 'INV' type conversion may lose accuracy at connection 'R']]></message>
+    <message status="normal" label="build" groupid="100006" id="2130796109" classid="CmpNavigator">
+      <User scope="PSID_Library_Inverters" name="PSID_Library:ActivePI_ReactivePI" status="normal" link="815459201" /><![CDATA[Compiling 'ActivePI_ReactivePI'. Generating network and data files.]]></message>
+    <message status="warning" label="build" groupid="206502" id="144310988" classid="CmpNavigator">
+      <User scope="PSID_Library" name="master:realpole" status="warning" link="1499652905" /><![CDATA[Signal 'INV' type conversion may lose accuracy at connection 'R']]></message>
+    <message status="warning" label="build" groupid="206502" id="57452858" classid="CmpNavigator">
+      <User scope="PSID_Library" name="master:realpole" status="warning" link="13584325" /><![CDATA[Signal 'INV' type conversion may lose accuracy at connection 'R']]></message>
+    <message status="warning" label="build" groupid="206502" id="286388942" classid="CmpNavigator">
+      <User scope="PSID_Library" name="master:integral" status="warning" link="2071166572" /><![CDATA[Signal 'INV' type conversion may lose accuracy at connection 'R']]></message>
+    <message status="warning" label="build" groupid="206502" id="1101946548" classid="CmpNavigator">
+      <User scope="PSID_Library" name="master:integral" status="warning" link="1544546380" /><![CDATA[Signal 'INV' type conversion may lose accuracy at connection 'R']]></message>
+    <message status="normal" label="build" groupid="100006" id="822483212" classid="CmpNavigator">
+      <User scope="PSID_Library_Inverters" name="PSID_Library:CurrentModeControl" status="normal" link="2051780060" /><![CDATA[Compiling 'CurrentModeControl'. Generating network and data files.]]></message>
+    <message status="warning" label="build" groupid="206502" id="952917521" classid="CmpNavigator">
+      <User scope="PSID_Library" name="master:integral" status="warning" link="1271894104" /><![CDATA[Signal 'INV' type conversion may lose accuracy at connection 'R']]></message>
+    <message status="warning" label="build" groupid="206502" id="2106725592" classid="CmpNavigator">
+      <User scope="PSID_Library" name="master:integral" status="warning" link="138022980" /><![CDATA[Signal 'INV' type conversion may lose accuracy at connection 'R']]></message>
+    <message status="normal" label="build" groupid="100006" id="858119360" classid="CmpNavigator">
       <User scope="PSID_Library_Inverters" name="PSID_Library:AverageConverter" status="normal" link="784303139" /><![CDATA[Compiling 'AverageConverter'. Generating network and data files.]]></message>
-    <message status="normal" label="build" groupid="400000" scope="case_3bus" id="366147610" classid="MessageObj"><![CDATA[Time for Compile: 1909ms  Make: 0ms]]></message>
-    <message status="normal" label="build" groupid="400003" scope="case_3bus" id="1797106735" classid="MessageObj"><![CDATA[Finished compiling with PSCAD Version 5.0.1]]></message>
-    <message status="normal" label="build" groupid="400001" scope="case_3bus" id="1762628691" classid="MessageObj"><![CDATA[======== Build: 1 errors, 16 warnings ========]]></message>
+    <message status="normal" label="build" groupid="100006" id="1279508599" classid="CmpNavigator">
+      <User scope="case_3bus" name="PSID_Library_Inverters:SAUERPAI_SEXS_TGOV1_PSSFIXED" status="normal" link="1683075709" /><![CDATA[Compiling 'SAUERPAI_SEXS_TGOV1_PSSFIXED'. Generating network and data files.]]></message>
+    <message status="normal" label="build" groupid="100006" id="470817838" classid="CmpNavigator">
+      <User scope="PSID_Library_Inverters" name="PSID_Library:ReferenceFrameConversion_GEN" status="normal" link="827418965" /><![CDATA[Compiling 'ReferenceFrameConversion_GEN'. Generating network and data files.]]></message>
+    <message status="normal" label="build" groupid="100006" id="707659452" classid="CmpNavigator">
+      <User scope="PSID_Library_Inverters" name="PSID_Library:SEXS" status="normal" link="862504165" /><![CDATA[Compiling 'SEXS'. Generating network and data files.]]></message>
+    <message status="warning" label="build" groupid="206502" id="1548315176" classid="CmpNavigator">
+      <User scope="PSID_Library" name="master:leadlag" status="warning" link="1721607065" /><![CDATA[Signal 'GEN' type conversion may lose accuracy at connection 'R']]></message>
+    <message status="warning" label="build" groupid="206502" id="2003436055" classid="CmpNavigator">
+      <User scope="PSID_Library" name="master:realpole" status="warning" link="506883605" /><![CDATA[Signal 'GEN' type conversion may lose accuracy at connection 'R']]></message>
+    <message status="normal" label="build" groupid="100006" id="501266076" classid="CmpNavigator">
+      <User scope="PSID_Library_Inverters" name="PSID_Library:SteamTurbineGov1" status="normal" link="1429635466" /><![CDATA[Compiling 'SteamTurbineGov1'. Generating network and data files.]]></message>
+    <message status="warning" label="build" groupid="206502" id="622678710" classid="CmpNavigator">
+      <User scope="PSID_Library" name="master:realpole" status="warning" link="209374773" /><![CDATA[Signal 'GEN' type conversion may lose accuracy at connection 'R']]></message>
+    <message status="warning" label="build" groupid="206502" id="1984815596" classid="CmpNavigator">
+      <User scope="PSID_Library" name="master:leadlag" status="warning" link="1283320370" /><![CDATA[Signal 'GEN' type conversion may lose accuracy at connection 'R']]></message>
+    <message status="normal" label="build" groupid="100006" id="115753882" classid="CmpNavigator">
+      <User scope="PSID_Library_Inverters" name="PSID_Library:SingleMass" status="normal" link="1943350089" /><![CDATA[Compiling 'SingleMass'. Generating network and data files.]]></message>
+    <message status="warning" label="build" groupid="206502" id="556017375" classid="CmpNavigator">
+      <User scope="PSID_Library" name="master:integral" status="warning" link="879215536" /><![CDATA[Signal 'GEN' type conversion may lose accuracy at connection 'R']]></message>
+    <message status="normal" label="build" groupid="100006" id="948847107" classid="CmpNavigator">
+      <User scope="PSID_Library_Inverters" name="PSID_Library:SauerPaiMachine" status="normal" link="1888152530" /><![CDATA[Compiling 'SauerPaiMachine'. Generating network and data files.]]></message>
+    <message status="warning" label="build" groupid="206502" id="423011955" classid="CmpNavigator">
+      <User scope="PSID_Library" name="master:integral" status="warning" link="730570091" /><![CDATA[Signal 'GEN' type conversion may lose accuracy at connection 'R']]></message>
+    <message status="warning" label="build" groupid="206502" id="1784734007" classid="CmpNavigator">
+      <User scope="PSID_Library" name="master:integral" status="warning" link="2124658985" /><![CDATA[Signal 'GEN' type conversion may lose accuracy at connection 'R']]></message>
+    <message status="warning" label="build" groupid="206502" id="228607996" classid="CmpNavigator">
+      <User scope="PSID_Library" name="master:integral" status="warning" link="1188742786" /><![CDATA[Signal 'GEN' type conversion may lose accuracy at connection 'R']]></message>
+    <message status="warning" label="build" groupid="206502" id="575546982" classid="CmpNavigator">
+      <User scope="PSID_Library" name="master:integral" status="warning" link="1096188767" /><![CDATA[Signal 'GEN' type conversion may lose accuracy at connection 'R']]></message>
+    <message status="warning" label="build" groupid="206502" id="1271847833" classid="CmpNavigator">
+      <User scope="PSID_Library" name="master:integral" status="warning" link="877303017" /><![CDATA[Signal 'GEN' type conversion may lose accuracy at connection 'R']]></message>
+    <message status="warning" label="build" groupid="206502" id="496824842" classid="CmpNavigator">
+      <User scope="PSID_Library" name="master:integral" status="warning" link="1117486909" /><![CDATA[Signal 'GEN' type conversion may lose accuracy at connection 'R']]></message>
+    <message status="normal" label="build" groupid="100006" id="1867992847" classid="CmpNavigator">
+      <User scope="PSID_Library_Inverters" name="PSID_Library:PSSFixed" status="normal" link="2098509671" /><![CDATA[Compiling 'PSSFixed'. Generating network and data files.]]></message>
+    <message status="normal" label="build" groupid="100006" id="732632095" classid="CmpNavigator">
+      <User scope="PSID_Library_Inverters" name="PSID_Library:CurrentSourceInterface" status="normal" link="1006761352" /><![CDATA[Compiling 'CurrentSourceInterface'. Generating network and data files.]]></message>
+    <message status="normal" label="build" groupid="100006" link="1984688582" id="1984688582" classid="FileNavigator"><![CDATA[Generating 'c:\Users\Matt Bossart\OneDrive - UCB-O365\Desktop\Transient Stability\Repositories\PSIDValidation\PSCAD_3bus_EMT\pscad_files\case_3bus.gf46\case_3bus.map'.]]><file scope="case_3bus">c:\Users\Matt Bossart\OneDrive - UCB-O365\Desktop\Transient Stability\Repositories\PSIDValidation\PSCAD_3bus_EMT\pscad_files\case_3bus.gf46\case_3bus.map</file></message>
+    <message status="normal" label="build" groupid="100015" scope="case_3bus" id="1939767495" classid="MessageObj"><![CDATA[The total number of live nodes: 60]]></message>
+    <message status="normal" label="build" groupid="0" link="103869496" id="103869496" classid="FileNavigator"><![CDATA[Coding .mak file: 'c:\Users\Matt Bossart\OneDrive - UCB-O365\Desktop\Transient Stability\Repositories\PSIDValidation\PSCAD_3bus_EMT\pscad_files\case_3bus.gf46\\case_3bus.mak']]><file scope="case_3bus">c:\Users\Matt Bossart\OneDrive - UCB-O365\Desktop\Transient Stability\Repositories\PSIDValidation\PSCAD_3bus_EMT\pscad_files\case_3bus.gf46\\case_3bus.mak</file></message>
+    <message status="normal" label="build" groupid="400000" scope="case_3bus" id="665842193" classid="MessageObj"><![CDATA[Time for Compile: 2219ms  Make: 15ms]]></message>
+    <message status="normal" label="build" groupid="400000" scope="case_3bus" id="1070727334" classid="MessageObj"><![CDATA[Solve Time = 31ms]]></message>
+    <message status="normal" label="build" groupid="100016" scope="case_3bus" id="110268512" classid="MessageObj"><![CDATA[Will execute (1): call C:\Program Files (x86)\GFortran\4.6\bin\gf46vars.bat]]></message>
+    <message status="normal" label="build" groupid="100016" scope="case_3bus" id="60045262" classid="MessageObj"><![CDATA[Will execute (1): call "C:\Program Files (x86)\GFortran\4.6\bin\gf46vars.bat"]]></message>
+    <message status="normal" label="build" groupid="100016" scope="case_3bus" id="570757144" classid="MessageObj"><![CDATA[Will execute (2): make -j -f case_3bus.mak]]></message>
+    <message status="normal" label="build" groupid="100016" scope="case_3bus" id="1365771561" classid="MessageObj"><![CDATA[Will execute (2): "c:\Users\Matt Bossart\OneDrive - UCB-O365\Desktop\Transient Stability\Repositories\PSIDValidation\PSCAD_3bus_EMT\pscad_files\case_3bus.gf46\case_3bus_mak.bat"]]></message>
+    <message status="normal" label="build" groupid="100005" scope="case_3bus" id="698842497" classid="MessageObj"><![CDATA[Creating EMTDC executable...]]></message>
+    <message status="normal" label="build" groupid="0" scope="case_3bus" id="2081723663" classid="MessageObj"><![CDATA[c:\Users\Matt Bossart\OneDrive - UCB-O365\Desktop\Transient Stability\Repositories\PSIDValidation\PSCAD_3bus_EMT\pscad_files\case_3bus.gf46>call "C:\Program Files (x86)\GFortran\4.6\bin\gf46vars.bat" ]]></message>
+    <message status="normal" label="build" groupid="100004" scope="case_3bus" id="967754422" classid="MessageObj"><![CDATA[Compiling 'DS.f' into object code.]]></message>
+    <message status="normal" label="build" groupid="100004" scope="case_3bus" id="2144716615" classid="MessageObj"><![CDATA[Compiling 'Main.f' into object code.]]></message>
+    <message status="normal" label="build" groupid="100004" scope="case_3bus" id="1113168704" classid="MessageObj"><![CDATA[Compiling 'GFL.f' into object code.]]></message>
+    <message status="normal" label="build" groupid="100004" scope="case_3bus" id="95805653" classid="MessageObj"><![CDATA[Compiling 'FixedDCSource.f' into object code.]]></message>
+    <message status="normal" label="build" groupid="100004" scope="case_3bus" id="809459573" classid="MessageObj"><![CDATA[Compiling 'ReferenceFrameConversion_INV.f' into object code.]]></message>
+    <message status="normal" label="build" groupid="100004" scope="case_3bus" id="838439814" classid="MessageObj"><![CDATA[Compiling 'timestep_delay_angle.f' into object code.]]></message>
+    <message status="normal" label="build" groupid="100004" scope="case_3bus" id="952062449" classid="MessageObj"><![CDATA[Compiling 'dq_abc_psid.f' into object code.]]></message>
+    <message status="normal" label="build" groupid="100004" scope="case_3bus" id="1293041439" classid="MessageObj"><![CDATA[Compiling 'abc_dq_psid.f' into object code.]]></message>
+    <message status="normal" label="build" groupid="100004" scope="case_3bus" id="155133385" classid="MessageObj"><![CDATA[Compiling 'LCLFilter.f' into object code.]]></message>
+    <message status="normal" label="build" groupid="100004" scope="case_3bus" id="1729024638" classid="MessageObj"><![CDATA[Compiling 'ri_abc.f' into object code.]]></message>
+    <message status="normal" label="build" groupid="100004" scope="case_3bus" id="523728169" classid="MessageObj"><![CDATA[Compiling 'ReducedOrderPLL.f' into object code.]]></message>
+    <message status="normal" label="build" groupid="100004" scope="case_3bus" id="1249351" classid="MessageObj"><![CDATA[Compiling 'ActivePI_ReactivePI.f' into object code.]]></message>
+    <message status="normal" label="build" groupid="100004" scope="case_3bus" id="1542510012" classid="MessageObj"><![CDATA[Compiling 'CurrentModeControl.f' into object code.]]></message>
+    <message status="normal" label="build" groupid="100004" scope="case_3bus" id="1568580144" classid="MessageObj"><![CDATA[Compiling 'AverageConverter.f' into object code.]]></message>
+    <message status="normal" label="build" groupid="100004" scope="case_3bus" id="766141778" classid="MessageObj"><![CDATA[Compiling 'SAUERPAI_SEXS_TGOV1_PSSFIXED.f' into object code.]]></message>
+    <message status="normal" label="build" groupid="100004" scope="case_3bus" id="1027767821" classid="MessageObj"><![CDATA[Compiling 'ReferenceFrameConversion_GEN.f' into object code.]]></message>
+    <message status="normal" label="build" groupid="100004" scope="case_3bus" id="73457667" classid="MessageObj"><![CDATA[Compiling 'SEXS.f' into object code.]]></message>
+    <message status="normal" label="build" groupid="100004" scope="case_3bus" id="981851590" classid="MessageObj"><![CDATA[Compiling 'SteamTurbineGov1.f' into object code.]]></message>
+    <message status="normal" label="build" groupid="100004" scope="case_3bus" id="1456384578" classid="MessageObj"><![CDATA[Compiling 'SingleMass.f' into object code.]]></message>
+    <message status="normal" label="build" groupid="100004" scope="case_3bus" id="1287258227" classid="MessageObj"><![CDATA[Compiling 'SauerPaiMachine.f' into object code.]]></message>
+    <message status="normal" label="build" groupid="100004" scope="case_3bus" id="1477747321" classid="MessageObj"><![CDATA[Compiling 'PSSFixed.f' into object code.]]></message>
+    <message status="normal" label="build" groupid="100004" scope="case_3bus" id="790926514" classid="MessageObj"><![CDATA[Compiling 'CurrentSourceInterface.f' into object code.]]></message>
+    <message status="normal" label="build" groupid="0" scope="case_3bus" id="384543943" classid="MessageObj"><![CDATA[gfortran.exe -c -ffree-form -fdefault-real-8 -fdefault-double-8 -I"C:\Program Files (x86)\PSCAD501 x64\emtdc\gf46\inc" -I"C:\Program Files (x86)\PSCAD501 x64\emtdc\gf46\windows" -O2 -Wconversion  GFL.f]]></message>
+    <message status="normal" label="build" groupid="0" scope="case_3bus" id="1598777155" classid="MessageObj"><![CDATA[gfortran.exe -c -ffree-form -fdefault-real-8 -fdefault-double-8 -I"C:\Program Files (x86)\PSCAD501 x64\emtdc\gf46\inc" -I"C:\Program Files (x86)\PSCAD501 x64\emtdc\gf46\windows" -O2 -Wconversion  FixedDCSource.f]]></message>
+    <message status="normal" label="build" groupid="0" scope="case_3bus" id="735384173" classid="MessageObj"><![CDATA[gfortran.exe -c -ffree-form -fdefault-real-8 -fdefault-double-8 -I"C:\Program Files (x86)\PSCAD501 x64\emtdc\gf46\inc" -I"C:\Program Files (x86)\PSCAD501 x64\emtdc\gf46\windows" -O2 -Wconversion  ReferenceFrameConversion_INV.f]]></message>
+    <message status="normal" label="build" groupid="0" scope="case_3bus" id="92674014" classid="MessageObj"><![CDATA[gfortran.exe -c -ffree-form -fdefault-real-8 -fdefault-double-8 -I"C:\Program Files (x86)\PSCAD501 x64\emtdc\gf46\inc" -I"C:\Program Files (x86)\PSCAD501 x64\emtdc\gf46\windows" -O2 -Wconversion  timestep_delay_angle.f]]></message>
+    <message status="normal" label="build" groupid="0" scope="case_3bus" id="1627053782" classid="MessageObj"><![CDATA[gfortran.exe -c -ffree-form -fdefault-real-8 -fdefault-double-8 -I"C:\Program Files (x86)\PSCAD501 x64\emtdc\gf46\inc" -I"C:\Program Files (x86)\PSCAD501 x64\emtdc\gf46\windows" -O2 -Wconversion  dq_abc_psid.f]]></message>
+    <message status="normal" label="build" groupid="0" scope="case_3bus" id="956198136" classid="MessageObj"><![CDATA[gfortran.exe -c -ffree-form -fdefault-real-8 -fdefault-double-8 -I"C:\Program Files (x86)\PSCAD501 x64\emtdc\gf46\inc" -I"C:\Program Files (x86)\PSCAD501 x64\emtdc\gf46\windows" -O2 -Wconversion  abc_dq_psid.f]]></message>
+    <message status="normal" label="build" groupid="0" scope="case_3bus" id="1067651248" classid="MessageObj"><![CDATA[gfortran.exe -c -ffree-form -fdefault-real-8 -fdefault-double-8 -I"C:\Program Files (x86)\PSCAD501 x64\emtdc\gf46\inc" -I"C:\Program Files (x86)\PSCAD501 x64\emtdc\gf46\windows" -O2 -Wconversion  LCLFilter.f]]></message>
+    <message status="normal" label="build" groupid="0" scope="case_3bus" id="642146246" classid="MessageObj"><![CDATA[gfortran.exe -c -ffree-form -fdefault-real-8 -fdefault-double-8 -I"C:\Program Files (x86)\PSCAD501 x64\emtdc\gf46\inc" -I"C:\Program Files (x86)\PSCAD501 x64\emtdc\gf46\windows" -O2 -Wconversion  ri_abc.f]]></message>
+    <message status="normal" label="build" groupid="0" scope="case_3bus" id="818805643" classid="MessageObj"><![CDATA[gfortran.exe -c -ffree-form -fdefault-real-8 -fdefault-double-8 -I"C:\Program Files (x86)\PSCAD501 x64\emtdc\gf46\inc" -I"C:\Program Files (x86)\PSCAD501 x64\emtdc\gf46\windows" -O2 -Wconversion  ReducedOrderPLL.f]]></message>
+    <message status="normal" label="build" groupid="0" scope="case_3bus" id="1632356932" classid="MessageObj"><![CDATA[gfortran.exe -c -ffree-form -fdefault-real-8 -fdefault-double-8 -I"C:\Program Files (x86)\PSCAD501 x64\emtdc\gf46\inc" -I"C:\Program Files (x86)\PSCAD501 x64\emtdc\gf46\windows" -O2 -Wconversion  ActivePI_ReactivePI.f]]></message>
+    <message status="normal" label="build" groupid="0" scope="case_3bus" id="944939077" classid="MessageObj"><![CDATA[gfortran.exe -c -ffree-form -fdefault-real-8 -fdefault-double-8 -I"C:\Program Files (x86)\PSCAD501 x64\emtdc\gf46\inc" -I"C:\Program Files (x86)\PSCAD501 x64\emtdc\gf46\windows" -O2 -Wconversion  CurrentModeControl.f]]></message>
+    <message status="normal" label="build" groupid="0" scope="case_3bus" id="1765948473" classid="MessageObj"><![CDATA[gfortran.exe -c -ffree-form -fdefault-real-8 -fdefault-double-8 -I"C:\Program Files (x86)\PSCAD501 x64\emtdc\gf46\inc" -I"C:\Program Files (x86)\PSCAD501 x64\emtdc\gf46\windows" -O2 -Wconversion  AverageConverter.f]]></message>
+    <message status="normal" label="build" groupid="0" scope="case_3bus" id="183108246" classid="MessageObj"><![CDATA[gfortran.exe -c -ffree-form -fdefault-real-8 -fdefault-double-8 -I"C:\Program Files (x86)\PSCAD501 x64\emtdc\gf46\inc" -I"C:\Program Files (x86)\PSCAD501 x64\emtdc\gf46\windows" -O2 -Wconversion  SAUERPAI_SEXS_TGOV1_PSSFIXED.f]]></message>
+    <message status="normal" label="build" groupid="0" scope="case_3bus" id="1347700085" classid="MessageObj"><![CDATA[gfortran.exe -c -ffree-form -fdefault-real-8 -fdefault-double-8 -I"C:\Program Files (x86)\PSCAD501 x64\emtdc\gf46\inc" -I"C:\Program Files (x86)\PSCAD501 x64\emtdc\gf46\windows" -O2 -Wconversion  ReferenceFrameConversion_GEN.f]]></message>
+    <message status="normal" label="build" groupid="0" scope="case_3bus" id="186933372" classid="MessageObj"><![CDATA[gfortran.exe -c -ffree-form -fdefault-real-8 -fdefault-double-8 -I"C:\Program Files (x86)\PSCAD501 x64\emtdc\gf46\inc" -I"C:\Program Files (x86)\PSCAD501 x64\emtdc\gf46\windows" -O2 -Wconversion  SEXS.f]]></message>
+    <message status="normal" label="build" groupid="0" scope="case_3bus" id="1032863714" classid="MessageObj"><![CDATA[gfortran.exe -c -ffree-form -fdefault-real-8 -fdefault-double-8 -I"C:\Program Files (x86)\PSCAD501 x64\emtdc\gf46\inc" -I"C:\Program Files (x86)\PSCAD501 x64\emtdc\gf46\windows" -O2 -Wconversion  SteamTurbineGov1.f]]></message>
+    <message status="normal" label="build" groupid="0" scope="case_3bus" id="734569725" classid="MessageObj"><![CDATA[gfortran.exe -c -ffree-form -fdefault-real-8 -fdefault-double-8 -I"C:\Program Files (x86)\PSCAD501 x64\emtdc\gf46\inc" -I"C:\Program Files (x86)\PSCAD501 x64\emtdc\gf46\windows" -O2 -Wconversion  SingleMass.f]]></message>
+    <message status="normal" label="build" groupid="0" scope="case_3bus" id="130078256" classid="MessageObj"><![CDATA[gfortran.exe -c -ffree-form -fdefault-real-8 -fdefault-double-8 -I"C:\Program Files (x86)\PSCAD501 x64\emtdc\gf46\inc" -I"C:\Program Files (x86)\PSCAD501 x64\emtdc\gf46\windows" -O2 -Wconversion  SauerPaiMachine.f]]></message>
+    <message status="normal" label="build" groupid="0" scope="case_3bus" id="260274471" classid="MessageObj"><![CDATA[gfortran.exe -c -ffree-form -fdefault-real-8 -fdefault-double-8 -I"C:\Program Files (x86)\PSCAD501 x64\emtdc\gf46\inc" -I"C:\Program Files (x86)\PSCAD501 x64\emtdc\gf46\windows" -O2 -Wconversion  PSSFixed.f]]></message>
+    <message status="normal" label="build" groupid="0" scope="case_3bus" id="475077170" classid="MessageObj"><![CDATA[gfortran.exe -c -ffree-form -fdefault-real-8 -fdefault-double-8 -I"C:\Program Files (x86)\PSCAD501 x64\emtdc\gf46\inc" -I"C:\Program Files (x86)\PSCAD501 x64\emtdc\gf46\windows" -O2 -Wconversion  CurrentSourceInterface.f]]></message>
+    <message status="normal" label="build" groupid="100013" scope="case_3bus" id="1728421189" classid="MessageObj"><![CDATA[Linking objects and libraries into binary 'case_3bus.exe']]></message>
+    <message status="normal" label="build" groupid="400003" scope="case_3bus" id="2060381023" classid="MessageObj"><![CDATA[Finished compiling with PSCAD Version 5.0.1]]></message>
   </messagelist>
   <ViewContext>
-    <Window defn="PSID_Library:VirtualInertia_ReactiveDroop" call="0" />
+    <Window defn="case_3bus:Main" call="0" />
   </ViewContext>
   <List classid="View">
-    <View name="Main" zoomscale="0.96" scrollx="0" scrolly="0" />
+    <View name="Main" zoomscale="0.96" scrollx="0" scrolly="19" />
   </List>
-  <Output device="EMTDC" version="2010" date="2022/11/06" time="12:17:48.000000">
+  <Output device="EMTDC" version="2010" date="2023/01/26" time="18:05:25.000000">
     <Domain name="Time" unit="s" mult="0.0" skew="0.0">
-      <Sample rate="20000.0" end="300000" />
+      <Sample rate="2000.0" end="40000" />
     </Domain>
     <List classid="Analog">
       <Analog name="Main(0):V_101" index="1" gindex="100663297" id="349715791:0" label="" dim="1" unit="" min="-2.0" max="2.0" />
