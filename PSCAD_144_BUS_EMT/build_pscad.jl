@@ -41,7 +41,7 @@ PP = pyimport("PSCAD_Python")
 pscad = PP.basic_pscad_startup()
 sleep(3)    #need to let the default files load in pscad before loading the workspace you want 
 
-sys = System(joinpath(@__DIR__, "psid_files", "144Bus.json"), bus_name_formatter = x->string(x["name"]))  
+sys = System(joinpath(@__DIR__, "psid_files", "144Bus.json"))  
 pscad_workspace_name = "workspace_144bus.pswx"
 pscad_case_name = "case_144bus"
 
@@ -56,5 +56,6 @@ include(joinpath(@__DIR__, "psid_files", "bus_details.jl")) #define bus_coords_1
 pscad.load(PyObject(joinpath(@__DIR__, "pscad_files", pscad_workspace_name)))  #load workspace 
 project =
     pscad.create_project(1, pscad_case_name, PyObject(joinpath(@__DIR__, "pscad_files"))) #create new project (1 for case, 2 for library)
-build_system(sys, project, bus_coords_144) #build the system (place the components)
+build_system(sys, project, bus_coords_144; add_line_breakers = true, add_multimeters = true) #build the system (place the components)
+
 project.save()
