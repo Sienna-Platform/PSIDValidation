@@ -2,7 +2,9 @@ using Test
 using Revise
 import LinearAlgebra
 include(joinpath(@__DIR__, "..", "psid_files", "dynamic_test_data.jl"))
-include(joinpath(@__DIR__, "..", "..", "PSID2PSCAD", "_pscad_psid_conversion", "PSCAD_PSID.jl"))
+include(joinpath(@__DIR__, "..", "..", "PSID2PSCAD", "_pscad_psid_conversion", "build_system.jl"))
+include(joinpath(@__DIR__, "..", "..", "PSID2PSCAD", "_pscad_psid_conversion", "parameterize_system.jl"))
+include(joinpath(@__DIR__, "..", "..", "PSID2PSCAD", "_pscad_psid_conversion", "simulation_extras.jl"))
 include(joinpath(@__DIR__, "..", "..", "PSID2PSCAD", "_pscad_psid_conversion", "collect_data.jl"))
 include(joinpath(@__DIR__, "..", "constants.jl"))
 include(joinpath(@__DIR__, "..", "src", "run_psid.jl"))       

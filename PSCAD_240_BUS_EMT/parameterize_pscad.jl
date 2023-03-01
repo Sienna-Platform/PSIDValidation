@@ -9,8 +9,9 @@ using Conda
 using Pkg
 using PyCall
 
-
-include(joinpath(@__DIR__, "..", "PSID2PSCAD", "_pscad_psid_conversion", "PSCAD_PSID.jl"))
+include(joinpath(@__DIR__, "..", "PSID2PSCAD", "_pscad_psid_conversion", "build_system.jl"))
+include(joinpath(@__DIR__, "..", "PSID2PSCAD", "_pscad_psid_conversion", "parameterize_system.jl"))
+include(joinpath(@__DIR__, "..", "PSID2PSCAD", "_pscad_psid_conversion", "simulation_extras.jl"))
 include(joinpath(@__DIR__, "..", "PSID2PSCAD", "_pscad_psid_conversion", "collect_data.jl"))
 include(joinpath(@__DIR__, "constants.jl"))
 
