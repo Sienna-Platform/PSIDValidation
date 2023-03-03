@@ -52,7 +52,7 @@ include(joinpath(@__DIR__, "psid_files", "bus_details.jl")) #define bus_coords_1
 pscad.load(PyObject(joinpath(@__DIR__, "pscad_files", pscad_workspace_name)))  #load workspace 
 project =
     pscad.create_project(1, pscad_case_name, PyObject(joinpath(@__DIR__, "pscad_files"))) #create new project (1 for case, 2 for library)
-build_system(sys, project, bus_coords_144; add_line_breakers = true, add_multimeters = true) #build the system (place the components)
+build_system(sys, project, bus_coords_144; add_gen_breakers = true, add_load_breakers = true, add_line_breakers = true, add_multimeters = true) #build the system (place the components)
 project.save()
 ##
 ############# PARAMETERIZE EXISTING SYSTEM #######################################
