@@ -75,3 +75,33 @@ PP.update_parameter_by_name(project.find("master:const", "t_GEN"), "Value", 2.0)
 PP.update_parameter_by_name(project.find("master:const", "t_RAMP"), "Value", 2.0)
 
 set_project_parameters!(project; time_duration =10.0, sample_step = 2e-4 * 1e6, time_step = 10e-5 * 1e6)
+##
+############# LOAD STEADY STATE IF APPLICABLE ########################################
+include(joinpath(@__DIR__, "psid_files", "snapshot_details.jl"))
+sim = Simulation!(MassMatrixModel, sys, pwd(), (0.0, 0.0))
+x0_dict = read_initial_conditions(sim)
+setpoints_dict = get_setpoints(sim)
+match_found = false
+for (x0d, value) in snapshot_dict
+    if x0_dict == x0d
+        if value.setpoints == setpoint_dict
+            match_found = true
+            set_project_parameters!(project; StartType = 1, startup_filename = value.snapshot)
+            break
+        end
+    end
+end
+if match_found == false
+    @warn "No matching snapshot found"
+end
+
+##
+############# CREATE SAVE A SNAPSHOT ########################################
+include(joinpath(@__DIR__, "psid_files", "snapshot_details.jl"))
+sim = Simulation!(MassMatrixModel, sys, pwd(), (0.0, 0.0))
+x0_dict = read_initial_conditions(sim)
+setpoints_dict = get_setpoints(sim)
+snapshot_name = "snapshot_name" # set snapshot name
+set_project_parameters!(project; SnapType = 1, snapshot_filename = snapshot_name, SnapTime = 10, Mruns = 1) 
+snapshot_dict[x0_dict] = (setpoints = setpoints_dict, snapshot = snapshot_name)
+
