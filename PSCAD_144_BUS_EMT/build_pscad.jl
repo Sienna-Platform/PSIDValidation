@@ -117,10 +117,10 @@ PP.update_parameter_by_name(project.find("master:const", "t_RAMP"), "Value", 0.1
 #USER INPUT 
 sample_step =  1e-3 * 1e6
 time_step = 20e-6 * 1e6
-time_duration = 1.0
-save_snapshot = true  
-save_snapshot_name = "snap_1s"
-save_snapshot_time = 1.0
+time_duration = 0.01
+save_snapshot = 0 # 0: don't save snapshot, 1: save a single snapshot, 2: save multiple snapshots (same file), 3: save multiple snapshots (separate files)  
+save_snapshot_name = "snap_test"
+save_snapshot_time = 0.002    #if saving one snapshot, occurs at this time. If multiple, this is the interval between saves 
 load_snapshot = false   
 load_snapshot_name = "snap_20ms"
 
@@ -129,7 +129,7 @@ set_project_parameters!(
     project;
     snapshot_filename = save_snapshot_name,
     startup_filename = load_snapshot_path,
-    SnapType = Int64(save_snapshot), 
+    SnapType = save_snapshot, 
     SnapTime = save_snapshot_time,
     StartType =  Int64(load_snapshot), 
     time_duration = time_duration,
