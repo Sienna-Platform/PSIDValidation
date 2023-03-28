@@ -123,149 +123,149 @@ bus_coords_144 = Dict(
     "Bus_39" =>
         (centerpoint = (370, 410), orientation = "wide", devices_location = "none"),
     "Bus_33" =>
-        (centerpoint = (370, 430), orientation = "wide", devices_location = "s"),
+        (centerpoint = (370, 430), orientation = "wide", devices_location = "s"), #midline
     "Bus_133" =>
-        (centerpoint = (430, 40), orientation = "wide", devices_location = "n"),
+        (centerpoint = (420, 40), orientation = "wide", devices_location = "n"),
     "Bus_139" =>
-        (centerpoint = (430, 70), orientation = "wide", devices_location = "none"),
+        (centerpoint = (420, 70), orientation = "wide", devices_location = "none"),
     "Bus_136" =>
-        (centerpoint = (470, 80), orientation = "tall", devices_location = "e"),
+        (centerpoint = (460, 80), orientation = "tall", devices_location = "e"),
     "Bus_131" =>
-        (centerpoint = (490, 110), orientation = "tall", devices_location = "e"),
+        (centerpoint = (480, 110), orientation = "tall", devices_location = "e"),
     "Bus_134" =>
-        (centerpoint = (480, 110), orientation = "tall", devices_location = "none"),
+        (centerpoint = (470, 110), orientation = "tall", devices_location = "none"),
     "Bus_138" =>
-        (centerpoint = (430, 110), orientation = "wide", devices_location = "n"),
+        (centerpoint = (420, 110), orientation = "wide", devices_location = "n"),
     "Bus_135" =>
-        (centerpoint = (470, 150), orientation = "tall", devices_location = "w"),
+        (centerpoint = (460, 150), orientation = "tall", devices_location = "w"),
     "Bus_137" =>
-        (centerpoint = (430, 160), orientation = "wide", devices_location = "none"),
+        (centerpoint = (420, 160), orientation = "wide", devices_location = "none"),
     "Bus_132" =>
-        (centerpoint = (430, 180), orientation = "wide", devices_location = "s"),
+        (centerpoint = (420, 180), orientation = "wide", devices_location = "s"),
     "Bus_125" =>
-        (centerpoint = (480, 190), orientation = "wide", devices_location = "s"),
+        (centerpoint = (470, 190), orientation = "wide", devices_location = "s"),
     "Bus_122" =>
-        (centerpoint = (440, 220), orientation = "tall", devices_location = "w"),
+        (centerpoint = (430, 220), orientation = "tall", devices_location = "w"),
     "Bus_127" =>
-        (centerpoint = (460, 220), orientation = "tall", devices_location = "none"),
+        (centerpoint = (450, 220), orientation = "tall", devices_location = "none"),
     "Bus_82" =>
-        (centerpoint = (440, 260), orientation = "tall", devices_location = "w"),
+        (centerpoint = (430, 260), orientation = "tall", devices_location = "w"),
     "Bus_87" =>
-        (centerpoint = (460, 260), orientation = "tall", devices_location = "none"),
+        (centerpoint = (450, 260), orientation = "tall", devices_location = "none"),
     "Bus_92" =>
-        (centerpoint = (430, 290), orientation = "wide", devices_location = "n"),
+        (centerpoint = (420, 290), orientation = "wide", devices_location = "n"),
     "Bus_85" =>
-        (centerpoint = (470, 290), orientation = "wide", devices_location = "s"),
+        (centerpoint = (460, 290), orientation = "wide", devices_location = "s"),
     "Bus_97" =>
-        (centerpoint = (430, 320), orientation = "wide", devices_location = "none"),
+        (centerpoint = (420, 320), orientation = "wide", devices_location = "none"),
     "Bus_95" =>
-        (centerpoint = (460, 330), orientation = "tall", devices_location = "e"),
+        (centerpoint = (450, 330), orientation = "tall", devices_location = "e"),
     "Bus_98" =>
-        (centerpoint = (430, 370), orientation = "wide", devices_location = "s"),
+        (centerpoint = (420, 370), orientation = "wide", devices_location = "s"),
     "Bus_94" =>
-        (centerpoint = (480, 370), orientation = "tall", devices_location = "none"),
+        (centerpoint = (470, 370), orientation = "tall", devices_location = "none"),
     "Bus_91" =>
-        (centerpoint = (490, 370), orientation = "tall", devices_location = "e"),
+        (centerpoint = (480, 370), orientation = "tall", devices_location = "e"),
     "Bus_96" =>
-        (centerpoint = (460, 400), orientation = "tall", devices_location = "e"),
+        (centerpoint = (450, 400), orientation = "tall", devices_location = "e"),
     "Bus_99" =>
-        (centerpoint = (430, 410), orientation = "wide", devices_location = "none"),
+        (centerpoint = (420, 410), orientation = "wide", devices_location = "none"),
     "Bus_93" =>
-        (centerpoint = (430, 430), orientation = "wide", devices_location = "s"),
+        (centerpoint = (420, 430), orientation = "wide", devices_location = "s"),
     "Bus_121" =>
-        (centerpoint = (510, 160), orientation = "wide", devices_location = "n"),
+        (centerpoint = (500, 160), orientation = "wide", devices_location = "n"),
     "Bus_124" =>
-        (centerpoint = (510, 170), orientation = "wide", devices_location = "none"),
+        (centerpoint = (500, 170), orientation = "wide", devices_location = "none"),
     "Bus_126" =>
-        (centerpoint = (540, 190), orientation = "wide", devices_location = "s"),
+        (centerpoint = (530, 190), orientation = "wide", devices_location = "s"),
     "Bus_128" =>
-        (centerpoint = (510, 220), orientation = "tall", devices_location = "e"),
+        (centerpoint = (500, 220), orientation = "tall", devices_location = "e"),
     "Bus_129" =>
-        (centerpoint = (550, 220), orientation = "tall", devices_location = "none"),
+        (centerpoint = (540, 220), orientation = "tall", devices_location = "none"),
     "Bus_123" =>
-        (centerpoint = (580, 220), orientation = "tall", devices_location = "e"),
+        (centerpoint = (570, 220), orientation = "tall", devices_location = "e"),
     "Bus_88" =>
-        (centerpoint = (510, 260), orientation = "tall", devices_location = "e"),
+        (centerpoint = (500, 260), orientation = "tall", devices_location = "e"),
     "Bus_89" =>
-        (centerpoint = (550, 260), orientation = "tall", devices_location = "none"),
+        (centerpoint = (540, 260), orientation = "tall", devices_location = "none"),
     "Bus_83" =>
-        (centerpoint = (580, 260), orientation = "tall", devices_location = "e"),
+        (centerpoint = (570, 260), orientation = "tall", devices_location = "e"),
     "Bus_86" =>
-        (centerpoint = (540, 290), orientation = "wide", devices_location = "s"),
+        (centerpoint = (530, 290), orientation = "wide", devices_location = "s"),
     "Bus_84" =>
-        (centerpoint = (510, 310), orientation = "wide", devices_location = "none"),
+        (centerpoint = (500, 310), orientation = "wide", devices_location = "none"),
     "Bus_81" =>
-        (centerpoint = (510, 320), orientation = "wide", devices_location = "s"),
+        (centerpoint = (500, 320), orientation = "wide", devices_location = "s"),
     "Bus_141" =>
-        (centerpoint = (690, 160), orientation = "wide", devices_location = "n"),
+        (centerpoint = (680, 160), orientation = "wide", devices_location = "n"),
     "Bus_144" =>
-        (centerpoint = (690, 170), orientation = "wide", devices_location = "none"),
+        (centerpoint = (680, 170), orientation = "wide", devices_location = "none"),
     "Bus_146" =>
-        (centerpoint = (660, 190), orientation = "wide", devices_location = "s"),
+        (centerpoint = (650, 190), orientation = "wide", devices_location = "s"),
     "Bus_143" =>
-        (centerpoint = (630, 220), orientation = "tall", devices_location = "w"),
+        (centerpoint = (620, 220), orientation = "tall", devices_location = "w"),
     "Bus_149" =>
-        (centerpoint = (650, 220), orientation = "tall", devices_location = "none"),
+        (centerpoint = (640, 220), orientation = "tall", devices_location = "none"),
     "Bus_148" =>
-        (centerpoint = (690, 220), orientation = "tall", devices_location = "w"),
+        (centerpoint = (680, 220), orientation = "tall", devices_location = "w"),
     "Bus_103" =>
-        (centerpoint = (630, 260), orientation = "tall", devices_location = "w"),
+        (centerpoint = (620, 260), orientation = "tall", devices_location = "w"),
     "Bus_109" =>
-        (centerpoint = (650, 260), orientation = "tall", devices_location = "none"),
+        (centerpoint = (640, 260), orientation = "tall", devices_location = "none"),
     "Bus_108" =>
-        (centerpoint = (690, 260), orientation = "tall", devices_location = "e"),
+        (centerpoint = (680, 260), orientation = "tall", devices_location = "e"),
     "Bus_106" =>
-        (centerpoint = (660, 290), orientation = "wide", devices_location = "s"),
+        (centerpoint = (650, 290), orientation = "wide", devices_location = "s"),
     "Bus_104" =>
-        (centerpoint = (690, 310), orientation = "wide", devices_location = "none"),
+        (centerpoint = (680, 310), orientation = "wide", devices_location = "none"),
     "Bus_101" =>
-        (centerpoint = (690, 320), orientation = "wide", devices_location = "s"),
+        (centerpoint = (680, 320), orientation = "wide", devices_location = "s"),
     "Bus_153" =>
-        (centerpoint = (780, 40), orientation = "wide", devices_location = "n"),
+        (centerpoint = (770, 40), orientation = "wide", devices_location = "n"),
     "Bus_159" =>
-        (centerpoint = (780, 60), orientation = "wide", devices_location = "none"),
+        (centerpoint = (770, 60), orientation = "wide", devices_location = "none"),
     "Bus_156" =>
-        (centerpoint = (740, 80), orientation = "tall", devices_location = "w"),
+        (centerpoint = (730, 80), orientation = "tall", devices_location = "w"),
     "Bus_151" =>
-        (centerpoint = (710, 110), orientation = "tall", devices_location = "w"),
+        (centerpoint = (700, 110), orientation = "tall", devices_location = "w"),
     "Bus_154" =>
-        (centerpoint = (720, 110), orientation = "tall", devices_location = "none"),
+        (centerpoint = (710, 110), orientation = "tall", devices_location = "none"),
     "Bus_158" =>
-        (centerpoint = (780, 120), orientation = "wide", devices_location = "s"),
+        (centerpoint = (770, 120), orientation = "wide", devices_location = "s"),
     "Bus_155" =>
-        (centerpoint = (740, 150), orientation = "tall", devices_location = "w"),
+        (centerpoint = (730, 150), orientation = "tall", devices_location = "w"),
     "Bus_157" =>
-        (centerpoint = (780, 160), orientation = "wide", devices_location = "none"),
+        (centerpoint = (770, 160), orientation = "wide", devices_location = "none"),
     "Bus_152" =>
-        (centerpoint = (780, 180), orientation = "wide", devices_location = "s"),
+        (centerpoint = (770, 180), orientation = "wide", devices_location = "s"),
     "Bus_145" =>
-        (centerpoint = (730, 190), orientation = "wide", devices_location = "s"),
+        (centerpoint = (720, 190), orientation = "wide", devices_location = "s"),
     "Bus_147" =>
-        (centerpoint = (740, 220), orientation = "tall", devices_location = "none"),
+        (centerpoint = (730, 220), orientation = "tall", devices_location = "none"),
     "Bus_142" =>
-        (centerpoint = (760, 220), orientation = "tall", devices_location = "e"),
+        (centerpoint = (750, 220), orientation = "tall", devices_location = "e"),
     "Bus_107" =>
-        (centerpoint = (740, 260), orientation = "tall", devices_location = "none"),
+        (centerpoint = (730, 260), orientation = "tall", devices_location = "none"),
     "Bus_102" =>
-        (centerpoint = (760, 260), orientation = "tall", devices_location = "e"),
+        (centerpoint = (750, 260), orientation = "tall", devices_location = "e"),
     "Bus_105" =>
-        (centerpoint = (730, 290), orientation = "wide", devices_location = "s"),
+        (centerpoint = (720, 290), orientation = "wide", devices_location = "s"),
     "Bus_112" =>
-        (centerpoint = (780, 290), orientation = "wide", devices_location = "n"),
+        (centerpoint = (770, 290), orientation = "wide", devices_location = "n"),
     "Bus_117" =>
-        (centerpoint = (780, 320), orientation = "wide", devices_location = "none"),
+        (centerpoint = (770, 320), orientation = "wide", devices_location = "none"),
     "Bus_115" =>
-        (centerpoint = (740, 330), orientation = "tall", devices_location = "w"),
+        (centerpoint = (730, 330), orientation = "tall", devices_location = "w"),
     "Bus_118" =>
-        (centerpoint = (780, 370), orientation = "wide", devices_location = "s"),
+        (centerpoint = (770, 370), orientation = "wide", devices_location = "s"),
     "Bus_114" =>
-        (centerpoint = (720, 370), orientation = "tall", devices_location = "none"),
+        (centerpoint = (710, 370), orientation = "tall", devices_location = "none"),
     "Bus_111" =>
-        (centerpoint = (710, 370), orientation = "tall", devices_location = "w"),
+        (centerpoint = (700, 370), orientation = "tall", devices_location = "w"),
     "Bus_116" =>
-        (centerpoint = (740, 400), orientation = "tall", devices_location = "w"),
+        (centerpoint = (730, 400), orientation = "tall", devices_location = "w"),
     "Bus_119" =>
-        (centerpoint = (780, 410), orientation = "tall", devices_location = "none"),
+        (centerpoint = (770, 410), orientation = "tall", devices_location = "none"),
     "Bus_113" =>
-        (centerpoint = (780, 430), orientation = "wide", devices_location = "s"),
+        (centerpoint = (770, 430), orientation = "wide", devices_location = "s"),
 )
