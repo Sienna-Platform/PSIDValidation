@@ -22,23 +22,16 @@ sys = System("/Users/jlara/cache/PSIDValidation/PSCAD_144_BUS_EMT/psid_files/144
 genTrip = GeneratorTrip(tripTime, PSY.get_component(PSY.DynamicInverter, sys, "GFM_Battery_31"))
 
 sim = Simulation(
-        MassMatrixModel,
+        ResidualModel,
         sys,
         pwd(),
         tspan,
         genTrip,
-        all_branches_dynamic = true,
+        all_lines_dynamic = true,
     )
 
-    # Run Small Signal Analysis
-sm = small_signal_analysis(sim)
-
-# Show eigenvalue statistics
-summary_eigenvalues(sm)
-
-
 # Run Perturbation
-execute!(sim, Rodas5P())
+execute!(sim, IDA(); abstol = 1e-9, reltol = 1e-9)
 results = read_results(sim)
 
 pscad_results = CSV.read("/Users/jlara/cache/PSIDValidation/PSCAD_144_BUS_EMT/PSCAD_144bus_results/GFM_Battery_31/GFM_Battery_31.csv", DataFrame)
