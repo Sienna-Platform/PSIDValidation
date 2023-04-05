@@ -37,7 +37,7 @@
             "count": 1
         },
         {
-            "type": "PowerLoad",
+            "type": "StandardLoad",
             "count": 48
         },
         {
