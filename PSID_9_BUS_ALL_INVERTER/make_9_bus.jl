@@ -114,8 +114,10 @@ function build_computation_benchmarks(; kwargs...)
     function add_grid_forming(storage, capacity, vsm = false)
         if vsm
             oc = outer_control_vsm()
+            fe = pll()
         else
             oc = outer_control_droop()
+            fe = PSY.FixedFrequency()
         end
 
         return DynamicInverter(
@@ -125,7 +127,7 @@ function build_computation_benchmarks(; kwargs...)
             outer_control = oc,
             inner_control = inner_control(), #inner control voltage source
             dc_source = PSY.FixedDCSource(voltage = 600.0), #dc source
-            freq_estimator = PSY.FixedFrequency(), #pll
+            freq_estimator = fe, #pll 
             filter = filt(), #filter
         )
     end
@@ -180,7 +182,7 @@ function build_computation_benchmarks(; kwargs...)
     trip_gen=get(kwargs, :trip_percent, 0.04)
     trip_gen_active=get(kwargs, :trip_Active_pug, 0.7)
 
-    file_path = "/Users/jlara/cache/PSIDValidation/9_bus.raw"
+    file_path = joinpath(pwd(), "PSID_9_BUS_ALL_INVERTER", "9_bus.raw")
     sys = PSY.System(file_path)
     @assert length(PSY.get_components(Bus, sys)) == sys_size
 
@@ -230,9 +232,9 @@ function build_computation_benchmarks(; kwargs...)
         end
     end
 
-    storage=add_battery(sys, join(["GF_Battery-", 1]), "Bus1", GF*bus_capacity["Bus1"]*10, 1.0, 0.0)
+    storage=add_battery(sys, join(["GF_Battery-", 1]), "Bus_1", GF*bus_capacity["Bus_1"]*10, 1.0, 0.0)
     add_component!(sys, storage)
-    inverter=add_grid_forming(storage, GF*bus_capacity["Bus1"]*10, true)
+    inverter=add_grid_forming(storage, GF*bus_capacity["Bus_1"]*10, true)
     add_component!(sys, inverter, storage)
 
     run_powerflow!(sys)
@@ -255,4 +257,4 @@ sim = Simulation(
 # Run Perturbation
 execute!(sim, IDA(); abstol = 1e-9, reltol = 1e-9)
 
-to_json(sys, "9_bus_all_inverter.json")
+to_json(sys, joinpath("PSID_9_BUS_ALL_INVERTER", "9_bus_all_inverter.json"), force =true )
