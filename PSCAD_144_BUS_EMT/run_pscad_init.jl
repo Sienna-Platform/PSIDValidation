@@ -51,11 +51,11 @@ pscad.get_certificate(hodge_certificate)
 ################################### USER VARIABLES #########################################
 ############################################################################################
 #sys = System(joinpath(@__DIR__, "psid_files", "144Bus.json"))
-sys = System(joinpath(@__DIR__, "psid_files", "9bus.json"))
+sys = System(joinpath(pwd(), "PSID_9_BUS_ALL_INVERTER", "9_bus_all_inverter.json"))
 
 pscad_workspace_name = "workspace_144bus.pswx"
-pscad_case_name = "case_9bus"
-output_csv_filename = "9bus.csv"
+pscad_case_name = "case_9bus_all_inverter"
+output_csv_filename = "9bus_all_inverter.csv"
 build_from_scratch = true  
 sample_step =  5.0e-3 * 1e6
 time_step = 20e-6 * 1e6
