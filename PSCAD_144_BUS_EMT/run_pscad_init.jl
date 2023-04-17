@@ -109,6 +109,7 @@ if build_from_scratch
     end 
     setup_output_channnels(project, quantities_to_record, (15, 2)) 
     project.save()   
+    pscad.save_workspace()
 end 
 
 pscad.load(PyObject(joinpath(@__DIR__, "pscad_files", pscad_workspace_name)))  
