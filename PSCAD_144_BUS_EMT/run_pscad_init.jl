@@ -50,24 +50,25 @@ pscad.get_certificate(hodge_certificate)
 ############################################################################################
 ################################### USER VARIABLES #########################################
 ############################################################################################
-#sys = System(joinpath(@__DIR__, "psid_files", "144Bus.json"))
-sys = System(joinpath(pwd(), "PSID_9_BUS_ALL_INVERTER", "9_bus_all_inverter.json"))
+sys = System(joinpath(@__DIR__, "psid_files", "144Bus.json"))
+#sys = System(joinpath(pwd(), "PSID_9_BUS_ALL_INVERTER", "9_bus_all_inverter.json"))
 
 pscad_workspace_name = "workspace_144bus.pswx"
-pscad_case_name = "case_9bus_all_inverter"
-output_csv_filename = "9bus_all_inverter.csv"
+pscad_case_name = "case_144"
+output_csv_filename = "144bus_init.csv"
 build_from_scratch = true  
 sample_step =  5.0e-3 * 1e6
 time_step = 20e-6 * 1e6
-time_duration = 10.0
-t_inv = 2.0
-t_gen = 2.0
-save_snapshot = 1 # 0: no snapshot, 1: single snapshot, 2: multiple snapshots (same file), 3:  multiple snapshots (separate files)  
-save_snapshot_name = "snap_9bus_10s"
-save_snapshot_time = 10.0    #if saving one snapshot, occurs at this time. If multiple, this is the interval between saves 
+time_duration = 15.0
+t_inv = 5.0
+t_gen = 5.0
+save_snapshot = 3 # 0: no snapshot, 1: single snapshot, 2: multiple snapshots (same file), 3:  multiple snapshots (separate files)  
+save_snapshot_name = "snap_144bus"
+save_snapshot_time = 0.5    #if saving one snapshot, occurs at this time. If multiple, this is the interval between saves 
 load_snapshot = false   
 load_snapshot_name = "snap_ss_19s"
-load_snapshot_path  = joinpath(@__DIR__, "pscad_files", string(pscad_case_name, ".gf46"), string(load_snapshot_name, ".snp"))
+fortran_version = ".gf46"
+load_snapshot_path  = joinpath(@__DIR__, "pscad_files", string(pscad_case_name, fortran_version), string(load_snapshot_name, ".snp"))
 
 ############################################################################################
 ############################################################################################
@@ -131,7 +132,7 @@ set_project_parameters!(
     time_step =time_step,
 ) 
 
-pscad_output_folder_path = joinpath(@__DIR__, "pscad_files", string(pscad_case_name, ".gf46"))
+pscad_output_folder_path = joinpath(@__DIR__, "pscad_files", string(pscad_case_name, fortran_version))
 
 if isdir(pscad_output_folder_path)
     foreach(rm, filter(!endswith(".snp") , readdir(pscad_output_folder_path,join=true))) #Don't delete snapshot file.
@@ -148,35 +149,3 @@ end
 pscad.release_all_certificates() 
 pscad.quit()    
 logging.shutdown()
-
-#= df = CSV.read(joinpath(@__DIR__, "results", "Bus_56-Bus_54-i_1", "Bus_56-Bus_54-i_1.csv"), DataFrame)
-plotlyjs()
-#Plot all voltage magnitudes
-p = plot(size=(1000,1000), hovermode = :closest)
-for signal_name in filter!(x-> (x !== "time") && contains(x, "v_") , names(df))
-    plot!(p, df[1:end, "time"], df[1:end, signal_name], legend = false, label = replace(signal_name, "Generator" => "") )
-end
-
-#Plot all voltage phases
-p = plot(size=(1000,1000))
-for signal_name in filter!(x-> (x !== "time") && contains(x, "ph_") , names(df))
-    plot!(p, df[1:end, "time"], df[1:end, signal_name], legend=false, label = signal_name) 
-end
-
-#Plot all P 
-p = plot(size=(1000,1000))
-for signal_name in filter!(x-> (x !== "time") && contains(x, "P_") , names(df))
-    plot!(p, df[1:end, "time"], df[1:end, signal_name], legend=false, label = replace(replace(signal_name, "generator" => "gen"),  "Battery" => "bat"))
-end
-
-#Plot all Q
-p = plot(size=(1000,1000))
-for signal_name in filter!(x-> (x !== "time") && contains(x, "Q_") , names(df))
-    plot!(p, df[1:end, "time"], df[1:end, signal_name], legend = false,label = replace(replace(signal_name, "generator" => "gen"),  "Battery" => "bat"))
-end
-
-
-p = plot(size=(1000,1000))
-for signal_name in filter!(x-> (x !== "time") && contains(x, "f_GFL") , names(df))
-    plot!(p, df[1:end, "time"], df[1:end, signal_name], legend = true, label = replace(replace(signal_name, "generator" => "gen"),  "Battery" => "bat"))
-end =#

@@ -13,27 +13,23 @@ const PSID = PowerSimulationsDynamics
 const PSY = PowerSystems
 
 # Params
-tspan=(0.0, 20.0) # Time duration of simualtion (Not-ML)
+tspan=(0.0, 15.0) # Time duration of simualtion (Not-ML)
 tripTime = 20.0
 
 # Build System
-#sys = System(joinpath(pwd(), "PSCAD_144_BUS_EMT", "psid_files", "144bus.json"))
-sys = System(joinpath(pwd(), "PSCAD_144_BUS_EMT", "psid_files", "9bus.json"))
-#run_powerflow(sys)["flow_results"]
-#genTrip = GeneratorTrip(tripTime, PSY.get_component(PSY.DynamicInverter, sys, "generator-2-1"))
-#lineTrip = BranchTrip(tripTime, Line, "Bus_7-Bus_5-i_1" )
-#g = get_component(DynamicInverter, sys, "GFL_Battery_2")
-#crc = ControlReferenceChange(tripTime, g, :P_ref, 0.2)
+sys = System(joinpath(pwd(), "PSID_9_BUS_ALL_INVERTER",  "9_bus_all_inverter.json"))
+csv_file = joinpath(pwd(), "PSCAD_144_BUS_EMT", "results", "initialization", "144bus_init.csv")
+
 
 sim = Simulation(
         MassMatrixModel,
         sys,
         pwd(),
         tspan,
-       all_branches_dynamic = false,
+        all_branches_dynamic = true,
     )
 
-    # Run Small Signal Analysis
+# Run Small Signal Analysis
 #sm = small_signal_analysis(sim)
 
 # Show eigenvalue statistics summary_eigenvalues(sm)
@@ -41,7 +37,7 @@ sim = Simulation(
 execute!(sim, Rodas5P())
 results = read_results(sim)
 
-pscad_results = CSV.read(joinpath(pwd(), "PSCAD_144_BUS_EMT", "results",  "GFL_Battery_2.csv"), DataFrame) #  /Users/jlara/cache/PSIDValidation/PSCAD_144_BUS_EMT/PSCAD_144bus_results/GFM_Battery_31/", DataFrame)
+pscad_results = CSV.read(csv_file, DataFrame)
 
 p1 = PlotlyJS.scatter()
 traces = GenericTrace{Dict{Symbol, Any}}[]

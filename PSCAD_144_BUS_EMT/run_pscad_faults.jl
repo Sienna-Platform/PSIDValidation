@@ -54,8 +54,8 @@ pscad.get_certificate(hodge_certificate)
 sys = System(joinpath(@__DIR__, "psid_files", "9bus.json"))
 
 pscad_workspace_name = "workspace_144bus.pswx"
-pscad_case_name = "case_9bus"
-#output_csv_filename = "9bus_crc.csv"
+pscad_case_name = "case_144"
+output_csv_filename = "144bus_faults.csv"
 build_from_scratch = false  
 sample_step =  5.0e-3 * 1e6
 time_step = 20e-6 * 1e6
@@ -66,8 +66,9 @@ save_snapshot = 0 # 0: no snapshot, 1: single snapshot, 2: multiple snapshots (s
 save_snapshot_name = ""
 save_snapshot_time = 3.0    #if saving one snapshot, occurs at this time. If multiple, this is the interval between saves 
 load_snapshot = true   
-load_snapshot_name = "snap_9bus_10s"
-load_snapshot_path  = joinpath(@__DIR__, "pscad_files", string(pscad_case_name, ".gf46"), string(load_snapshot_name, ".snp"))
+load_snapshot_name = "snap_144bus"
+fortran_version = ".gf46"
+load_snapshot_path  = joinpath(@__DIR__, "pscad_files", string(pscad_case_name, fortran_version), string(load_snapshot_name, ".snp"))
 perturbations = [GeneratorTrip(11.0, get_component(DynamicInjection, sys, "GFL_Battery_2" ))]  #[ BranchTrip(19.1, Line, "Bus_56-Bus_54-i_1"),  GeneratorTrip(19.1, get_component(DynamicInjection, sys, "GFL_Battery_31" ))]  
 
 ############################################################################################
@@ -108,7 +109,7 @@ for p in perturbations
         time_step =time_step,
     ) 
 
-    pscad_output_folder_path = joinpath(@__DIR__, "pscad_files", string(pscad_case_name, ".gf46"))
+    pscad_output_folder_path = joinpath(@__DIR__, "pscad_files", string(pscad_case_name, fortran_version))
 
     if isdir(pscad_output_folder_path)
         foreach(rm, filter(!endswith(".snp") , readdir(pscad_output_folder_path,join=true))) #Don't delete snapshot file.
