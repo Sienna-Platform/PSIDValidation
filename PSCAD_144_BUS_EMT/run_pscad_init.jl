@@ -87,7 +87,7 @@ if build_from_scratch
     build_system(
         sys,
         project,
-        bus_coords_9;
+        bus_coords_144;
         add_gen_breakers = true,
         add_load_breakers = true,
         add_line_breakers = true,
