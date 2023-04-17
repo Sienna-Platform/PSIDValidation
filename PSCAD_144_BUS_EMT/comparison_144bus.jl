@@ -17,7 +17,7 @@ tspan=(0.0, 15.0) # Time duration of simualtion (Not-ML)
 tripTime = 20.0
 
 # Build System
-sys = System(joinpath(pwd(), "PSID_9_BUS_ALL_INVERTER",  "9_bus_all_inverter.json"))
+sys = System(joinpath(pwd(), "PSCAD_144_BUS_EMT", "psid_files", "144Bus.json"))
 csv_file = joinpath(pwd(), "PSCAD_144_BUS_EMT", "results", "initialization", "144bus_init.csv")
 
 

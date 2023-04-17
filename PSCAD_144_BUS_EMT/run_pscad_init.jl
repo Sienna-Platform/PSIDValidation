@@ -67,7 +67,7 @@ save_snapshot_name = "snap_144bus"
 save_snapshot_time = 0.5    #if saving one snapshot, occurs at this time. If multiple, this is the interval between saves 
 load_snapshot = false   
 load_snapshot_name = "snap_ss_19s"
-fortran_version = ".gf46"
+fortran_version = ".if18"
 load_snapshot_path  = joinpath(@__DIR__, "pscad_files", string(pscad_case_name, fortran_version), string(load_snapshot_name, ".snp"))
 
 ############################################################################################

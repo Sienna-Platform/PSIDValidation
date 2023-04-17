@@ -35,6 +35,7 @@ docs/site/
 #outputs
 *.csv
 *.gf46
+*.if18
 
 Manifest.toml
 .vscode

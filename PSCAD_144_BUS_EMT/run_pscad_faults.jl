@@ -67,7 +67,7 @@ save_snapshot_name = ""
 save_snapshot_time = 3.0    #if saving one snapshot, occurs at this time. If multiple, this is the interval between saves 
 load_snapshot = true   
 load_snapshot_name = "snap_144bus"
-fortran_version = ".gf46"
+fortran_version = ".if18"
 load_snapshot_path  = joinpath(@__DIR__, "pscad_files", string(pscad_case_name, fortran_version), string(load_snapshot_name, ".snp"))
 perturbations = [GeneratorTrip(11.0, get_component(DynamicInjection, sys, "GFL_Battery_2" ))]  #[ BranchTrip(19.1, Line, "Bus_56-Bus_54-i_1"),  GeneratorTrip(19.1, get_component(DynamicInjection, sys, "GFL_Battery_31" ))]  
 
