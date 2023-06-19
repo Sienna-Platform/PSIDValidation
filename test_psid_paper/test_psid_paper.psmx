@@ -1,0 +1,136 @@
+<Meta name="test_psid_paper">
+  <messagelist>
+    <message status="normal" label="build" groupid="400002" scope="test_psid_paper" id="914937858" classid="MessageObj"><![CDATA[Begin compiling with PSCAD Version 5.0.1]]></message>
+    <message status="normal" label="build" groupid="100006" id="282331897" classid="CmpNavigator">
+      <User scope="test_psid_paper" name="PSID_Library:simple_brk_logic" status="normal" link="1133853834" /><![CDATA[Compiling 'simple_brk_logic'. Generating network and data files.]]></message>
+    <message status="normal" label="build" groupid="100006" id="1975288559" classid="CmpNavigator">
+      <User scope="test_psid_paper" name="PSID_Library_Inverters:DROOP_GFM" status="normal" link="107172210" /><![CDATA[Compiling 'DROOP_GFM'. Generating network and data files.]]></message>
+    <message status="normal" label="build" groupid="100006" id="1229542556" classid="CmpNavigator">
+      <User scope="PSID_Library_Inverters" name="PSID_Library:FixedDCSource" status="normal" link="219331248" /><![CDATA[Compiling 'FixedDCSource'. Generating network and data files.]]></message>
+    <message status="normal" label="build" groupid="100006" id="1491224153" classid="CmpNavigator">
+      <User scope="PSID_Library_Inverters" name="PSID_Library:ReferenceFrameConversion_INV" status="normal" link="1660439571" /><![CDATA[Compiling 'ReferenceFrameConversion_INV'. Generating network and data files.]]></message>
+    <message status="normal" label="build" groupid="100006" id="820982382" classid="CmpNavigator">
+      <User scope="PSID_Library" name="timestep_delay_angle" status="normal" link="1686720077" /><![CDATA[Compiling 'timestep_delay_angle'. Generating network and data files.]]></message>
+    <message status="normal" label="build" groupid="100006" id="1914762930" classid="CmpNavigator">
+      <User scope="PSID_Library" name="dq_abc_psid" status="normal" link="1115078297" /><![CDATA[Compiling 'dq_abc_psid'. Generating network and data files.]]></message>
+    <message status="normal" label="build" groupid="100006" id="162695058" classid="CmpNavigator">
+      <User scope="PSID_Library" name="abc_dq_psid" status="normal" link="1416558759" /><![CDATA[Compiling 'abc_dq_psid'. Generating network and data files.]]></message>
+    <message status="normal" label="build" groupid="100006" id="104896412" classid="CmpNavigator">
+      <User scope="PSID_Library_Inverters" name="PSID_Library:LCLFilter" status="normal" link="1670526590" /><![CDATA[Compiling 'LCLFilter'. Generating network and data files.]]></message>
+    <message status="normal" label="build" groupid="100006" id="1245818332" classid="CmpNavigator">
+      <User scope="PSID_Library" name="ri_abc" status="normal" link="645843216" /><![CDATA[Compiling 'ri_abc'. Generating network and data files.]]></message>
+    <message status="normal" label="build" groupid="100006" id="655283478" classid="CmpNavigator">
+      <User scope="PSID_Library_Inverters" name="PSID_Library:FixedFrequency" status="normal" link="822903436" /><![CDATA[Compiling 'FixedFrequency'. Generating network and data files.]]></message>
+    <message status="normal" label="build" groupid="100006" id="124038616" classid="CmpNavigator">
+      <User scope="PSID_Library_Inverters" name="PSID_Library:ActiveDroop_ReactiveDroop" status="normal" link="966491600" /><![CDATA[Compiling 'ActiveDroop_ReactiveDroop'. Generating network and data files.]]></message>
+    <message status="warning" label="build" groupid="206502" id="723582785" classid="CmpNavigator">
+      <User scope="PSID_Library" name="master:realpole" status="warning" link="472444405" /><![CDATA[Signal 'INV' type conversion may lose accuracy at connection 'R']]></message>
+    <message status="warning" label="build" groupid="206502" id="1300347222" classid="CmpNavigator">
+      <User scope="PSID_Library" name="master:realpole" status="warning" link="440507626" /><![CDATA[Signal 'INV' type conversion may lose accuracy at connection 'R']]></message>
+    <message status="warning" label="build" groupid="206502" id="1195688455" classid="CmpNavigator">
+      <User scope="PSID_Library" name="master:select" status="warning" link="1943296325" /><![CDATA[Signal 'INV' type conversion may lose accuracy at connection 'Ctrl']]></message>
+    <message status="normal" label="build" groupid="100006" id="165288123" classid="CmpNavigator">
+      <User scope="PSID_Library_Inverters" name="PSID_Library:VoltageModeControl" status="normal" link="2079101627" /><![CDATA[Compiling 'VoltageModeControl'. Generating network and data files.]]></message>
+    <message status="warning" label="build" groupid="206502" id="251979715" classid="CmpNavigator">
+      <User scope="PSID_Library" name="master:integral" status="warning" link="1891684365" /><![CDATA[Signal 'INV' type conversion may lose accuracy at connection 'R']]></message>
+    <message status="warning" label="build" groupid="206502" id="417195566" classid="CmpNavigator">
+      <User scope="PSID_Library" name="master:realpole" status="warning" link="231561493" /><![CDATA[Signal 'INV' type conversion may lose accuracy at connection 'R']]></message>
+    <message status="warning" label="build" groupid="206502" id="323276019" classid="CmpNavigator">
+      <User scope="PSID_Library" name="master:integral" status="warning" link="1673256143" /><![CDATA[Signal 'INV' type conversion may lose accuracy at connection 'R']]></message>
+    <message status="warning" label="build" groupid="206502" id="1855465078" classid="CmpNavigator">
+      <User scope="PSID_Library" name="master:realpole" status="warning" link="393200150" /><![CDATA[Signal 'INV' type conversion may lose accuracy at connection 'R']]></message>
+    <message status="warning" label="build" groupid="206502" id="1885679583" classid="CmpNavigator">
+      <User scope="PSID_Library" name="master:integral" status="warning" link="496252468" /><![CDATA[Signal 'INV' type conversion may lose accuracy at connection 'R']]></message>
+    <message status="warning" label="build" groupid="206502" id="92460469" classid="CmpNavigator">
+      <User scope="PSID_Library" name="master:integral" status="warning" link="1332369744" /><![CDATA[Signal 'INV' type conversion may lose accuracy at connection 'R']]></message>
+    <message status="normal" label="build" groupid="100006" id="2087987738" classid="CmpNavigator">
+      <User scope="PSID_Library_Inverters" name="PSID_Library:AverageConverter" status="normal" link="2040622412" /><![CDATA[Compiling 'AverageConverter'. Generating network and data files.]]></message>
+    <message status="normal" label="build" groupid="100006" id="2003750688" classid="CmpNavigator">
+      <User scope="test_psid_paper" name="PSID_Library_Inverters:DARCO_VSM" status="normal" link="1407280903" /><![CDATA[Compiling 'DARCO_VSM'. Generating network and data files.]]></message>
+    <message status="normal" label="build" groupid="100006" id="298889156" classid="CmpNavigator">
+      <User scope="PSID_Library_Inverters" name="PSID_Library:KauraPLL" status="normal" link="356470831" /><![CDATA[Compiling 'KauraPLL'. Generating network and data files.]]></message>
+    <message status="warning" label="build" groupid="206502" id="212601341" classid="CmpNavigator">
+      <User scope="PSID_Library" name="master:realpole" status="warning" link="1188308993" /><![CDATA[Signal 'INV' type conversion may lose accuracy at connection 'R']]></message>
+    <message status="warning" label="build" groupid="206502" id="199373814" classid="CmpNavigator">
+      <User scope="PSID_Library" name="master:realpole" status="warning" link="513146012" /><![CDATA[Signal 'INV' type conversion may lose accuracy at connection 'R']]></message>
+    <message status="warning" label="build" groupid="206502" id="291924711" classid="CmpNavigator">
+      <User scope="PSID_Library" name="master:integral" status="warning" link="926160967" /><![CDATA[Signal 'INV' type conversion may lose accuracy at connection 'R']]></message>
+    <message status="normal" label="build" groupid="100006" id="581762658" classid="CmpNavigator">
+      <User scope="PSID_Library_Inverters" name="PSID_Library:VirtualInertia_ReactiveDroop" status="normal" link="157850209" /><![CDATA[Compiling 'VirtualInertia_ReactiveDroop'. Generating network and data files.]]></message>
+    <message status="warning" label="build" groupid="206502" id="1038508319" classid="CmpNavigator">
+      <User scope="PSID_Library" name="master:realpole" status="warning" link="1781119895" /><![CDATA[Signal 'INV' type conversion may lose accuracy at connection 'R']]></message>
+    <message status="warning" label="build" groupid="206502" id="685178751" classid="CmpNavigator">
+      <User scope="PSID_Library" name="master:integral" status="warning" link="2112583661" /><![CDATA[Signal 'INV' type conversion may lose accuracy at connection 'R']]></message>
+    <message status="normal" label="build" groupid="100006" link="320323254" id="320323254" classid="FileNavigator"><![CDATA[Generating 'C:\Users\Matt Bossart\OneDrive - UCB-O365\Desktop\Transient Stability\Repositories\PSIDValidation\test_psid_paper\test_psid_paper.gf46\test_psid_paper.map'.]]><file scope="test_psid_paper">C:\Users\Matt Bossart\OneDrive - UCB-O365\Desktop\Transient Stability\Repositories\PSIDValidation\test_psid_paper\test_psid_paper.gf46\test_psid_paper.map</file></message>
+    <message status="normal" label="build" groupid="100015" scope="test_psid_paper" id="1962339741" classid="MessageObj"><![CDATA[The total number of live nodes: 84]]></message>
+    <message status="normal" label="build" groupid="0" link="1773100721" id="1773100721" classid="FileNavigator"><![CDATA[Coding .mak file: 'C:\Users\Matt Bossart\OneDrive - UCB-O365\Desktop\Transient Stability\Repositories\PSIDValidation\test_psid_paper\test_psid_paper.gf46\\test_psid_paper.mak']]><file scope="test_psid_paper">C:\Users\Matt Bossart\OneDrive - UCB-O365\Desktop\Transient Stability\Repositories\PSIDValidation\test_psid_paper\test_psid_paper.gf46\\test_psid_paper.mak</file></message>
+    <message status="normal" label="build" groupid="400000" scope="test_psid_paper" id="1868223831" classid="MessageObj"><![CDATA[Time for Compile: 1376ms  Make: 16ms]]></message>
+    <message status="normal" label="build" groupid="400000" scope="test_psid_paper" id="1641824241" classid="MessageObj"><![CDATA[Solve Time = 47ms]]></message>
+    <message status="normal" label="build" groupid="100016" scope="test_psid_paper" id="600712902" classid="MessageObj"><![CDATA[Will execute (1): call C:\Program Files (x86)\GFortran\4.6\bin\gf46vars.bat]]></message>
+    <message status="normal" label="build" groupid="100016" scope="test_psid_paper" id="1263595903" classid="MessageObj"><![CDATA[Will execute (1): call "C:\Program Files (x86)\GFortran\4.6\bin\gf46vars.bat"]]></message>
+    <message status="normal" label="build" groupid="100016" scope="test_psid_paper" id="1604694794" classid="MessageObj"><![CDATA[Will execute (2): make -j -f test_psid_paper.mak]]></message>
+    <message status="normal" label="build" groupid="100016" scope="test_psid_paper" id="161417410" classid="MessageObj"><![CDATA[Will execute (2): "C:\Users\Matt Bossart\OneDrive - UCB-O365\Desktop\Transient Stability\Repositories\PSIDValidation\test_psid_paper\test_psid_paper.gf46\test_psid_paper_mak.bat"]]></message>
+    <message status="normal" label="build" groupid="100005" scope="test_psid_paper" id="1284502669" classid="MessageObj"><![CDATA[Creating EMTDC executable...]]></message>
+    <message status="normal" label="build" groupid="0" scope="test_psid_paper" id="1668840774" classid="MessageObj"><![CDATA[C:\Users\Matt Bossart\OneDrive - UCB-O365\Desktop\Transient Stability\Repositories\PSIDValidation\test_psid_paper\test_psid_paper.gf46>call "C:\Program Files (x86)\GFortran\4.6\bin\gf46vars.bat" ]]></message>
+    <message status="normal" label="build" groupid="100004" scope="test_psid_paper" id="918698640" classid="MessageObj"><![CDATA[Compiling 'FixedFrequency.f' into object code.]]></message>
+    <message status="normal" label="build" groupid="100004" scope="test_psid_paper" id="1458469359" classid="MessageObj"><![CDATA[Compiling 'AverageConverter.f' into object code.]]></message>
+    <message status="normal" label="build" groupid="100004" scope="test_psid_paper" id="668675779" classid="MessageObj"><![CDATA[Compiling 'DARCO_VSM.f' into object code.]]></message>
+    <message status="normal" label="build" groupid="100004" scope="test_psid_paper" id="996608387" classid="MessageObj"><![CDATA[Compiling 'DROOP_GFM.f' into object code.]]></message>
+    <message status="normal" label="build" groupid="100004" scope="test_psid_paper" id="353595958" classid="MessageObj"><![CDATA[Compiling 'FixedDCSource.f' into object code.]]></message>
+    <message status="normal" label="build" groupid="100004" scope="test_psid_paper" id="615490519" classid="MessageObj"><![CDATA[Compiling 'ReferenceFrameConversion_INV.f' into object code.]]></message>
+    <message status="normal" label="build" groupid="100004" scope="test_psid_paper" id="2063253077" classid="MessageObj"><![CDATA[Compiling 'simple_brk_logic.f' into object code.]]></message>
+    <message status="normal" label="build" groupid="100004" scope="test_psid_paper" id="1182088899" classid="MessageObj"><![CDATA[Compiling 'abc_dq_psid.f' into object code.]]></message>
+    <message status="normal" label="build" groupid="100004" scope="test_psid_paper" id="1068340752" classid="MessageObj"><![CDATA[Compiling 'dq_abc_psid.f' into object code.]]></message>
+    <message status="normal" label="build" groupid="100004" scope="test_psid_paper" id="1690311157" classid="MessageObj"><![CDATA[Compiling 'ri_abc.f' into object code.]]></message>
+    <message status="normal" label="build" groupid="100004" scope="test_psid_paper" id="94163847" classid="MessageObj"><![CDATA[Compiling 'LCLFilter.f' into object code.]]></message>
+    <message status="normal" label="build" groupid="100004" scope="test_psid_paper" id="1491360232" classid="MessageObj"><![CDATA[Compiling 'VoltageModeControl.f' into object code.]]></message>
+    <message status="normal" label="build" groupid="100004" scope="test_psid_paper" id="1450715975" classid="MessageObj"><![CDATA[Compiling 'KauraPLL.f' into object code.]]></message>
+    <message status="normal" label="build" groupid="100004" scope="test_psid_paper" id="245048611" classid="MessageObj"><![CDATA[Compiling 'timestep_delay_angle.f' into object code.]]></message>
+    <message status="normal" label="build" groupid="100004" scope="test_psid_paper" id="1943618825" classid="MessageObj"><![CDATA[Compiling 'ActiveDroop_ReactiveDroop.f' into object code.]]></message>
+    <message status="normal" label="build" groupid="100004" scope="test_psid_paper" id="1243023785" classid="MessageObj"><![CDATA[Compiling 'Main.f' into object code.]]></message>
+    <message status="normal" label="build" groupid="100004" scope="test_psid_paper" id="1728239565" classid="MessageObj"><![CDATA[Compiling 'VirtualInertia_ReactiveDroop.f' into object code.]]></message>
+    <message status="normal" label="build" groupid="100004" scope="test_psid_paper" id="1894932605" classid="MessageObj"><![CDATA[Compiling 'DS.f' into object code.]]></message>
+    <message status="normal" label="build" groupid="0" scope="test_psid_paper" id="991046346" classid="MessageObj"><![CDATA[gfortran.exe -c -ffree-form -fdefault-real-8 -fdefault-double-8 -I"C:\Program Files (x86)\PSCAD501 x64\emtdc\gf46\inc" -I"C:\Program Files (x86)\PSCAD501 x64\emtdc\gf46\windows" -O2 -Wconversion  Main.f]]></message>
+    <message status="normal" label="build" groupid="0" scope="test_psid_paper" id="964372332" classid="MessageObj"><![CDATA[gfortran.exe -c -ffree-form -fdefault-real-8 -fdefault-double-8 -I"C:\Program Files (x86)\PSCAD501 x64\emtdc\gf46\inc" -I"C:\Program Files (x86)\PSCAD501 x64\emtdc\gf46\windows" -O2 -Wconversion  DROOP_GFM.f]]></message>
+    <message status="normal" label="build" groupid="0" scope="test_psid_paper" id="1394692687" classid="MessageObj"><![CDATA[gfortran.exe -c -ffree-form -fdefault-real-8 -fdefault-double-8 -I"C:\Program Files (x86)\PSCAD501 x64\emtdc\gf46\inc" -I"C:\Program Files (x86)\PSCAD501 x64\emtdc\gf46\windows" -O2 -Wconversion  FixedDCSource.f]]></message>
+    <message status="normal" label="build" groupid="0" scope="test_psid_paper" id="1368132978" classid="MessageObj"><![CDATA[gfortran.exe -c -ffree-form -fdefault-real-8 -fdefault-double-8 -I"C:\Program Files (x86)\PSCAD501 x64\emtdc\gf46\inc" -I"C:\Program Files (x86)\PSCAD501 x64\emtdc\gf46\windows" -O2 -Wconversion  ReferenceFrameConversion_INV.f]]></message>
+    <message status="normal" label="build" groupid="0" scope="test_psid_paper" id="1709732341" classid="MessageObj"><![CDATA[gfortran.exe -c -ffree-form -fdefault-real-8 -fdefault-double-8 -I"C:\Program Files (x86)\PSCAD501 x64\emtdc\gf46\inc" -I"C:\Program Files (x86)\PSCAD501 x64\emtdc\gf46\windows" -O2 -Wconversion  timestep_delay_angle.f]]></message>
+    <message status="normal" label="build" groupid="0" scope="test_psid_paper" id="879958817" classid="MessageObj"><![CDATA[gfortran.exe -c -ffree-form -fdefault-real-8 -fdefault-double-8 -I"C:\Program Files (x86)\PSCAD501 x64\emtdc\gf46\inc" -I"C:\Program Files (x86)\PSCAD501 x64\emtdc\gf46\windows" -O2 -Wconversion  dq_abc_psid.f]]></message>
+    <message status="normal" label="build" groupid="0" scope="test_psid_paper" id="2115336773" classid="MessageObj"><![CDATA[gfortran.exe -c -ffree-form -fdefault-real-8 -fdefault-double-8 -I"C:\Program Files (x86)\PSCAD501 x64\emtdc\gf46\inc" -I"C:\Program Files (x86)\PSCAD501 x64\emtdc\gf46\windows" -O2 -Wconversion  abc_dq_psid.f]]></message>
+    <message status="normal" label="build" groupid="0" scope="test_psid_paper" id="323814476" classid="MessageObj"><![CDATA[gfortran.exe -c -ffree-form -fdefault-real-8 -fdefault-double-8 -I"C:\Program Files (x86)\PSCAD501 x64\emtdc\gf46\inc" -I"C:\Program Files (x86)\PSCAD501 x64\emtdc\gf46\windows" -O2 -Wconversion  LCLFilter.f]]></message>
+    <message status="normal" label="build" groupid="0" scope="test_psid_paper" id="924248343" classid="MessageObj"><![CDATA[gfortran.exe -c -ffree-form -fdefault-real-8 -fdefault-double-8 -I"C:\Program Files (x86)\PSCAD501 x64\emtdc\gf46\inc" -I"C:\Program Files (x86)\PSCAD501 x64\emtdc\gf46\windows" -O2 -Wconversion  ri_abc.f]]></message>
+    <message status="normal" label="build" groupid="0" scope="test_psid_paper" id="920788293" classid="MessageObj"><![CDATA[gfortran.exe -c -ffree-form -fdefault-real-8 -fdefault-double-8 -I"C:\Program Files (x86)\PSCAD501 x64\emtdc\gf46\inc" -I"C:\Program Files (x86)\PSCAD501 x64\emtdc\gf46\windows" -O2 -Wconversion  ActiveDroop_ReactiveDroop.f]]></message>
+    <message status="normal" label="build" groupid="0" scope="test_psid_paper" id="1007502712" classid="MessageObj"><![CDATA[gfortran.exe -c -ffree-form -fdefault-real-8 -fdefault-double-8 -I"C:\Program Files (x86)\PSCAD501 x64\emtdc\gf46\inc" -I"C:\Program Files (x86)\PSCAD501 x64\emtdc\gf46\windows" -O2 -Wconversion  VoltageModeControl.f]]></message>
+    <message status="normal" label="build" groupid="0" scope="test_psid_paper" id="1962158246" classid="MessageObj"><![CDATA[gfortran.exe -c -ffree-form -fdefault-real-8 -fdefault-double-8 -I"C:\Program Files (x86)\PSCAD501 x64\emtdc\gf46\inc" -I"C:\Program Files (x86)\PSCAD501 x64\emtdc\gf46\windows" -O2 -Wconversion  DARCO_VSM.f]]></message>
+    <message status="normal" label="build" groupid="0" scope="test_psid_paper" id="830689270" classid="MessageObj"><![CDATA[gfortran.exe -c -ffree-form -fdefault-real-8 -fdefault-double-8 -I"C:\Program Files (x86)\PSCAD501 x64\emtdc\gf46\inc" -I"C:\Program Files (x86)\PSCAD501 x64\emtdc\gf46\windows" -O2 -Wconversion  KauraPLL.f]]></message>
+    <message status="normal" label="build" groupid="0" scope="test_psid_paper" id="348493041" classid="MessageObj"><![CDATA[gfortran.exe -c -ffree-form -fdefault-real-8 -fdefault-double-8 -I"C:\Program Files (x86)\PSCAD501 x64\emtdc\gf46\inc" -I"C:\Program Files (x86)\PSCAD501 x64\emtdc\gf46\windows" -O2 -Wconversion  VirtualInertia_ReactiveDroop.f]]></message>
+    <message status="normal" label="build" groupid="100013" scope="test_psid_paper" id="1953206387" classid="MessageObj"><![CDATA[Linking objects and libraries into binary 'test_psid_paper.exe']]></message>
+    <message status="normal" label="build" groupid="400003" scope="test_psid_paper" id="1834079619" classid="MessageObj"><![CDATA[Finished compiling with PSCAD Version 5.0.1]]></message>
+  </messagelist>
+  <ViewContext>
+    <Window defn="test_psid_paper:Main" call="0" />
+  </ViewContext>
+  <List classid="View">
+    <View name="Main" zoomscale="1.5" scrollx="0" scrolly="0" />
+  </List>
+  <Output device="EMTDC" version="2010" date="2023/06/19" time="18:57:47.000000">
+    <Domain name="Time" unit="s" mult="0.0" skew="0.0">
+      <Sample rate="2000.0" end="6000" />
+    </Domain>
+    <List classid="Analog">
+      <Analog name="Main(0):Q_generator_101_1" index="1" gindex="100663297" id="1369692375:0" label="" dim="1" unit="" min="-2.0" max="2.0" />
+      <Analog name="Main(0):P_generator_101_1" index="2" gindex="100663298" id="66139950:0" label="" dim="1" unit="" min="-2.0" max="2.0" />
+      <Analog name="Main(0):f_generator_101_1" index="3" gindex="100663299" id="974546126:0" label="" dim="1" unit="" min="-2.0" max="2.0" />
+      <Analog name="Main(0):Q_generator_102_1" index="4" gindex="100663300" id="1270429878:0" label="" dim="1" unit="" min="-2.0" max="2.0" />
+      <Analog name="Main(0):P_generator_102_1" index="5" gindex="100663301" id="197988860:0" label="" dim="1" unit="" min="-2.0" max="2.0" />
+      <Analog name="Main(0):f_generator_102_1" index="6" gindex="100663302" id="1987092162:0" label="" dim="1" unit="" min="-2.0" max="2.0" />
+      <Analog name="Main(0):ph_Bus_3" index="7" gindex="100663303" id="20812562:0" label="" dim="1" unit="" min="-2.0" max="2.0" />
+      <Analog name="Main(0):v_Bus_3" index="8" gindex="100663304" id="1092968738:0" label="" dim="1" unit="" min="-2.0" max="2.0" />
+      <Analog name="Main(0):ph_Bus_2" index="9" gindex="100663305" id="1248268458:0" label="" dim="1" unit="" min="-2.0" max="2.0" />
+      <Analog name="Main(0):v_Bus_2" index="10" gindex="100663306" id="377079511:0" label="" dim="1" unit="" min="-2.0" max="2.0" />
+      <Analog name="Main(0):ph_Bus_1" index="11" gindex="100663307" id="1426891664:0" label="" dim="1" unit="" min="-2.0" max="2.0" />
+      <Analog name="Main(0):v_Bus_1" index="12" gindex="100663308" id="1720523902:0" label="" dim="1" unit="" min="-2.0" max="2.0" />
+    </List>
+    <List classid="Digital" />
+  </Output>
+</Meta>

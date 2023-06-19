@@ -8,14 +8,66 @@ using DataFrames
 using Sundials
 using CSV
 const PSY = PowerSystems
+include(joinpath(pwd(), "PSCAD_3bus_EMT_old", "psid_files", "dynamic_test_data.jl"))
+
+function _compute_total_load_parameters(load::PSY.StandardLoad)
+    # Constant Power Data
+    constant_active_power = PSY.get_constant_active_power(load)
+    constant_reactive_power = PSY.get_constant_reactive_power(load)
+    max_constant_active_power = PSY.get_max_constant_active_power(load)
+    max_constant_reactive_power = PSY.get_max_constant_reactive_power(load)
+    # Constant Current Data
+    current_active_power = PSY.get_current_active_power(load)
+    current_reactive_power = PSY.get_current_reactive_power(load)
+    max_current_active_power = PSY.get_max_current_active_power(load)
+    max_current_reactive_power = PSY.get_max_current_reactive_power(load)
+    # Constant Admittance Data
+    impedance_active_power = PSY.get_impedance_active_power(load)
+    impedance_reactive_power = PSY.get_impedance_reactive_power(load)
+    max_impedance_active_power = PSY.get_max_impedance_active_power(load)
+    max_impedance_reactive_power = PSY.get_max_impedance_reactive_power(load)
+    # Total Load Calculations
+    active_power = constant_active_power + current_active_power + impedance_active_power
+    reactive_power =
+        constant_reactive_power + current_reactive_power + impedance_reactive_power
+    max_active_power =
+        max_constant_active_power + max_current_active_power + max_impedance_active_power
+    max_reactive_power =
+        max_constant_reactive_power +
+        max_current_reactive_power +
+        max_impedance_reactive_power
+    return active_power, reactive_power, max_active_power, max_reactive_power
+end
+
+function transform_load_to_constant_impedance(load::PSY.StandardLoad)
+    # Total Load Calculations
+    active_power, reactive_power, max_active_power, max_reactive_power =
+        _compute_total_load_parameters(load)
+    # Set Impedance Power
+    PSY.set_impedance_active_power!(load, active_power)
+    PSY.set_impedance_reactive_power!(load, reactive_power)
+    PSY.set_max_impedance_active_power!(load, max_active_power)
+    PSY.set_max_impedance_reactive_power!(load, max_reactive_power)
+    # Set everything else to zero
+    PSY.set_constant_active_power!(load, 0.0)
+    PSY.set_constant_reactive_power!(load, 0.0)
+    PSY.set_max_constant_active_power!(load, 0.0)
+    PSY.set_max_constant_reactive_power!(load, 0.0)
+    PSY.set_current_active_power!(load, 0.0)
+    PSY.set_current_reactive_power!(load, 0.0)
+    PSY.set_max_current_active_power!(load, 0.0)
+    PSY.set_max_current_reactive_power!(load, 0.0)
+    return
+end
+
 
 function run_3bus_psid(;
     rawfile = "ThreeBusPSCAD.raw",
     perturbation_type = "LoadStepDown",    #Options: ["LoadStepDown" "LoadStepUp" "LineTrip"]
     line_to_trip = "BUS 1-BUS 2-i_1",
     line_type = "Dynamic",
-    bus_1_device = "fixed_sauerpai",
-    bus_2_device = "gfl",
+    bus_1_device = "vsm",
+    bus_2_device = "droop",
     saveat = 5e-5,
     tspan = (0.0, 10.0),
     ref_bus_number = 101,
@@ -24,12 +76,15 @@ function run_3bus_psid(;
     abstol = 1e-14,
 )
     sys = System(joinpath(@__DIR__, "..", "psid_files", rawfile), runchecks = false)
+    display(sys)
+    for l in get_components(PSY.StandardLoad, sys)
+        transform_load_to_constant_impedance(l)
+        @show get_impedance_active_power(l)
+        @show get_constant_active_power(l)
+    end 
 
-    for l in get_components(PSY.PowerLoad, sys)
-        PSY.set_model!(l, PSY.LoadModels.ConstantImpedance)
-    end
-
-    l = get_component(PSY.PowerLoad, sys, "load1032")
+    l = get_component(PSY.StandardLoad, sys, "load1032")
+    @error l 
 #=     println(l)
     PSY.set_active_power!(l, PSY.get_active_power(l)/2)
     PSY.set_reactive_power!(l, PSY.get_reactive_power(l)/2)
@@ -100,6 +155,7 @@ function run_3bus_psid(;
 
     if line_type == "Dynamic" && perturbation_type == "LineTrip"
         for b in get_components(Line, sys)
+            @error get_name(b)
             if get_name(b) != line_to_trip
                 dyn_branch = PowerSystems.DynamicBranch(b)
                 add_component!(sys, dyn_branch)
@@ -218,5 +274,5 @@ function record_3bus_psid(
     end
 end
 
-#result_psid = run_3bus_psid()
+result_psid = run_3bus_psid()
 #record_3bus_psid(result_psid)

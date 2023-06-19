@@ -1,9 +1,9 @@
-@testset "psid_paper_3bus" begin
+#@testset "psid_paper_3bus" begin
 
     sys, result_psid = run_3bus_psid(
         rawfile = "ThreeBusPSCAD.raw",
         perturbation_type = "LineTrip",    #Options: ["LoadStepDown" "LoadStepUp" "LineTrip"]
-        line_to_trip = "BUS 1-BUS 2-i_1",
+        line_to_trip = "Bus_1-Bus_2-i_1", 
         line_type = "Dynamic",
         bus_1_device = "vsm",
         bus_2_device = "droop",
@@ -76,4 +76,4 @@
     )
     @test inf_norm <= 3e-6
     @test two_norm <= 8e-5
-end 
+#end 
