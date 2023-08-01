@@ -1,0 +1,488 @@
+# Adapted from modifiy_system.jl
+
+using PowerSystems
+using PowerSimulationsDynamics
+using PowerFlows
+using NLsolve
+using CSV
+using Plots
+using DataFrames
+
+include("new_system_data.jl")
+
+# Load .raw and .dyr files
+sys = System(
+    joinpath(@__DIR__, "psid_files", "PSCAD_VALIDATION_RAW.raw"),
+    joinpath(@__DIR__, "psid_files", "PSCAD_VALIDATION_DYR.dyr");
+    bus_name_formatter = x -> "B" * strip(string(x["index"])) * "_" * replace(strip(string(x["name"])),  "." => "_", "-" =>"_", " " => "_"),
+    runchecks = false,
+)
+
+run_powerflow!(sys)
+
+#for b in get_components(Bus, sys)
+#    println("$(get_name(b)) - Magnitude $(get_magnitude(b)) - Angle (rad) $(get_angle(b))")
+#end
+
+         
+# Code for exporting powerflow results
+#= 
+res = run_powerflow(sys)
+df = res["flow_results"]
+open(joinpath(@__DIR__, string("flow_results", ".csv")), "w") do io
+    CSV.write(io, df)
+end
+df = res["bus_results"]
+open(joinpath(@__DIR__, string("bus_results", ".csv")), "w") do io
+    CSV.write(io, df)
+end
+=#
+
+# Print names of lines with negative impedances
+#for br in get_components(Line, sys)
+#    if get_x(br) < 0
+        #@info "Line $(get_name(br)) has negative impedance"
+#    end
+#end
+
+line_params = Dict(
+    #https://www.mdpi.com/1996-1073/10/8/1233/htm
+    345.0 => ( 
+        impedance = (0.000198, 0.000360, 0.000518), #impedance or reactance?
+        xr_ratio = (16.0, 12.0 ,9.0),
+        limits = (1494, 1195, 897),
+        # Couldn't find z_c = (),
+    ),
+    500.0 => (
+        impedance = (0.000121, 0.000155, 0.000210), #"Transmission line per-km, per-unit X"
+        xr_ratio = (26.0, 17.0, 11.0),
+        limits = (3464, 2598, 1732),
+        #z_c = (233, 294), 
+    ),
+)
+
+# Correct lines with zero resistance but postive reactance. 
+for br in get_components(Line, sys)
+    if get_r(br) <= 0 && get_x(br) > 0
+        @info "Line $(get_name(br)) has voltage  $(get_base_voltage(get_from(get_arc(br)))) and x = $(get_x(br))"
+        voltage = get_base_voltage(get_from(get_arc(br)))
+        new_r = get_x(br)/(line_params[voltage].xr_ratio[2]) # divide reactance by median x/r ratio to get r value.
+        set_r!(br, new_r)
+    end
+end
+
+
+# Network changes to shorten lines
+from_line = get_component(Line, sys, "B2404_VINCENT-B3897_MIDWAY6-i_1")
+remove_component!(Line, sys, "B2404_VINCENT-B3897_MIDWAY6-i_1")
+remove_component!(Arc, sys, get_name(get_arc(from_line))) 
+to_line = get_component(Line, sys, "B3803_MIDWAY-B3896_MIDWAY5-i_1")
+remove_component!(Line, sys, "B3803_MIDWAY-B3896_MIDWAY5-i_1")
+remove_component!(Arc, sys, get_name(get_arc(to_line)))
+line = get_component(Line, sys,  "B3896_MIDWAY5-B3897_MIDWAY6-i_1")
+remove_component!(Line, sys, "B3896_MIDWAY5-B3897_MIDWAY6-i_1")
+remove_component!(Arc, sys, get_name(get_arc(line)))
+
+new_line = Line(
+    name = "B2404_VINCENT-B3803_MIDWAY-i_1",
+    available = true,
+    active_power_flow = get_active_power_flow(line),
+    reactive_power_flow = get_reactive_power_flow(line),
+    arc = Arc(from_line.arc.from, to_line.arc.from),
+    r = get_r(line),
+    x = get_x(line) + get_x(from_line) + get_x(to_line),
+    b = get_b(line),
+    rate = get_rate(line),
+    angle_limits = get_angle_limits(line)
+)
+remove_component!(Bus, sys, get_name(line.arc.to))
+remove_component!(Bus, sys, get_name(line.arc.from))
+add_component!(sys, new_line,)
+
+from_line = get_component(Line, sys, "B2404_VINCENT-B3893_MIDWAY2-i_1")
+remove_component!(Line, sys, "B2404_VINCENT-B3893_MIDWAY2-i_1")
+remove_component!(Arc, sys, get_name(get_arc(from_line)))
+to_line = get_component(Line, sys, "B3803_MIDWAY-B3894_MIDWAY3-i_1")
+remove_component!(Line, sys, "B3803_MIDWAY-B3894_MIDWAY3-i_1")
+remove_component!(Arc, sys, get_name(get_arc(to_line)))
+line = get_component(Line, sys,  "B3892_MIDWAY1-B3893_MIDWAY2-i_1")
+remove_component!(Line, sys, "B3892_MIDWAY1-B3893_MIDWAY2-i_1")
+remove_component!(Arc, sys, get_name(get_arc(line)))
+
+new_line = Line(
+    name = "B2404_VINCENT-B3803_MIDWAY-i_2",
+    available = true,
+    active_power_flow = get_active_power_flow(line),
+    reactive_power_flow = get_reactive_power_flow(line),
+    arc = Arc(from_line.arc.from, to_line.arc.from),
+    r = get_r(line),
+    x = get_x(line) + get_x(from_line) + get_x(to_line),
+    b = get_b(line),
+    rate = get_rate(line),
+    angle_limits = get_angle_limits(line)
+)
+remove_component!(Bus, sys, get_name(line.arc.to))
+remove_component!(Bus, sys, get_name(line.arc.from))
+add_component!(sys, new_line,)
+
+from_line = get_component(Line, sys, "B2404_VINCENT-B3895_MIDWAY4-i_1")
+remove_component!(Line, sys, "B2404_VINCENT-B3895_MIDWAY4-i_1")
+remove_component!(Arc, sys, get_name(get_arc(from_line)))
+to_line = get_component(Line, sys, "B3803_MIDWAY-B3892_MIDWAY1-i_1")
+remove_component!(Line, sys, "B3803_MIDWAY-B3892_MIDWAY1-i_1")
+remove_component!(Arc, sys, get_name(get_arc(to_line)))
+line = get_component(Line, sys,  "MIDWAY3-3894-MIDWAY4-3895-i_1")
+line = get_component(Line, sys,  "B3894_MIDWAY3-B3895_MIDWAY4-i_1") #re-defining line?
+remove_component!(Line, sys, "B3894_MIDWAY3-B3895_MIDWAY4-i_1")
+remove_component!(Arc, sys, get_name(get_arc(line)))
+
+new_line = Line(
+    name = "B2404_VINCENT-B3803_MIDWAY-i_3",
+    available = true,
+    active_power_flow = get_active_power_flow(line),
+    reactive_power_flow = get_reactive_power_flow(line),
+    arc = Arc(from_line.arc.from, to_line.arc.from),
+    r = get_r(line),
+    x = get_x(line) + get_x(from_line) + get_x(to_line),
+    b = get_b(line),
+    rate = get_rate(line),
+    angle_limits = get_angle_limits(line)
+)
+remove_component!(Bus, sys, get_name(line.arc.to))
+remove_component!(Bus, sys, get_name(line.arc.from))
+add_component!(sys, new_line,)
+
+mid_line1 = get_component(Line, sys, "B4096_GRIZZLY6-B4097_GRIZZLY7-i_1")
+remove_component!(Line, sys, "B4096_GRIZZLY6-B4097_GRIZZLY7-i_1")
+remove_component!(Arc, sys, get_name(get_arc(mid_line1)))
+mid_line2 = get_component(Line, sys, "B4095_GRIZZLY5-B4096_GRIZZLY6-i_1")
+remove_component!(Line, sys, "B4095_GRIZZLY5-B4096_GRIZZLY6-i_1")
+remove_component!(Arc, sys, get_name(get_arc(mid_line2)))
+line_from = get_component(Line, sys,  "B4001_MALIN-B4097_GRIZZLY7-i_1")
+remove_component!(Line, sys, "B4001_MALIN-B4097_GRIZZLY7-i_1")
+remove_component!(Arc, sys, get_name(get_arc(line_from)))
+line_to = get_component(Line, sys,  "B4004_GRIZZLY-B4095_GRIZZLY5-i_1")
+remove_component!(Line, sys, "B4004_GRIZZLY-B4095_GRIZZLY5-i_1")
+remove_component!(Arc, sys, get_name(get_arc(line_to)))
+
+new_line = Line(
+    name = "B4001_MALIN-B4004_GRIZZLY-i_1",
+    available = true,
+    active_power_flow = get_active_power_flow(mid_line1),
+    reactive_power_flow = get_reactive_power_flow(mid_line1),
+    arc = Arc(line_from.arc.from, line_to.arc.from),
+    r = get_r(mid_line1) + get_r(mid_line2) + get_r(line_from) + get_r(line_to),
+    x = get_x(mid_line1) + get_x(mid_line2) + get_x(line_from) + get_x(line_to),
+    b = get_b(line_from),
+    rate = get_rate(line_from),
+    angle_limits = get_angle_limits(line_from)
+)
+remove_component!(Bus, sys, get_name(mid_line1.arc.to))
+remove_component!(Bus, sys, get_name(mid_line1.arc.from))
+remove_component!(Bus, sys, get_name(mid_line2.arc.from))
+add_component!(sys, new_line,)
+
+
+mid_line1 = get_component(Line, sys, "B4092_GRIZZLY2-B4093_GRIZZLY3-i_1")
+remove_component!(Line, sys, "B4092_GRIZZLY2-B4093_GRIZZLY3-i_1")
+remove_component!(Arc, sys, get_name(get_arc(mid_line1)))
+mid_line2 = get_component(Line, sys, "B4093_GRIZZLY3-B4094_GRIZZLY4-i_1")
+remove_component!(Line, sys, "B4093_GRIZZLY3-B4094_GRIZZLY4-i_1")
+remove_component!(Arc, sys, get_name(get_arc(mid_line2)))
+line_from = get_component(Line, sys, "B4001_MALIN-B4094_GRIZZLY4-i_1")
+remove_component!(Line, sys, "B4001_MALIN-B4094_GRIZZLY4-i_1")
+remove_component!(Arc, sys, get_name(get_arc(line_from)))
+line_to = get_component(Line, sys,  "B4004_GRIZZLY-B4092_GRIZZLY2-i_1")
+remove_component!(Line, sys, "B4004_GRIZZLY-B4092_GRIZZLY2-i_1")
+remove_component!(Arc, sys, get_name(get_arc(line_to)))
+
+new_line = Line(
+    name = "B4001_MALIN-B4004_GRIZZLY-i_2",
+    available = true,
+    active_power_flow = get_active_power_flow(mid_line1),
+    reactive_power_flow = get_reactive_power_flow(mid_line1),
+    arc = Arc(line_from.arc.from, line_to.arc.from),
+    r = get_r(mid_line1) + get_r(mid_line2) + get_r(line_from) + get_r(line_to),
+    x = get_x(mid_line1) + get_x(mid_line2) + get_x(line_from) + get_x(line_to),
+    b = get_b(line_from),
+    rate = get_rate(line_from),
+    angle_limits = get_angle_limits(line_from)
+)
+remove_component!(Bus, sys, get_name(mid_line1.arc.to))
+remove_component!(Bus, sys, get_name(mid_line1.arc.from))
+remove_component!(Bus, sys, get_name(mid_line2.arc.to))
+add_component!(sys, new_line,)
+
+line_from = get_component(Line, sys,  "B3803_MIDWAY-B3891_GATES1-i_1")
+remove_component!(Arc, sys, get_name(get_arc(line_from)))
+remove_component!(Line, sys, "B3803_MIDWAY-B3891_GATES1-i_1")
+line_to = get_component(Line, sys,  "B3802_GATES-B3891_GATES1-i_1")
+remove_component!(Arc, sys, get_name(get_arc(line_to)))
+remove_component!(Line, sys, "B3802_GATES-B3891_GATES1-i_1")
+new_line = Line(
+    name = "B3803_MIDWAY-B3802_GATES-i_1",
+    available = true,
+    active_power_flow = get_active_power_flow(line_from),
+    reactive_power_flow = get_reactive_power_flow(line_from),
+    arc = Arc(line_from.arc.from, line_to.arc.from),
+    r = get_r(line_from) + get_r(line_to),
+    x = get_x(line_from) + get_x(line_to),
+    b = get_b(line_to),
+    rate = get_rate(line_from),
+    angle_limits = get_angle_limits(line_from)
+)
+remove_component!(Bus, sys, "B3891_GATES1")
+add_component!(sys, new_line,)
+
+existing_line = get_component(Line, sys, "B6305_NAUGHTON-B6510_BENLOMND-i_2")
+set_x!(existing_line, get_x(existing_line)*0.8)
+set_r!(existing_line, get_x(existing_line)*0.8)
+new_line = Line(
+    name = "B6305_NAUGHTON-B6510_BENLOMND-i_3",
+    available = true,
+    active_power_flow = get_active_power_flow(existing_line),
+    reactive_power_flow = get_reactive_power_flow(existing_line),
+    arc = get_arc(existing_line),
+    r = get_r(existing_line),
+    x = get_x(existing_line),
+    b = get_b(existing_line),
+    rate = get_rate(existing_line),
+    angle_limits = get_angle_limits(existing_line)
+)
+add_component!(sys, new_line,)
+
+new_line = Line(
+    name = "B6305_NAUGHTON-B6510_BENLOMND-i_4",
+    available = true,
+    active_power_flow = get_active_power_flow(existing_line),
+    reactive_power_flow = get_reactive_power_flow(existing_line),
+    arc = get_arc(existing_line),
+    r = get_r(existing_line),
+    x = get_x(existing_line),
+    b = get_b(existing_line),
+    rate = get_rate(existing_line),
+    angle_limits = get_angle_limits(existing_line)
+)
+add_component!(sys, new_line,)
+
+existing_line = get_component(Line, sys, "B6104_BORAH-B6305_NAUGHTON-i_1")
+set_x!(existing_line, get_x(existing_line)*0.8)
+set_r!(existing_line, get_x(existing_line)*0.8)
+new_line = Line(
+    name = "B6104_BORAH-B6305_NAUGHTON-i_2",
+    available = true,
+    active_power_flow = get_active_power_flow(existing_line),
+    reactive_power_flow = get_reactive_power_flow(existing_line),
+    arc = get_arc(existing_line),
+    r = get_r(existing_line),
+    x = get_x(existing_line),
+    b = get_b(existing_line),
+    rate = get_rate(existing_line),
+    angle_limits = get_angle_limits(existing_line)
+)
+add_component!(sys, new_line,)
+
+existing_line = get_component(Line, sys, "B6303_BRIDGER2-B6305_NAUGHTON-i_1")
+set_x!(existing_line, get_x(existing_line)*0.8)
+set_r!(existing_line, get_x(existing_line)*0.8)
+new_line = Line(
+    name = "B6303_BRIDGER2-B6305_NAUGHTON-i_3",
+    available = true,
+    active_power_flow = get_active_power_flow(existing_line),
+    reactive_power_flow = get_reactive_power_flow(existing_line),
+    arc = get_arc(existing_line),
+    r = get_r(existing_line),
+    x = get_x(existing_line),
+    b = get_b(existing_line),
+    rate = get_rate(existing_line),
+    angle_limits = get_angle_limits(existing_line)
+)
+add_component!(sys, new_line,)
+
+existing_line = get_component(Line, sys, "B6104_BORAH-B6204_GARRISON-i_1")
+new_line = Line(
+    name = "B6104_BORAH-B6204_GARRISON-i_2",
+    available = true,
+    active_power_flow = get_active_power_flow(existing_line),
+    reactive_power_flow = get_reactive_power_flow(existing_line),
+    arc = get_arc(existing_line),
+    r = get_r(existing_line),
+    x = get_x(existing_line),
+    b = get_b(existing_line),
+    rate = get_rate(existing_line),
+    angle_limits = get_angle_limits(existing_line)
+)
+add_component!(sys, new_line,)
+
+run_powerflow!(sys)
+set_units_base_system!(sys, "DEVICE_BASE")
+update_generation_units!(sys)
+
+split_generation_units(sys)
+
+##
+# Note: all lines with negative impedance have been removed
+# Plot impedances of zero resistance lines.
+#= 
+x_500 = []
+x_500_0r = []
+for br in get_components(Line,sys)
+    if get_base_voltage(get_from(get_arc(br))) == 500 && get_r(br)>0 
+        push!(x_500,get_x(br))
+    elseif get_base_voltage(get_from(get_arc(br))) == 500
+        push!(x_500_0r,get_x(br))
+    end
+end
+
+x_345 = []
+x_345_0r = []
+for br in get_components(Line,sys)
+    if get_base_voltage(get_from(get_arc(br))) == 345 && get_r(br)>0 
+        push!(x_345,get_x(br))
+    elseif get_base_voltage(get_from(get_arc(br))) == 345
+        push!(x_345_0r,get_x(br))
+    end
+end
+
+p345 = plot(x_345, label="x_345")
+scatter!(x_345_0r, label="0r x values")
+
+p500 = plot(x_500, label="x_500")
+scatter!(x_500_0r, label="0r x values")
+
+p = plot(p345, p500, layout=(2,1), label=["345kV" "345kV" "500kV" "500kV"])
+
+display(p)
+=#
+
+# Plotting Q fraction, V mag, and V ang. Create dataframe.
+gens_adjusted = [
+    "generator-4231-H",
+    "generator-4231-C",
+    "generator-4231-S",
+    "generator-4039-H",
+    "generator-4039-S",
+    "generator-4039-W",
+    "generator-4035-G",
+    "generator-6333-W",
+    "generator-6235-H",
+    "generator-6235-S",
+    "generator-4035-H",
+    "generator-4035-W",
+    "generator-6132-G",
+    "generator-6132-S",
+    "generator-6533-W",
+    "generator-4031-G",
+    "generator-4031-W",
+    "generator-4031-H",
+    "generator-4031-S",
+    "generator-6533-H",
+    "generator-6533-S",
+    "generator-3133-S",
+    "generator-3133-NG",
+    "generator-6433-E",
+    "generator-6303-DP", 
+]
+
+# Define empty arrays that will be populated inside the loop below
+gen_voltage_mag = zeros(0)
+gen_voltage_mag_adjusted = zeros(0)
+gen_voltage_angle = zeros(0)
+gen_voltage_angle_adjusted = zeros(0)
+gen_q_fraction = zeros(0)
+gen_q_fraction_adjusted = zeros(0)
+gen_cap = zeros(0)
+gen_cap_adjusted = zeros(0)
+adjusted_gens_df = DataFrame(AdjGenNames=String[], VMag=Float64[], VAng=Float64[], QFrac=Float64[], MagLimit=Bool[], AngLimit=Bool[], QLimit=Bool[], LimitReached=Bool[])
+
+# Loop through all thermal generators (I think there are others that are not ThermalStandard? not sure if we want those too)
+for gen in get_components(ThermalStandard, sys)
+    # Print names of generators that are over reactive limit
+    #if (get_reactive_power(gen) > get_reactive_power_limits(gen).max) || (get_reactive_power(gen) < get_reactive_power_limits(gen).min)
+    #    @info "Gen $(get_name(gen)) - reactive power $(get_reactive_power(gen)) - limits $(get_reactive_power_limits(gen))"
+    #end
+    if get_name(gen) in gens_adjusted
+        # Append to JD-adjusted arrays for plotting
+        name = get_name(gen)
+        vmag = get_magnitude(get_bus(gen))
+        vang = get_angle(get_bus(gen))
+        qfrac = abs(get_reactive_power(gen)) / broadcast(abs, get_reactive_power_limits(gen).max)
+        capacity = get_rating(gen)
+        println(capacity)
+        magbool = false
+        angbool = false
+        qbool = false
+        if qfrac >= 0.95
+            qbool = true
+        elseif vmag <= 0.95 || vmag >= 1.05
+            magbool = true
+        elseif (vang - (pi/2*0.9)) >= 0 
+            angbool = true
+        end
+        limitbool = qbool||magbool||angbool
+        push!(adjusted_gens_df, (name,vmag,vang,qfrac,magbool,angbool,qbool,limitbool))
+        append!(gen_voltage_mag_adjusted, vmag)
+        append!(gen_voltage_angle_adjusted, vang)
+        append!(gen_q_fraction_adjusted, qfrac)
+        append!(gen_cap_adjusted, capacity)
+    else
+        # Append to non-JD-adjusted arrays for plotting
+        append!(gen_voltage_mag, get_magnitude(get_bus(gen)))
+        append!(gen_voltage_angle, get_angle(get_bus(gen)))
+        append!(gen_q_fraction, abs(get_reactive_power(gen)) / broadcast(abs, get_reactive_power_limits(gen).max))
+        println(get_rating(gen))
+        append!(gen_cap, get_rating(gen))
+    end
+end
+
+
+# Plot Q fraction vs bus voltage mag (p1) and Q fraction vs. bus voltage angle (p2)
+p1 = plot(
+    gen_voltage_angle*(180/pi), # convert radians to degrees
+    gen_q_fraction, 
+    seriestype=:scatter, 
+    title="Q Fraction vs. Voltage Angle",
+    label="Not adjusted",
+    xlabel="Voltage Angle (degs)", 
+    ylabel="abs(Q)/abs(Q limit)"
+    )
+plot!(
+    gen_voltage_angle_adjusted*(180/pi), # convert radians to degrees
+    gen_q_fraction_adjusted, 
+    seriestype=:scatter, 
+    label="Adjusted"
+    )
+p2 = plot(
+    gen_voltage_mag, 
+    gen_q_fraction, 
+    seriestype=:scatter,
+    title="Q Fraction vs. Voltage Mag", 
+    label="Not adjusted",
+    xlabel="Voltage Mag (p.u.)", 
+    ylabel="abs(Q)/abs(Q limit)"
+    )
+plot!(
+    gen_voltage_mag_adjusted, 
+    gen_q_fraction_adjusted, 
+    seriestype=:scatter, 
+    label="Adjusted"
+    )
+p3 = plot(
+    gen_cap, 
+    #gen_q_fraction, 
+    seriestype=:scatter,
+    title="Capacity", 
+    label="Not adjusted",
+    yaxis=:log
+    #xlabel="Capacity (?)", 
+    #ylabel="abs(Q)/abs(Q limit)"
+    )
+plot!(
+    gen_cap_adjusted, 
+    #gen_q_fraction_adjusted, 
+    seriestype=:scatter, 
+    label="Adjusted",
+    yaxis=:log
+    )
+plot(p1, p2, p3, layout = (3, 1), size = (600, 700))
+
