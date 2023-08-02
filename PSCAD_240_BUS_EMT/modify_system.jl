@@ -18,7 +18,7 @@ sys = System(
     runchecks = false,
 )
 
-run_powerflow!(sys)
+solve_powerflow!(sys)
 
 #for b in get_components(Bus, sys)
 #    println("$(get_name(b)) - Magnitude $(get_magnitude(b)) - Angle (rad) $(get_angle(b))")
@@ -313,7 +313,88 @@ new_line = Line(
     angle_limits = get_angle_limits(existing_line)
 )
 add_component!(sys, new_line,)
-#####################################################################
+
+# Note: all lines with negative impedance have been removed
+
+# --------------------------------------------------------------
+# *FOR TESTING* Build Dataframe with info about each generator
+# --------------------------------------------------------------
+
+function build_gen_info_dataframe(sys)
+    df_gens = DataFrame(
+        GenName=String[],
+        GenBus=Integer[],
+        SplitBus=Bool[],
+        Capacity=Float64[],
+        VMag=Float64[],
+        VAng=Float64[],
+        P=Float64[],
+        Q=Float64[],
+        Qmin=Float64[],
+        Qmax=Float64[],
+        QFrac=Float64[],
+        VMagViolated=Bool[],
+        VAngViolated=Bool[],
+        QViolated=Bool[],
+        LimitReached=Bool[],
+        )
+    for gen in get_components(ThermalStandard, sys)
+        # Get basic information about generator
+        name = get_name(gen)
+        bus = get_number(get_bus(gen))
+        capacity = get_rating(gen)
+        vmag = get_magnitude(get_bus(gen))
+        vang = get_angle(get_bus(gen))
+        p = get_active_power(gen)
+        q = get_reactive_power(gen)
+        qmin = get_reactive_power_limits(gen).min
+        qmax = get_reactive_power_limits(gen).max
+        qfrac = abs(q) / broadcast(abs, qmax)
+        bool_split = bus in SPLIT_BUSES
+        
+        # Check voltage mag/ang and reactive power against limits
+        bool_vmag_violated = false
+        bool_vang_violated = false
+        bool_q_violated = false
+        if qfrac >= 0.95
+            bool_q_violated = true
+        end
+        if vmag <= 0.95 || vmag >= 1.05
+            bool_vmag_violated = true
+        end
+        if (vang - (pi/2*0.9)) >= 0
+            bool_vang_violated = true
+        end
+        bool_violated = bool_q_violated||bool_vmag_violated||bool_vang_violated # are any of the limits violated?
+        
+        # Create row in dataframe for this generator
+        push!(df_gens, (name, bus, bool_split, capacity, vmag, vang, p, q, qmin, qmax, qfrac, bool_vmag_violated, bool_vang_violated, bool_q_violated, bool_violated))
+    end
+    return df_gens
+end
+
+
+# --------------------------------------------------------------
+# *FOR TESTING* Find a bus with gens close to their Q limit
+# --------------------------------------------------------------
+
+# Build dataframe with generator info prior to splitting generators
+df_gens_pre_split = build_gen_info_dataframe(sys)
+
+# Show all gens at >0.95 of their reactive power limit
+show(sort!(filter(:QFrac => n -> n > 0.95 && n <= 1, df_gens_pre_split[!,[:GenName, :Capacity,:GenBus, :Q, :Qmin, :Qmax,:QFrac]]),:GenBus), allrows=true)
+buses_hitting_Q_limit = filter(:QFrac => n -> n > 0.95 && n <= 1, df_gens_pre_split[!,[:GenBus, :QFrac]]).GenBus
+
+# Show full set of generators for each bus that has one or more gens at/close to their reactive power limit
+for bus in buses_hitting_Q_limit
+    show(sort!(filter(:GenBus => n -> n == bus, df_gens_pre_split), :Capacity, rev=true),allrows=true)
+end
+
+
+# --------------------------------------------------------------
+# Split multi-gen buses so each gen has it's own transformer
+# --------------------------------------------------------------
+
 const MULTI_GEN_BUSES = [
     4231
 ]
@@ -377,10 +458,34 @@ for b in MULTI_GEN_BUSES
     end
 end
 
-#=
-# Note: all lines with negative impedance have been removed
+# Re-solve powerflow with new topology
+solve_powerflow!(sys)
+
+
+# --------------------------------------------------------------
+# *FOR TESTING* Look at reactive power after splitting bus
+# --------------------------------------------------------------
+
+# Build dataframe with generator info after to splitting generators
+df_gens_post_split = build_gen_info_dataframe(sys)
+
+# Create plotting dataframe with Qpre-Qpost to interpret reactive power changes
+df_plot = leftjoin(df_gens_pre_split[!,[:GenName,:Q]], df_gens_post_split[!,[:GenName, :Q]], on = :GenName, makeunique=true)
+df_plot = insertcols!(df_plot, :QDiff => df_plot.Q - df_plot.Q_1)
+show(sort!(df_plot, :QDiff, rev=true), allrows=true)
+p1 = plot(
+    df_plot[!, :GenName], # convert radians to degrees
+    df_plot[!, :QDiff], 
+    seriestype=:scatter, 
+    title="Difference in Q pre/post bus split",
+    xlabel="GenName", 
+    ylabel="Q_pre - Q_post"
+    )
+
+# --------------------------------------------------------------
 # Plot impedances of zero resistance lines.
-#= 
+# --------------------------------------------------------------
+#=
 x_500 = []
 x_500_0r = []
 for br in get_components(Line,sys)
@@ -410,7 +515,6 @@ scatter!(x_500_0r, label="0r x values")
 p = plot(p345, p500, layout=(2,1), label=["345kV" "345kV" "500kV" "500kV"])
 
 display(p)
-=#
 
 # Plotting Q fraction, V mag, and V ang. Create dataframe.
 gens_adjusted = [
