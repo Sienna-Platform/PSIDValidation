@@ -313,14 +313,71 @@ new_line = Line(
     angle_limits = get_angle_limits(existing_line)
 )
 add_component!(sys, new_line,)
+#####################################################################
+const MULTI_GEN_BUSES = [
+    4231
+]
 
-run_powerflow!(sys)
-set_units_base_system!(sys, "DEVICE_BASE")
-update_generation_units!(sys)
+bus_numbers = get_number.(get_components(Bus, sys))
+for b in MULTI_GEN_BUSES
+    xfr_list = []
+    for xfr in get_components(Transformer2W, sys)
+        if get_number(get_arc(xfr).to) == b
+            push!(xfr_list,xfr)
+        elseif get_number(get_arc(xfr).from) == b
+            push!(xfr_list,xfr)
+        end
+    end
+    if length(xfr_list) == 1
+        bus_xfr = first(xfr_list)
+        println(bus_xfr)
+    else
+        error("more than one xfr at bus $b")
+    end
+    for g in get_components(ThermalStandard, sys) 
+        if get_number(get_bus(g)) == b
+            dyn_gen = get_dynamic_injector(g)
+            bus = get_bus(g)
+            next_bus_number = get_next_bus_number(bus_numbers, get_number(bus))
+            push!(bus_numbers, next_bus_number)
+            unit_type = split(get_name(g), "-")[end]
+            pv_setpoint = 1 # TO DO: CHANGE THIS VALUE
+            remove_component!(sys, dyn_gen)
+            remove_component!(sys, g)
+            new_bus = Bus(
+                name = "B$(next_bus_number)_$unit_type",
+                number = next_bus_number,
+                bustype = "PV",
+                angle = get_angle(bus),
+                magnitude = pv_setpoint,
+                voltage_limits = get_voltage_limits(bus),
+                base_voltage = get_base_voltage(bus),
+                area = get_area(bus),
+                load_zone = get_load_zone(bus),
+            )   
+            add_component!(sys, new_bus)
+            set_bus!(g, new_bus)
+            set_name!(g, "generator-$(next_bus_number)-$unit_type")
+            add_component!(sys, g)
+            #Add dynamic component to gen?
+            new_xfr = Transformer2W(
+                name = "$(get_name(bus))-$(get_name(new_bus))-i_1",
+                available = true,
+                active_power_flow = -get_active_power(g),
+                reactive_power_flow = -get_reactive_power(g),
+                arc = Arc(to = bus, from = new_bus),
+                r = get_r(bus_xfr), #MULTIPLY BY 2?
+                x = get_r(bus_xfr), #MULTIPLY BY 2?
+                primary_shunt = 0.0,
+                rate = get_base_power(g)*1.1,
+            )
+            add_component!(sys, new_xfr)
+            # DELETE ORIGINAL TRANSFORMER?
+        end
+    end
+end
 
-split_generation_units(sys)
-
-##
+#=
 # Note: all lines with negative impedance have been removed
 # Plot impedances of zero resistance lines.
 #= 
@@ -486,3 +543,4 @@ plot!(
     )
 plot(p1, p2, p3, layout = (3, 1), size = (600, 700))
 
+=#
