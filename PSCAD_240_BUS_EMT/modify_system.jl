@@ -402,7 +402,7 @@ const MULTI_GEN_BUSES = [
 bus_numbers = get_number.(get_components(Bus, sys))
 for b in MULTI_GEN_BUSES
     xfr_list = []
-    for xfr in get_components(Transformer2W, sys)
+    for xfr in get_components(Transformer2W, sys) # Find transformer at bus with multiple gens
         if get_number(get_arc(xfr).to) == b
             push!(xfr_list,xfr)
         elseif get_number(get_arc(xfr).from) == b
@@ -416,7 +416,7 @@ for b in MULTI_GEN_BUSES
         error("more than one xfr at bus $b")
     end
     for g in get_components(ThermalStandard, sys) 
-        if get_number(get_bus(g)) == b
+        if get_number(get_bus(g)) == b # loop through generators at buses with multiple gens
             dyn_gen = get_dynamic_injector(g)
             bus = get_bus(g)
             next_bus_number = get_next_bus_number(bus_numbers, get_number(bus))
@@ -425,7 +425,7 @@ for b in MULTI_GEN_BUSES
             pv_setpoint = 1 # TO DO: CHANGE THIS VALUE
             remove_component!(sys, dyn_gen)
             remove_component!(sys, g)
-            new_bus = Bus(
+            new_bus = Bus( # Create new bus for individual generator 
                 name = "B$(next_bus_number)_$unit_type",
                 number = next_bus_number,
                 bustype = "PV",
@@ -441,7 +441,7 @@ for b in MULTI_GEN_BUSES
             set_name!(g, "generator-$(next_bus_number)-$unit_type")
             add_component!(sys, g)
             #Add dynamic component to gen?
-            new_xfr = Transformer2W(
+            new_xfr = Transformer2W( # Create new transformer from bus that had multiple gens to new bus with one gen
                 name = "$(get_name(bus))-$(get_name(new_bus))-i_1",
                 available = true,
                 active_power_flow = -get_active_power(g),
