@@ -482,8 +482,12 @@ for b in MULTI_GEN_BUSES
         
     end
 
+    # Change old bus to PQ bus since it no longer has any gens attached to it
+    # TODO: this allows powerflow to solve, but figure out if there is anything else we need to change
+    set_bustype!(bus, "PQ")
+
     # After adding the new transformers, adjust (or delete?) original transformer
-    # ^ TODO: decide this after confirming the subtransmission issue
+    # TODO: decide this after confirming the subtransmission issue
 
 end
 
