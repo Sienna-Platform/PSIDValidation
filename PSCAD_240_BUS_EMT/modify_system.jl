@@ -319,7 +319,7 @@ add_component!(sys, new_line,)
 # --------------------------------------------------------------
 # *FOR TESTING* Build Dataframe with info about each generator
 # --------------------------------------------------------------
-#=
+
 function build_gen_info_dataframe(sys)
     df_gens = DataFrame(
         GenName=String[],
@@ -337,6 +337,7 @@ function build_gen_info_dataframe(sys)
         VAngViolated=Bool[],
         QViolated=Bool[],
         LimitReached=Bool[],
+        StatusAvailable=[]
         )
     for gen in get_components(ThermalStandard, sys)
         # Get basic information about generator
@@ -351,6 +352,7 @@ function build_gen_info_dataframe(sys)
         qmax = get_reactive_power_limits(gen).max
         qfrac = abs(q) / broadcast(abs, qmax)
         bool_split = bus in SPLIT_BUSES
+        status = get_status(gen) && get_available(gen)
         
         # Check voltage mag/ang and reactive power against limits
         bool_vmag_violated = false
@@ -368,7 +370,7 @@ function build_gen_info_dataframe(sys)
         bool_violated = bool_q_violated||bool_vmag_violated||bool_vang_violated # are any of the limits violated?
         
         # Create row in dataframe for this generator
-        push!(df_gens, (name, bus, bool_split, capacity, vmag, vang, p, q, qmin, qmax, qfrac, bool_vmag_violated, bool_vang_violated, bool_q_violated, bool_violated))
+        push!(df_gens, (name, bus, bool_split, capacity, vmag, vang, p, q, qmin, qmax, qfrac, bool_vmag_violated, bool_vang_violated, bool_q_violated, bool_violated, status))
     end
     return df_gens
 end
@@ -382,15 +384,15 @@ end
 df_gens_pre_split = build_gen_info_dataframe(sys)
 
 # Show all gens at >0.95 of their reactive power limit
-show(sort!(filter(:QFrac => n -> n > 0.95 && n <= 1, df_gens_pre_split[!,[:GenName, :Capacity,:GenBus, :Q, :Qmin, :Qmax,:QFrac]]),:GenBus), allrows=true)
-buses_hitting_Q_limit = filter(:QFrac => n -> n > 0.95 && n <= 1, df_gens_pre_split[!,[:GenBus, :QFrac]]).GenBus
+show(sort!(filter(:QFrac => n -> n > 0.95 && n <= 1, df_gens_pre_split[!,[:GenName, :StatusAvailable,:Capacity,:GenBus, :Q, :Qmin, :Qmax,:QFrac]]),:GenBus), allrows=true)
+buses_hitting_Q_limit = unique(filter(:QFrac => n -> n > 0.95 && n <= 1, df_gens_pre_split[!,[:GenBus, :QFrac]]).GenBus)
 
 # Show full set of generators for each bus that has one or more gens at/close to their reactive power limit
 for bus in buses_hitting_Q_limit
-    show(sort!(filter(:GenBus => n -> n == bus, df_gens_pre_split), :Capacity, rev=true),allrows=true)
+    show(sort!(filter(:GenBus => n -> n == bus, df_gens_pre_split[!,[:GenName, :StatusAvailable,:Capacity,:GenBus, :Q, :Qmin, :Qmax,:QFrac]]), :Capacity, rev=true),allrows=true)
 end
 
-=#
+
 # --------------------------------------------------------------
 # Split multi-gen buses so each gen has it's own transformer
 # --------------------------------------------------------------
