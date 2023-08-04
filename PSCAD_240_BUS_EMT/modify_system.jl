@@ -398,25 +398,37 @@ end
 # --------------------------------------------------------------
 
 const MULTI_GEN_BUSES = [
-    4031
-    #4231
+    #4031
+    4231
 ]
 
 bus_numbers = get_number.(get_components(Bus, sys))
 for b in MULTI_GEN_BUSES
+    
+    # Get info about the bus this generator is attached to
+    buses = get_components(x -> get_number(x) == b, Bus, sys)
+    if length(buses) == 1
+        bus = first(buses)
+    end # TODO: add error handling
+    bus_xfr = get_bus_transformer(sys, bus)
+
+    # Loop through all generator components attached to bus b
     th = get_components(x -> get_number(get_bus(x)) == b, ThermalStandard, sys)
     for g in th
-        dyn_gen = get_dynamic_injector(g)
-        bus = get_bus(g)
-        bus_xfr = get_bus_transformer(sys,bus)
-        next_bus_number = get_next_bus_number(bus_numbers, b) #may want to look over how get_next_bus_number works
-        push!(bus_numbers, next_bus_number)
+
+        # ------------------ CREATE NEW BUS
+
+        # Get the generator info we need for the new bus
         unit_type = split(get_name(g), "-")[end]
-        pv_setpoint = 1 # TO DO: CHANGE THIS VALUE
-        remove_component!(sys, dyn_gen)
-        remove_component!(sys, g)
-        new_bus = Bus( # Create new bus for individual generator 
-            name = "B$(next_bus_number)_$unit_type",
+        pv_setpoint = 1 # TODO: CHANGE THIS VALUE, maybe to get_magnitude(g)
+
+        # Get next un-used bus number to assign to the new bus we will create for this generator 
+        next_bus_number = get_next_bus_number(bus_numbers, b) # Q: may want to look over how get_next_bus_number works
+        push!(bus_numbers, next_bus_number)
+        
+        # Create new bus for this individual generator
+        new_bus = Bus(
+            name = "B$(next_bus_number)_$unit_type", # Q: are the buses always labeled by the generator type...?
             number = next_bus_number,
             bustype = "PV",
             angle = get_angle(bus),
@@ -426,14 +438,33 @@ for b in MULTI_GEN_BUSES
             area = get_area(bus),
             load_zone = get_load_zone(bus),
         )   
+
+        # Add new bus to system
         @info "adding bus $(get_name(new_bus))"
         add_component!(sys, new_bus)
-        set_bus!(g, new_bus)
+
+        # ------------------ UPDATE GEN
+
+        # Remove this generator (i.e. detach from grid)
+        dyn_gen = get_dynamic_injector(g)
+        remove_component!(sys, dyn_gen)
+        remove_component!(sys, g)
+
+        # Update generator component parameters before adding it back into the system
+        set_bus!(g, new_bus) # Q: I think g is still the same object, just not attached?
         @info "setting gen name generator-$(next_bus_number)-$unit_type"
         set_name!(g, "generator-$(next_bus_number)-$unit_type")
+
+        # Add generator back into system (i.e. attach to grid)
         add_component!(sys, g)
-        #Add dynamic component to gen?
-        new_xfr = Transformer2W( # Create new transformer from bus that had multiple gens to new bus with one gen
+         
+        #TODO: add dynamic component to gen?
+
+        # ------------------ CREATE NEW TRANSFORMER
+
+        # Create new transformer between new bus (where this gen will be attached) and original bus 
+        # (where this gen used to be attached and what will become PQ bus at the end of this loop)
+        new_xfr = Transformer2W( 
             name = "$(get_name(bus))-$(get_name(new_bus))-i_1",
             available = true,
             active_power_flow = -get_active_power(g),
@@ -444,11 +475,18 @@ for b in MULTI_GEN_BUSES
             primary_shunt = 0.0,
             rate = get_base_power(g)*1.1,
         )
+
+        # Add new transformer to system
         @info "adding transformer $(get_name(new_xfr))"
         add_component!(sys, new_xfr)
-        # DELETE ORIGINAL TRANSFORMER?
+        
     end
+
+    # After adding the new transformers, adjust (or delete?) original transformer
+    # ^ TODO: decide this after confirming the subtransmission issue
+
 end
+
 
 ##
 # Re-solve powerflow with new topology
