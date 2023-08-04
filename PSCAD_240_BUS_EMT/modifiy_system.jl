@@ -402,7 +402,7 @@ set_Y!(fxa, get_Y(fxa) - 1.88im)
 
 ###### Update Generation Data to match prime mover and fuel ######
 run_powerflow!(sys)
-set_units_base_system!(sys, "DEVICE_BASE")
+set_units_base_system!(sys, "DEVICE_BASE") # to use percentages of device base rather than system base
 update_generation_units!(sys)
 
 split_generation_units(sys)

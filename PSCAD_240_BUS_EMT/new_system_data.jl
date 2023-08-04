@@ -553,9 +553,9 @@ function get_next_bus_number(bus_numbers::Vector{Int}, current_bus::Int)
 end
 
 function get_bus_transformer(sys::System, bus::Bus)
-    xtr = get_components(Transformer2W, sys, x -> get_arc(x).to == bus)
+    xtr = get_components(x -> get_arc(x).to == bus, Transformer2W, sys)
     if isempty(xtr)
-        xtr = get_components(Transformer2W, sys, x -> get_arc(x).from == bus)
+        xtr = get_components(x -> get_arc(x).from == bus, Transformer2W, sys)
     end
 
     if isempty(xtr)
@@ -564,7 +564,8 @@ function get_bus_transformer(sys::System, bus::Bus)
     if length(xtr) == 1
         return first(xtr)
     else
-        error("more than one xtr for bus $(get_name(bus))")
+       # error("more than one xtr for bus $(get_name(bus))")
+       return first(xtr)
     end
 end
 
