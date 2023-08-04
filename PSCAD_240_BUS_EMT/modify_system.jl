@@ -471,7 +471,7 @@ for b in MULTI_GEN_BUSES
             reactive_power_flow = -get_reactive_power(g),
             arc = Arc(to = bus, from = new_bus),
             r = get_r(bus_xfr), #MULTIPLY BY 2?
-            x = get_r(bus_xfr), #MULTIPLY BY 2?
+            x = get_x(bus_xfr), #MULTIPLY BY 2?
             primary_shunt = 0.0,
             rate = get_base_power(g)*1.1,
         )
