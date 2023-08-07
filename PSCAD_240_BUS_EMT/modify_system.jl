@@ -319,7 +319,7 @@ add_component!(sys, new_line,)
 # --------------------------------------------------------------
 # *FOR TESTING* Build Dataframe with info about each generator
 # --------------------------------------------------------------
-#=
+
 function build_gen_info_dataframe(sys)
     df_gens = DataFrame(
         GenName=String[],
@@ -337,6 +337,7 @@ function build_gen_info_dataframe(sys)
         VAngViolated=Bool[],
         QViolated=Bool[],
         LimitReached=Bool[],
+        StatusAvailable=[]
         )
     for gen in get_components(ThermalStandard, sys)
         # Get basic information about generator
@@ -351,6 +352,7 @@ function build_gen_info_dataframe(sys)
         qmax = get_reactive_power_limits(gen).max
         qfrac = abs(q) / broadcast(abs, qmax)
         bool_split = bus in SPLIT_BUSES
+        status = get_status(gen) && get_available(gen)
         
         # Check voltage mag/ang and reactive power against limits
         bool_vmag_violated = false
@@ -368,7 +370,7 @@ function build_gen_info_dataframe(sys)
         bool_violated = bool_q_violated||bool_vmag_violated||bool_vang_violated # are any of the limits violated?
         
         # Create row in dataframe for this generator
-        push!(df_gens, (name, bus, bool_split, capacity, vmag, vang, p, q, qmin, qmax, qfrac, bool_vmag_violated, bool_vang_violated, bool_q_violated, bool_violated))
+        push!(df_gens, (name, bus, bool_split, capacity, vmag, vang, p, q, qmin, qmax, qfrac, bool_vmag_violated, bool_vang_violated, bool_q_violated, bool_violated, status))
     end
     return df_gens
 end
@@ -382,22 +384,22 @@ end
 df_gens_pre_split = build_gen_info_dataframe(sys)
 
 # Show all gens at >0.95 of their reactive power limit
-show(sort!(filter(:QFrac => n -> n > 0.95 && n <= 1, df_gens_pre_split[!,[:GenName, :Capacity,:GenBus, :Q, :Qmin, :Qmax,:QFrac]]),:GenBus), allrows=true)
-buses_hitting_Q_limit = filter(:QFrac => n -> n > 0.95 && n <= 1, df_gens_pre_split[!,[:GenBus, :QFrac]]).GenBus
+show(sort!(filter(:QFrac => n -> n > 0.95 && n <= 1, df_gens_pre_split[!,[:GenName, :StatusAvailable,:Capacity,:GenBus, :Q, :Qmin, :Qmax,:QFrac]]),:GenBus), allrows=true)
+buses_hitting_Q_limit = unique(filter(:QFrac => n -> n > 0.95 && n <= 1, df_gens_pre_split[!,[:GenBus, :QFrac]]).GenBus)
 
 # Show full set of generators for each bus that has one or more gens at/close to their reactive power limit
 for bus in buses_hitting_Q_limit
-    show(sort!(filter(:GenBus => n -> n == bus, df_gens_pre_split), :Capacity, rev=true),allrows=true)
+    show(sort!(filter(:GenBus => n -> n == bus, df_gens_pre_split[!,[:GenName, :StatusAvailable,:Capacity,:GenBus, :Q, :Qmin, :Qmax,:QFrac]]), :Capacity, rev=true),allrows=true)
 end
 
-=#
+
 # --------------------------------------------------------------
 # Split multi-gen buses so each gen has it's own transformer
 # --------------------------------------------------------------
 ##
 const MULTI_GEN_BUSES = [
-    4031
-    #4231
+    #4031
+    4231
 ]
 bus = get_components(x -> get_number(x) == 4031, Bus, sys)
 #bus_xtrs = get_bus_transformer(sys, bus)
@@ -409,62 +411,94 @@ println("Mag at 4001 = $(get_magnitude(first(bus)))")
 
 bus_numbers = get_number.(get_components(Bus, sys))
 for b in MULTI_GEN_BUSES
-    bus = first(get_components(x -> get_number(x) == b, Bus, sys))
-    bus_xfr = get_bus_transformer(sys,bus)
-    println(bus_xfr)
+    
+    # Get info about the bus this generator is attached to
+    buses = get_components(x -> get_number(x) == b, Bus, sys)
+    if length(buses) == 1
+        bus = first(buses)
+    end # TODO: add error handling
+    bus_xfr = get_bus_transformer(sys, bus)
+
+    # Loop through all generator components attached to bus b
     th = get_components(x -> get_number(get_bus(x)) == b, ThermalStandard, sys)
     number_of_gens_at_bus = length(th)
     for g in th
-        if get_status(g) && get_available(g) == true
-            dyn_gen = get_dynamic_injector(g)
-            next_bus_number = get_next_bus_number(bus_numbers, b) #may want to look over how get_next_bus_number works
-            push!(bus_numbers, next_bus_number)
-            remove_component!(sys, dyn_gen)
-            remove_component!(sys, g)
-            unit_type = split(get_name(g), "-")[end]
-            pv_setpoint = 1 # TO DO: CHANGE THIS VALUE
-            new_bus = Bus( # Create new bus for individual generator 
-                name = "B$(next_bus_number)_$unit_type",
-                number = next_bus_number,
-                bustype = "PV",
-                angle = get_angle(bus),
-                magnitude = pv_setpoint,
-                voltage_limits = get_voltage_limits(bus),
-                base_voltage = get_base_voltage(bus),
-                area = get_area(bus),
-                load_zone = get_load_zone(bus),
-            )   
-            #@info "adding bus $(get_name(new_bus))"
-            add_component!(sys, new_bus)
-            set_bus!(g, new_bus)
-            #@info "setting gen name generator-$(next_bus_number)-$unit_type"
-            set_name!(g, "generator-$(next_bus_number)-$unit_type")
-            add_component!(sys, g)
-            #Add dynamic component to gen?
-            
-            println("name: $(get_name(bus_xfr)), r = $(get_r(bus_xfr)),  x = $(get_x(bus_xfr))")
-            new_xfr_x = number_of_gens_at_bus/get_x(bus_xfr)
-            new_xfr = Transformer2W( # Create new transformer from bus that had multiple gens to new bus with one gen
-                name = "$(get_name(bus))-$(get_name(new_bus))-i_1",
-                available = true,
-                active_power_flow = -get_active_power(g),
-                reactive_power_flow = -get_reactive_power(g),
-                arc = Arc(to = bus, from = new_bus),
-                r = 0, #ALWAYS 0?
-                x = new_xfr_x, 
-                primary_shunt = 0.0,
-                rate = get_base_power(g)*1.1,
-            )
-            #@info "adding transformer $(get_name(new_xfr))"
-            add_component!(sys, new_xfr)
-            # DELETE ORIGINAL TRANSFORMER?
-        else # Remove components that aren't active
-            dyn_gen = get_dynamic_injector(g)
-            remove_component!(sys, dyn_gen)
-            remove_component!(sys, g)
-        end
+
+        # ------------------ CREATE NEW BUS
+
+        # Get the generator info we need for the new bus
+        unit_type = split(get_name(g), "-")[end]
+        pv_setpoint = 1 # TODO: CHANGE THIS VALUE, maybe to get_magnitude(g)
+
+        # Get next un-used bus number to assign to the new bus we will create for this generator 
+        next_bus_number = get_next_bus_number(bus_numbers, b) # Q: may want to look over how get_next_bus_number works
+        push!(bus_numbers, next_bus_number)
+        
+        # Create new bus for this individual generator
+        new_bus = Bus(
+            name = "B$(next_bus_number)_$unit_type", # Q: are the buses always labeled by the generator type...?
+            number = next_bus_number,
+            bustype = "PV",
+            angle = get_angle(bus),
+            magnitude = pv_setpoint,
+            voltage_limits = get_voltage_limits(bus),
+            base_voltage = get_base_voltage(bus),
+            area = get_area(bus),
+            load_zone = get_load_zone(bus),
+        )   
+
+        # Add new bus to system
+        @info "adding bus $(get_name(new_bus))"
+        add_component!(sys, new_bus)
+
+        # ------------------ UPDATE GEN
+
+        # Remove this generator (i.e. detach from grid)
+        dyn_gen = get_dynamic_injector(g)
+        remove_component!(sys, dyn_gen)
+        remove_component!(sys, g)
+
+        # Update generator component parameters before adding it back into the system
+        set_bus!(g, new_bus) # Q: I think g is still the same object, just not attached?
+        @info "setting gen name generator-$(next_bus_number)-$unit_type"
+        set_name!(g, "generator-$(next_bus_number)-$unit_type")
+
+        # Add generator back into system (i.e. attach to grid)
+        add_component!(sys, g)
+         
+        #TODO: add dynamic component to gen?
+
+        # ------------------ CREATE NEW TRANSFORMER
+
+        # Create new transformer between new bus (where this gen will be attached) and original bus 
+        # (where this gen used to be attached and what will become PQ bus at the end of this loop)
+        new_xfr = Transformer2W( 
+            name = "$(get_name(bus))-$(get_name(new_bus))-i_1",
+            available = true,
+            active_power_flow = -get_active_power(g),
+            reactive_power_flow = -get_reactive_power(g),
+            arc = Arc(to = bus, from = new_bus),
+            r = get_r(bus_xfr), #MULTIPLY BY 2?
+            x = get_x(bus_xfr), #MULTIPLY BY 2?
+            primary_shunt = 0.0,
+            rate = get_base_power(g)*1.1,
+        )
+
+        # Add new transformer to system
+        @info "adding transformer $(get_name(new_xfr))"
+        add_component!(sys, new_xfr)
+        
     end
+
+    # Change old bus to PQ bus since it no longer has any gens attached to it
+    # TODO: this allows powerflow to solve, but figure out if there is anything else we need to change
+    set_bustype!(bus, "PQ")
+
+    # After adding the new transformers, adjust (or delete?) original transformer
+    # TODO: decide this after confirming the subtransmission issue
+
 end
+
 
 ##
 # Re-solve powerflow with new topology
