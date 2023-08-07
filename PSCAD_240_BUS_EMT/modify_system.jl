@@ -395,22 +395,14 @@ end
 # --------------------------------------------------------------
 # Split multi-gen buses so each gen has it's own transformer
 # --------------------------------------------------------------
+
 ##
-
-# Delete these lines before commit
-bus = first(get_components(x -> get_number(x) == 4031, Bus, sys))
-#bus_xtrs = get_bus_transformer(sys, bus)
-#println("Mag at 4031 = $(get_magnitude(first(bus)))")
-bus = first(get_components(x -> get_number(x) == 4001, Bus, sys))
-#println("Mag at 4001 = $(get_magnitude(first(bus)))")
-
-th = get_components(x -> get_number(get_bus(x)) == 4031, ThermalStandard, sys)
-for g in th
-    display(g)
-    println(" ")
+for gen in get_components(ThermalStandard, sys)
+    new_min = get_reactive_power_limits(gen).min
+    new_max = get_reactive_power_limits(gen).max * 10
+    set_reactive_power_limits!(gen, (min = new_min, max = new_max))
 end
 
-##
 const MULTI_GEN_BUSES = [
     4031
     #4231
