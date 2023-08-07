@@ -372,7 +372,7 @@ function build_gen_info_dataframe(sys)
         bool_violated = bool_q_violated||bool_vmag_violated||bool_vang_violated # are any of the limits violated?
         
         # Create row in dataframe for this generator
-        push!(df_gens, (name, bus, bool_split, capacity, vmag, vang, p, q, qmin, qmax, qfrac, bool_vmag_violated, bool_vang_violated, bool_q_violated, bool_violated, status))
+        push!(df_gens, (name, bus, bool_split, capacity, vmag, vang, p, q, power_factor, qmin, qmax, qfrac, bool_vmag_violated, bool_vang_violated, bool_q_violated, bool_violated, status))
     end
     return df_gens
 end
