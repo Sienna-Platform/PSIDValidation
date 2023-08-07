@@ -315,7 +315,7 @@ new_line = Line(
 add_component!(sys, new_line,)
 
 # Note: all lines with negative impedance have been removed
-
+##
 # --------------------------------------------------------------
 # *FOR TESTING* Build Dataframe with info about each generator
 # --------------------------------------------------------------
@@ -396,9 +396,24 @@ end
 # Split multi-gen buses so each gen has it's own transformer
 # --------------------------------------------------------------
 ##
+
+# Delete these lines before commit
+bus = first(get_components(x -> get_number(x) == 4031, Bus, sys))
+#bus_xtrs = get_bus_transformer(sys, bus)
+#println("Mag at 4031 = $(get_magnitude(first(bus)))")
+bus = first(get_components(x -> get_number(x) == 4001, Bus, sys))
+#println("Mag at 4001 = $(get_magnitude(first(bus)))")
+
+th = get_components(x -> get_number(get_bus(x)) == 4031, ThermalStandard, sys)
+for g in th
+    display(g)
+    println(" ")
+end
+
+##
 const MULTI_GEN_BUSES = [
-    #4031
-    4231
+    4031
+    #4231
 ]
 
 bus_numbers = get_number.(get_components(Bus, sys))
@@ -413,12 +428,11 @@ for b in MULTI_GEN_BUSES
     th = get_components(x -> get_number(get_bus(x)) == b, ThermalStandard, sys)
     number_of_gens_at_bus = length(th)
     for g in th
-
         # ------------------ CREATE NEW BUS
 
         # Get the generator info we need for the new bus
         unit_type = split(get_name(g), "-")[end]
-        pv_setpoint = 1 # TODO: CHANGE THIS VALUE, maybe to get_magnitude(g)
+        pv_setpoint = get_magnitude(bus) # TODO: Change this value to be magnitude of the other bus bus_xfr is connected to?
 
         # Get next un-used bus number to assign to the new bus we will create for this generator 
         next_bus_number = get_next_bus_number(bus_numbers, b) # Q: may want to look over how get_next_bus_number works
@@ -468,12 +482,11 @@ for b in MULTI_GEN_BUSES
             active_power_flow = -get_active_power(g),
             reactive_power_flow = -get_reactive_power(g),
             arc = Arc(to = bus, from = new_bus),
-            r = get_r(bus_xfr), #MULTIPLY BY 2?
-            x = get_x(bus_xfr), #MULTIPLY BY 2?
+            r = get_r(bus_xfr), #Always 0?
+            x = number_of_gens_at_bus * get_x(bus_xfr), 
             primary_shunt = 0.0,
             rate = get_base_power(g)*1.1,
         )
-
         # Add new transformer to system
         @info "adding transformer $(get_name(new_xfr))"
         add_component!(sys, new_xfr)
@@ -515,10 +528,11 @@ p1 = plot(
     ylabel="Q_pre - Q_post"
     )
 
+##
 # --------------------------------------------------------------
 # Plot impedances of zero resistance lines.
 # --------------------------------------------------------------
-#=
+
 x_500 = []
 x_500_0r = []
 for br in get_components(Line,sys)
@@ -680,4 +694,3 @@ plot!(
     )
 plot(p1, p2, p3, layout = (3, 1), size = (600, 700))
 
-=#
