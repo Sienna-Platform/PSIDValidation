@@ -557,15 +557,14 @@ function get_bus_transformer(sys::System, bus::Bus)
     if isempty(xtr)
         xtr = get_components(x -> get_arc(x).from == bus, Transformer2W, sys)
     end
-
     if isempty(xtr)
         error("xtr for bus $(get_name(bus)) not found")
     end
     if length(xtr) == 1
         return first(xtr)
     else
-       # error("more than one xtr for bus $(get_name(bus))")
-       return first(xtr)
+        error("$(length(xtr)) transformers at bus $(get_name(bus))")
+        #return first(xtr)
     end
 end
 

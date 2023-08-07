@@ -394,57 +394,75 @@ end
 # --------------------------------------------------------------
 # Split multi-gen buses so each gen has it's own transformer
 # --------------------------------------------------------------
-
+##
 const MULTI_GEN_BUSES = [
     4031
     #4231
 ]
+bus = get_components(x -> get_number(x) == 4031, Bus, sys)
+#bus_xtrs = get_bus_transformer(sys, bus)
+println("Mag at 4031 = $(get_magnitude(first(bus)))")
+bus = get_components(x -> get_number(x) == 4001, Bus, sys)
+println("Mag at 4001 = $(get_magnitude(first(bus)))")
+
+##
 
 bus_numbers = get_number.(get_components(Bus, sys))
 for b in MULTI_GEN_BUSES
+    bus = first(get_components(x -> get_number(x) == b, Bus, sys))
+    bus_xfr = get_bus_transformer(sys,bus)
+    println(bus_xfr)
     th = get_components(x -> get_number(get_bus(x)) == b, ThermalStandard, sys)
+    number_of_gens_at_bus = length(th)
     for g in th
-        dyn_gen = get_dynamic_injector(g)
-        bus = get_bus(g)
-        bus_xfr = get_bus_transformer(sys,bus)
-        next_bus_number = get_next_bus_number(bus_numbers, b) #may want to look over how get_next_bus_number works
-        push!(bus_numbers, next_bus_number)
-        unit_type = split(get_name(g), "-")[end]
-        pv_setpoint = 1 # TO DO: CHANGE THIS VALUE
-        remove_component!(sys, dyn_gen)
-        remove_component!(sys, g)
-        new_bus = Bus( # Create new bus for individual generator 
-            name = "B$(next_bus_number)_$unit_type",
-            number = next_bus_number,
-            bustype = "PV",
-            angle = get_angle(bus),
-            magnitude = pv_setpoint,
-            voltage_limits = get_voltage_limits(bus),
-            base_voltage = get_base_voltage(bus),
-            area = get_area(bus),
-            load_zone = get_load_zone(bus),
-        )   
-        @info "adding bus $(get_name(new_bus))"
-        add_component!(sys, new_bus)
-        set_bus!(g, new_bus)
-        @info "setting gen name generator-$(next_bus_number)-$unit_type"
-        set_name!(g, "generator-$(next_bus_number)-$unit_type")
-        add_component!(sys, g)
-        #Add dynamic component to gen?
-        new_xfr = Transformer2W( # Create new transformer from bus that had multiple gens to new bus with one gen
-            name = "$(get_name(bus))-$(get_name(new_bus))-i_1",
-            available = true,
-            active_power_flow = -get_active_power(g),
-            reactive_power_flow = -get_reactive_power(g),
-            arc = Arc(to = bus, from = new_bus),
-            r = get_r(bus_xfr), #MULTIPLY BY 2?
-            x = get_r(bus_xfr), #MULTIPLY BY 2?
-            primary_shunt = 0.0,
-            rate = get_base_power(g)*1.1,
-        )
-        @info "adding transformer $(get_name(new_xfr))"
-        add_component!(sys, new_xfr)
-        # DELETE ORIGINAL TRANSFORMER?
+        if get_status(g) && get_available(g) == true
+            dyn_gen = get_dynamic_injector(g)
+            next_bus_number = get_next_bus_number(bus_numbers, b) #may want to look over how get_next_bus_number works
+            push!(bus_numbers, next_bus_number)
+            remove_component!(sys, dyn_gen)
+            remove_component!(sys, g)
+            unit_type = split(get_name(g), "-")[end]
+            pv_setpoint = 1 # TO DO: CHANGE THIS VALUE
+            new_bus = Bus( # Create new bus for individual generator 
+                name = "B$(next_bus_number)_$unit_type",
+                number = next_bus_number,
+                bustype = "PV",
+                angle = get_angle(bus),
+                magnitude = pv_setpoint,
+                voltage_limits = get_voltage_limits(bus),
+                base_voltage = get_base_voltage(bus),
+                area = get_area(bus),
+                load_zone = get_load_zone(bus),
+            )   
+            #@info "adding bus $(get_name(new_bus))"
+            add_component!(sys, new_bus)
+            set_bus!(g, new_bus)
+            #@info "setting gen name generator-$(next_bus_number)-$unit_type"
+            set_name!(g, "generator-$(next_bus_number)-$unit_type")
+            add_component!(sys, g)
+            #Add dynamic component to gen?
+            
+            println("name: $(get_name(bus_xfr)), r = $(get_r(bus_xfr)),  x = $(get_x(bus_xfr))")
+            new_xfr_x = number_of_gens_at_bus/get_x(bus_xfr)
+            new_xfr = Transformer2W( # Create new transformer from bus that had multiple gens to new bus with one gen
+                name = "$(get_name(bus))-$(get_name(new_bus))-i_1",
+                available = true,
+                active_power_flow = -get_active_power(g),
+                reactive_power_flow = -get_reactive_power(g),
+                arc = Arc(to = bus, from = new_bus),
+                r = 0, #ALWAYS 0?
+                x = new_xfr_x, 
+                primary_shunt = 0.0,
+                rate = get_base_power(g)*1.1,
+            )
+            #@info "adding transformer $(get_name(new_xfr))"
+            add_component!(sys, new_xfr)
+            # DELETE ORIGINAL TRANSFORMER?
+        else # Remove components that aren't active
+            dyn_gen = get_dynamic_injector(g)
+            remove_component!(sys, dyn_gen)
+            remove_component!(sys, g)
+        end
     end
 end
 
