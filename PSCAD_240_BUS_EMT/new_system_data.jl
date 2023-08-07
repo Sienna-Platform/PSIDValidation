@@ -564,7 +564,6 @@ function get_bus_transformer(sys::System, bus::Bus)
         return first(xtr)
     else
         error("$(length(xtr)) transformers at bus $(get_name(bus))")
-        #return first(xtr)
     end
 end
 

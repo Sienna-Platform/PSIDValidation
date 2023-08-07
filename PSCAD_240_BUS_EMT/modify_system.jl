@@ -392,7 +392,6 @@ for bus in buses_hitting_Q_limit
     show(sort!(filter(:GenBus => n -> n == bus, df_gens_pre_split[!,[:GenName, :StatusAvailable,:Capacity,:GenBus, :Q, :Qmin, :Qmax,:QFrac]]), :Capacity, rev=true),allrows=true)
 end
 
-
 # --------------------------------------------------------------
 # Split multi-gen buses so each gen has it's own transformer
 # --------------------------------------------------------------
@@ -401,22 +400,13 @@ const MULTI_GEN_BUSES = [
     #4031
     4231
 ]
-bus = get_components(x -> get_number(x) == 4031, Bus, sys)
-#bus_xtrs = get_bus_transformer(sys, bus)
-println("Mag at 4031 = $(get_magnitude(first(bus)))")
-bus = get_components(x -> get_number(x) == 4001, Bus, sys)
-println("Mag at 4001 = $(get_magnitude(first(bus)))")
-
-##
 
 bus_numbers = get_number.(get_components(Bus, sys))
 for b in MULTI_GEN_BUSES
     
     # Get info about the bus this generator is attached to
-    buses = get_components(x -> get_number(x) == b, Bus, sys)
-    if length(buses) == 1
-        bus = first(buses)
-    end # TODO: add error handling
+    bus = first(get_components(x -> get_number(x) == b, Bus, sys))
+    # Get bus transformer (will through error if more than one)
     bus_xfr = get_bus_transformer(sys, bus)
 
     # Loop through all generator components attached to bus b
