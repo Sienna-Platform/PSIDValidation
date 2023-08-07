@@ -424,19 +424,28 @@ for b in MULTI_GEN_BUSES
 
         # Get the generator info we need for the new bus
         unit_type = split(get_name(g), "-")[end]
-        pv_setpoint = get_magnitude(bus) # TODO: Change this value to be magnitude of the other bus bus_xfr is connected to?
+        v_mag_setpoint = get_magnitude(bus) # TODO: Change this value to be magnitude of the other bus bus_xfr is connected to?
 
         # Get next un-used bus number to assign to the new bus we will create for this generator 
         next_bus_number = get_next_bus_number(bus_numbers, b) # Q: may want to look over how get_next_bus_number works
         push!(bus_numbers, next_bus_number)
         
+        # Get whether this is a grid-forming gen (PV bus) or grid-following gen (PQ bus) from dyn_gen attributes
+        # TODO: find a more robust way to check for this
+        dyn_gen = get_dynamic_injector(g)
+        if hasproperty(dyn_gen, :freq_estimator) 
+            new_bustype = "PQ"  # "DynamicInverter"
+        else 
+            new_bustype = "PV"  # "DynamicGenerator"
+        end
+        
         # Create new bus for this individual generator
         new_bus = Bus(
             name = "B$(next_bus_number)_$unit_type", # Q: are the buses always labeled by the generator type...?
             number = next_bus_number,
-            bustype = "PV",
-            angle = get_angle(bus),
-            magnitude = pv_setpoint,
+            bustype = new_bustype,
+            angle = get_angle(bus), # NOTE: for both PV and PQ buses, this will get overwritten, that's fine!
+            magnitude = v_mag_setpoint, # NOTE: for PQ buses, this will get overwritten, that's fine!
             voltage_limits = get_voltage_limits(bus),
             base_voltage = get_base_voltage(bus),
             area = get_area(bus),
@@ -450,7 +459,6 @@ for b in MULTI_GEN_BUSES
         # ------------------ UPDATE GEN
 
         # Remove this generator (i.e. detach from grid)
-        dyn_gen = get_dynamic_injector(g)
         remove_component!(sys, dyn_gen)
         remove_component!(sys, g)
 
@@ -458,6 +466,13 @@ for b in MULTI_GEN_BUSES
         set_bus!(g, new_bus) # Q: I think g is still the same object, just not attached?
         @info "setting gen name generator-$(next_bus_number)-$unit_type"
         set_name!(g, "generator-$(next_bus_number)-$unit_type")
+
+        # If our new bus is a PQ bus, define Q (powerflow input)
+        # TODO: decide which setpoint to use
+        if new_bustype == "PQ"
+            #set_reactive_power!(g, get_reactive_power(g))
+            set_reactive_power!(g, 0.0)
+        end
 
         # Add generator back into system (i.e. attach to grid)
         add_component!(sys, g)
@@ -487,6 +502,7 @@ for b in MULTI_GEN_BUSES
 
     # Change old bus to PQ bus since it no longer has any gens attached to it
     # TODO: this allows powerflow to solve, but figure out if there is anything else we need to change
+    # TODO: check whether this assumes that P=0 and Q=0 (what we want) or if we need to define a StaticInjection (StandardLoad?) of 0
     set_bustype!(bus, "PQ")
 
     # After adding the new transformers, adjust (or delete?) original transformer
