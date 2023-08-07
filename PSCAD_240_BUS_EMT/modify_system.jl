@@ -330,6 +330,7 @@ function build_gen_info_dataframe(sys)
         VAng=Float64[],
         P=Float64[],
         Q=Float64[],
+        PowerFactor=Float64[],
         Qmin=Float64[],
         Qmax=Float64[],
         QFrac=Float64[],
@@ -348,6 +349,7 @@ function build_gen_info_dataframe(sys)
         vang = get_angle(get_bus(gen))
         p = get_active_power(gen)
         q = get_reactive_power(gen)
+        power_factor = p / sqrt((p^2) + (q^2))
         qmin = get_reactive_power_limits(gen).min
         qmax = get_reactive_power_limits(gen).max
         qfrac = abs(q) / broadcast(abs, qmax)
@@ -384,12 +386,12 @@ end
 df_gens_pre_split = build_gen_info_dataframe(sys)
 
 # Show all gens at >0.95 of their reactive power limit
-show(sort!(filter(:QFrac => n -> n > 0.95 && n <= 1, df_gens_pre_split[!,[:GenName, :StatusAvailable,:Capacity,:GenBus, :Q, :Qmin, :Qmax,:QFrac]]),:GenBus), allrows=true)
+show(sort!(filter(:QFrac => n -> n > 0.95 && n <= 1, df_gens_pre_split[!,[:GenName, :StatusAvailable,:Capacity,:GenBus, :PowerFactor, :Q, :Qmin, :Qmax,:QFrac]]),:GenBus), allrows=true)
 buses_hitting_Q_limit = unique(filter(:QFrac => n -> n > 0.95 && n <= 1, df_gens_pre_split[!,[:GenBus, :QFrac]]).GenBus)
 
 # Show full set of generators for each bus that has one or more gens at/close to their reactive power limit
 for bus in buses_hitting_Q_limit
-    show(sort!(filter(:GenBus => n -> n == bus, df_gens_pre_split[!,[:GenName, :StatusAvailable,:Capacity,:GenBus, :Q, :Qmin, :Qmax,:QFrac]]), :Capacity, rev=true),allrows=true)
+    show(sort!(filter(:GenBus => n -> n == bus, df_gens_pre_split[!,[:GenName, :StatusAvailable,:Capacity,:GenBus, :PowerFactor, :Q, :Qmin, :Qmax,:QFrac]]), :Capacity, rev=true),allrows=true)
 end
 
 # --------------------------------------------------------------
