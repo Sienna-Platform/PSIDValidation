@@ -5,7 +5,7 @@ using PowerSimulationsDynamics
 using PowerFlows
 using NLsolve
 using CSV
-using Plots
+using PlotlyJS
 using DataFrames
 
 include("new_system_data.jl")
@@ -315,6 +315,18 @@ new_line = Line(
 add_component!(sys, new_line,)
 
 # Note: all lines with negative impedance have been removed
+
+# --------------------------------------------------------------
+# *FOR TESTING* Multiply Q limit of every gen by 10 
+# --------------------------------------------------------------
+
+# This will make it easier to see when there is a "run-away" reactive power problem 
+for gen in get_components(ThermalStandard, sys)
+    new_min = get_reactive_power_limits(gen).min
+    new_max = get_reactive_power_limits(gen).max * 10
+    set_reactive_power_limits!(gen, (min = new_min, max = new_max))
+end
+
 ##
 # --------------------------------------------------------------
 # *FOR TESTING* Build Dataframe with info about each generator
@@ -386,7 +398,7 @@ end
 df_gens_pre_split = build_gen_info_dataframe(sys)
 
 # Show all gens at >0.95 of their reactive power limit
-show(sort!(filter(:QFrac => n -> n > 0.95 && n <= 1, df_gens_pre_split[!,[:GenName, :StatusAvailable,:Capacity,:GenBus, :PowerFactor, :Q, :Qmin, :Qmax,:QFrac]]),:GenBus), allrows=true)
+show(sort!(filter(:QFrac => n -> n > 0.095 && n <= 0.1, df_gens_pre_split[!,[:GenName, :StatusAvailable,:Capacity,:GenBus, :PowerFactor, :Q, :Qmin, :Qmax,:QFrac]]),:GenBus), allrows=true)
 buses_hitting_Q_limit = unique(filter(:QFrac => n -> n > 0.95 && n <= 1, df_gens_pre_split[!,[:GenBus, :QFrac]]).GenBus)
 
 # Show full set of generators for each bus that has one or more gens at/close to their reactive power limit
@@ -399,11 +411,6 @@ end
 # --------------------------------------------------------------
 
 ##
-for gen in get_components(ThermalStandard, sys)
-    new_min = get_reactive_power_limits(gen).min
-    new_max = get_reactive_power_limits(gen).max * 10
-    set_reactive_power_limits!(gen, (min = new_min, max = new_max))
-end
 
 const MULTI_GEN_BUSES = [
     4031
@@ -525,18 +532,55 @@ solve_powerflow!(sys)
 # Build dataframe with generator info after to splitting generators
 df_gens_post_split = build_gen_info_dataframe(sys)
 
-# Create plotting dataframe with Qpre-Qpost to interpret reactive power changes
-df_plot = leftjoin(df_gens_pre_split[!,[:GenName,:Q]], df_gens_post_split[!,[:GenName, :Q]], on = :GenName, makeunique=true)
-df_plot = insertcols!(df_plot, :QDiff => df_plot.Q - df_plot.Q_1)
-show(sort!(df_plot, :QDiff, rev=true), allrows=true)
-p1 = plot(
-    df_plot[!, :GenName], # convert radians to degrees
-    df_plot[!, :QDiff], 
-    seriestype=:scatter, 
-    title="Difference in Q pre/post bus split",
-    xlabel="GenName", 
-    ylabel="Q_pre - Q_post"
+# Build comparison dataframe for plotting
+df_plot = leftjoin(df_gens_post_split[!,[:GenName, :PowerFactor, :QFrac]], df_gens_pre_split[!,[:GenName,:PowerFactor, :QFrac]], on = :GenName, makeunique=true)
+
+# Plot Power Factor (post vs. pre)
+plot(
+    df_plot, x=:PowerFactor_1, y=:PowerFactor, text=:GenName,
+    mode="markers", size_max=60,
+    kind="scatter",
+    labels=Dict(
+        :PowerFactor_1 => "PF (pre-split)",
+        :PowerFactor => "PF (post-split)",
+    ),
+    Layout(
+        title_text="Comparison of Power Factor before/after splitting bus",
+        annotations=[
+            attr(text="Worse (further from PF=1)",
+            xref="paper", yref="paper",
+            x=0.9, y=0.1, showarrow=false),
+            attr(text="Better (closer to PF=1)",
+            xref="paper", yref="paper",
+            x=0.1, y=0.9, showarrow=false),
+        ]        
     )
+)
+
+# Plot Q Fraction (post vs. pre)
+plot(
+    df_plot, x=:QFrac_1, y=:QFrac, text=:GenName,
+    mode="markers", size_max=60,
+    kind="scatter",
+    labels=Dict(
+        :QFrac_1 => "Q / QLimit (pre-split)",
+        :Q_Frac => "Q / QLimit (post-split)",
+    ),
+    Layout(
+        title_text="Comparison of Q/QLimit before/after splitting bus",
+        annotations=[
+            attr(text="Better (further from Q limit)",
+            #xref="paper", yref="paper",
+            x=0.1, y=0.02, showarrow=false),
+            attr(text="Worse (closer to Q limit)",
+            #xref="paper", yref="paper",
+            x=0.02, y=0.1, showarrow=false),
+            attr(text="Run-away",
+            #xref="paper", yref="paper",
+            x=0.05, y=0.45, showarrow=false),
+        ]
+    )
+)
 
 ##
 # --------------------------------------------------------------
