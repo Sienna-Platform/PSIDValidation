@@ -64,13 +64,18 @@ line_params = Dict(
 # Correct lines with zero resistance but postive reactance. 
 for br in get_components(Line, sys)
     if get_r(br) <= 0 && get_x(br) > 0
-        @info "Line $(get_name(br)) has voltage  $(get_base_voltage(get_from(get_arc(br)))) and x = $(get_x(br))"
         voltage = get_base_voltage(get_from(get_arc(br)))
         new_r = get_x(br)/(line_params[voltage].xr_ratio[2]) # divide reactance by median x/r ratio to get r value.
         set_r!(br, new_r)
     end
 end
-
+#= # Code to print rate for lines connected to 500kV lines
+for l in get_components(Line, sys)
+    if get_base_voltage(get_arc(l).to)== 500
+        println(get_rate(l))
+    end
+end
+=#
 
 # Network changes to shorten lines
 from_line = get_component(Line, sys, "B2404_VINCENT-B3897_MIDWAY6-i_1")
@@ -327,7 +332,6 @@ for gen in get_components(ThermalStandard, sys)
     set_reactive_power_limits!(gen, (min = new_min, max = new_max))
 end
 
-##
 # --------------------------------------------------------------
 # *FOR TESTING* Build Dataframe with info about each generator
 # --------------------------------------------------------------
@@ -410,12 +414,15 @@ end
 # Split multi-gen buses so each gen has it's own transformer
 # --------------------------------------------------------------
 
-##
-
 const MULTI_GEN_BUSES = [
     4031
     #4231
 ]
+
+bus = first(get_components(x -> get_number(x) == 4001, Bus, sys))
+println("Magnitude of bus 4001 before split: $(get_magnitude(bus))")
+bus = first(get_components(x -> get_number(x) == 4031, Bus, sys))
+println("Magnitude of bus 4031 before split: $(get_magnitude(bus))")
 
 bus_numbers = get_number.(get_components(Bus, sys))
 for b in MULTI_GEN_BUSES
@@ -430,7 +437,11 @@ for b in MULTI_GEN_BUSES
     number_of_gens_at_bus = length(th)
     for g in th
         # ------------------ CREATE NEW BUS
-
+        q = get_reactive_power(g)
+        qmax = get_reactive_power_limits(g).max
+        qfrac = abs(q) / abs(qmax) * 10
+        println("Pre-split adjusted Q frac of $(get_name(g)) is $qfrac")
+        
         # Get the generator info we need for the new bus
         unit_type = split(get_name(g), "-")[end]
         v_mag_setpoint = get_magnitude(bus) # TODO: Change this value to be magnitude of the other bus bus_xfr is connected to?
@@ -513,18 +524,45 @@ for b in MULTI_GEN_BUSES
     # TODO: this allows powerflow to solve, but figure out if there is anything else we need to change
     # TODO: check whether this assumes that P=0 and Q=0 (what we want) or if we need to define a StaticInjection (StandardLoad?) of 0
     set_bustype!(bus, "PQ")
+    # Change base voltage of the B post_split bus to be the same as bus A
+    set_base_voltage!(bus, get_base_voltage(get_arc(bus_xfr).from)) # Could be .to for some buses?
 
-    # After adding the new transformers, adjust (or delete?) original transformer
+    # ------------------ REMOVE OLD TRANSFORMER AND REPLACE WITH LINE
+    # Need to figure out how to assign values to some line params
+    new_line = Line(
+        name = "$(get_name(get_arc(bus_xfr).from))-$(get_name(get_arc(bus_xfr).to))-i_1",
+        available = true,
+        active_power_flow = get_active_power_flow(bus_xfr),
+        reactive_power_flow = get_reactive_power_flow(bus_xfr),
+        arc = get_arc(bus_xfr),
+        r = 0,
+        x = 0.0001, # random small number
+        b = (from = 0.0, to = 0.0), # taken from another line
+        rate = 1000, # random large number (should change)
+        angle_limits = (min = -1.0472, max = 1.0472) # take from another line
+    )
+    remove_component!(sys, bus_xfr)
+    add_component!(sys, new_line)
     # TODO: decide this after confirming the subtransmission issue
 
 end
 
-
-##
 # Re-solve powerflow with new topology
 solve_powerflow!(sys)
 
+bus = first(get_components(x -> get_number(x) == 4001, Bus, sys))
+@info("Magnitude of bus 4001 after split: $(get_magnitude(bus))")
+bus = first(get_components(x -> get_number(x) == 4031, Bus, sys))
+@info("Magnitude of bus 4032 after split: $(get_magnitude(bus))")
+for b in [4233,4234,4235,4236]
+    th = first(get_components(x -> get_number(get_bus(x)) == b, ThermalStandard, sys))
+    q = get_reactive_power(th)
+    qmax = get_reactive_power_limits(th).max
+    qfrac = abs(q) / abs(qmax) * 10
+    println("The adjusted Qfrac of $(get_name(th)) is $qfrac")
+end
 
+##
 # --------------------------------------------------------------
 # *FOR TESTING* Look at reactive power after splitting bus
 # --------------------------------------------------------------
@@ -557,6 +595,7 @@ plot(
     )
 )
 
+##
 # Plot Q Fraction (post vs. pre)
 plot(
     df_plot, x=:QFrac_1, y=:QFrac, text=:GenName,
