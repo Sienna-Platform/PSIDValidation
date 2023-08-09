@@ -419,14 +419,16 @@ const MULTI_GEN_BUSES = [
     #4231
 ]
 
+# Print voltage magnitude of the split bus (B) and the bus on the high side of the original transformer (A)
 bus = first(get_components(x -> get_number(x) == 4001, Bus, sys))
-println("Magnitude of bus 4001 before split: $(get_magnitude(bus))")
+println("Voltage magnitude of bus 4001 before split: $(get_magnitude(bus))")
 bus = first(get_components(x -> get_number(x) == 4031, Bus, sys))
-println("Magnitude of bus 4031 before split: $(get_magnitude(bus))")
+println("Voltage magnitude of bus 4031 before split: $(get_magnitude(bus))")
 
 bus_numbers = get_number.(get_components(Bus, sys))
+bus_numbers_new = []
 for b in MULTI_GEN_BUSES
-    
+
     # Get info about the bus this generator is attached to
     bus = first(get_components(x -> get_number(x) == b, Bus, sys))
     # Get bus transformer (will through error if more than one)
@@ -440,7 +442,7 @@ for b in MULTI_GEN_BUSES
         q = get_reactive_power(g)
         qmax = get_reactive_power_limits(g).max
         qfrac = abs(q) / abs(qmax) * 10
-        println("Pre-split adjusted Q frac of $(get_name(g)) is $qfrac")
+        println("The pre-split Q frac of $(get_name(g)) is $qfrac")
         
         # Get the generator info we need for the new bus
         unit_type = split(get_name(g), "-")[end]
@@ -449,7 +451,8 @@ for b in MULTI_GEN_BUSES
         # Get next un-used bus number to assign to the new bus we will create for this generator 
         next_bus_number = get_next_bus_number(bus_numbers, b) # Q: may want to look over how get_next_bus_number works
         push!(bus_numbers, next_bus_number)
-        
+        push!(bus_numbers_new, next_bus_number)
+
         # Get whether this is a grid-forming gen (PV bus) or grid-following gen (PQ bus) from dyn_gen attributes
         # TODO: find a more robust way to check for this
         dyn_gen = get_dynamic_injector(g)
@@ -524,11 +527,20 @@ for b in MULTI_GEN_BUSES
     # TODO: this allows powerflow to solve, but figure out if there is anything else we need to change
     # TODO: check whether this assumes that P=0 and Q=0 (what we want) or if we need to define a StaticInjection (StandardLoad?) of 0
     set_bustype!(bus, "PQ")
-    # Change base voltage of the B post_split bus to be the same as bus A
-    set_base_voltage!(bus, get_base_voltage(get_arc(bus_xfr).from)) # Could be .to for some buses?
+
+    # Change base voltage of the split bus (B) to be the same as the bus on the high side of this transformer (A)
+    if get_arc(bus_xfr).from == bus
+        bus_high_side = get_arc(bus_xfr).to
+    else 
+        bus_high_side = get_arc(bus_xfr).from
+    end
+    set_base_voltage!(bus, get_base_voltage(bus_high_side))
 
     # ------------------ REMOVE OLD TRANSFORMER AND REPLACE WITH LINE
-    # Need to figure out how to assign values to some line params
+
+    # Create new line object
+    # TODO: check that we should indeed be removing this (related to question about subtransmission)
+    # TODO: figure out how to assign values to some line params
     new_line = Line(
         name = "$(get_name(get_arc(bus_xfr).from))-$(get_name(get_arc(bus_xfr).to))-i_1",
         available = true,
@@ -541,25 +553,29 @@ for b in MULTI_GEN_BUSES
         rate = 1000, # random large number (should change)
         angle_limits = (min = -1.0472, max = 1.0472) # take from another line
     )
+
+    # Swap out transformer for line
     remove_component!(sys, bus_xfr)
     add_component!(sys, new_line)
-    # TODO: decide this after confirming the subtransmission issue
 
 end
 
 # Re-solve powerflow with new topology
 solve_powerflow!(sys)
 
+# Print voltage magnitude of the split bus (B) and the bus on the high side of the original transformer (A)
 bus = first(get_components(x -> get_number(x) == 4001, Bus, sys))
-@info("Magnitude of bus 4001 after split: $(get_magnitude(bus))")
+@info("Voltage magnitude of bus 4001 after split: $(get_magnitude(bus))")
 bus = first(get_components(x -> get_number(x) == 4031, Bus, sys))
-@info("Magnitude of bus 4032 after split: $(get_magnitude(bus))")
-for b in [4233,4234,4235,4236]
+@info("Voltage magnitude of bus 4032 after split: $(get_magnitude(bus))")
+
+# Print Qfrac of new buses (should be zero for IBRs)
+for b in bus_numbers_new
     th = first(get_components(x -> get_number(get_bus(x)) == b, ThermalStandard, sys))
     q = get_reactive_power(th)
     qmax = get_reactive_power_limits(th).max
     qfrac = abs(q) / abs(qmax) * 10
-    println("The adjusted Qfrac of $(get_name(th)) is $qfrac")
+    println("The post-split Qfrac of $(get_name(th)) is $qfrac")
 end
 
 ##
