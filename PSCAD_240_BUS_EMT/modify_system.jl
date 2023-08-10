@@ -322,6 +322,46 @@ add_component!(sys, new_line,)
 # Note: all lines with negative impedance have been removed
 
 # --------------------------------------------------------------
+# *FOR TESTING* Creating Data Frame of Generators with Strange Device Mixes
+# --------------------------------------------------------------
+
+df_multi_gen_buses = DataFrame(
+        BusName=String[],
+        SC=Bool[],
+        SG=Bool[],
+        Inv=Bool[],
+)
+
+for b in get_components(Bus, sys)
+    th = get_components(x -> get_bus(x) == b, ThermalStandard, sys)
+    number_of_gens_at_bus = length(th)
+    SC_flag = false
+    SG_flag = false
+    INV_flag = false
+    for g in th
+        unit_type = split(get_name(g), "-")[end]
+        if unit_type == "S"||unit_type == "W"||unit_type == "DP"||unit_type == "NW"||unit_type == "SW"
+            INV_flag = true
+        elseif unit_type == "SC"
+            SC_flag = true
+        else
+            SG_flag = true
+        end
+    end
+    if SC_flag && SG_flag
+        push!(df_multi_gen_buses, (get_name(b), SC_flag, SG_flag, INV_flag))
+    elseif SC_flag && INV_flag
+        push!(df_multi_gen_buses, (get_name(b), SC_flag, SG_flag, INV_flag))
+    elseif SG_flag && INV_flag
+        push!(df_multi_gen_buses, (get_name(b), SC_flag, SG_flag, INV_flag))
+    end
+end
+open(joinpath(@__DIR__, string("multi_gen_buses", ".csv")), "w") do io
+    CSV.write(io, df_multi_gen_buses)
+end
+
+##
+# --------------------------------------------------------------
 # *FOR TESTING* Multiply Q limit of every gen by 10 
 # --------------------------------------------------------------
 
@@ -410,20 +450,28 @@ for bus in buses_hitting_Q_limit
     show(sort!(filter(:GenBus => n -> n == bus, df_gens_pre_split[!,[:GenName, :StatusAvailable,:Capacity,:GenBus, :PowerFactor, :Q, :Qmin, :Qmax,:QFrac]]), :Capacity, rev=true),allrows=true)
 end
 
+##
 # --------------------------------------------------------------
 # Split multi-gen buses so each gen has it's own transformer
 # --------------------------------------------------------------
 
 const MULTI_GEN_BUSES = [
+    6433
+    6132
+    4231
+    4035
     4031
-    #4231
+    6333
+    4039
+    6235
 ]
 
-# Print voltage magnitude of the split bus (B) and the bus on the high side of the original transformer (A)
+#= Print voltage magnitude of the split bus (B) and the bus on the high side of the original transformer (A)
 bus = first(get_components(x -> get_number(x) == 4001, Bus, sys))
 println("Voltage magnitude of bus 4001 before split: $(get_magnitude(bus))")
 bus = first(get_components(x -> get_number(x) == 4031, Bus, sys))
 println("Voltage magnitude of bus 4031 before split: $(get_magnitude(bus))")
+=#
 
 bus_numbers = get_number.(get_components(Bus, sys))
 bus_numbers_new = []
@@ -551,7 +599,7 @@ for b in MULTI_GEN_BUSES
         x = 0.0001, # random small number
         b = (from = 0.0, to = 0.0), # taken from another line
         rate = 1000, # random large number (should change)
-        angle_limits = (min = -1.0472, max = 1.0472) # take from another line
+        angle_limits = (min = -1.0472, max = 1.0472) # taken from another line
     )
 
     # Swap out transformer for line
@@ -563,11 +611,11 @@ end
 # Re-solve powerflow with new topology
 solve_powerflow!(sys)
 
-# Print voltage magnitude of the split bus (B) and the bus on the high side of the original transformer (A)
+#= Print voltage magnitude of the split bus (B) and the bus on the high side of the original transformer (A)
 bus = first(get_components(x -> get_number(x) == 4001, Bus, sys))
 @info("Voltage magnitude of bus 4001 after split: $(get_magnitude(bus))")
 bus = first(get_components(x -> get_number(x) == 4031, Bus, sys))
-@info("Voltage magnitude of bus 4032 after split: $(get_magnitude(bus))")
+@info("Voltage magnitude of bus 4031 after split: $(get_magnitude(bus))")
 
 # Print Qfrac of new buses (should be zero for IBRs)
 for b in bus_numbers_new
@@ -577,6 +625,7 @@ for b in bus_numbers_new
     qfrac = abs(q) / abs(qmax) * 10
     println("The post-split Qfrac of $(get_name(th)) is $qfrac")
 end
+=#
 
 ##
 # --------------------------------------------------------------
