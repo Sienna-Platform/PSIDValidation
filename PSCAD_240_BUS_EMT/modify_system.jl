@@ -501,6 +501,13 @@ bus_numbers = get_number.(get_components(Bus, sys))
 bus_numbers_new = []
 for b in bus_numbers_with_gens_strange_mix
 
+    # *TESTING* There is an issue with 3933
+    # - splitting 3933 with the following procedure causes the powerflow to break
+    # - I think it is because it is *not* a PV bus, despite having generators...
+    if b == 3933 
+        @info "......skipping $b"
+        continue
+    end
 
     # Get info about the bus this generator is attached to
     bus = first(get_components(x -> get_number(x) == b, Bus, sys))
