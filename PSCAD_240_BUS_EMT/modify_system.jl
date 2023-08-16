@@ -10,6 +10,8 @@ using DataFrames
 
 include("new_system_data.jl")
 
+println("---------------------------------------------------------------------------------------------------------------- Starting import")
+
 # Load .raw and .dyr files
 sys = System(
     joinpath(@__DIR__, "psid_files", "PSCAD_VALIDATION_RAW.raw"),
@@ -18,7 +20,11 @@ sys = System(
     runchecks = false,
 )
 
+println("---------------------------------------------------------------------------------------------------------------- Running powerflow")
+
 solve_powerflow!(sys)
+
+println("---------------------------------------------------------------------------------------------------------------- Starting negative impedance removal")
 
 #for b in get_components(Bus, sys)
 #    println("$(get_name(b)) - Magnitude $(get_magnitude(b)) - Angle (rad) $(get_angle(b))")
@@ -432,7 +438,7 @@ function build_gen_info_dataframe(sys)
         power_factor = p / sqrt((p^2) + (q^2))
         qmin = get_reactive_power_limits(gen).min
         qmax = get_reactive_power_limits(gen).max
-        qfrac = abs(q) / broadcast(abs, qmax)
+        qfrac = abs(q) / (broadcast(abs, qmax)/10)
         bool_split = bus in SPLIT_BUSES
         status = get_status(gen) && get_available(gen)
         
@@ -463,32 +469,35 @@ end
 # --------------------------------------------------------------
 
 # Build dataframe with generator info prior to splitting generators
-df_gens_pre_split = build_gen_info_dataframe(sys)
+df_gens_pre_split = build_gen_info_dataframe(sys);
 
-# Show all gens at >0.95 of their reactive power limit
-show(sort!(filter(:QFrac => n -> n > 0.095 && n <= 0.1, df_gens_pre_split[!,[:GenName, :StatusAvailable,:Capacity,:GenBus, :PowerFactor, :Q, :Qmin, :Qmax,:QFrac]]),:GenBus), allrows=true)
-buses_hitting_Q_limit = unique(filter(:QFrac => n -> n > 0.95 && n <= 1, df_gens_pre_split[!,[:GenBus, :QFrac]]).GenBus)
-
-# Show full set of generators for each bus that has one or more gens at/close to their reactive power limit
-for bus in buses_hitting_Q_limit
-    show(sort!(filter(:GenBus => n -> n == bus, df_gens_pre_split[!,[:GenName, :StatusAvailable,:Capacity,:GenBus, :PowerFactor, :Q, :Qmin, :Qmax,:QFrac]]), :Capacity, rev=true),allrows=true)
+# Show buses where one or more of the gens at that bus is at >0.95 of their reactive power limit
+display_gens_at_Q_limit = false
+if display_gens_at_Q_limit
+    # Show all gens at >0.95 of their reactive power limit
+    show(sort!(filter(:QFrac => n -> n > 0.095 && n <= 0.1, df_gens_pre_split[!,[:GenName, :StatusAvailable,:Capacity,:GenBus, :PowerFactor, :Q, :Qmin, :Qmax,:QFrac]]),:GenBus), allrows=true)
+    # Show full set of generators for each bus that has one or more gens at/close to their reactive power limit
+    buses_hitting_Q_limit = unique(filter(:QFrac => n -> n > 0.095 && n <= 0.1, df_gens_pre_split[!,[:GenBus, :QFrac]]).GenBus)
+    for bus in buses_hitting_Q_limit
+        show(sort!(filter(:GenBus => n -> n == bus, df_gens_pre_split[!,[:GenName, :StatusAvailable,:Capacity,:GenBus, :PowerFactor, :Q, :Qmin, :Qmax,:QFrac]]), :Capacity, rev=true),allrows=true)
+    end
 end
 
-##
+
 # --------------------------------------------------------------
 # Split multi-gen buses so each gen has it's own transformer
 # --------------------------------------------------------------
 
-const MULTI_GEN_BUSES = [
-    6433
-    6132
-    4231
-    4035
-    4031
-    6333
-    4039
-    6235
-]
+# const MULTI_GEN_BUSES = [
+#     6433
+#     6132
+#     4231
+#     4035
+#     4031
+#     6333
+#     4039
+#     6235
+# ]
 
 #= Print voltage magnitude of the split bus (B) and the bus on the high side of the original transformer (A)
 bus = first(get_components(x -> get_number(x) == 4001, Bus, sys))
@@ -511,8 +520,11 @@ for b in bus_numbers_with_gens_strange_mix
 
     # Get info about the bus this generator is attached to
     bus = first(get_components(x -> get_number(x) == b, Bus, sys))
-    # Get bus transformer (will through error if more than one)
+    # Get bus transformer (will throw error if more than one)
     bus_xfr = get_bus_transformer(sys, bus)
+
+    println("---------------------------------------------------------------------------------------------------------------- Starting split procedure for bus $(b): $(get_name(bus))")
+    @info "Bus type: $(get_bustype(bus))"
 
     # Loop through all generator components attached to bus b
     th = get_components(x -> get_number(get_bus(x)) == b, ThermalStandard, sys)
@@ -522,10 +534,12 @@ for b in bus_numbers_with_gens_strange_mix
         q = get_reactive_power(g)
         qmax = get_reactive_power_limits(g).max
         qfrac = abs(q) / abs(qmax) * 10
-        println("The pre-split Q frac of $(get_name(g)) is $qfrac")
+        @info "---------- Starting separation of $(get_name(g))"
+        @info "Pre-split Q frac: $qfrac"
         
         # Get the generator info we need for the new bus
         unit_type = split(get_name(g), "-")[end]
+        @info "Unit type: $(device_mapping[unit_type])"
         v_mag_setpoint = get_magnitude(bus) # TODO: Change this value to be magnitude of the other bus bus_xfr is connected to?
 
         # Get next un-used bus number to assign to the new bus we will create for this generator 
@@ -536,10 +550,15 @@ for b in bus_numbers_with_gens_strange_mix
         # Get whether this is a grid-forming gen (PV bus) or grid-following gen (PQ bus) from dyn_gen attributes
         # TODO: find a more robust way to check for this
         dyn_gen = get_dynamic_injector(g)
+        new_bustype = "not_set"
         if hasproperty(dyn_gen, :freq_estimator) 
             new_bustype = "PQ"  # "DynamicInverter"
         else 
             new_bustype = "PV"  # "DynamicGenerator"
+        end
+        @info "Unit Type $unit_type: set as $new_bustype"
+        if new_bustype == "not_set"
+            @warn "Unit type not set... something weird with our logic for finding the bus type with the dynamic injector"
         end
         
         # Create new bus for this individual generator
@@ -556,7 +575,7 @@ for b in bus_numbers_with_gens_strange_mix
         )   
 
         # Add new bus to system
-        @info "adding bus $(get_name(new_bus))"
+        @info "Adding new bus: $(get_name(new_bus))"
         add_component!(sys, new_bus)
 
         # ------------------ UPDATE GEN
@@ -567,7 +586,7 @@ for b in bus_numbers_with_gens_strange_mix
 
         # Update generator component parameters before adding it back into the system
         set_bus!(g, new_bus) # Q: I think g is still the same object, just not attached?
-        @info "setting gen name generator-$(next_bus_number)-$unit_type"
+        @info "Defining new gen name: generator-$(next_bus_number)-$unit_type"
         set_name!(g, "generator-$(next_bus_number)-$unit_type")
 
         # If our new bus is a PQ bus, define Q (powerflow input)
@@ -598,7 +617,7 @@ for b in bus_numbers_with_gens_strange_mix
             rate = get_base_power(g)*1.1,
         )
         # Add new transformer to system
-        @info "adding transformer $(get_name(new_xfr))"
+        @info "Adding new transformer: $(get_name(new_xfr))"
         add_component!(sys, new_xfr)
         
     end
@@ -615,6 +634,10 @@ for b in bus_numbers_with_gens_strange_mix
         bus_high_side = get_arc(bus_xfr).from
     end
     set_base_voltage!(bus, get_base_voltage(bus_high_side))
+
+    # Print out pre-split voltage magnitudes
+    @info "Voltage magnitude of low-side bus (orig gen bus) $(b) before split: $(get_magnitude(bus))"
+    @info "Voltage magnitude of high-side bus (one hop into grid) $(get_number(bus_high_side)) before split: $(get_magnitude(bus_high_side))"
 
     # ------------------ REMOVE OLD TRANSFORMER AND REPLACE WITH LINE
 
@@ -692,7 +715,7 @@ plot(
     )
 )
 
-##
+
 # Plot Q Fraction (post vs. pre)
 plot(
     df_plot, x=:QFrac_1, y=:QFrac, text=:GenName,
@@ -700,7 +723,7 @@ plot(
     kind="scatter",
     labels=Dict(
         :QFrac_1 => "Q / QLimit (pre-split)",
-        :Q_Frac => "Q / QLimit (post-split)",
+        :QFrac => "Q / QLimit (post-split)",
     ),
     Layout(
         title_text="Comparison of Q/QLimit before/after splitting bus",
