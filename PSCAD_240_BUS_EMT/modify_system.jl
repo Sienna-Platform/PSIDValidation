@@ -325,19 +325,29 @@ add_component!(sys, new_line,)
 # *FOR TESTING* Creating Data Frame of Generators with Strange Device Mixes
 # --------------------------------------------------------------
 
-df_multi_gen_buses = DataFrame(
+println("---------------------------------------------------------------------------------------------------------------- *TESTING* Creating dataframe of buses with strange device mixes")
+
+# Only includes buses with the following combinations: SG+SC, SG+Inv, SC+Inv
+df_buses_with_gens = DataFrame(
         BusName=String[],
+        BusNumber=Int[],
+        BusType=Int[],
         SC=Bool[],
         SG=Bool[],
         Inv=Bool[],
+        StrangeMix=Bool[]
 )
 
 for b in get_components(Bus, sys)
     th = get_components(x -> get_bus(x) == b, ThermalStandard, sys)
     number_of_gens_at_bus = length(th)
+
+    # Start by assuming none of the device types are present at this bus
     SC_flag = false
     SG_flag = false
     INV_flag = false
+
+    # If any of the device types are found at this bus, toggle the relevant flag
     for g in th
         unit_type = split(get_name(g), "-")[end]
         if unit_type == "S"||unit_type == "W"||unit_type == "DP"||unit_type == "NW"||unit_type == "SW"
@@ -348,19 +358,33 @@ for b in get_components(Bus, sys)
             SG_flag = true
         end
     end
-    if SC_flag && SG_flag
-        push!(df_multi_gen_buses, (get_name(b), SC_flag, SG_flag, INV_flag))
-    elseif SC_flag && INV_flag
-        push!(df_multi_gen_buses, (get_name(b), SC_flag, SG_flag, INV_flag))
-    elseif SG_flag && INV_flag
-        push!(df_multi_gen_buses, (get_name(b), SC_flag, SG_flag, INV_flag))
+
+    # Add to data frame if this bus has generators
+    if (SC_flag && SG_flag) || (SC_flag && INV_flag) || (SG_flag && INV_flag)
+        # Buses with strange devices mixes: SG+SC, SG+Inv, SC+Inv (Note this also includes the case of SC+SG+INV)
+        push!(df_buses_with_gens, (get_name(b), get_number(b), get_bustype(b).value, SC_flag, SG_flag, INV_flag, true))
+    elseif SC_flag || SG_flag || INV_flag
+        # Buses with a only one type of generator
+        push!(df_buses_with_gens, (get_name(b), get_number(b), get_bustype(b).value, SC_flag, SG_flag, INV_flag, false))
     end
 end
+
+# Grab subset of buses that have a strange  mix of generators
+df_buses_with_gens_strange_mix = filter(:StrangeMix => n -> n == true, df_buses_with_gens)
+
+# Store list of unique buses to be used for split bus procedure
+bus_numbers_with_gens_strange_mix = sort!(unique((df_buses_with_gens_strange_mix[!,[:BusNumber]]).BusNumber))
+
+
+# Export strange mix subset to a CSV
 open(joinpath(@__DIR__, string("multi_gen_buses", ".csv")), "w") do io
-    CSV.write(io, df_multi_gen_buses)
+    CSV.write(io, df_buses_with_gens_strange_mix)
 end
 
-##
+# Grab subset of buses that have only one type of generator (just for reference, not used anywhere)
+df_buses_with_gens_single_type = filter(:StrangeMix => n -> n == false, df_buses_with_gens)
+
+
 # --------------------------------------------------------------
 # *FOR TESTING* Multiply Q limit of every gen by 10 
 # --------------------------------------------------------------
@@ -475,7 +499,8 @@ println("Voltage magnitude of bus 4031 before split: $(get_magnitude(bus))")
 
 bus_numbers = get_number.(get_components(Bus, sys))
 bus_numbers_new = []
-for b in MULTI_GEN_BUSES
+for b in bus_numbers_with_gens_strange_mix
+
 
     # Get info about the bus this generator is attached to
     bus = first(get_components(x -> get_number(x) == b, Bus, sys))
