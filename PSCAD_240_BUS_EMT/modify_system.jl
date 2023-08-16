@@ -391,7 +391,7 @@ df_buses_with_gens_single_type = filter(:StrangeMix => n -> n == false, df_buses
 
 # This will make it easier to see when there is a "run-away" reactive power problem 
 for gen in get_components(ThermalStandard, sys)
-    new_min = get_reactive_power_limits(gen).min
+    new_min = get_reactive_power_limits(gen).min * 10
     new_max = get_reactive_power_limits(gen).max * 10
     set_reactive_power_limits!(gen, (min = new_min, max = new_max))
 end
