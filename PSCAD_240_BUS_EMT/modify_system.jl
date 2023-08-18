@@ -44,13 +44,6 @@ open(joinpath(@__DIR__, string("bus_results", ".csv")), "w") do io
 end
 =#
 
-# Print names of lines with negative impedances
-#for br in get_components(Line, sys)
-#    if get_x(br) < 0
-        #@info "Line $(get_name(br)) has negative impedance"
-#    end
-#end
-
 line_params = Dict(
     #https://www.mdpi.com/1996-1073/10/8/1233/htm
     345.0 => ( 
@@ -75,13 +68,6 @@ for br in get_components(Line, sys)
         set_r!(br, new_r)
     end
 end
-#= # Code to print rate for lines connected to 500kV lines
-for l in get_components(Line, sys)
-    if get_base_voltage(get_arc(l).to)== 500
-        println(get_rate(l))
-    end
-end
-=#
 
 # Network changes to shorten lines
 from_line = get_component(Line, sys, "B2404_VINCENT-B3897_MIDWAY6-i_1")
@@ -510,9 +496,7 @@ bus_numbers = get_number.(get_components(Bus, sys))
 bus_numbers_new = []
 for b in bus_numbers_with_gens_strange_mix
 
-    # *TESTING* There is an issue with 3933
-    # - splitting 3933 with the following procedure causes the powerflow to break
-    # - I think it is because it is *not* a PV bus, despite having generators...
+    # Skipping 3933 because it is the reference bus
     if b == 3933 
         @info "......skipping $b"
         continue
@@ -588,6 +572,8 @@ for b in bus_numbers_with_gens_strange_mix
         set_bus!(g, new_bus) # Q: I think g is still the same object, just not attached?
         @info "Defining new gen name: generator-$(next_bus_number)-$unit_type"
         set_name!(g, "generator-$(next_bus_number)-$unit_type")
+        set_name!(dyn_gen, "generator-$(next_bus_number)-$unit_type")
+
 
         # If our new bus is a PQ bus, define Q (powerflow input)
         # TODO: decide which setpoint to use
@@ -596,8 +582,9 @@ for b in bus_numbers_with_gens_strange_mix
             set_reactive_power!(g, 0.0)
         end
 
-        # Add generator back into system (i.e. attach to grid)
+        # Add generator and dynamic injector back into system (i.e. attach to grid)
         add_component!(sys, g)
+        add_component!(sys, dyn_gen, g)
          
         #TODO: add dynamic component to gen?
 
@@ -665,33 +652,22 @@ end
 
 # Re-solve powerflow with new topology
 solve_powerflow!(sys)
+df_gens_before_mapping = build_gen_info_dataframe(sys)
+set_units_base_system!(sys, "DEVICE_BASE") # to use percentages of device base rather than system base
+update_generation_units!(sys)
+solve_powerflow!(sys)
 
-#= Print voltage magnitude of the split bus (B) and the bus on the high side of the original transformer (A)
-bus = first(get_components(x -> get_number(x) == 4001, Bus, sys))
-@info("Voltage magnitude of bus 4001 after split: $(get_magnitude(bus))")
-bus = first(get_components(x -> get_number(x) == 4031, Bus, sys))
-@info("Voltage magnitude of bus 4031 after split: $(get_magnitude(bus))")
-
-# Print Qfrac of new buses (should be zero for IBRs)
-for b in bus_numbers_new
-    th = first(get_components(x -> get_number(get_bus(x)) == b, ThermalStandard, sys))
-    q = get_reactive_power(th)
-    qmax = get_reactive_power_limits(th).max
-    qfrac = abs(q) / abs(qmax) * 10
-    println("The post-split Qfrac of $(get_name(th)) is $qfrac")
-end
-=#
-
-##
 # --------------------------------------------------------------
 # *FOR TESTING* Look at reactive power after splitting bus
 # --------------------------------------------------------------
 
-# Build dataframe with generator info after to splitting generators
+# Build dataframes with generator info after to splitting generators and device mapping
 df_gens_post_split = build_gen_info_dataframe(sys)
+df_gens_after_mapping = build_gen_info_dataframe(sys)
 
 # Build comparison dataframe for plotting
 df_plot = leftjoin(df_gens_post_split[!,[:GenName, :PowerFactor, :QFrac]], df_gens_pre_split[!,[:GenName,:PowerFactor, :QFrac]], on = :GenName, makeunique=true)
+#df_plot = leftjoin(df_gens_after_mapping[!,[:GenName, :PowerFactor, :QFrac]], df_gens_before_mapping[!,[:GenName,:PowerFactor, :QFrac]], on = :GenName, makeunique=true)
 
 # Plot Power Factor (post vs. pre)
 plot(
