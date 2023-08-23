@@ -669,6 +669,29 @@ df_gens_after_mapping = build_gen_info_dataframe(sys)
 df_plot = leftjoin(df_gens_post_split[!,[:GenName, :PowerFactor, :QFrac]], df_gens_pre_split[!,[:GenName,:PowerFactor, :QFrac]], on = :GenName, makeunique=true)
 #df_plot = leftjoin(df_gens_after_mapping[!,[:GenName, :PowerFactor, :QFrac]], df_gens_before_mapping[!,[:GenName,:PowerFactor, :QFrac]], on = :GenName, makeunique=true)
 
+# Plot vmag vs. qfrac (post- and pre-splitting)
+plot_pre_split = plot(
+    df_gens_pre_split, x=:QFrac, y=:VMag, text=:GenName,
+    mode="markers", size_max=60,
+    kind="scatter",
+    labels=Dict(
+        :VMag => "Voltage Magnitude (pre-split)",
+        :QFrac => "Q / QLimit (pre-split)",
+    )
+)
+plot_post_split = plot(
+    df_gens_post_split, x=:QFrac, y=:VMag, text=:GenName,
+    mode="markers", size_max=60,
+    kind="scatter",
+    labels=Dict(
+        :VMag => "Voltage Magnitude (post-split)",
+        :QFrac => "Q / QLimit (post-split)",
+    )
+)
+##
+p = [plot_pre_split plot_post_split]
+p
+##
 # Plot Power Factor (post vs. pre)
 plot(
     df_plot, x=:PowerFactor_1, y=:PowerFactor, text=:GenName,
@@ -691,6 +714,7 @@ plot(
     )
 )
 
+##
 
 # Plot Q Fraction (post vs. pre)
 plot(
