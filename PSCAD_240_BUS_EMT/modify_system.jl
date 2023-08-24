@@ -424,7 +424,7 @@ function build_gen_info_dataframe(sys)
         power_factor = p / sqrt((p^2) + (q^2))
         qmin = get_reactive_power_limits(gen).min
         qmax = get_reactive_power_limits(gen).max
-        qfrac = abs(q) / (broadcast(abs, qmax)/10)
+        qfrac = q / (broadcast(abs, qmax)/10)
         bool_split = bus in SPLIT_BUSES
         status = get_status(gen) && get_available(gen)
         
@@ -432,7 +432,7 @@ function build_gen_info_dataframe(sys)
         bool_vmag_violated = false
         bool_vang_violated = false
         bool_q_violated = false
-        if qfrac >= 0.95
+        if qfrac >= 0.95 || qfrac <= -0.95
             bool_q_violated = true
         end
         if vmag <= 0.95 || vmag >= 1.05
@@ -461,9 +461,9 @@ df_gens_pre_split = build_gen_info_dataframe(sys);
 display_gens_at_Q_limit = false
 if display_gens_at_Q_limit
     # Show all gens at >0.95 of their reactive power limit
-    show(sort!(filter(:QFrac => n -> n > 0.095 && n <= 0.1, df_gens_pre_split[!,[:GenName, :StatusAvailable,:Capacity,:GenBus, :PowerFactor, :Q, :Qmin, :Qmax,:QFrac]]),:GenBus), allrows=true)
+    show(sort!(filter(:QFrac => n -> n > 0.095 || n <= 0.095, df_gens_pre_split[!,[:GenName, :StatusAvailable,:Capacity,:GenBus, :PowerFactor, :Q, :Qmin, :Qmax,:QFrac]]),:GenBus), allrows=true)
     # Show full set of generators for each bus that has one or more gens at/close to their reactive power limit
-    buses_hitting_Q_limit = unique(filter(:QFrac => n -> n > 0.095 && n <= 0.1, df_gens_pre_split[!,[:GenBus, :QFrac]]).GenBus)
+    buses_hitting_Q_limit = unique(filter(:QFrac => n -> n > 0.095 || n <= 0.095, df_gens_pre_split[!,[:GenBus, :QFrac]]).GenBus)
     for bus in buses_hitting_Q_limit
         show(sort!(filter(:GenBus => n -> n == bus, df_gens_pre_split[!,[:GenName, :StatusAvailable,:Capacity,:GenBus, :PowerFactor, :Q, :Qmin, :Qmax,:QFrac]]), :Capacity, rev=true),allrows=true)
     end
@@ -517,7 +517,7 @@ for b in bus_numbers_with_gens_strange_mix
         # ------------------ CREATE NEW BUS
         q = get_reactive_power(g)
         qmax = get_reactive_power_limits(g).max
-        qfrac = abs(q) / abs(qmax) * 10
+        qfrac = q / abs(qmax) * 10
         @info "---------- Starting separation of $(get_name(g))"
         @info "Pre-split Q frac: $qfrac"
         
@@ -672,25 +672,47 @@ df_plot = leftjoin(df_gens_post_split[!,[:GenName, :PowerFactor, :QFrac]], df_ge
 # Plot vmag vs. qfrac (post- and pre-splitting)
 plot_pre_split = plot(
     df_gens_pre_split, x=:QFrac, y=:VMag, text=:GenName,
-    mode="markers", size_max=60,
+    mode="markers", size_max=60, marker_color="blue",
     kind="scatter",
     labels=Dict(
         :VMag => "Voltage Magnitude (pre-split)",
-        :QFrac => "Q / QLimit (pre-split)",
+        :QFrac => "Q / |QLimit| (pre-split)",
+    ),
+    Layout(
+        title="Vmag vs Q/|QLimit| -- BEFORE bus splitting",
+        shapes=[
+            rect(
+                x0=0.999, x1=1.001, y0=.99, y1=1.15,
+            ),
+            rect(
+                x0=-1.001, x1=-0.999, y0=.99, y1=1.15,
+            )
+        ],
+        yaxis_range=[.99,1.15]
     )
 )
 plot_post_split = plot(
     df_gens_post_split, x=:QFrac, y=:VMag, text=:GenName,
-    mode="markers", size_max=60,
+    mode="markers", size_max=60, marker_color="red",
     kind="scatter",
     labels=Dict(
         :VMag => "Voltage Magnitude (post-split)",
-        :QFrac => "Q / QLimit (post-split)",
+        :QFrac => "Q / |QLimit| (post-split)",
+    ),
+    Layout(
+        title="Vmag vs Q/|QLimit| -- AFTER bus splitting",
+        shapes=[
+            rect(
+                x0=0.999, x1=1.001, y0=.98, y1=1.16,
+            ),
+            rect(
+                x0=-1.001, x1=-0.999, y0=.98, y1=1.16,
+            )
+        ]
     )
 )
 ##
-p = [plot_pre_split plot_post_split]
-p
+
 ##
 # Plot Power Factor (post vs. pre)
 plot(
@@ -827,13 +849,13 @@ for gen in get_components(ThermalStandard, sys)
         name = get_name(gen)
         vmag = get_magnitude(get_bus(gen))
         vang = get_angle(get_bus(gen))
-        qfrac = abs(get_reactive_power(gen)) / broadcast(abs, get_reactive_power_limits(gen).max)
+        qfrac = get_reactive_power(gen) / broadcast(abs, get_reactive_power_limits(gen).max)
         capacity = get_rating(gen)
         println(capacity)
         magbool = false
         angbool = false
         qbool = false
-        if qfrac >= 0.95
+        if qfrac >= 0.95 || qfrac <= -0.95
             qbool = true
         elseif vmag <= 0.95 || vmag >= 1.05
             magbool = true
@@ -850,7 +872,7 @@ for gen in get_components(ThermalStandard, sys)
         # Append to non-JD-adjusted arrays for plotting
         append!(gen_voltage_mag, get_magnitude(get_bus(gen)))
         append!(gen_voltage_angle, get_angle(get_bus(gen)))
-        append!(gen_q_fraction, abs(get_reactive_power(gen)) / broadcast(abs, get_reactive_power_limits(gen).max))
+        append!(gen_q_fraction, get_reactive_power(gen) / broadcast(abs, get_reactive_power_limits(gen).max))
         println(get_rating(gen))
         append!(gen_cap, get_rating(gen))
     end
@@ -865,7 +887,7 @@ p1 = plot(
     title="Q Fraction vs. Voltage Angle",
     label="Not adjusted",
     xlabel="Voltage Angle (degs)", 
-    ylabel="abs(Q)/abs(Q limit)"
+    ylabel="Q/abs(Q limit)"
     )
 plot!(
     gen_voltage_angle_adjusted*(180/pi), # convert radians to degrees
@@ -880,7 +902,7 @@ p2 = plot(
     title="Q Fraction vs. Voltage Mag", 
     label="Not adjusted",
     xlabel="Voltage Mag (p.u.)", 
-    ylabel="abs(Q)/abs(Q limit)"
+    ylabel="Q/abs(Q limit)"
     )
 plot!(
     gen_voltage_mag_adjusted, 
@@ -896,7 +918,7 @@ p3 = plot(
     label="Not adjusted",
     yaxis=:log
     #xlabel="Capacity (?)", 
-    #ylabel="abs(Q)/abs(Q limit)"
+    #ylabel="Q/abs(Q limit)"
     )
 plot!(
     gen_cap_adjusted, 
