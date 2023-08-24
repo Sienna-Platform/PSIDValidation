@@ -495,11 +495,12 @@ println("Voltage magnitude of bus 4031 before split: $(get_magnitude(bus))")
 bus_numbers = get_number.(get_components(Bus, sys))
 bus_numbers_new = []
 for b in bus_numbers_with_gens_strange_mix
-
+    ref_bus = false
     # Skipping 3933 because it is the reference bus
     if b == 3933 
-        @info "......skipping $b"
-        continue
+        #@info "......skipping $b"
+        #continue
+        ref_bus = true
     end
 
     # Get info about the bus this generator is attached to
@@ -535,10 +536,14 @@ for b in bus_numbers_with_gens_strange_mix
         # TODO: find a more robust way to check for this
         dyn_gen = get_dynamic_injector(g)
         new_bustype = "not_set"
-        if hasproperty(dyn_gen, :freq_estimator) 
-            new_bustype = "PQ"  # "DynamicInverter"
-        else 
-            new_bustype = "PV"  # "DynamicGenerator"
+        if ref_bus && (unit_type == "ND")
+            new_bustype = "REF" # Reference bus
+        else
+            if hasproperty(dyn_gen, :freq_estimator) 
+                new_bustype = "PQ"  # "DynamicInverter"
+            else 
+                new_bustype = "PV"  # "DynamicGenerator"
+            end
         end
         @info "Unit Type $unit_type: set as $new_bustype"
         if new_bustype == "not_set"
@@ -688,9 +693,11 @@ plot_post_split = plot(
         :QFrac => "Q / QLimit (post-split)",
     )
 )
-##
+
 p = [plot_pre_split plot_post_split]
 p
+#
+g = first(get_components(x -> get_name(x) == "generator-4242-ND", Source, sys))
 ##
 # Plot Power Factor (post vs. pre)
 plot(
