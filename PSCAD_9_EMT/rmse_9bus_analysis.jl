@@ -17,8 +17,9 @@ line_to_trip = "Bus_8-Bus_9-i_1"
 t_sample =  5.0e-4 #* 1e6 
 t_dynamic_sim = 5.0
 time_step_pscad = 25e-6 * 1e6  
-
-sys = System(joinpath(@__DIR__, string("nine_bus_inv_gen", ".json")), runchecks = false)
+pscad_dynamic_file = "pscad_results_dynamics_0.csv"
+pscad_init_file = "pscad_results_init_0.csv"
+sys = System(joinpath(@__DIR__, string("nine_bus_single_device", ".json")), runchecks = false)
 
 for b in get_components(Line, sys)
     if get_name(b) != line_to_trip
@@ -28,7 +29,7 @@ for b in get_components(Line, sys)
 end
 
 perturbation = BranchTrip(0.1, Line, line_to_trip)
-sim = Simulation(
+sim = Simulation!(
     ResidualModel,
     sys,
     pwd(),
@@ -48,11 +49,10 @@ sim_time_adaptive = @timed execute!(sim, IDA(linear_solver = :KLU), saveat=500e-
 @show sim_time_adaptive
 result_psid_adaptive = read_results(sim)
 
-pscad_results_file = joinpath(@__DIR__, "pscad_results_dynamics.csv")
+pscad_results_file = joinpath(@__DIR__, pscad_dynamic_file) 
 pscad_results = CSV.read(pscad_results_file, DataFrame)  #header =2? 
-pscad_init_file =  joinpath(@__DIR__, "pscad_results_init.csv")
+pscad_init_file =  joinpath(@__DIR__, pscad_init_file) 
 pscad_results_init =  CSV.read(pscad_init_file, DataFrame)  #header =2? 
-
 ### Store Errors in Dictionaries ###
 dict_voltage_fixed = Dict()
 dict_speed_fixed = Dict()
@@ -66,7 +66,6 @@ dict_reactivepower_adaptive = Dict()
 function pscad_compat_name(psid_name)
     return replace(psid_name, "-" => "_")
 end 
-
 
 #Section for storing RMSE for all traces 
 for bus in get_components(Bus, sys)
@@ -115,50 +114,18 @@ for d in get_components(DynamicInjection, sys)
     dict_speed_adaptive[psid_name] =  LinearAlgebra.norm(res_f_adaptive) / length(res_f_adaptive)
 end
 
-p = plot(dict_speed_adaptive, label ="adaptive", title = "speed")
-plot!(p, dict_speed_fixed, label = "fixed")
+p = Plots.plot(dict_speed_adaptive, label ="adaptive", title = "speed")
+Plots.plot!(p, dict_speed_fixed, label = "fixed")
 display(p)
 
-p = plot(dict_voltage_adaptive, label ="adaptive", title = "votage")
-plot!(p, dict_voltage_fixed, label = "fixed")
+p = Plots.plot(dict_voltage_adaptive, label ="adaptive", title = "votage")
+Plots.plot!(p, dict_voltage_fixed, label = "fixed")
 display(p)
 
-p = plot(dict_activepower_adaptive, label ="adaptive", title = "P")
-plot!(p, dict_activepower_fixed, label = "fixed")
+p = Plots.plot(dict_activepower_adaptive, label ="adaptive", title = "P")
+Plots.plot!(p, dict_activepower_fixed, label = "fixed")
 display(p)
 
-p = plot(dict_reactivepower_adaptive, label ="adaptive", title = "Q")
-plot!(p, dict_reactivepower_fixed, label = "fixed")
+p = Plots.plot(dict_reactivepower_adaptive, label ="adaptive", title = "Q")
+Plots.plot!(p, dict_reactivepower_fixed, label = "fixed")
 display(p)
-##
-#Add in time series plot of voltages so that we can see the unwanted oscillations
-bus = get_component(Bus, sys, "Bus_4")
-bus_number = get_number(bus)
-bus_name = get_name(bus)
-t_pscad =  pscad_results[!, "time"]
-voltage_pscad  = pscad_results[!, "v_$bus_name"]
-t_psid, voltage_psid_fixed = get_voltage_magnitude_series(result_psid_fixed, bus_number)
-t_psid, voltage_psid_adaptive = get_voltage_magnitude_series(result_psid_adaptive, bus_number)
-using PlotlyJS
-PlotlyJS.GenericTrace[]
-trace_1 = PlotlyJS.scatter(x=t_pscad, y=voltage_pscad)
-trace_2 = PlotlyJS.scatter(x=t_psid, y=voltage_psid_fixed)
-trace_3 = PlotlyJS.scatter(x=t_psid, y=voltage_psid_adaptive)
-PlotlyJS.plot([trace_1, trace_2, trace_3])
-
-#naming convention: <source_release>_<inv_release>_<gen_release>_<R>
-case_1 =  CSV.read(joinpath(@__DIR__, "pscad_results_init_3_3_3_0.csv"), DataFrame)  
-case_2 =  CSV.read(joinpath(@__DIR__, "pscad_results_init_3_4_5_0.csv"), DataFrame)  
-case_3 =  CSV.read(joinpath(@__DIR__, "pscad_results_init_3_5_4_0.csv"), DataFrame)  
-case_4 =  CSV.read(joinpath(@__DIR__, "pscad_results_init_3_3_3_1e-2.csv"), DataFrame)  
-case_5 =  CSV.read(joinpath(@__DIR__, "pscad_results_init_3_3_3_1e-1.csv"), DataFrame)  
-#case_6 =  CSV.read(joinpath(@__DIR__, "pscad_results_init_3_5_4_1e-2.csv"), DataFrame)  
-
-trace_1 = PlotlyJS.scatter(x=case_1[!, "time"], y=case_1[!, "v_$bus_name"], name="case1")
-trace_2 = PlotlyJS.scatter(x=case_2[!, "time"], y=case_2[!, "v_$bus_name"], name="case2")
-trace_3 = PlotlyJS.scatter(x=case_3[!, "time"], y=case_3[!, "v_$bus_name"], name="case3")
-trace_4 = PlotlyJS.scatter(x=case_4[!, "time"], y=case_4[!, "v_$bus_name"], name="case4")
-trace_5 = PlotlyJS.scatter(x=case_5[!, "time"], y=case_5[!, "v_$bus_name"], name="case5")
-#trace_6 = PlotlyJS.scatter(x=case_6[!, "time"], y=case_6[!, "v_$bus_name"], name="case6")
-PlotlyJS.plot([trace_1, trace_2, trace_3, trace_4, trace_5], Layout(xaxis = attr(title = "t"), yaxis = attr(title = "V_$bus_name")))
-#PlotlyJS.plot([trace_1, trace_2, trace_3, trace_4, trace_5, trace_6], Layout(xaxis = attr(title = "t"), yaxis = attr(title = "V_3")))

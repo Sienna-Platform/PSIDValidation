@@ -26,6 +26,11 @@ gfm_names = ["GFM_Battery_2", "GFM_Battery_3"]
 
 set_units_base_system!(sys, "SYSTEM_BASE")
 
+#Add shunt resistance:
+b = get_component(Bus, sys, "Bus_1")
+gen_shunt = FixedAdmittance(name="gen-shunt", available=true, bus = b, Y =0.1+0.0*im, dynamic_injector=nothing)
+add_component!(sys, gen_shunt)
+
 # Replace Bus 2:
 gfm_2 = get_component(GenericBattery, sys, "GFM_Battery_2")
 gfl_2 = get_component(GenericBattery, sys, "GFL_Battery_2")
@@ -62,5 +67,5 @@ remove_component!(sys, gfm_3)
 remove_component!(sys, gen_3)
 
 set_units_base_system!(sys, "DEVICE_BASE")
-
+Simulation!(MassMatrixModel, sys, pwd(), (0.0, 1.0))
 to_json(sys, joinpath(@__DIR__, "nine_bus_single_device.json"), force = true)
