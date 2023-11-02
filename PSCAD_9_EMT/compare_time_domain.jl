@@ -17,8 +17,8 @@ line_to_trip = "Bus_8-Bus_9-i_1"
 t_sample =  5.0e-4 #* 1e6 
 t_dynamic_sim = 5.0
 time_step_pscad = 25e-6 * 1e6  
-pscad_dynamic_file = "pscad_results_dynamics_0.csv"
-pscad_init_file = "pscad_results_init_0.csv"
+pscad_dynamic_file = "pscad_results_dynamics.csv"
+pscad_init_file = "pscad_results_init.csv"
 sys = System(joinpath(@__DIR__, string("nine_bus_single_device", ".json")), runchecks = false)
 
 for b in get_components(Line, sys)
@@ -64,7 +64,7 @@ sim_time_adaptive = @timed execute!(sim, IDA(linear_solver = :KLU), saveat=500e-
 @show sim_time_adaptive
 result_psid_R = read_results(sim)
 
-##
+
 #Compare dyanmic results in PSID and PSCAD 
 bus = get_component(Bus, sys, "Bus_1")
 bus_number = get_number(bus)
@@ -74,11 +74,17 @@ t_psid_R, voltage_psid_R = get_voltage_magnitude_series(result_psid_R, bus_numbe
 trace_1 = PlotlyJS.scatter(x=t_psid_0, y=voltage_psid_0,  name="psid: R=0.0")
 trace_2 = PlotlyJS.scatter(x=t_psid_R, y=voltage_psid_R,  name="psid: R=0.0385975")
 
-case_0 =  CSV.read(joinpath(@__DIR__, "pscad_results_dynamics_0.csv"), DataFrame)  
-case_R =  CSV.read(joinpath(@__DIR__, "pscad_results_dynamics_R.csv"), DataFrame)  
-trace_3 = PlotlyJS.scatter(x=case_0[!, "time"], y=case_0[!, "v_$bus_name"], name="pscad: R=0.0")
-trace_4 = PlotlyJS.scatter(x=case_R[!, "time"], y=case_R[!, "v_$bus_name"], name="pscad: R=0.0385975")
-PlotlyJS.plot([trace_1, trace_2, trace_3, trace_4], Layout(xaxis = attr(title = "t"), yaxis = attr(title = "v_$bus_name")))
+case_100 =  CSV.read(joinpath(@__DIR__, "pscad_results_dynamics_100.csv"), DataFrame) 
+case_100_R =  CSV.read(joinpath(@__DIR__, "pscad_results_dynamics_100_R.csv"), DataFrame)   
+case_500 =  CSV.read(joinpath(@__DIR__, "pscad_results_dynamics_500.csv"), DataFrame)  
+case_60Hz =  CSV.read(joinpath(@__DIR__, "pscad_results_dynamics_60Hz.csv"), DataFrame)  
+
+trace_3 = PlotlyJS.scatter(x=case_100[!, "time"], y=case_100[!, "v_$bus_name"], name="pscad: 100us sample, 25us timestep")
+trace_4 = PlotlyJS.scatter(x=case_500[!, "time"], y=case_500[!, "v_$bus_name"], name="pscad: 500us sample, 25us timestep")
+trace_5 = PlotlyJS.scatter(x=case_100_R[!, "time"], y=case_100_R[!, "v_$bus_name"], name="pscad: 100us sample, 25us timestep, R=0.0385")
+trace_6 = PlotlyJS.scatter(x=case_60Hz[!, "time"], y=case_60Hz[!, "v_$bus_name"], name="pscad: 500us sample, 25us timestep, 60Hz measurement, R=0.0385")
+
+PlotlyJS.plot([trace_1, trace_2, trace_3, trace_4, trace_5, trace_6], Layout(xaxis = attr(title = "t"), yaxis = attr(title = "v_$bus_name")))
 
 ##
 #Plot initialization of PSCAD
